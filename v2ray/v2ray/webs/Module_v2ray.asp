@@ -150,7 +150,7 @@ document.form.v2ray_user.value = "0";
 <input type="hidden" name="modified" value="0">
 <input type="hidden" name="action_wait" value="2">
 <input type="hidden" name="action_mode" value="toolscript">
-<input type="hidden" name="action_script" value="softcenter_v2ray.sh">
+<input type="hidden" name="action_script" value="/jffs/softcenter/scripts/softcenter_v2ray.sh">
 <input type="hidden" name="preferred_lang" id="preferred_lang" value="<% nvram_get("preferred_lang"); %>" disabled>
 <input type="hidden" name="firmver" value="<% nvram_get("firmver"); %>">
 <input type="hidden" name="v2ray_enable" value="<% nvram_get("v2ray_enable"); %>">
