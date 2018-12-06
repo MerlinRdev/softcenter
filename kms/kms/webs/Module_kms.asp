@@ -65,7 +65,7 @@
 			
 			function version_show(){
 			    $j.ajax({
-			        url: 'https://raw.githubusercontent.com/paldier/softcenter_ks/mips_softerware_center/kms/config.json.js',
+			        url: 'https://raw.githubusercontent.com/paldier/softcenter/master/kms/config.json.js',
 			        type: 'GET',
 			        dataType: 'json',
 			        success: function(res) {
@@ -147,7 +147,7 @@
 															<div id="kms_version_show" style="padding-top:5px;margin-left:230px;margin-top:0px;"><i>当前版本：<% dbus_get_def("kms_ver", "未知"); %></i>
 															</div>
 															<div id="kms_install_show" style="padding-top:5px;margin-left:330px;margin-top:-25px;"></div>
-															<a style="margin-left: 318px;" href="https://raw.githubusercontent.com/paldier/softcenter_ks/mips_softerware_center/kms/Changelog.txt" target="_blank"><em>[<u> 更新日志 </u>]</em></a>
+															<a style="margin-left: 318px;" href="https://raw.githubusercontent.com/paldier/softcenter/master/kms/Changelog.txt" target="_blank"><em>[<u> 更新日志 </u>]</em></a>
 														</td>
 													</tr>
 													<tr id="port_tr">
