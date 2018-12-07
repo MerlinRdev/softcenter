@@ -295,7 +295,7 @@ function appUninstallModule(moduleInfo) {
 </script>
 <script>
     //TODO auto detect home url
-    db_softcenter_["softcenter_home_url"] = "sc.paldier.com";
+    db_softcenter_["softcenter_home_url"] = "http://sc.paldier.com";
     
     // 安装信息更新策略:
     // 当软件安装的时候,安装进程内部会有超时时间. 超过超时时间 没安装成功,则认为失败.
@@ -621,7 +621,7 @@ function menu_hook() {
 }
 function notice_show(){
     $.ajax({
-        url: 'https://sc.paldier.com/softcenter/push_message.json.js',
+        url: 'http://sc.paldier.com/softcenter/push_message.json.js',
         type: 'GET',
         dataType: 'jsonp',
         success: function(res) {

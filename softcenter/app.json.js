@@ -1,14 +1,14 @@
 {
     "apps": [
         {
-            "build_date": "2016-09-01_17:20:58", 
+            "build_date": "2018-12-07_22:58:48", 
             "description": "让测速更简单", 
             "home_url": "Module_speedtest.asp", 
-            "md5": "7adab161925485c41ff8b54a7ffc75f2", 
+            "md5": "70ce58f20f2d72e186059a1b1d0cc77d", 
             "name": "speedtest", 
             "tar_url": "speedtest/speedtest.tar.gz", 
             "title": "网络测速", 
-            "version": "0.2.2"
+            "version": "0.2.3"
         }, 
         {
             "name": "shadowsocks", 
