@@ -1131,7 +1131,7 @@ function save(){
 	dbus["koolproxy_sourcelist"] = sourceList;
 	//console.log(sourceList)
 	//post data
-	dbus["SystemCmd"] = "koolproxy_config.sh";
+	dbus["action_script"] = "koolproxy_config.sh";
 	dbus["action_mode"] = " Refresh ";
 	dbus["current_page"] = "Module_koolproxy.asp";
 	if(dbus["koolproxy_enable"] == "1"){
