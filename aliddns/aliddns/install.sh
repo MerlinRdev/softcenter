@@ -1,9 +1,11 @@
 #!/bin/sh
 
-cp -r /tmp/aliddns/* /jffs/softcenter/
+cp -rf /tmp/aliddns/scripts/* /jffs/softcenter/scripts/
+cp -rf /tmp/aliddns/webs/* /jffs/softcenter/webs/
+cp -rf /tmp/aliddns/res/* /jffs/softcenter/res/
 chmod a+x /jffs/softcenter/scripts/aliddns_*
 
-rm -rf /jffs/softcenter/install.sh
+#rm -rf /tmp/softcenter/install.sh
 
 # add icon into softerware center
 # dbus set softcenter_module_aliddns_install=1

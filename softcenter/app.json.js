@@ -72,10 +72,10 @@
             "version": "1.5"
         }, 
         {
-            "build_date": "2019-01-12_22:09:07", 
+            "build_date": "2019-01-12_22:19:14", 
             "description": "阿里云解析自动更新IP", 
             "home_url": "Module_aliddns.asp", 
-            "md5": "1224296f69904c8073e9de60fe23cac5", 
+            "md5": "b775cde3f6f8f552f28c59e8d2d95bc1", 
             "name": "aliddns", 
             "tar_url": "aliddns/aliddns.tar.gz", 
             "title": "aliddns", 
