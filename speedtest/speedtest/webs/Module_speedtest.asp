@@ -231,86 +231,6 @@
                 margin-top: 20px;
             }
         </style>
-    </head>
-    <body onload="init();">
-        <div id="TopBanner"></div>
-        <div id="Loading" class="popup_bg"></div>
-        <iframe name="hidden_frame" id="hidden_frame" src="" width="0" height="0" frameborder="0"></iframe>
-        <form method="post" name="form" action="/applydb.cgi?p=speedtest_" target="hidden_frame">
-            <input type="hidden" name="current_page" value="Module_speedtest.asp"/>
-            <input type="hidden" name="next_page" value="Module_speedtest.asp"/>
-            <input type="hidden" name="group_id" value=""/>
-            <input type="hidden" name="modified" value="0"/>
-            <input type="hidden" name="action_mode" value=""/>
-            <input type="hidden" name="action_script" value=""/>
-            <input type="hidden" name="action_wait" value="5"/>
-            <input type="hidden" name="first_time" value=""/>
-            <input type="hidden" name="preferred_lang" id="preferred_lang" value="<% nvram_get("preferred_lang"); %>"/>
-            <input type="hidden" name="SystemCmd" onkeydown="onSubmitCtrl(this, ' Refresh ')" value="speedtest_config.sh"/>
-            <input type="hidden" name="firmver" value="<% nvram_get("firmver"); %>"/>
-
-            <table class="content" align="center" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td width="17">&nbsp;</td>
-                    <td valign="top" width="202">
-                        <div id="mainMenu"></div>
-                        <div id="subMenu"></div>
-                    </td>
-                    <td valign="top">
-						<div id="tabMenu" class="submenuBlock"></div>
-						<table width="98%" border="0" align="left" cellpadding="0" cellspacing="0">
-							<tr>
-								<td align="left" valign="top">
-									<table width="760px" border="0" cellpadding="5" cellspacing="0" bordercolor="#6b8fa3" class="FormTitle" id="FormTitle">
-										<tr>
-											<td bgcolor="#4D595D" colspan="3" valign="top">
-					                            <h2 class="plugin-header">
-					                                <span class="text">Speedtest网络测速
-					                                    <span class="version-info">(V<% dbus_get_def("speedtest_version", "0"); %>)</span>
-					                                </span>
-					                                <a class="return-button" href="/Main_Soft_center.asp">返回软件中心</a>
-					                            </h2>
-					                            <div class="speedtest-dashboard">
-					                                <div class="dashboard-content">
-					                                    <div class="graph">
-					                                        <h4 class="desc">下载速度</h4>
-					                                        <div class="background">
-					                                            <div id="download_speed" class="speed">0.00</div>
-					                                        </div>
-					                                        <div id="indicator_download" class="indicator"></div>
-					                                    </div>
-					                                    <div class="graph">
-					                                        <h4 class="desc">上传速度</h4>
-					                                        <div class="background">
-					                                            <div id="upload_speed" class="speed">0.00</div>
-					                                        </div>
-					                                        <div id="indicator_upload" class="indicator"></div>
-					                                    </div>
-					                                </div>
-					                            </div>
-					                            <div class="opt-bar">
-					                                <center>
-					                                    <button id="cmdBtn" class="button_gen" onclick="onSubmitCtrl(this, ' Refresh ')">开始测速</button>
-					                                </center>
-					                            </div>
-					                            <div id="warn" style="display: none;margin-top: 20px;text-align: center;font-size: 20px;margin-bottom: 20px;"class="formfontdesc" ><i></i></div>
-					                            <div class="KoolshareBottom">
-					                                <br/>论坛技术支持： <a href="http://www.koolshare.cn" target="_blank"> <i><u>www.koolshare.cn</u></i> </a> <br/>
-					                                后台技术支持： <i>Xiaobao</i> <br/>
-					                                Shell, Web by： <i>wangchll</i>, <i>acelan</i><br/>
-					                            </div>
-											</td>
-										</tr>
-									</table>
-								</td>
-								<td width="10" align="center" valign="top"></td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
-        </form>
-        <div id="footer"></div>
         <script type="text/javascript">
             function init() {
                 show_menu();
@@ -445,8 +365,7 @@
             })();
 
             //开始测速
-            function onSubmitCtrl(o, s) {
-                document.form.action_mode.value = s;
+            function onSubmitCtrl() {
                 $("#updateBtn").attr("disabled", true);
                 $("#updateBtn").hide();
                 $("#cmdBtn").attr("disabled", true);
@@ -466,5 +385,85 @@
 				return true;
 			}
         </script>
+    </head>
+    <body onload="init();">
+        <div id="TopBanner"></div>
+        <div id="Loading" class="popup_bg"></div>
+        <iframe name="hidden_frame" id="hidden_frame" src="" width="0" height="0" frameborder="0"></iframe>
+        <form method="post" name="form" action="/applydb.cgi?p=speedtest_" target="hidden_frame">
+            <input type="hidden" name="current_page" value="Module_speedtest.asp"/>
+            <input type="hidden" name="next_page" value="Module_speedtest.asp"/>
+            <input type="hidden" name="group_id" value=""/>
+            <input type="hidden" name="modified" value="0"/>
+            <input type="hidden" name="action_mode" value="toolscript"/>
+            <input type="hidden" name="action_script" value="speedtest_config.sh"/>
+            <input type="hidden" name="action_wait" value="5"/>
+            <input type="hidden" name="first_time" value=""/>
+            <input type="hidden" name="preferred_lang" id="preferred_lang" value="<% nvram_get("preferred_lang"); %>"/>
+            <input type="hidden" name="firmver" value="<% nvram_get("firmver"); %>"/>
+
+            <table class="content" align="center" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td width="17">&nbsp;</td>
+                    <td valign="top" width="202">
+                        <div id="mainMenu"></div>
+                        <div id="subMenu"></div>
+                    </td>
+                    <td valign="top">
+						<div id="tabMenu" class="submenuBlock"></div>
+						<table width="98%" border="0" align="left" cellpadding="0" cellspacing="0">
+							<tr>
+								<td align="left" valign="top">
+									<table width="760px" border="0" cellpadding="5" cellspacing="0" bordercolor="#6b8fa3" class="FormTitle" id="FormTitle">
+										<tr>
+											<td bgcolor="#4D595D" colspan="3" valign="top">
+					                            <h2 class="plugin-header">
+					                                <span class="text">Speedtest网络测速
+					                                    <span class="version-info">(V<% dbus_get_def("speedtest_version", "0"); %>)</span>
+					                                </span>
+					                                <a class="return-button" href="/Main_Soft_center.asp">返回软件中心</a>
+					                            </h2>
+					                            <div class="speedtest-dashboard">
+					                                <div class="dashboard-content">
+					                                    <div class="graph">
+					                                        <h4 class="desc">下载速度</h4>
+					                                        <div class="background">
+					                                            <div id="download_speed" class="speed">0.00</div>
+					                                        </div>
+					                                        <div id="indicator_download" class="indicator"></div>
+					                                    </div>
+					                                    <div class="graph">
+					                                        <h4 class="desc">上传速度</h4>
+					                                        <div class="background">
+					                                            <div id="upload_speed" class="speed">0.00</div>
+					                                        </div>
+					                                        <div id="indicator_upload" class="indicator"></div>
+					                                    </div>
+					                                </div>
+					                            </div>
+					                            <div class="opt-bar">
+					                                <center>
+					                                    <button id="cmdBtn" class="button_gen" onclick="onSubmitCtrl()">开始测速</button>
+					                                </center>
+					                            </div>
+					                            <div id="warn" style="display: none;margin-top: 20px;text-align: center;font-size: 20px;margin-bottom: 20px;"class="formfontdesc" ><i></i></div>
+					                            <div class="KoolshareBottom">
+					                                <br/>论坛技术支持： <a href="http://www.koolshare.cn" target="_blank"> <i><u>www.koolshare.cn</u></i> </a> <br/>
+					                                后台技术支持： <i>Xiaobao</i> <br/>
+					                                Shell, Web by： <i>wangchll</i>, <i>acelan</i><br/>
+					                                <br/>修改版 by： <i>paldier</i>
+					                            </div>
+											</td>
+										</tr>
+									</table>
+								</td>
+								<td width="10" align="center" valign="top"></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+        </form>
+        <div id="footer"></div>
     </body>
 </html>

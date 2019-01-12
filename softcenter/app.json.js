@@ -1,10 +1,10 @@
 {
     "apps": [
         {
-            "build_date": "2018-12-07_22:58:48", 
+            "build_date": "2019-01-12_20:58:26", 
             "description": "让测速更简单", 
             "home_url": "Module_speedtest.asp", 
-            "md5": "70ce58f20f2d72e186059a1b1d0cc77d", 
+            "md5": "05fcccca9ce4bc98f56730d502f75a96", 
             "name": "speedtest", 
             "tar_url": "speedtest/speedtest.tar.gz", 
             "title": "网络测速", 
@@ -104,7 +104,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "3bb44fca41795904e2490e728c7138ed", 
+    "md5": "11b6c4b4a8bf2586f92d1dcb48f5782d", 
     "tar_url": "softcenter/softcenter.tar.gz", 
     "version": "1.1.6"
 }
