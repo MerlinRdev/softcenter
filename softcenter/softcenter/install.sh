@@ -2,11 +2,11 @@
 
 softcenter_install() {
 	if [ -d "/tmp/softcenter" ]; then
-		cp -rf /tmp/softcenter/webs/* /jffs/softcenter/webs
+		cp -rf /tmp/softcenter/webs/* /jffs/softcenter/webs/
 		cp -rf /tmp/softcenter/res/* /jffs/softcenter/res/
 		cp -rf /tmp/softcenter/bin/* /jffs/softcenter/bin/
-		cp -rf /tmp/softcenter/perp /jffs/softcenter/
-		cp -rf /tmp/softcenter/scripts /jffs/softcenter/
+		cp -rf /tmp/softcenter/perp/* /jffs/softcenter/perp/
+		cp -rf /tmp/softcenter/scripts/* /jffs/softcenter/scripts/
 		chmod 755 /jffs/softcenter/bin/*
 		chmod 755 /jffs/softcenter/perp/*
 		chmod 755 /jffs/softcenter/perp/.boot/*
