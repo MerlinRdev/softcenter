@@ -54,7 +54,7 @@ function init() {
     setTimeout("write_usb_status()", 200);
 }
 function applyRule() {
-	document.form.action_mode.value = ' Refresh ';
+	document.form.action_mode.value = 'toolscript';
 	var mode = document.getElementById("swap_size").value;
 	if (mode == "1"){
 		show_swap_LoadingBar(20);
@@ -67,12 +67,12 @@ function applyRule() {
 	document.form.submit();
 }
 function check_usb(){
-	document.form.action_mode.value = ' Refresh ';
+	document.form.action_mode.value = 'toolscript';
     document.form.action_script.value = "swap_check.sh";
     document.form.submit();
 }
 function unload_swap(){
-	document.form.action_mode.value = ' Refresh ';
+	document.form.action_mode.value = 'toolscript';
     document.form.action_script.value = "swap_unload.sh";
     showLoading(5);
     refreshpage(5);
