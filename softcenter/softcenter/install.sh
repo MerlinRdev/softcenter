@@ -11,10 +11,9 @@ softcenter_install() {
 		chmod 755 /jffs/softcenter/perp/*
 		chmod 755 /jffs/softcenter/perp/.boot/*
 		chmod 755 /jffs/softcenter/perp/.control/*
-		chmod 755 /jffs/softcenter/perp/adm/*
 		rm -rf /tmp/softcenter
 		if [ ! -f "/jffs/softcenter/init.d/S10Softcenter.sh" ]; then
-		ln -sf /jffs/softcenter/scripts/app_install.sh /jffs/softcenter/init.d/S10Softcenter.sh
+		ln -sf /jffs/softcenter/scripts/ks_app_install.sh /jffs/softcenter/init.d/S10Softcenter.sh
 		fi
 	fi
 }

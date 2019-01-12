@@ -11,9 +11,14 @@
             "version": "0.2.3"
         }, 
         {
+            "build_date": "2018-12-08_00:04:35", 
+            "description": "shadowsocks", 
+            "home_url": "Main_Ss_Content.asp", 
+            "md5": "cf64c5749a42228b932f8568e9f563e9", 
             "name": "shadowsocks", 
             "tar_url": "shadowsocks/shadowsocks.tar.gz", 
-            "title": "shadowsocks"
+            "title": "shadowsocks", 
+            "version": "3.0.4"
         }, 
         {
             "build_date": "2017-05-03_19:15:58", 
@@ -27,14 +32,14 @@
             "version": "1.0.0"
         }, 
         {
-            "build_date": "2016-09-01_17:21:04", 
+            "build_date": "2019-01-12_19:22:11", 
             "description": "老板，来一斤虚拟内存~", 
             "home_url": "Module_swap.asp", 
-            "md5": "852a398f732af3508c83a6d3ca91f25d", 
+            "md5": "4ea389360d37f7ff9d2d4046b43be59b", 
             "name": "swap", 
             "tar_url": "swap/swap.tar.gz", 
             "title": "虚拟内存", 
-            "version": "1.8"
+            "version": "2.2"
         }, 
         {
             "build_date": "2017-06-06_01:02:58", 
@@ -88,21 +93,6 @@
             "version": "0.1.3"
         }, 
         {
-            "name": "tunnel", 
-            "tar_url": "tunnel/tunnel.tar.gz", 
-            "title": "tunnel"
-        }, 
-        {
-            "build_date": "2016-09-01_17:20:46", 
-            "description": "让分流更简单", 
-            "home_url": "Module_policy_route.asp", 
-            "md5": "3112c34fa479156b5872ae700b7015b3", 
-            "name": "dualwan", 
-            "tar_url": "dualwan/dualwan.tar.gz", 
-            "title": "策略路由", 
-            "version": "0.6"
-        }, 
-        {
             "build_date": "2016-09-16_10:11:21", 
             "description": "广告屏蔽大师", 
             "home_url": "Module_adbyby.asp", 
@@ -114,7 +104,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "3242715f2a71bec3ffc70252f92c977b", 
+    "md5": "3bb44fca41795904e2490e728c7138ed", 
     "tar_url": "softcenter/softcenter.tar.gz", 
     "version": "1.1.6"
 }

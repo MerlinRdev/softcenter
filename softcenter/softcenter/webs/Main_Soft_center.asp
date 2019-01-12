@@ -20,6 +20,7 @@
 <script type="text/javascript" src="/general.js"></script>
 <script type="text/javascript" src="/switcherplugin/jquery.iphone-switch.js"></script>
 <script type="text/javascript" src="/form.js"></script>
+<script type="text/javascript" src="/dbconf?p=softcenter_&v=<% uptime(); %>"></script>
 <style>
 .cloud_main_radius_left{
     -webkit-border-radius: 10px 0 0 10px;
@@ -121,7 +122,6 @@
         bottom: 0;
         left: -10px;
     }
-
     .icon-desc .uninstall-btn{
         display: none;
     }
@@ -207,7 +207,6 @@
 	.cloud_main_radius h5 { color:#FFF;font-weight:normal;font-style: normal;}
 </style>
 <script>
-	var db_softcenter_ = {};
 //set tabstop=4 set shiftwidth=4 set expandtab
 String.prototype.format = String.prototype.f = function() {
     var s = this,
@@ -237,7 +236,6 @@ function checkField(o, f, d) {
     if(typeof o[f] == "undefined") {
         o[f] = d;
     }
-
     return o[f];
 }
 function appPostScript(moduleInfo, script) {
@@ -246,7 +244,7 @@ function appPostScript(moduleInfo, script) {
     return;
     }
     //Current page must has prefix of "Module_"
-    var data = {"SystemCmd":script, "current_page":"Module_koolnet.asp", "action_mode":" Refresh ", "action_script":""};
+    var data = {"action_script":script, "current_page":"Module_koolnet.asp", "action_mode":" Refresh "};
 
     var applyUrl = "applydb.cgi?p=softcenter_";
 
@@ -258,12 +256,10 @@ function appPostScript(moduleInfo, script) {
     data["softcenter_installing_tar_url"] = moduleInfo.tar_url;
     data["softcenter_installing_md5"] = moduleInfo.md5;
     data["softcenter_installing_version"] = moduleInfo.version;
-
     //Update title for this module
     data[moduleInfo.name + "_title"] = moduleInfo.title;
-        applyUrl = applyUrl + "," + moduleInfo.name;
+        //applyUrl = applyUrl + "," + moduleInfo.name;
     }
-
         $.ajax({
                 type: "POST",
                 url: applyUrl,
@@ -286,7 +282,6 @@ function appInstallModule(moduleInfo) {
     appPostScript(moduleInfo, "ks_app_install.sh");
 }
 function appUninstallModule(moduleInfo) {
-
     if (!window.confirm('确定卸载吗')) {
         return;
     }
@@ -338,7 +333,6 @@ function appUninstallModule(moduleInfo) {
             if(o[base+"status"] != currState.lastStatus) {
                 currState.lastStatus = o[base+"status"];
                 showInstallInfo(curr_module, currState.lastStatus);
-
                 // Install ok now
                 if(currState.lastStatus == "1" || currState.lastStatus == "7") {
                     currState.installing = false;
@@ -358,7 +352,6 @@ function appUninstallModule(moduleInfo) {
            }
         })
     }
-
     function showInstallInfo(module, scode) {
         var code = parseInt(scode);
         var s = module.capitalizeFirstLetter();
@@ -397,7 +390,6 @@ function appUninstallModule(moduleInfo) {
         // set apps to global variable of softInfo
         softInfo = apps;
         //console.log(softInfo);
-
         //简单模板函数
         function _format(source, opts) {
             var source = source.valueOf(),
@@ -428,7 +420,7 @@ function appUninstallModule(moduleInfo) {
                 '</dd>',
                 '<dt class="icon-title">#{title}</dt>',
                 '<dd class="icon-desc">',
-                    '<a class="text" href="/#{home_url}" #{target}>',
+                    '<a class="text" href="/#{home_url}">',
                         '#{description}',
                     '</a>',
                     '<div class="opt">',
@@ -615,7 +607,7 @@ function softceterInitData(data) {
 
     });
 
-function menu_hook() {
+function menu_hook(title, tab) {
 	tabtitle[tabtitle.length -1] = new Array("", "软件中心", "离线安装");
 	tablink[tablink.length -1] = new Array("", "Main_Soft_center.asp", "Main_Soft_setting.asp");
 }
@@ -736,7 +728,7 @@ function notice_show(){
 
                                                     <tr bgcolor="#444f53" width="235px">
                                                         <td colspan="4" id="IconContainer">
-                                                            <div id="software_center_message" style="text-align:center; line-height: 4em;">更新中...</div>
+                                                            <div style="text-align:center; line-height: 4em;">更新中...</div>
                                                         </td>
                                                     </tr>
                                                     <tr height="10px">
@@ -748,6 +740,7 @@ function notice_show(){
                                                 <br/>Github项目： <a href="https://github.com/koolshare/koolshare.github.io" target="_blank"> <i><u>github.com/koolshare</u></i> </a>
                                                 <br/>Powered by： <i>koolshare开发组</i>
 						<br/>修改版 by： <i>paldier</i>
+						<br/>Github项目： <a href="https://github.com/paldier/softcenter" target="_blank"> <i><u>https://github.com/paldier</u></i> </a>
                                             </div>
                                         </td>
                                     </tr>

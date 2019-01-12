@@ -1,7 +1,7 @@
 #!/bin/sh
 
 source /jffs/softcenter/scripts/base.sh
-export PERP_BASE=/koolshare/perp
+export PERP_BASE=/jffs/softcenter/perp
 
 case $ACTION in
 start)

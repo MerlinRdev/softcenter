@@ -231,12 +231,15 @@ uninstall_module() {
 		rm -f /jffs/softcenter/webs/Module_$softcenter_installing_todo.asp
         rm -f /jffs/softcenter/init.d/S*$softcenter_installing_todo.sh
 	fi
+	curl -s http://sc.paldier.com/"$softcenter_installing_module"/"$softcenter_installing_module"/install.sh >/dev/null 2>&1
 }
 
-LOGGER $BIN_NAME
+#LOGGER $BIN_NAME
 case $BIN_NAME in
 start)
+	sh /jffs/softcenter/perp/perp.sh stop
 	sh /jffs/softcenter/perp/perp.sh start
+	dbus set softcenter_installing_status=1
 	;;
 update)
 	install_module
