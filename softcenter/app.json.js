@@ -21,6 +21,16 @@
             "version": "2.2"
         }, 
         {
+            "build_date": "2019-01-13_00:00:08", 
+            "description": "去广告，没烦恼", 
+            "home_url": "Module_koolproxy.asp", 
+            "md5": "7afb9a5a4fac29bef9b5d21ad7a6aab8", 
+            "name": "koolproxy", 
+            "tar_url": "koolproxy/koolproxy.tar.gz", 
+            "title": "koolproxy", 
+            "version": "3.8.4"
+        }, 
+        {
             "build_date": "2018-12-06_13:29:29", 
             "description": "kms", 
             "home_url": "Module_kms.asp", 
@@ -42,7 +52,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "dd5b07bef8289c2a0715695591faf2b7", 
+    "md5": "df146dd013b253de4d6e250562ce9022", 
     "tar_url": "softcenter/softcenter.tar.gz", 
     "version": "1.1.6"
 }

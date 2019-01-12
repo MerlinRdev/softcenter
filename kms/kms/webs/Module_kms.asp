@@ -53,8 +53,7 @@
 				});
 			}
 			
-			function onSubmitCtrl(o, s) {
-				document.form.action_mode.value = s;
+			function onSubmitCtrl() {
 				showLoading(3);
 				document.form.submit();
 			}
@@ -91,12 +90,11 @@
 			<input type="hidden" name="next_page" value="Module_kms.asp" />
 			<input type="hidden" name="group_id" value="" />
 			<input type="hidden" name="modified" value="0" />
-			<input type="hidden" name="action_mode" value="" />
-			<input type="hidden" name="action_script" value="" />
+			<input type="hidden" name="action_mode" value=" Refresh " />
+			<input type="hidden" name="action_script" value="kms.sh" />
 			<input type="hidden" name="action_wait" value="5" />
 			<input type="hidden" name="first_time" value="" />
 			<input type="hidden" name="preferred_lang" id="preferred_lang" value="<% nvram_get(" preferred_lang "); %>"/>
-			<input type="hidden" name="SystemCmd" onkeydown="onSubmitCtrl(this, ' Refresh ')" value="k3c_kms.sh" />
 			<input type="hidden" name="firmver" value="<% nvram_get(" firmver "); %>"/>
 			<input type="hidden" id="kms_enable" name="kms_enable" value='<% dbus_get_def("kms_enable", "0"); %>' />
 			<table class="content" align="center" cellpadding="0" cellspacing="0">
@@ -163,7 +161,7 @@
 													</tr>
 												</table>
 												<div class="apply_gen">
-													<button id="cmdBtn" class="button_gen" onclick="onSubmitCtrl(this, ' Refresh ')">提交</button>
+													<button id="cmdBtn" class="button_gen" onclick="onSubmitCtrl()">提交</button>
 												</div>
 												<div style="margin-left:5px;margin-top:10px;margin-bottom:10px">
 													<img src="/images/New_ui/export/line_export.png">
