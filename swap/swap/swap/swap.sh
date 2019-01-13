@@ -1,11 +1,10 @@
 #! /bin/sh
 # ====================================变量定义====================================
 # 版本号定义
-version="1.8"
+version="2.2"
 dbus set swap_version="$version"
 # 导入skipd数据
 eval `dbus export swap`
-
 # 引用环境变量等
 source /jffs/softcenter/scripts/base.sh
 
@@ -30,7 +29,7 @@ if [ "$swapon" == "0" ];then
 			swapon "$usb_disk"/swapfile
 			dbus set swap_warnning="4"
 		else
-			if [ "$ext_type" == "ext2" ] || [ "$ext_type" == "ext3" ] || [ "$ext_type" == "ext4" ];then
+			if [ "$ext_type" == "ext2" ] || [ "$ext_type" == "ext3" ] || [ "$ext_type" == "ext4" ] || [ "$ext_type" == "tfat" ] || [ "$ext_type" == "tntfs" ] || [ "$ext_type" == "vfat" ];then
 				dbus set swap_warnning="3"
 			else
 				dbus set swap_warnning="2"

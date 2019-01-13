@@ -218,8 +218,8 @@ function reload_Soft_Center(){
 location.href = "/Main_Soft_center.asp";
 }
 function menu_hook(title, tab) {
-	tabtitle[tabtitle.length -1] = new Array("", "speedtest");
-	tablink[tablink.length -1] = new Array("", "Module_speedtest.asp");
+	tabtitle[tabtitle.length -1] = new Array("", "虚拟内存");
+	tablink[tablink.length -1] = new Array("", "Module_swap.asp");
 }
 </script>
 </head>
@@ -275,7 +275,7 @@ function menu_hook(title, tab) {
 										<div class="formfontdesc" style="padding-top:5px;margin-top:0px;float: left;" id="cmdDesc">创建虚拟内存，让路由运行更顺畅</div>
 										<div id="swap_version_status" style="padding-top:5px;margin-left:30px;margin-right:0px;margin-top:0px;float: left;"><i>当前版本：<% dbus_get_def("swap_version", "0"); %></i></div>
 										<div style="padding-top:5px;margin-top:25px;margin-left:-300px;float: left;" id="NoteBox" >
-											<li style="margin-top:5px;">创建虚拟内存，你需要一个空的、已经格式化成ext2|3|4格式的U盘； </li>
+											<li style="margin-top:5px;">创建虚拟内存，你需要一个空的、已经格式化成ext2|3|4|fat|ntfs格式的U盘； </li>
 											<li style="margin-top:5px;">如果你通过其它方式创建了虚拟内存，可以不用使用该工具，或者删除后再使用本工具。</li>
 											<li style="margin-top:5px;">建议使用游戏模式V2，aria2等应用的用户开启虚拟内存！</li>					
 										</div>
@@ -286,7 +286,8 @@ function menu_hook(title, tab) {
 											<tr>
 												<td colspan="2">创建虚拟内存</td>
 											</tr>
-											</thead>											
+											</thead>
+											
 											<tr id="swap_status">
 												<th>
 													<label>状态</label>
@@ -311,8 +312,8 @@ function menu_hook(title, tab) {
 											</tr>
                                     	</table>
 										<div class="apply_gen">
-											<input class="button_gen" onclick="applyRule()" type="button" value="创建swap"/>
-											<input class="button_gen" onclick="unload_swap()" type="button" value="删除swap"/>
+											<button id="cmdBtn" class="button_gen" onclick="applyRule()">创建swap</button>
+											<button id="cmdBtn1" class="button_gen" onclick="unload_swap()">删除swap</button>
 										</div>
 										<div style="margin-left:5px;margin-top:10px;margin-bottom:10px"><img src="/images/New_ui/export/line_export.png"></div>
 										<div class="KoolshareBottom">
