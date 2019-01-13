@@ -22,10 +22,9 @@
 		<script type="text/javascript" src="/general.js"></script>
 		<script type="text/javascript" src="/switcherplugin/jquery.iphone-switch.js"></script>
 		<script language="JavaScript" type="text/javascript" src="/client_function.js"></script>
+		<script type="text/javascript" src="/dbconf?p=kms_&v=<% uptime(); %>"></script>
 		<script>
 			var $j = jQuery.noConflict();
-			var softcenter_kms_ver="<% dbus_get("kms_ver"); %>";
-			var softcenter_kms_wan_port="<% dbus_get("kms_wan_port"); %>";
 			function init() {
 				show_menu(menu_hook);
 				buildswitch();
@@ -36,7 +35,7 @@
 				} else {
 					rrt.checked = true;
 				}
-				 $j('#kms_wan_port').val(softcenter_kms_wan_port);
+				 $j('#kms_wan_port').val(db_kms_["kms_wan_port"]);
 			}
 			function done_validating() {
 				return true;
@@ -53,7 +52,8 @@
 				});
 			}
 			
-			function onSubmitCtrl() {
+			function onSubmitCtrl(o, s) {
+				document.form.action_mode.value = s;
 				showLoading(3);
 				document.form.submit();
 			}
@@ -63,12 +63,20 @@
 			}
 			
 			function version_show(){
+				$j("#kms_version_status").html("<i>当前版本：" + db_kms_['kms_version']);
 			    $j.ajax({
 			        url: 'https://raw.githubusercontent.com/paldier/softcenter/master/kms/config.json.js',
 			        type: 'GET',
-			        dataType: 'json',
 			        success: function(res) {
-						$j("#kms_install_show").html("<i>有新版本：" + res.version);
+			            var txt = $j(res.responseText).text();
+			            if(typeof(txt) != "undefined" && txt.length > 0) {
+			                //console.log(txt);
+			                var obj = $j.parseJSON(txt.replace("'", "\""));
+					$j("#kms_version_status").html("<i>当前版本：" + obj.version);
+					if(obj.version != db_kms_["kms_version"]) {
+						$j("#kms_version_status").html("<i>有新版本：" + obj.version);
+					}
+			            }
 			        }
 			    });
 			}
@@ -90,7 +98,7 @@
 			<input type="hidden" name="next_page" value="Module_kms.asp" />
 			<input type="hidden" name="group_id" value="" />
 			<input type="hidden" name="modified" value="0" />
-			<input type="hidden" name="action_mode" value=" Refresh " />
+			<input type="hidden" name="action_mode" value="" />
 			<input type="hidden" name="action_script" value="kms.sh" />
 			<input type="hidden" name="action_wait" value="5" />
 			<input type="hidden" name="first_time" value="" />
@@ -142,7 +150,7 @@
 																	</div>
 																</label>
 															</div>
-															<div id="kms_version_show" style="padding-top:5px;margin-left:230px;margin-top:0px;"><i>当前版本：<% dbus_get_def("kms_ver", "未知"); %></i>
+															<div id="kms_version_show" style="padding-top:5px;margin-left:230px;margin-top:0px;"><i>当前版本：<% dbus_get_def("kms_version", "未知"); %></i>
 															</div>
 															<div id="kms_install_show" style="padding-top:5px;margin-left:330px;margin-top:-25px;"></div>
 															<a style="margin-left: 318px;" href="https://raw.githubusercontent.com/paldier/softcenter/master/kms/Changelog.txt" target="_blank"><em>[<u> 更新日志 </u>]</em></a>
@@ -210,5 +218,4 @@
 		</td>
 		<div id="footer"></div>
 	</body>
-
 </html>

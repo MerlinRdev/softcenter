@@ -51,10 +51,10 @@
             "version": "2.4"
         }, 
         {
-            "build_date": "2018-12-06_13:29:29", 
+            "build_date": "2019-01-13_19:04:43", 
             "description": "kms", 
             "home_url": "Module_kms.asp", 
-            "md5": "647a16ede1b4cea1615391b6465b1525", 
+            "md5": "963a0702e0e37aa67a64c674544f30a6", 
             "name": "kms", 
             "tar_url": "kms/kms.tar.gz", 
             "title": "kms", 
@@ -72,7 +72,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "2fcb8ccf6c0a97c160df7d6fa3e32929", 
+    "md5": "ad50bc75f8a05449e8d65d03216be3db", 
     "tar_url": "softcenter/softcenter.tar.gz", 
     "version": "1.1.6"
 }
