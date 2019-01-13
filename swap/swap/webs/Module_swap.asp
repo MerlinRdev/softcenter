@@ -48,7 +48,7 @@
 </style>
 <script>
 function init() {
-	show_menu();
+	show_menu(menu_hook);
     write_usb_status();
     check_usb();
     setTimeout("write_usb_status()", 200);
@@ -216,6 +216,10 @@ function hideSSLoadingBar(){
 }
 function reload_Soft_Center(){
 location.href = "/Main_Soft_center.asp";
+}
+function menu_hook(title, tab) {
+	tabtitle[tabtitle.length -1] = new Array("", "speedtest");
+	tablink[tablink.length -1] = new Array("", "Module_speedtest.asp");
 }
 </script>
 </head>

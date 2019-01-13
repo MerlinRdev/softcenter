@@ -47,7 +47,7 @@ write_sourcelist(){
 	fi
 	
 	if [ -n "$koolproxy_custom_rule" ];then
-		echo $koolproxy_custom_rule| base64_decode |sed 's/\\n/\n/g' > $KP_DIR/data/rules/user.txt
+		echo $koolproxy_custom_rule| base64 -d |sed 's/\\n/\n/g' > $KP_DIR/data/rules/user.txt
 		dbus remove koolproxy_custom_rule
 	fi
 }
@@ -90,16 +90,16 @@ remove_nat_start(){
 add_ipset_conf(){
 	if [ "$koolproxy_mode" == "2" ];then
 		echo_date 添加黑名单软连接...
-		rm -rf /jffs/configs/dnsmasq.d/koolproxy_ipset.conf
-		ln -sf /jffs/softcenter/koolproxy/data/koolproxy_ipset.conf /jffs/configs/dnsmasq.d/koolproxy_ipset.conf
+		rm -rf /etc/dnsmasq.user/koolproxy_ipset.conf
+		ln -sf /jffs/softcenter/koolproxy/data/koolproxy_ipset.conf /etc/dnsmasq.user/koolproxy_ipset.conf
 		dnsmasq_restart=1
 	fi
 }
 
 remove_ipset_conf(){
-	if [ -L "/jffs/configs/dnsmasq.d/koolproxy_ipset.conf" ];then
+	if [ -L "/etc/dnsmasq.user/koolproxy_ipset.conf" ];then
 		echo_date 移除黑名单软连接...
-		rm -rf /jffs/configs/dnsmasq.d/koolproxy_ipset.conf
+		rm -rf /etc/dnsmasq.user/koolproxy_ipset.conf
 		dnsmasq_restart=1
 	fi
 }
@@ -288,6 +288,8 @@ detect_cert(){
 		echo_date 检测到首次运行，开始生成koolproxy证书，用于https过滤！
 		echo_date 生成证书需要较长时间，请一定耐心等待！！！
 		cd $KP_DIR/data && sh gen_ca.sh
+		mkdir -p /jffs/koolproxy/certs/
+		cp -f /jffs/softcenter/koolproxy/certs/ca.crt /jffs/koolproxy/certs/
 		echo_date 证书生成完毕！！！
 	fi
 }

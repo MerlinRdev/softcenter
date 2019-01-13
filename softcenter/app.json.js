@@ -21,14 +21,34 @@
             "version": "2.2"
         }, 
         {
-            "build_date": "2019-01-13_00:10:53", 
+            "build_date": "2019-01-13_02:08:34", 
             "description": "去广告，没烦恼", 
             "home_url": "Module_koolproxy.asp", 
-            "md5": "42c61e110449a52a19b76931d432df7a", 
+            "md5": "1ad5b05d424832237b00028327e9a90e", 
             "name": "koolproxy", 
             "tar_url": "koolproxy/koolproxy.tar.gz", 
             "title": "koolproxy", 
             "version": "3.8.4"
+        }, 
+        {
+            "build_date": "2019-01-13_14:01:15", 
+            "description": "迅雷快鸟，为上网加速而生~", 
+            "home_url": "Module_kuainiao.asp", 
+            "md5": "915e63000cbf3a98887930b04aa874ec", 
+            "name": "kuainiao", 
+            "tar_url": "kuainiao/kuainiao.tar.gz", 
+            "title": "讯雷快鸟", 
+            "version": "0.3.6"
+        }, 
+        {
+            "build_date": "2019-01-13_14:31:33", 
+            "description": "linux下载利器", 
+            "home_url": "Module_aria2.asp", 
+            "md5": "cdd0a74446c977528b6c0bd39f6d85bb", 
+            "name": "aria2", 
+            "tar_url": "aria2/aria2.tar.gz", 
+            "title": "Aria2", 
+            "version": "2.4"
         }, 
         {
             "build_date": "2018-12-06_13:29:29", 
@@ -52,7 +72,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "51b7d9cc5d6af10bc8979ca078c1a8fd", 
+    "md5": "ad166b845c7885b7c5a18f2ce6514886", 
     "tar_url": "softcenter/softcenter.tar.gz", 
     "version": "1.1.6"
 }

@@ -14,7 +14,7 @@ rules_date_local=`cat $KSROOT/koolproxy/data/rules/koolproxy.txt  | sed -n '3p'|
 rules_nu_local=`grep -E -v "^!" $KSROOT/koolproxy/data/rules/koolproxy.txt | wc -l`
 video_date_local=`cat $KSROOT/koolproxy/data/rules/koolproxy.txt  | sed -n '4p'|awk '{print $3,$4}'`
 daily_nu_local=`grep -E -v "^!" $KSROOT/koolproxy/data/rules/daily.txt | wc -l`
-custom_nu_local=`grep -E -v "^!" $KSROOT/koolproxy/data/rules/user.txt | wc -l`
+#custom_nu_local=`grep -E -v "^!" $KSROOT/koolproxy/data/rules/user.txt | wc -l`
 
 rm -rf /tmp/kp_tp.txt
 tp_rules=`dbus list koolproxy_rule_file_|cut -d "=" -f1|cut -d "_" -f4|sort -n`
@@ -40,9 +40,9 @@ else
 fi
 rm -rf /tmp/koolproxy.log
 if [ "$status" == "2" ];then
-	echo "【$date】 $version  运行正常！(PID: $pid)@@<span>$rules_date_local / $rules_nu_local条</span>@@<span>$daily_nu_local条</span>@@<span>$video_date_local<span>@@<span>$custom_nu_local条</span>$TP" > /tmp/koolproxy.log
+	echo "【$date】 $version  运行正常！(PID: $pid)@@<span>$rules_date_local / $rules_nu_local条</span>@@<span>$daily_nu_local条</span>@@<span>$video_date_local<span>$TP" > /tmp/koolproxy.log
 else
-	echo "<font color='#FF0000'>【警告】：进程未运行！请点击提交按钮！</font>@@<span>$rules_date_local / $rules_nu_local条</span>@@<span>$daily_nu_local条</span>@@<span>$video_date_local<span>@@<span>$custom_nu_local条</span>$TP" > /tmp/koolproxy.log
+	echo "<font color='#FF0000'>【警告】：进程未运行！请点击提交按钮！</font>@@<span>$rules_date_local / $rules_nu_local条</span>@@<span>$daily_nu_local条</span>@@<span>$video_date_local<span>$TP" > /tmp/koolproxy.log
 fi
 echo XU6J03M6 >> /tmp/koolproxy.log
 

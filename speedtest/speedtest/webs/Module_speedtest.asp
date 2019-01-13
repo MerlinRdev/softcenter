@@ -233,7 +233,7 @@
         </style>
         <script type="text/javascript">
             function init() {
-                show_menu();
+                show_menu(menu_hook);
                 var testStatus = <% dbus_get_def("speedtest_status", "0"); %>;
                 if (+testStatus === 1) {
                     $("#cmdBtn").attr("disabled", true);
@@ -383,6 +383,10 @@
 
 			function done_validating(action) {
 				return true;
+			}
+			function menu_hook(title, tab) {
+				tabtitle[tabtitle.length -1] = new Array("", "speedtest");
+				tablink[tablink.length -1] = new Array("", "Module_speedtest.asp");
 			}
         </script>
     </head>
