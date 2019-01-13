@@ -41,10 +41,10 @@
             "version": "0.3.6"
         }, 
         {
-            "build_date": "2019-01-13_14:31:33", 
+            "build_date": "2019-01-13_18:35:15", 
             "description": "linux下载利器", 
             "home_url": "Module_aria2.asp", 
-            "md5": "cdd0a74446c977528b6c0bd39f6d85bb", 
+            "md5": "f4e5e3027db9cafbddd77b4f649f8b64", 
             "name": "aria2", 
             "tar_url": "aria2/aria2.tar.gz", 
             "title": "Aria2", 
@@ -72,7 +72,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "ad166b845c7885b7c5a18f2ce6514886", 
+    "md5": "2fcb8ccf6c0a97c160df7d6fa3e32929", 
     "tar_url": "softcenter/softcenter.tar.gz", 
     "version": "1.1.6"
 }

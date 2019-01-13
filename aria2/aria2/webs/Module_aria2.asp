@@ -109,7 +109,7 @@ function menu_hook(title, tab) {
   tabtitle[tabtitle.length -1] = new Array("", "aria2");
   tablink[tablink.length -1] = new Array("", "Module_aria2.asp");
 }
-function done_validating() {
+function done_validating(action) {
   return true;
 }
 function check_ddnsto() {
@@ -226,12 +226,11 @@ function onSubmitCtrl(o, s) {
   if (validForm()) {
     document.aria2_form.action_mode.value = s;
     showLoading(5);
+    refreshpage(10);
     document.aria2_form.submit();
   }
 }
-function done_validating(action) { //提交操作5秒后刷洗网页
-    refreshpage(5);
-}
+
 function conf2obj() {
   var params1 = ["aria2_cpulimit_value", "aria2_bt_tracker", "aria2_bt_max_peers", "aria2_custom", "aria2_dht_listen_port", "aria2_dir", "aria2_disk_cache", "aria2_enable", "aria2_event_poll", "aria2_file_allocation", "aria2_force_save", "aria2_install_status", "aria2_listen_port", "aria2_lowest_speed_limit", "aria2_max_concurrent_downloads", "aria2_max_connection_per_server", "aria2_max_download_limit", "aria2_max_overall_download_limit", "aria2_max_overall_upload_limit", "aria2_max_tries", "aria2_max_upload_limit", "aria2_min_split_size", "aria2_peer_id_prefix", "aria2_referer", "aria2_retry_wait", "aria2_rpc_listen_port", "aria2_rpc_secret", "aria2_save_session_interval", "aria2_seed_ratio", "aria2_sleep", "aria2_split", "aria2_user_agent"];
   for (var i = 0; i < params1.length; i++) {
@@ -264,13 +263,14 @@ function load_default_value(o, s) {
   if (validForm()) {
     document.aria2_form.action_mode.value = s;
     showLoading(5);
+    refreshpage(10);
     document.aria2_form.submit();
     update_visibility();
   }
 }
 function version_check() {
   $.ajax({
-    url: 'https://koolshare.ngrok.wang/aria2/config.json.js',
+    url: 'http://sc.paldier.com/aria2/config.json.js',
     type: 'GET',
     dataType: 'jsonp',
     success: function(res) {
@@ -286,7 +286,7 @@ function version_check() {
 }
 function get_status() {
   $.ajax({
-    url: 'apply.cgi?current_page=Module_aria2.asp&next_page=Module_aria2.asp&group_id=&modified=0&action_mode=+Refresh+&action_script=aria2_status.sh&action_wait=&first_time=&preferred_lang=CN',
+    url: 'applydb.cgi?current_page=Module_aria2.asp&next_page=Module_aria2.asp&group_id=&modified=0&action_mode=+Refresh+&action_script=aria2_status.sh&action_wait=&first_time=&preferred_lang=CN',
     dataType: 'html',
     error: function(xhr) {
       alert("error");
@@ -552,7 +552,8 @@ function initial_dir() {
 function initial_dir_status(data) {
   if (data != "" && data.length != 2) {
     get_layer_items("0");
-    eval("var default_dir=" + data);
+    //eval('var default_dir=' + data);
+    var default_dir=  data;
   } else {
     //document.getElementById("EditExports").style.display = "none";
     disk_flag = 1;
@@ -1554,7 +1555,7 @@ function toggle_func() {
                               <label>&nbsp;&nbsp;&nbsp;&nbsp;下载的URIs 文件</label>
                             </td>
                             <td>
-                              <input type="text" class="input_ss_table" style="width:auto;" name="aria2_input_file" value="/koolshare/aria2/aria2.session" maxlength="50" size="50" id="aria2_input_file">
+                              <input type="text" class="input_ss_table" style="width:auto;" name="aria2_input_file" value="/jffs/softcenter/bin/aria2.session" maxlength="50" size="50" id="aria2_input_file">
                             </td>
                           </tr>
                           <tr id="aria2_save_session_tr">
@@ -1562,7 +1563,7 @@ function toggle_func() {
                               <label>&nbsp;&nbsp;&nbsp;&nbsp;会话session保存文件</label>
                             </td>
                             <td>
-                              <input type="text" class="input_ss_table" style="width:auto;" name="aria2_save_session" value="/koolshare/aria2/aria2.session" maxlength="50" size="50" id="aria2_save_session">
+                              <input type="text" class="input_ss_table" style="width:auto;" name="aria2_save_session" value="/jffs/softcenter/bin/aria2.session" maxlength="50" size="50" id="aria2_save_session">
                             </td>
                           </tr>
                           <tr>
@@ -1612,6 +1613,7 @@ function toggle_func() {
                           </a>
                           <br/>后台技术支持： <i>Xiaobao</i>
                           <br/>Shell, Web by： <i>fw867</i>
+                          <br/>修改： <i>paldier</i>
                           <br/>
                         </div>
                       </td>
