@@ -11,6 +11,16 @@
             "version": "0.2.3"
         }, 
         {
+            "build_date": "2019-01-13_22:44:33", 
+            "description": "Cloudflare解析自动更新IP", 
+            "home_url": "Module_cfddns.asp", 
+            "md5": "a5412ac92b26967a619c8c458f839733", 
+            "name": "cfddns", 
+            "tar_url": "cfddns/cfddns.tar.gz", 
+            "title": "", 
+            "version": "1.2"
+        }, 
+        {
             "build_date": "2019-01-13_21:09:08", 
             "description": "老板，来一斤虚拟内存~", 
             "home_url": "Module_swap.asp", 
@@ -72,7 +82,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "55442664d9e425f5ce6a2a0375200c4d", 
+    "md5": "87f69f0f5f47b7a4a17be3f2ef39ff93", 
     "tar_url": "softcenter/softcenter.tar.gz", 
     "version": "1.1.6"
 }
