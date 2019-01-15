@@ -13,12 +13,12 @@ fi
 version_old=`cat history/version | awk '{print $1}' | sort -rn |sed -n 1p`
 version_new=`cat config.json.js |grep "version"|cut -d"\"" -f 4`
 md5_old=`cat history/version | sort -nk1 | awk '{print $1}' |sed -n 1p`
-md5_new=` md5sum aliddns.tar.gz | awk '{print $1}'`
+md5_new=` md5sum cfddns.tar.gz | awk '{print $1}'`
 
-if [ -f ./aliddns.tar.gz ];then
+if [ -f ./cfddns.tar.gz ];then
 	if [ "$version_old" != "$version_new" ];then
 		mkdir ./history/$version_new/
-		cp ./aliddns.tar.gz ./history/$version_new/
+		cp ./cfddns.tar.gz ./history/$version_new/
 		echo $version_new $md5_new >> ./history/version
 	fi
 fi

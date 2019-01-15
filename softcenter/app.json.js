@@ -11,6 +11,16 @@
             "version": "0.2.3"
         }, 
         {
+            "build_date": "2019-01-15_12:45:31", 
+            "description": "shadowsocks", 
+            "home_url": "Main_Ss_Content.asp", 
+            "md5": "85056d753a7babd8b494a9b3a4b04266", 
+            "name": "shadowsocks", 
+            "tar_url": "shadowsocks/shadowsocks.tar.gz", 
+            "title": "shadowsocks", 
+            "version": "3.0.5"
+        }, 
+        {
             "build_date": "2019-01-13_23:00:27", 
             "description": "Cloudflare解析自动更新IP", 
             "home_url": "Module_cfddns.asp", 
@@ -82,7 +92,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "59ac9ab949d719056c43094dc59db706", 
+    "md5": "f85034b38f4335d289e69a1228484d45", 
     "tar_url": "softcenter/softcenter.tar.gz", 
     "version": "1.1.6"
 }
