@@ -11,10 +11,10 @@
             "version": "0.2.3"
         }, 
         {
-            "build_date": "2019-01-15_12:45:31", 
+            "build_date": "2019-01-15_14:10:56", 
             "description": "shadowsocks", 
             "home_url": "Main_Ss_Content.asp", 
-            "md5": "85056d753a7babd8b494a9b3a4b04266", 
+            "md5": "8e2dcfc093371d6b90df36170c1d4ed5", 
             "name": "shadowsocks", 
             "tar_url": "shadowsocks/shadowsocks.tar.gz", 
             "title": "shadowsocks", 
@@ -92,7 +92,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "f85034b38f4335d289e69a1228484d45", 
+    "md5": "9efbbd79792c6d7eb0fc834a8fcb2ae9", 
     "tar_url": "softcenter/softcenter.tar.gz", 
     "version": "1.1.6"
 }

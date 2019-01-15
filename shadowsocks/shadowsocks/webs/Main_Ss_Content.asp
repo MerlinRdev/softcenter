@@ -354,13 +354,6 @@ function update_visibility_tab2(){
 		document.getElementById("show_isp_dns").style.display = "";
 		$j("#show_isp_dns").html("ChinaDNS方案自带国内cdn加速，请在ChinaDNS国内DNS选取国内DNS");
 		$j("#user_cdn_span").html("ChinaDNS方案自带国内cdn加速，无需定义cdn加速名单");
-	}else if(rdf == "6"){
-		document.getElementById("ss_dns_china").style.display = "none";
-		document.getElementById("ss_dns_china_user").style.display = "none";
-		document.getElementById("ss_isp_website_web").style.display = "none";
-		document.getElementById("show_isp_dns").style.display = "";
-		$j("#show_isp_dns").html("Pcap_DNSProxy方案自带国内cdn加速，无需定义国内DNS");
-		$j("#user_cdn_span").html("Pcap_DNSProxy方案自带国内cdn加速，无需定义cdn加速名单");
 	}else{
 		document.getElementById("ss_dns_china").style.display = "";
 		showhide("ss_dns_china_user", (rdc == "12"));
@@ -2764,7 +2757,6 @@ function write_proc_status(){
 															<option value="3">dnscrypt-proxy</option>
 															<option value="4">pdnsd</option>
 															<option value="5">ChinaDNS</option>
-															<option value="6">Pcap_DNSProxy</option>
 														</select>
 														<select id="ss_opendns" name="ss_opendns" class="input_option" style="width:320px"></select>
 														<input type="text" class="ssconfig input_ss_table" id="ss_dns2socks_user" name="ss_dns2socks_user" maxlength="100" placeholder="需端口号如：8.8.8.8:53" value="8.8.8.8:53">
