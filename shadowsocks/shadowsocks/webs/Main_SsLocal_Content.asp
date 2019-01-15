@@ -133,20 +133,15 @@ function onSubmitCtrl(o, s) {
 	if(validForm()){
 		showSSLoadingBar(5);
 		document.form.action_mode.value = s;
-		updateOptions();
+		document.form.enctype = "";
+		document.form.encoding = "";
+		document.form.action_script.value = "ss_socks5.sh";
+		document.form.submit();
 	}
 }
 
 function done_validating(action){
 	return true;
-}
-
-function updateOptions(){
-	document.form.enctype = "";
-	document.form.encoding = "";
-	document.form.action = "/applydb.cgi?p=ss_local_";
-	document.form.action_script.value = "ss_socks5.sh";
-	document.form.submit();
 }
 
 function validForm(){
@@ -178,7 +173,7 @@ function update_visibility(){
 		</table>
 	</div>
 <iframe name="hidden_frame" id="hidden_frame" src="" width="0" height="0" frameborder="0"></iframe>
-<form method="post" name="form" action="/applyss.cgi" target="hidden_frame">
+<form method="post" name="form" action="/applydb.cgi?p=ss_local_" target="hidden_frame">
 	<input type="hidden" name="current_page" value="Main_SsLocal_Content.asp">
 	<input type="hidden" name="next_page" value="Main_SsLocal_Content.asp">
 	<input type="hidden" name="group_id" value="">

@@ -88,7 +88,7 @@ function upload_ok(isok) {
 function start_install() {
 	document.form.action_mode.value = ' Refresh ';
 	document.form.action = "/applydb.cgi?p=soft";
-    document.form.SystemCmd.value = "ks_tar_intall.sh";
+    document.form.action_script.value = "ks_tar_intall.sh";
 	document.form.enctype = "";
 	document.form.encoding = "";
 	document.form.submit();
@@ -144,7 +144,6 @@ function checkCmdRet(){
 	<input type="hidden" name="action_wait" value=""/>
 	<input type="hidden" name="first_time" value=""/>
 	<input type="hidden" name="preferred_lang" id="preferred_lang" value="<% nvram_get("preferred_lang"); %>"/>
-	<input type="hidden" name="SystemCmd" onkeydown="onSubmitCtrl(this, ' Refresh ')" value="adm_config.sh"/>
 	<input type="hidden" name="firmver" value="<% nvram_get("firmver"); %>"/>
 	<input type="hidden" id="soft_name" name="soft_name" value=""/>
 	<table class="content" align="center" cellpadding="0" cellspacing="0">
@@ -168,11 +167,10 @@ function checkCmdRet(){
 										<div style="margin-left:5px;margin-top:10px;margin-bottom:10px"><img src="/images/New_ui/export/line_export.png"></div>
 										<div class="formfontdesc" style="padding-top:5px;margin-top:0px;float: left;" id="cmdDesc"></div>
 										<div style="padding-top:5px;margin-top:0px;float: left;" id="NoteBox" >
-											<li>通过本页面，你可以上传插件的离线安装包来安装插件,此功能需要在7.0及以上的固件才能使用; </li>
+											<li>通过本页面，你可以上传插件的离线安装包来安装插件,此功能需要在蓝洞及K3C固件上使用; </li>
 											<li>离线安装会自动解压tar.gz后缀的压缩包，识别压缩包一级目录下的install.sh文件并执行； </li>
 											<li>建议开发者将插件版本号，md5等信息在install.sh文件内进行写入； </li>
 											<li>此页面也能用来安装SS离线安装包，方便用户进行回滚操作，上传前需要将历史文件包改名为shadowsocks.tar.gz，建议安装时关闭SS，安装后需要重新提交才能看到安装的版本号； </li>
-											<li>此功能暂时不可能，待修复； </li>
 										</div>
 										<div class="formfontdesc" id="cmdDesc"></div>
 										<table style="margin:10px 0px 0px 0px;" width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bordercolor="#6b8fa3" class="FormTable" id="routing_table">

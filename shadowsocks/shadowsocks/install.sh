@@ -140,15 +140,4 @@ if [ "$ss_basic_enable" == "1" ];then
 fi
 echo_date 更新完毕，请等待网页自动刷新！
 echo XU6J03M6
-sleep 1
-killall ssconfig.sh >/dev/null 2>&1
-killall sh >/dev/null 2>&1
-kill `pidof ssconfig.sh` >/dev/null 2>&1
-
-
-
-
-
-
-
 
