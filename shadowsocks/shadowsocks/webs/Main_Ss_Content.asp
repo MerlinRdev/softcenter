@@ -1391,7 +1391,7 @@ function get_ss_status_data() {
 		refreshRate = $j("#ss_basic_refreshrate").val();
 		$j.ajax({
 			type: "get",
-			url: "/dbconf?p=ss_basic_enable,ss_basic_dns_success",
+			url: "/dbconf?p=ss_basic_enable",
 			dataType: "script",
 			success: function() {
 				if (refreshRate != 0) {
