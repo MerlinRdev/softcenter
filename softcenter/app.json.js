@@ -119,6 +119,16 @@
             "tar_url": "aliddns/aliddns.tar.gz", 
             "title": "aliddns", 
             "version": "1.2"
+        }, 
+        {
+            "build_date": "2019-01-17_00:07:34", 
+            "description": "使用Dnspod的ddns服务", 
+            "home_url": "Module_ddnspod.asp", 
+            "md5": "c738df170ed0071439f017fc701be137", 
+            "name": "ddnspod", 
+            "tar_url": "ddnspod/ddnspod.tar.gz", 
+            "title": "DDnspod", 
+            "version": "0.1.6"
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
