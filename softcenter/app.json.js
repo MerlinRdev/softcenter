@@ -81,6 +81,16 @@
             "version": "2.1.15"
         }, 
         {
+            "build_date": "2019-01-16_20:42:05", 
+            "description": "ss-server", 
+            "home_url": "Module_ssserver.asp", 
+            "md5": "685832dcb4a2a9df0c080043269922c5", 
+            "name": "ssserver", 
+            "tar_url": "ssserver/ssserver.tar.gz", 
+            "title": "ss-server", 
+            "version": "2.1"
+        }, 
+        {
             "build_date": "2019-01-13_19:04:43", 
             "description": "kms", 
             "home_url": "Module_kms.asp", 
