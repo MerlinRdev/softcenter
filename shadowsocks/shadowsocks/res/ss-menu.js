@@ -364,7 +364,7 @@ function openssHint(itemNum){
 		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;<font color='#00F'>2.2：是否使用了域名：</font>一些SS服务商提供的域名，特别是较为复杂的域名，可能有解析不了的问题，可尝试更换为IP地址；"
 		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;<font color='#00F'>2.3：是否使用了含有特殊字符的密码：</font>极少数情况下，电脑端账号使用正常，路由端却Problem detected!是因为使用了包含特殊字符的密码；"
 		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;<font color='#00F'>2.4：尝试更换国外dns：</font>此部分详细解析，请看DNS部分帮助文档；"
-		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;<font color='#00F'>2.5：更换shadowsocks主程序：</font>meirlin ss一直使用最新的shadowsocks-libev和shadowsocksR-libev代码编译主程序，如果某次更新后出现这种情况，在检查了以上均无问题后，可能出现的问题就是路由器内的ss主程序和服务器端的不匹配，此时你可以通过下载历史安装包，将旧的主程序替换掉新的，主程序位于路由器下的/koolshare/bin目录，shadowsocks-libev：ss-redir,ss-local,ss-tunnel；shadowsocksR-libev：rss-redir,rss-local,rss-tunnel；"
+		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;<font color='#00F'>2.5：更换shadowsocks主程序：</font>meirlin ss一直使用最新的shadowsocks-libev和shadowsocksR-libev代码编译主程序，如果某次更新后出现这种情况，在检查了以上均无问题后，可能出现的问题就是路由器内的ss主程序和服务器端的不匹配，此时你可以通过下载历史安装包，将旧的主程序替换掉新的，主程序位于路由器下的/jffs/softcenter/bin目录，shadowsocks-libev：ss-redir,ss-local,ss-tunnel；shadowsocksR-libev：rss-redir,rss-local,rss-tunnel；"
 		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;<font color='#00F'>2.6：更新服务器端：</font>如果你不希望更换路由器端主程序，可以更新最新服务器端来尝试解决问题，另外建议使用原版SS的朋友,在服务器端部署和路由器端相同版本的shadowsocks-libev；"
 		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;<font color='#00F'>2.7：ntp时间问题：</font>如果你使用SSR，一些混淆协议是需要验证ss服务器和路由器的时间的，如果时间相差太多，那么就会出现Problem detected! 。"
 		statusmenu +="</br><b><font color='#CC0066'>3：双Problem detected!：</font></b>"
@@ -450,12 +450,12 @@ function openssHint(itemNum){
 		statusmenu +="</br></br><font color='#CC0066'>1&nbsp;&nbsp;</font>进入<a href='Tools_Shell.asp' target='_blank'><u><font color='#00F'>webshell</font></u></a>或者其他telnet,ssh等能输入命令的工具";
 		statusmenu +="</br><font color='#CC0066'>2&nbsp;&nbsp;</font>请依次输入以下命令，等待上一条命令执行完后再运行下一条(这里以回滚2.8.9为例)：";
 		statusmenu +="</br></br>&nbsp;&nbsp;&nbsp;&nbsp;cd /tmp";
-		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;wget --no-check-certificate https://raw.githubusercontent.com/koolshare/koolshare.github.io/mips_softerware_center/shadowsocks/history/shadowsocks_2.8.9.tar.gz";
+		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;wget --no-check-certificate https://raw.githubusercontent.com/paldier/softcenter/master/shadowsocks/history/shadowsocks_2.8.9.tar.gz";
 		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;tar -zxvf /tmp/shadowsocks.tar.gz";
 		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;chmod +x /tmp/shadowsocks/install.sh";
 		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;sh /tmp/shadowsocks/install.sh";
 		statusmenu +="</br></br>最后一条命令输入完后不会有任何打印信息。";
-		statusmenu +="</br>回滚其它版本号，请参考<a href='https://github.com/koolshare/koolshare.github.io/tree/mips_softerware_center/shadowsocks/history' target='_blank'><u><font color='#00F'>版本历史列表</font></u></a>";
+		statusmenu +="</br>回滚其它版本号，请参考<a href='https://github.com/paldier/softcenter/tree/master/shadowsocks/history' target='_blank'><u><font color='#00F'>版本历史列表</font></u></a>";
 		_caption = "shadowsocks for merlin 版本";
 	}
 	else if(itemNum == 13){
@@ -508,9 +508,9 @@ function openssHint(itemNum){
 	}
 	else if(itemNum == 25){
 		statusmenu ="<font color='#CC0066'>1&nbsp;&nbsp;在gfwlist模式下：</font>";
-		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;将用此处定义的国内DNS解析<a href='https://github.com/koolshare/koolshare.github.io/blob/acelan_softcenter_ui/maintain_files/gfwlist.conf' target='_blank'><u><font color='#00F'>gfwlist</font></u></a>以外的网址，包括全部国内网址和国外未被墙的网址。"
+		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;将用此处定义的国内DNS解析<a href='https://github.com/paldier/softcenter/blob/master/maintain_files/gfwlist.conf' target='_blank'><u><font color='#00F'>gfwlist</font></u></a>以外的网址，包括全部国内网址和国外未被墙的网址。"
 		statusmenu +="</br></br><font color='#CC0066'>2&nbsp;&nbsp;在大陆白名单模式：</font>";
-		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;将用此处定义的国内DNS将解析国内<a href='https://github.com/koolshare/koolshare.github.io' target='_blank'><font color='#00F'>2W+个域名（CDN名单）</font></a> 参与维护这个列表。"
+		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;将用此处定义的国内DNS将解析国内<a href='https://github.com/paldier/softcenter' target='_blank'><font color='#00F'>2W+个域名（CDN名单）</font></a> 参与维护这个列表。"
 		_caption = "国内DNS";
 	}
 	else if(itemNum == 26){
@@ -520,19 +520,19 @@ function openssHint(itemNum){
 		//dns2socks
 		statusmenu +="</br><font color='#CC0066'>1:dns2socks：</font>"
 		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;可以说是万金油方案,作用是将 DNS请求通过一个socks5隧道转发到DNS服务器，和下文中ss-tunnel类似，不过1dns2socks是利用了SOCK5隧道代理，ss-tunnel是利用了加密UDP；该DNS方案不受到ss服务是否支持udp限制，不受到运营商是否封Opendns限制，只要能建立socoks5链接，就能使用；";
-		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;在gfwlist模式下，dns2socks用于针对性的解析gfwlist内的域名名单；在使用chnroute的模式（大陆白名单模式）dns2socks用于解析<a href='https://github.com/koolshare/koolshare.github.io/blob/acelan_softcenter_ui/maintain_files/cdn.txt' target='_blank'><u><font color='#00F'>国内cdn名单</font></u></a>以外的所有域名，所以一些没有包含在这份名单内的网站，而正好这个网站有部署国外地址的话，那么这个网站就会被解析为国外ip，然后由ipset判断流量走ss，当然这种情况是比较少的，因为一般常用的国内网站都包含在这份cdn名单内了。";
+		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;在gfwlist模式下，dns2socks用于针对性的解析gfwlist内的域名名单；在使用chnroute的模式（大陆白名单模式）dns2socks用于解析<a href='https://github.com/paldier/softcenter/blob/master/maintain_files/cdn.txt' target='_blank'><u><font color='#00F'>国内cdn名单</font></u></a>以外的所有域名，所以一些没有包含在这份名单内的网站，而正好这个网站有部署国外地址的话，那么这个网站就会被解析为国外ip，然后由ipset判断流量走ss，当然这种情况是比较少的，因为一般常用的国内网站都包含在这份cdn名单内了。";
 		//dnscrypt-proxy
 		statusmenu +="</br><font color='#CC0066'>2:dnscrypt-proxy：</font>"
 		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;原理是通过加密连接到支持该程序的国外DNS服务器，由这些DNS服务器解析出gfwlist中域名的IP地址，因为该解析不走ss服务器，所以解析出的IP地址离SS服务器的距离随机，国外CDN较弱。这里提供了很多支持dnscrypt-proxy解析的节点列表，通常最常用的就是cisco(opendns)，不过国内有些地区的运营商针对opendns有封锁，所以有时候选择dnscrypt-proxy + opendns的方案可能行不通；";
-		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;在gfwlist模式下，dnscrypt-proxy用于针对性的解析gfwlist内的域名名单；在使用chnroute的模式（大陆白名单模式）dnscrypt-proxy用于解析<a href='https://github.com/koolshare/koolshare.github.io/blob/acelan_softcenter_ui/maintain_files/cdn.txt' target='_blank'><u><font color='#00F'>国内cdn名单</font></u></a>以外的所有域名，所以一些没有包含在这份名单内的网站，而正好这个网站有部署国外地址的话，那么这个网站就会被解析为国外ip，然后由ipset判断流量走ss，当然这种情况是比较少的，因为一般常用的国内网站都包含在这份cdn名单内了。";
+		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;在gfwlist模式下，dnscrypt-proxy用于针对性的解析gfwlist内的域名名单；在使用chnroute的模式（大陆白名单模式）dnscrypt-proxy用于解析<a href='https://github.com/paldier/softcenter/blob/master/maintain_files/cdn.txt' target='_blank'><u><font color='#00F'>国内cdn名单</font></u></a>以外的所有域名，所以一些没有包含在这份名单内的网站，而正好这个网站有部署国外地址的话，那么这个网站就会被解析为国外ip，然后由ipset判断流量走ss，当然这种情况是比较少的，因为一般常用的国内网站都包含在这份cdn名单内了。";
 		//ss-tunnel
 		statusmenu +="</br><font color='#CC0066'>3:ss-tunnel：</font>"
 		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;原理是将DNS请求，通过ss-tunnel利用UDP发送到ss服务器上，由ss服务器向你定义的DNS服务器发送解析请求，解析出gfwlist中域名的IP地址，这种方式解析出来的IP地址会距离ss服务器更近，具有较强的国外CDN效果;"
-		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;在gfwlist模式下，ss-tunnel用于针对性的解析gfwlist内的域名名单；在使用chnroute的模式（大陆白名单模式）ss-tunnel用于解析<a href='https://github.com/koolshare/koolshare.github.io/blob/acelan_softcenter_ui/maintain_files/cdn.txt' target='_blank'><u><font color='#00F'>国内cdn名单</font></u></a>以外的所有域名，所以一些没有包含在这份名单内的网站，而正好这个网站有部署国外地址的话，那么这个网站就会被解析为国外ip，然后由ipset判断流量走ss，当然这种情况是比较少的，因为一般常用的国内网站都包含在这份cdn名单内了。";
+		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;在gfwlist模式下，ss-tunnel用于针对性的解析gfwlist内的域名名单；在使用chnroute的模式（大陆白名单模式）ss-tunnel用于解析<a href='https://github.com/kpaldier/softcenter/blob/master/maintain_files/cdn.txt' target='_blank'><u><font color='#00F'>国内cdn名单</font></u></a>以外的所有域名，所以一些没有包含在这份名单内的网站，而正好这个网站有部署国外地址的话，那么这个网站就会被解析为国外ip，然后由ipset判断流量走ss，当然这种情况是比较少的，因为一般常用的国内网站都包含在这份cdn名单内了。";
 		//ChinaDNS
 		statusmenu +="</br><font color='#CC0066'>4:ChinaDNS：</font>"
-		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;原理是通过ChinaDNS自身的DNS并发查询，同时将你要请求的域名同时向国内和国外DNS发起查询，然后用ChinaDNS内置的双向过滤+指针压缩功能来过滤掉污染ip，双向过滤保证了国内地址都用国内域名查询，因此使用ChinaDNS能够获得最佳的国内CDN效果，这里ChinaDNS国内服务器的选择是有要求的，这个DNS的ip地址必须在<a href='https://github.com/koolshare/koolshare.github.io/blob/acelan_softcenter_ui/maintain_files/chnroute.txt' target='_blank'><u><font color='#00F'>chnroute</font></u></a>定义的IP段内，同理你选择或者自定义的国外DNS必须在chnroute定义的IP段外，所以比如你在国内DNS处填写你的上级路由器的ip地址，类似192.168.1.1这种，会被ChinaDNS判断为国外IP地址,从而使得双向过滤功能失效，国外DNS解析的IP地址就会进入DNS缓存；";
-		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;因为ChinaDNS自己具备cdn解析能力，所以没必要再使用<a href='https://github.com/koolshare/koolshare.github.io/blob/acelan_softcenter_ui/maintain_files/cdn.txt' target='_blank'><u><font color='#00F'>国内cdn名单</font></u></a>,因为使用这个名单会对dnsmasq造成很大的负担！"
+		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;原理是通过ChinaDNS自身的DNS并发查询，同时将你要请求的域名同时向国内和国外DNS发起查询，然后用ChinaDNS内置的双向过滤+指针压缩功能来过滤掉污染ip，双向过滤保证了国内地址都用国内域名查询，因此使用ChinaDNS能够获得最佳的国内CDN效果，这里ChinaDNS国内服务器的选择是有要求的，这个DNS的ip地址必须在<a href='https://github.com/paldier/softcenter/blob/master/maintain_files/chnroute.txt' target='_blank'><u><font color='#00F'>chnroute</font></u></a>定义的IP段内，同理你选择或者自定义的国外DNS必须在chnroute定义的IP段外，所以比如你在国内DNS处填写你的上级路由器的ip地址，类似192.168.1.1这种，会被ChinaDNS判断为国外IP地址,从而使得双向过滤功能失效，国外DNS解析的IP地址就会进入DNS缓存；";
+		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;因为ChinaDNS自己具备cdn解析能力，所以没必要再使用<a href='https://github.com/paldier/softcenter/blob/master/maintain_files/cdn.txt' target='_blank'><u><font color='#00F'>国内cdn名单</font></u></a>,因为使用这个名单会对dnsmasq造成很大的负担！"
 		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;为了保证ChinaDNS国外解析的效果，这里我给出的ChinaDNS国外DNS都是又经过了一层软件（dns2socks，dnscrypt-proxy，ss-tunnel）的；同时你也可以自定义ChinaDNS国外dns去直接去请求国外DNS服务器，但是cdn效果就不会有经过上层软件后好。这里如果选择dns2socks或者ss-tunnel，ChinaDNS解析国外DNS会向上游软件去请求，而这两个上游软件都会经过SS服务器，可以说能达到良好的国外CDN效果；"
 		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;因为gfwlist模式的原理，不需要用到这个软件，也有良好的cdn效果，所以并没有必要在gfwlist模式中集成该方案;"
 		//pdnsd
@@ -540,18 +540,18 @@ function openssHint(itemNum){
 		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;pdnsd是一个老牌的dns解析软件了它不仅可以用来做解析软件，还能用来自己搭建dns缓存服务器；早期pdnsd的流行，主要是其支持TCP解析，然而随着gfw对投毒范围的越来越广泛，tcp解析已经不能保证无毒了，但是其强大的dns缓存机制，让我仍然不肯放弃它；";
 		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;pdnsd域名解析具备强大的dns缓存机制，通过修改最小ttl时间，可以让缓存进入电脑后很长时间才会失效，优点就是每次解析国外网站，仅需1ms的时间；";
 		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;设置pdnsd的上有服务器，建议使用UDP方式，因为TCP方式，除非自己搭建支持TCP查询的DNS服务器，很难避免污染的情况，而UDP方式也是提供了（dns2socks，dnscrypt-proxy，ss-tunnel）三种上游软件，这里就不再赘述；";
-		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;在gfwlist模式下，pdnsd用于针对性的解析gfwlist内的域名名单，因此pdnsd的DNS缓存也只针对这部分域名；在使用chnroute的模式（大陆白名单模式）dnscrypt-proxy用于解析<a href='https://github.com/koolshare/koolshare.github.io/blob/acelan_softcenter_ui/maintain_files/cdn.txt' target='_blank'><u><font color='#00F'>国内cdn名单</font></u></a>以外的所有域名，pdnsd的DNS缓存也针对这部分域名（但是范围比使用gfwlist要大得多了），所以一些没有包含在这份名单内的网站，而正好这个网站有部署国外地址的话，那么这个网站就会被解析为国外ip，然后由ipset判断流量走ss，当然这种情况是比较少的，因为一般常用的国内网站都包含在这份cdn名单内了。";
+		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;在gfwlist模式下，pdnsd用于针对性的解析gfwlist内的域名名单，因此pdnsd的DNS缓存也只针对这部分域名；在使用chnroute的模式（大陆白名单模式）dnscrypt-proxy用于解析<a href='https://github.com/paldier/softcenter/blob/master/maintain_files/cdn.txt' target='_blank'><u><font color='#00F'>国内cdn名单</font></u></a>以外的所有域名，pdnsd的DNS缓存也针对这部分域名（但是范围比使用gfwlist要大得多了），所以一些没有包含在这份名单内的网站，而正好这个网站有部署国外地址的话，那么这个网站就会被解析为国外ip，然后由ipset判断流量走ss，当然这种情况是比较少的，因为一般常用的国内网站都包含在这份cdn名单内了。";
 		_caption = "国外DNS";
 		return overlib(statusmenu, OFFSETX, -860, OFFSETY, -290, LEFT, STICKY, WIDTH, 'width', CAPTION, _caption, CLOSETITLE, '');
 		
 	}
 	else if(itemNum == 27){
-		statusmenu ="&nbsp;&nbsp;&nbsp;&nbsp;ChinaDNS用于解析<a href='https://github.com/koolshare/koolshare.github.io/blob/acelan_softcenter_ui/maintain_files/cdn.txt' target='_blank'><u><font color='#00F'>国内cdn名单</font></u></a>以外的国内网址的DNS。"
-		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;因为ChinaDNS会将你定义的国内DNS和<a href='https://github.com/koolshare/koolshare.github.io/blob/acelan_softcenter_ui/maintain_files/chnroute.txt' target='_blank'><u><font color='#00F'>chnroute</font></u></a>做匹配，如果你定义的国内DNS不在<a href='https://github.com/koolshare/koolshare.github.io/blob/acelan_softcenter_ui/maintain_files/chnroute.txt' target='_blank'><u><font color='#00F'>chnroute</font></u></a>内，那么就是无效的，比如你定义了上级路由器的192.168.1.1的DNS那么就是无效的！"
+		statusmenu ="&nbsp;&nbsp;&nbsp;&nbsp;ChinaDNS用于解析<a href='https://github.com/paldier/softcenter/blob/master/maintain_files/cdn.txt' target='_blank'><u><font color='#00F'>国内cdn名单</font></u></a>以外的国内网址的DNS。"
+		statusmenu +="</br>&nbsp;&nbsp;&nbsp;&nbsp;因为ChinaDNS会将你定义的国内DNS和<a href='https://github.com/paldier/softcenter/blob/master/maintain_files/chnroute.txt' target='_blank'><u><font color='#00F'>chnroute</font></u></a>做匹配，如果你定义的国内DNS不在<a href='https://github.com/paldier/softcenter/blob/master/maintain_files/chnroute.txt' target='_blank'><u><font color='#00F'>chnroute</font></u></a>内，那么就是无效的，比如你定义了上级路由器的192.168.1.1的DNS那么就是无效的！"
 		_caption = "ChinaDNS国内DNS";
 	}
 	else if(itemNum == 28){
-		statusmenu ="&nbsp;&nbsp;&nbsp;&nbsp;ChinaDNS用于解析<a href='https://github.com/koolshare/koolshare.github.io/blob/acelan_softcenter_ui/maintain_files/chnroute.txt' target='_blank'><u><font color='#00F'>chnroute</font></u></a>以外的国外网址的DNS。"
+		statusmenu ="&nbsp;&nbsp;&nbsp;&nbsp;ChinaDNS用于解析<a href='https://github.com/paldier/softcenter/blob/master/maintain_files/chnroute.txt' target='_blank'><u><font color='#00F'>chnroute</font></u></a>以外的国外网址的DNS。"
 		_caption = "ChinaDNS国外DNS";
 	}
 	else if(itemNum == 29){
@@ -631,7 +631,7 @@ function openssHint(itemNum){
 		_caption = "chromecast";
 	}
 	else if(itemNum == 44){
-		statusmenu ="shadowsocks规则更新包括了gfwlist模式中用到的<a href='https://github.com/koolshare/koolshare.github.io/blob/acelan_softcenter_ui/maintain_files/gfwlist.conf' target='_blank'><font color='#00F'><u>gfwlist</u></font></a>，在大陆白名单模式中用到的<a href='https://github.com/koolshare/koolshare.github.io/blob/acelan_softcenter_ui/maintain_files/chnroute.txt' target='_blank'><u><font color='#00F'>chnroute</font></u></a>和<a href='https://github.com/koolshare/koolshare.github.io/blob/acelan_softcenter_ui/maintain_files/cdn.txt' target='_blank'><u><font color='#00F'>国内cdn名单</font></u></a>"
+		statusmenu ="shadowsocks规则更新包括了gfwlist模式中用到的<a href='https://github.com/paldier/softcenter/blob/master/maintain_files/gfwlist.conf' target='_blank'><font color='#00F'><u>gfwlist</u></font></a>，在大陆白名单模式中用到的<a href='https://github.com/paldier/softcenter/blob/master/maintain_files/chnroute.txt' target='_blank'><u><font color='#00F'>chnroute</font></u></a>和<a href='https://github.com/paldier/softcenter/blob/master/maintain_files/cdn.txt' target='_blank'><u><font color='#00F'>国内cdn名单</font></u></a>"
 		statusmenu +="</br>建议更新时间在凌晨闲时进行，以避免更新时重启ss服务器造成网络访问问题。"
 		_caption = "shadowsocks规则自动更新";
 	}
@@ -665,8 +665,8 @@ function openssHint(itemNum){
 		_caption = "侧边栏开关";
 	}else if(itemNum == 53){
 		statusmenu ="此处可以自定义你偏向使用的DNS解析方案"
-		statusmenu +="</br></br>国内优先：国外dns解析gfwlist名单内的国外域名，其余域名用国内dns解析，需要<a href='https://github.com/koolshare/koolshare.github.io/blob/acelan_softcenter_ui/maintain_files/gfwlist.conf' target='_blank'><u><font color='#00F'>gfwlist</font></u></a>，占用cpu较小，国内解析效果好。"
-		statusmenu +="</br></br>国外优先：国内dns解析cdn名单内的国内域名用，其余域名用国外dns解析，需要<a href='https://github.com/koolshare/koolshare.github.io/blob/acelan_softcenter_ui/maintain_files/cdn.txt' target='_blank'><u><font color='#00F'>国内cdn名单</font></u></a>，占用cpu较大，国外解析效果好。"
+		statusmenu +="</br></br>国内优先：国外dns解析gfwlist名单内的国外域名，其余域名用国内dns解析，需要<a href='https://github.com/paldier/softcenter/blob/master/maintain_files/gfwlist.conf' target='_blank'><u><font color='#00F'>gfwlist</font></u></a>，占用cpu较小，国内解析效果好。"
+		statusmenu +="</br></br>国外优先：国内dns解析cdn名单内的国内域名用，其余域名用国外dns解析，需要<a href='https://github.com/paldier/softcenter/blob/master/maintain_files/cdn.txt' target='_blank'><u><font color='#00F'>国内cdn名单</font></u></a>，占用cpu较大，国外解析效果好。"
 		_caption = "侧边栏开关";
 	}
 	else if(itemNum == 54){

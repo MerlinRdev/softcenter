@@ -11,10 +11,10 @@
             "version": "0.2.3"
         }, 
         {
-            "build_date": "2019-01-15_23:03:46", 
+            "build_date": "2019-01-18_23:28:00", 
             "description": "shadowsocks", 
             "home_url": "Main_Ss_Content.asp", 
-            "md5": "dec15008fbecb4f04d796fd924eb05f1", 
+            "md5": "678f57d8c58e5828b7447b3f7ab91653", 
             "name": "shadowsocks", 
             "tar_url": "shadowsocks/shadowsocks.tar.gz", 
             "title": "shadowsocks", 
