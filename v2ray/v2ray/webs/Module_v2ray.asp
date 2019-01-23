@@ -93,7 +93,7 @@ top: 250px;
 </style>
 <script>
 function initial(){
-show_menu();
+show_menu(menu_hook);
 document.form.v2ray_srcip.value = document.form.v2ray_srcip.value.replace(/,yushi,/g,"\r\n");
 show_footer();
 }
@@ -138,6 +138,10 @@ document.form.v2ray_user.value = "0";
 }
 );
 });
+function menu_hook(title, tab) {
+	tabtitle[tabtitle.length -1] = new Array("", "软件中心", "离线安装", "V2RAY");
+	tablink[tablink.length -1] = new Array("", "Main_Soft_center.asp", "Main_Soft_setting.asp", "Module_v2ray.asp");
+}
 </script></head>
 <body onload="initial();" onunload="unload_body();" onselectstart="return false;">
 <div id="TopBanner"></div>

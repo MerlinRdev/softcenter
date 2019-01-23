@@ -24,7 +24,7 @@
 <script type="text/javascript" src="/switcherplugin/jquery.iphone-switch.js"></script>
 <script>
 function init() {
-	show_menu();
+	show_menu(menu_hook);
 	buildswitch();
 	conf2obj();
 }
@@ -74,6 +74,10 @@ function conf2obj() {
 }
 function reload_Soft_Center() {
 	location.href = "/Main_Soft_center.asp";
+}
+function menu_hook(title, tab) {
+	tabtitle[tabtitle.length -1] = new Array("", "软件中心", "离线安装", "ss-server");
+	tablink[tablink.length -1] = new Array("", "Main_Soft_center.asp", "Main_Soft_setting.asp", "Module_ssserver.asp");
 }
 </script>
 </head>

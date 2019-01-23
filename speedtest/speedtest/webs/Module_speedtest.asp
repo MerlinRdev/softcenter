@@ -385,8 +385,8 @@
 				return true;
 			}
 			function menu_hook(title, tab) {
-				tabtitle[tabtitle.length -1] = new Array("", "speedtest");
-				tablink[tablink.length -1] = new Array("", "Module_speedtest.asp");
+	tabtitle[tabtitle.length -1] = new Array("", "软件中心", "离线安装", "speedtest");
+	tablink[tablink.length -1] = new Array("", "Main_Soft_center.asp", "Main_Soft_setting.asp", "Module_speedtest.asp");
 			}
         </script>
     </head>

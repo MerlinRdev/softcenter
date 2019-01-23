@@ -27,7 +27,7 @@
 		<script type="text/javascript" src="/res/sha1.js"></script>
         <script type="text/javascript">
 		function init() {
-			show_menu();
+			show_menu(menu_hook);
 			buildswitch();
 			var rrt = document.getElementById("switch");
 		    if (document.form.ddnspod_enable.value != "1") {
@@ -152,6 +152,10 @@
 		function reload_Soft_Center() {
 			location.href = "/Main_Soft_center.asp";
 		}
+function menu_hook(title, tab) {
+	tabtitle[tabtitle.length -1] = new Array("", "软件中心", "离线安装", "ddnspod");
+	tablink[tablink.length -1] = new Array("", "Main_Soft_center.asp", "Main_Soft_setting.asp", "Module_ddnspod.asp");
+}
         </script>
     </head>
     <body onload="init();">

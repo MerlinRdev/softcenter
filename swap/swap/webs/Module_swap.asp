@@ -218,8 +218,8 @@ function reload_Soft_Center(){
 location.href = "/Main_Soft_center.asp";
 }
 function menu_hook(title, tab) {
-	tabtitle[tabtitle.length -1] = new Array("", "虚拟内存");
-	tablink[tablink.length -1] = new Array("", "Module_swap.asp");
+	tabtitle[tabtitle.length -1] = new Array("", "软件中心", "离线安装", "虚拟内存");
+	tablink[tablink.length -1] = new Array("", "Main_Soft_center.asp", "Main_Soft_setting.asp", "Module_swap.asp");
 }
 </script>
 </head>

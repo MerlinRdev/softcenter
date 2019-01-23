@@ -249,15 +249,8 @@ function reload_Soft_Center(){ //返回软件中心按钮
     location.href = "/Main_Soft_center.asp";
 }
 function menu_hook(title, tab) {
-    var enable_ss = "<% nvram_get("enable_ss"); %>";
-    var enable_soft = "<% nvram_get("enable_soft"); %>";
-    if(enable_ss == "1" && enable_soft == "1"){
-        tabtitle[tabtitle.length -2] = new Array("", "Frps 内网穿透");
-        tablink[tablink.length -2] = new Array("", "Module_frps.asp");
-    }else{
-        tabtitle[tabtitle.length -1] = new Array("", "Frps 内网穿透");
-        tablink[tablink.length -1] = new Array("", "Module_frps.asp");
-    }
+	tabtitle[tabtitle.length -1] = new Array("", "软件中心", "离线安装", "Frps 内网穿透");
+	tablink[tablink.length -1] = new Array("", "Main_Soft_center.asp", "Main_Soft_setting.asp", "Module_frps.asp");
 }
 function version_show(){
     $j.ajax({

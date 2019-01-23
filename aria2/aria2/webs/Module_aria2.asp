@@ -106,8 +106,8 @@ function init() {
   generate_glutton_link();
 }
 function menu_hook(title, tab) {
-  tabtitle[tabtitle.length -1] = new Array("", "aria2");
-  tablink[tablink.length -1] = new Array("", "Module_aria2.asp");
+	tabtitle[tabtitle.length -1] = new Array("", "软件中心", "离线安装", "aria2");
+	tablink[tablink.length -1] = new Array("", "Main_Soft_center.asp", "Main_Soft_setting.asp", "Module_aria2.asp");
 }
 function done_validating(action) {
   return true;
@@ -121,9 +121,6 @@ function check_ddnsto() {
     $G("aria2_ddnsto").checked = false;
     $G("f_aria2_ddnsto").value = "false";
     $G("ddnsto_status").innerHTML = "<font color=#ffffff>如需远程连接Aria，请正确设置DDNSTO插件并启用！</font>";
-    if (validForm()) {
-      document.aria2_form.submit();
-    }
   }
   if ($G("aria2_ddnsto").checked){
     $G("aria2_rpc_secret").readOnly=true;
@@ -286,7 +283,7 @@ function version_check() {
 }
 function get_status() {
   $.ajax({
-    url: 'applydb.cgi?current_page=Module_aria2.asp&next_page=Module_aria2.asp&group_id=&modified=0&action_mode=+Refresh+&action_script=aria2_status.sh&action_wait=&first_time=&preferred_lang=CN',
+    url: 'applydb.cgi?p=aria2_&current_page=Module_aria2.asp&next_page=Module_aria2.asp&group_id=&modified=0&action_mode=+Refresh+&action_script=aria2_status.sh&action_wait=&first_time=&preferred_lang=CN',
     dataType: 'html',
     error: function(xhr) {
       alert("error");
@@ -553,7 +550,7 @@ function initial_dir_status(data) {
   if (data != "" && data.length != 2) {
     get_layer_items("0");
     //eval('var default_dir=' + data);
-    var default_dir=  data;
+    var default_dir= data;
   } else {
     //document.getElementById("EditExports").style.display = "none";
     disk_flag = 1;
@@ -1027,8 +1024,8 @@ function toggle_func() {
    <input type="hidden" name="next_page" value="Module_aria2.asp" />
    <input type="hidden" name="group_id" value="" />
    <input type="hidden" name="modified" value="0" />
-   <input type="hidden" name="action_mode" value=" Refresh " />
-   <input type="hidden" name="action_script" value="aria2_config.sh" />
+   <input type="hidden" name="action_mode" value="" />
+   <input type="hidden" name="action_script" value="" />
    <input type="hidden" name="action_wait" value="5" />
    <input type="hidden" name="first_time" value="" />
    <input type="hidden" name="preferred_lang" id="preferred_lang" value="<% nvram_get(" preferred_lang "); %>"/>

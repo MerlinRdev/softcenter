@@ -86,6 +86,8 @@
 			function menu_hook(title, tab) {
 				tabtitle[tabtitle.length -1] = new Array("", "KMS");
 				tablink[tablink.length -1] = new Array("", "Module_kms.asp");
+	tabtitle[tabtitle.length -1] = new Array("", "软件中心", "离线安装", "KMS");
+	tablink[tablink.length -1] = new Array("", "Main_Soft_center.asp", "Main_Soft_setting.asp", "Module_kms.asp");
 			}
 		</script>
 	</head>
