@@ -44,7 +44,7 @@
 	border-radius: 5px 5px 5px 5px;
 	width:20%;
 }
-.show-btn1, .show-btn1_1, .show-btn2, .show-btn3, .show-btn4, .show-btn5, .show-btn6, .show-btn7 {
+.show-btn1, .show-btn1_1, .show-btn2, .show-btn3, .show-btn3_1, .show-btn3_2, .show-btn4, .show-btn5, .show-btn6, .show-btn7 {
 	border: 1px solid #222;
 	background: linear-gradient(to bottom, #76a0ba  0%, #688292 100%); /* W3C */
 	background: linear-gradient(to bottom, #919fa4  0%, #67767d 100%); /* W3C */
@@ -133,36 +133,18 @@ input[type=button]:focus {
 	border: 1px solid #222;
 }
 
-#ss_node_list_table_td { -ms-overflow-style: none; overflow: auto; } /* for IE hide scrollbar on ss node ta */
-#ss_node_list_table_td::-webkit-scrollbar {
-    width: 0px;  /* remove scrollbar space */
-    background: transparent;  /* optional: just make scrollbar invisible */
-}
-
-#log_content3, #log_content1, #proc_status { -ms-overflow-style: none; overflow: auto; } /* for IE hide scrollbar on ss node ta */
-#log_content3::-webkit-scrollbar, #log_content1::-webkit-scrollbar, #proc_status::-webkit-scrollbar {
-    width: 0px;  /* remove scrollbar space */
-    background: transparent;  /* optional: just make scrollbar invisible */
-}
-#log_content3:focus, #log_content1:focus, #proc_status:focus {
-	outline: none;
-}
-
-#log_content3, #log_content1, #proc_status {overflow: -moz-scrollbars-none;}
-
-
 .FormTable1{
 	table-layout:fixed;
-	width:748px;
+	width:749.71px;
 	font-size:12px;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	border: 1px solid #000000;
 	border-collapse: collapse;
 }
 .FormTable1 th{
 	table-layout:fixed;
 	overflow:hidden;
-	font-family:Arial, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	background-color:#1F2D35;
 	color:#FFFFFF	;	/*Viz add*/
 	font-weight:normal;
@@ -194,7 +176,7 @@ input[type=button]:focus {
 .SimpleNote { padding:5px 10px;}
 
 #iframe1{
-   font-family: sans-serif;
+   font-family: Lucida Console;
    color: red;
 }
 
@@ -206,7 +188,7 @@ input[type=button]:focus {
 	border-bottom-width:1px; 
 	border-color:#888;	
 	color:#FFFFFF;
-	font-family:'Courier New', Courier, mono;
+	font-family: Lucida Console;
 	font-size:13px;
 }
 .input_option_2{
@@ -214,7 +196,7 @@ input[type=button]:focus {
 	background-color:#475a5f;
 	border: 0px solid #222;
 	color:#FFFFFF;
-	font-family:'Courier New', Courier, mono;
+	font-family: Lucida Console;
 	font-size:13px;
 }
 
@@ -223,7 +205,7 @@ input[type=button]:focus {
 	background-color:#576D73;
 	border: 0px solid #222;
 	color:#FFFFFF;
-	font-family:'Courier New', Courier, mono;
+	font-family: Lucida Console;
 	font-size:13px;
 }
 #ss_basic_kcp_parameter{
@@ -232,7 +214,7 @@ input[type=button]:focus {
     overflow: hidden;
     width: 99%;
     font-size: 13px;
-	font-family:'Courier New', Courier, mono;
+	font-family: Lucida Console;
     height: 25px;
     line-height: 1.5;
     padding:0px;
@@ -255,29 +237,12 @@ input[type=button]:focus {
 	border-radius: 5px 5px 5px 5px;
 	width:14%;
 }
-.kp_btn {
-	border: 1px solid #222;
-	background: linear-gradient(to bottom, #003333  0%, #000000 100%); /* W3C */
-	font-size:10pt;
-	color: #fff;
-	padding: 5px 5px;
-	border-radius: 5px 5px 5px 5px;
-	width:14%;
-}
-.kp_btn:hover {
-	border: 1px solid #222;
-	background: linear-gradient(to bottom, #27c9c9  0%, #279fd9 100%); /* W3C */
-	font-size:10pt;
-	color: #fff;
-	padding: 5px 5px;
-	border-radius: 5px 5px 5px 5px;
-	width:14%;
-}
+
 .FormTitle_chrome56{
 	margin-top:-100px;
 	line-height:160%;
 	font-size:12px;
-	font-family:Arial, Verdana, Arial, Helvetica, sans-serif;
+	font-family: Lucida Console;
 	border:1px solid #4D595D;
 	color:white;
 	position:relative;
@@ -319,7 +284,6 @@ input[type=button]:focus {
 	margin-top:-100px;
 	line-height:160%;
 	font-size:12px;
-	font-family:Arial, Verdana, Arial, Helvetica, sans-serif;
 	border:1px solid #4D595D;
 	color:white;
 }
@@ -347,3 +311,35 @@ input[type=button]:focus {
     font-style: normal;
 	font-weight:normal;
 }
+.input_ss_table{
+	margin-left:2px;
+	padding-left:0.4em;
+	height:21px;
+	width:158.2px;
+	line-height:23px \9;	/*IE*/
+	font-size:13px;
+	font-family: Lucida Console;
+	background-image:none;
+	background-color: #576d73;
+	border:1px solid gray;
+	color:#FFFFFF;
+}
+
+.sub-btn1, .sub-btn2, .sub-btn3 {
+	border: 1px solid #222;
+	border-bottom:none;
+	background: linear-gradient(to bottom, #919fa4  0%, #67767d 100%); /* W3C */
+	font-size:10pt;
+	color: #fff;
+	padding: 10px 3.75px;
+	border-radius: 5px 5px 0px 0px;
+	width:16%;
+}
+.sub-btn1:hover, .sub-btn2:hover, .sub-btn3:hover, .active2 {
+	background: #2f3a3e;
+}
+
+.cloud_main_radius h2 { border-bottom:1px #AAA dashed;}
+.cloud_main_radius h3 { font-size:12px;color:#FFF;font-weight:normal;font-style: normal;}
+.cloud_main_radius h4 { font-size:12px;color:#FC0;font-weight:normal;font-style: normal;}
+.cloud_main_radius h5 { color:#FFF;font-weight:normal;font-style: normal;}

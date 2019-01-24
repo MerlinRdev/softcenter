@@ -2,9 +2,9 @@
 
 
 MODULE=shadowsocks
-VERSION=3.0.6
-TITLE=shadowsocks
-DESCRIPTION=shadowsocks
+VERSION=4.1.7
+TITLE=科学上网
+DESCRIPTION=科学上网
 HOME_URL=Main_Ss_Content.asp
 
 # Check and include base

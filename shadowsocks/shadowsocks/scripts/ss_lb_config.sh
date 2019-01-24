@@ -1,11 +1,13 @@
 #!/bin/sh
+
 # 导入skipd数据
 eval `dbus export ss`
+ss_basic_dnslookup_server="114.114.114.114"
 
 # 引用环境变量等
 source /jffs/softcenter/scripts/base.sh
 username=`nvram get http_username`
-alias echo_date='echo $(date +%Y年%m月%d日\ %X):'
+alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
 
 write_haproxy_cfg(){
 	echo_date 生成haproxy配置文件到/jffs/softcenter/configs目录.
@@ -189,7 +191,7 @@ start_haproxy(){
 		echo_date ┣如果此处等待过久，可能服务器域名解析失败造成的！可以刷新页面后关闭一次SS!
 		echo_date ┣然后进入附加设置-SS服务器地址解析，更改解析dns或者更换解析方式！
 		echo_date ┗启动haproxy主进程...
-		haproxy -f /koolshare/configs/haproxy.cfg
+		haproxy -f /jffs/softcenter/configs/haproxy.cfg
 	fi
 }
 
@@ -200,5 +202,7 @@ if [ "$ss_lb_enable" == "1" ];then
 	start_haproxy
 	echo_date 成功！
 else
+	echo_date 关闭haproxy进程！
 	killall haproxy >/dev/null 2>&1
+	echo_date 成功！
 fi
