@@ -768,27 +768,6 @@ create_dnsmasq_conf(){
 		echo "$ss_dnsmasq" | base64_decode | sort -u >> /tmp/custom.conf
 	fi
 
-	# these sites need to go ss inside router
-	if [ "$ss_basic_mode" != "6" ];then
-		echo "#for router itself" >> /tmp/wblist.conf
-		echo "server=/.google.com.tw/127.0.0.1#7913" >> /tmp/wblist.conf
-		echo "ipset=/.google.com.tw/router" >> /tmp/wblist.conf
-		echo "server=/dns.google.com/127.0.0.1#7913" >> /tmp/wblist.conf
-		echo "ipset=/dns.google.com/router" >> /tmp/wblist.conf
-		echo "server=/.github.com/127.0.0.1#7913" >> /tmp/wblist.conf
-		echo "ipset=/.github.com/router" >> /tmp/wblist.conf
-		echo "server=/.github.io/127.0.0.1#7913" >> /tmp/wblist.conf
-		echo "ipset=/.github.io/router" >> /tmp/wblist.conf
-		echo "server=/.raw.githubusercontent.com/127.0.0.1#7913" >> /tmp/wblist.conf
-		echo "ipset=/.raw.githubusercontent.com/router" >> /tmp/wblist.conf
-		echo "server=/.adblockplus.org/127.0.0.1#7913" >> /tmp/wblist.conf
-		echo "ipset=/.adblockplus.org/router" >> /tmp/wblist.conf
-		echo "server=/.entware.net/127.0.0.1#7913" >> /tmp/wblist.conf
-		echo "ipset=/.entware.net/router" >> /tmp/wblist.conf
-		echo "server=/.apnic.net/127.0.0.1#7913" >> /tmp/wblist.conf
-		echo "ipset=/.apnic.net/router" >> /tmp/wblist.conf
-	fi
-	
 	# append white domain list, not through ss
 	wanwhitedomain=$(echo $ss_wan_white_domain | base64_decode)
 	if [ -n "$ss_wan_white_domain" ];then
@@ -1685,7 +1664,7 @@ flush_nat(){
 	
 	iptables -t mangle -F SHADOWSOCKS >/dev/null 2>&1 && iptables -t mangle -X SHADOWSOCKS >/dev/null 2>&1
 	iptables -t mangle -F SHADOWSOCKS_GAM > /dev/null 2>&1 && iptables -t mangle -X SHADOWSOCKS_GAM > /dev/null 2>&1
-	iptables -t nat -D OUTPUT -p tcp -m set --match-set router dst -j REDIRECT --to-ports 3333 >/dev/null 2>&1
+	iptables -t nat -D OUTPUT -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-ports 3333 >/dev/null 2>&1
 	iptables -t nat -F OUTPUT > /dev/null 2>&1
 	iptables -t nat -X SHADOWSOCKS_EXT > /dev/null 2>&1
 	#iptables -t nat -D PREROUTING -p udp -s $(get_lan_cidr) --dport 53 -j DNAT --to $lan_ipaddr >/dev/null 2>&1
@@ -1942,7 +1921,7 @@ apply_nat_rules(){
 	lan_acess_control
 	#-----------------------FOR ROUTER---------------------
 	# router itself
-	[ "$ss_basic_mode" != "6" ] && iptables -t nat -A OUTPUT -p tcp -m set --match-set router dst -j REDIRECT --to-ports 3333
+	[ "$ss_basic_mode" != "6" ] && iptables -t nat -A OUTPUT -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-ports 3333
 	iptables -t nat -A OUTPUT -p tcp -m mark --mark "$ip_prefix_hex" -j SHADOWSOCKS_EXT
 	
 	# 把最后剩余流量重定向到相应模式的nat表中对应的主模式的链
