@@ -941,8 +941,8 @@ start_haveged(){
 }
 
 auto_start(){
-	[ ! -e "/koolshare/init.d/S99shadowsocks.sh" ] && cp -rf /koolshare/ss/ssconfig.sh /koolshare/init.d/S99shadowsocks.sh
-	[ ! -e "/koolshare/init.d/N99shadowsocks.sh" ] && cp -rf /koolshare/ss/ssconfig.sh /koolshare/init.d/N99shadowsocks.sh
+	[ ! -e "/jffs/softcenter/init.d/S99shadowsocks.sh" ] && cp -rf /jffs/softcenter/ss/ssconfig.sh /jffs/softcenter/init.d/S99shadowsocks.sh
+	[ ! -e "/jffs/softcenter/init.d/N99shadowsocks.sh" ] && cp -rf /jffs/softcenter/ss/ssconfig.sh /jffs/softcenter/init.d/N99shadowsocks.sh
 }
 
 start_kcp(){
@@ -1418,13 +1418,12 @@ creat_v2ray_json(){
 								"users": [
 									{
 										"id": "$ss_basic_v2ray_uuid",
-										"alterId": $ss_basic_v2ray_alterid,
+										"alterId": "$ss_basic_v2ray_alterid",
 										"security": "$ss_basic_v2ray_security"
 									}
 								]
 							}
-						],
-						"servers": null
+						]
 					},
 					"streamSettings": {
 						"network": "$ss_basic_v2ray_network",
@@ -1436,8 +1435,7 @@ creat_v2ray_json(){
 						"httpSettings": $h2
 					},
 					"mux": {
-						"enabled": $(get_function_switch $ss_basic_v2ray_mux_enable),
-						"concurrency": $ss_basic_v2ray_mux_concurrency
+						"enabled": $(get_function_switch $ss_basic_v2ray_mux_enable)
 					}
 				}
 			}
