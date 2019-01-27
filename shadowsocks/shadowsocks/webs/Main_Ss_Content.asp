@@ -447,6 +447,7 @@ function push_data(obj) {
 	$.ajax({
 		type: "POST",
 		url: '/applydb.cgi?p=ss',
+		contentType: "application/x-www-form-urlencoded",
 		dataType: 'text',
 		data: $.param(obj),
 		success: function(response) {
@@ -1296,6 +1297,7 @@ function add_ss_node_conf(flag) { //点击添加按钮动作
 	}
 	$.ajax({
 		url: '/applydb.cgi?p=ssconf_basic',
+		contentType: "application/x-www-form-urlencoded",
 		dataType: 'text',
 		data: $.param(ns),
 		success: function(response) {
