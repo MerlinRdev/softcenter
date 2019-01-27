@@ -132,7 +132,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "93477e9af9460eecbc2c9237f3d4027a", 
+    "md5": "457899c20692885a54165d0764269530", 
     "tar_url": "softcenter/softcenter.tar.gz", 
     "version": "1.1.6"
 }
