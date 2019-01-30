@@ -129,6 +129,16 @@
             "tar_url": "ddnspod/ddnspod.tar.gz", 
             "title": "DDnspod", 
             "version": "0.1.6"
+        }, 
+        {
+            "build_date": "2019-01-30_19:23:59", 
+            "description": "Intel CPU频率设置", 
+            "home_url": "Module_cpufreq.asp", 
+            "md5": "e9ddf7d75daa25dc388ff5ef62407c6b", 
+            "name": "cpufreq", 
+            "tar_url": "cpufreq/cpufreq.tar.gz", 
+            "title": "CPU频率设置", 
+            "version": "1.0"
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 

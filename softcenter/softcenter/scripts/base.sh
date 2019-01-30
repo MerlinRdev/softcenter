@@ -73,5 +73,6 @@ kservice_reload() {
 }
 
 export PATH=$PATH:/jffs/softcenter/bin:/jffs/softcenter/scripts:/bin:/usr/bin:/sbin:/usr/sbin:/home/admin:/opt/sbin:/opt/bin:/opt/usr/sbin:/opt/usr/bin
+export LD_LIBRARY_PATH=/jffs/softcenter/lib:/lib:/usr/lib:/opt/lantiq/usr/lib:/opt/lantiq/usr/sbin/:/tmp/wireless/lantiq/usr/lib/:${LD_LIBRARY_PATH}
 
 #logger "Leaving ${0##*/}."
