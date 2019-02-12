@@ -101,6 +101,16 @@
             "version": "1.5"
         }, 
         {
+            "build_date": "2019-02-12_18:38:27", 
+            "description": "dc1服务器", 
+            "home_url": "Module_dc1svr.asp", 
+            "md5": "7bab90695d4d9b38a03bc15aa2b20637", 
+            "name": "dc1svr", 
+            "tar_url": "dc1svr/dc1svr.tar.gz", 
+            "title": "dc1服务器", 
+            "version": "1.0"
+        }, 
+        {
             "build_date": "2019-01-16_20:13:34", 
             "description": "内网穿透利器，谁用谁知道。", 
             "home_url": "Module_frps.asp", 
@@ -121,6 +131,16 @@
             "version": "1.2"
         }, 
         {
+            "build_date": "2019-01-23_18:38:39", 
+            "description": "pppoe单线多拨，带宽提升神器！", 
+            "home_url": "Module_mdial.asp", 
+            "md5": "becd45a122614c2c2290c66aa11332d1", 
+            "name": "mdial", 
+            "tar_url": "mdial/mdial.tar.gz", 
+            "title": "单线多拨", 
+            "version": "1.3"
+        }, 
+        {
             "build_date": "2019-01-17_00:07:34", 
             "description": "使用Dnspod的ddns服务", 
             "home_url": "Module_ddnspod.asp", 
@@ -129,6 +149,16 @@
             "tar_url": "ddnspod/ddnspod.tar.gz", 
             "title": "DDnspod", 
             "version": "0.1.6"
+        }, 
+        {
+            "build_date": "2019-02-04_20:27:44", 
+            "description": "v2ray", 
+            "home_url": "Module_v2ray.asp", 
+            "md5": "72a421802e093e7cc52d89c8e05a5bbf", 
+            "name": "v2ray", 
+            "tar_url": "v2ray/v2ray.tar.gz", 
+            "title": "v2ray", 
+            "version": "4.13.0"
         }, 
         {
             "build_date": "2019-01-30_19:23:59", 
@@ -142,7 +172,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "457899c20692885a54165d0764269530", 
+    "md5": "d374aef1bf1c4a5511ae45c457f4a852", 
     "tar_url": "softcenter/softcenter.tar.gz", 
-    "version": "1.1.6"
+    "version": "1.1.7"
 }

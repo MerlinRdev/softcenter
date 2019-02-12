@@ -7,7 +7,7 @@
 		<meta HTTP-EQUIV="Expires" CONTENT="-1" />
 		<link rel="shortcut icon" href="images/favicon.png" />
 		<link rel="icon" href="images/favicon.png" />
-		<title>软件中心 - 系统工具</title>
+		<title>软件中心 - DC1服务器</title>
 		<link rel="stylesheet" type="text/css" href="index_style.css" />
 		<link rel="stylesheet" type="text/css" href="form_style.css" />
 		<link rel="stylesheet" type="text/css" href="usp_style.css" />
@@ -22,7 +22,7 @@
 		<script type="text/javascript" src="/general.js"></script>
 		<script type="text/javascript" src="/switcherplugin/jquery.iphone-switch.js"></script>
 		<script language="JavaScript" type="text/javascript" src="/client_function.js"></script>
-		<script type="text/javascript" src="/dbconf?p=kms_&v=<% uptime(); %>"></script>
+		<script type="text/javascript" src="/dbconf?p=dc1svr_&v=<% uptime(); %>"></script>
 		<script>
 			var $j = jQuery.noConflict();
 			function init() {
@@ -30,12 +30,11 @@
 				buildswitch();
 				version_show();
 				var rrt = document.getElementById("switch");
-				if (document.form.kms_enable.value != "1") {
+				if (document.form.dc1svr_enable.value != "1") {
 					rrt.checked = false;
 				} else {
 					rrt.checked = true;
 				}
-				 $j('#kms_wan_port').val(db_kms_["kms_wan_port"]);
 			}
 			function done_validating() {
 				return true;
@@ -45,9 +44,9 @@
 				$j("#switch").click(
 					function(){
 					if(document.getElementById('switch').checked){
-						document.form.kms_enable.value = 1;
+						document.form.dc1svr_enable.value = 1;
 					}else{
-						document.form.kms_enable.value = 0;
+						document.form.dc1svr_enable.value = 0;
 					}
 				});
 			}
@@ -63,29 +62,26 @@
 			}
 			
 			function version_show(){
-				$j("#kms_version_status").html("<i>当前版本：" + db_kms_['kms_version']);
+				$j("#dc1svr_version_status").html("<i>当前版本：" + db_dc1svr_['dc1svr_version']);
 			    $j.ajax({
-			        url: 'https://raw.githubusercontent.com/paldier/softcenter/master/kms/config.json.js',
+			        url: 'https://raw.githubusercontent.com/paldier/softcenter/master/dc1svr/config.json.js',
 			        type: 'GET',
 			        success: function(res) {
 			            var txt = $j(res.responseText).text();
 			            if(typeof(txt) != "undefined" && txt.length > 0) {
 			                //console.log(txt);
 			                var obj = $j.parseJSON(txt.replace("'", "\""));
-					$j("#kms_version_status").html("<i>当前版本：" + obj.version);
-					if(obj.version != db_kms_["kms_version"]) {
-						$j("#kms_version_status").html("<i>有新版本：" + obj.version);
+					$j("#dc1svr_version_status").html("<i>当前版本：" + obj.version);
+					if(obj.version != db_dc1svr_["dc1svr_version"]) {
+						$j("#dc1svr_version_status").html("<i>有新版本：" + obj.version);
 					}
 			            }
 			        }
 			    });
 			}
-			
-			var enable_ss = "<% nvram_get("enable_ss"); %>";
-			var enable_soft = "<% nvram_get("enable_soft"); %>";
 			function menu_hook(title, tab) {
-				tabtitle[tabtitle.length -1] = new Array("", "软件中心", "离线安装", "KMS");
-				tablink[tablink.length -1] = new Array("", "Main_Soft_center.asp", "Main_Soft_setting.asp", "Module_kms.asp");
+				tabtitle[tabtitle.length -1] = new Array("", "软件中心", "离线安装", "DC1服务器");
+				tablink[tablink.length -1] = new Array("", "Main_Soft_center.asp", "Main_Soft_setting.asp", "Module_dc1svr.asp");
 			}
 		</script>
 	</head>
@@ -93,18 +89,18 @@
 		<div id="TopBanner"></div>
 		<div id="Loading" class="popup_bg"></div>
 		<iframe name="hidden_frame" id="hidden_frame" src="" width="0" height="0" frameborder="0"></iframe>
-		<form method="POST" name="form" action="/applydb.cgi?p=kms_" target="hidden_frame">
-			<input type="hidden" name="current_page" value="Module_kms.asp" />
-			<input type="hidden" name="next_page" value="Module_kms.asp" />
+		<form method="POST" name="form" action="/applydb.cgi?p=dc1svr_" target="hidden_frame">
+			<input type="hidden" name="current_page" value="Module_dc1svr.asp" />
+			<input type="hidden" name="next_page" value="Module_dc1svr.asp" />
 			<input type="hidden" name="group_id" value="" />
 			<input type="hidden" name="modified" value="0" />
 			<input type="hidden" name="action_mode" value="" />
-			<input type="hidden" name="action_script" value="kms.sh" />
+			<input type="hidden" name="action_script" value="dc1.sh" />
 			<input type="hidden" name="action_wait" value="5" />
 			<input type="hidden" name="first_time" value="" />
 			<input type="hidden" name="preferred_lang" id="preferred_lang" value="<% nvram_get(" preferred_lang "); %>"/>
 			<input type="hidden" name="firmver" value="<% nvram_get(" firmver "); %>"/>
-			<input type="hidden" id="kms_enable" name="kms_enable" value='<% dbus_get_def("kms_enable", "0"); %>' />
+			<input type="hidden" id="dc1svr_enable" name="dc1svr_enable" value='<% dbus_get_def("dc1svr_enable", "0"); %>' />
 			<table class="content" align="center" cellpadding="0" cellspacing="0">
 				<tr>
 					<td width="17">&nbsp;</td>
@@ -121,23 +117,23 @@
 										<tr>
 											<td bgcolor="#4D595D" colspan="3" valign="top">
 												<div>&nbsp;</div>
-												<div style="float:left;" class="formfonttitle">系统工具 - 来自网络的胃軟系统工具</div>
+												<div style="float:left;" class="formfonttitle">DC1服务器 - 替换官方服务器</div>
 												<div style="float:right; width:15px; height:25px;margin-top:10px">
 													<img id="return_btn" onclick="reload_Soft_Center();" align="right" style="cursor:pointer;position:absolute;margin-left:-30px;margin-top:-25px;" title="返回软件中心" src="/images/backprev.png" onMouseOver="this.src='/images/backprevclick.png'" onMouseOut="this.src='/images/backprev.png'"></img>
 												</div>
 												<div style="margin-left:5px;margin-top:10px;margin-bottom:10px">
 													<img src="/images/New_ui/export/line_export.png">
 												</div>
-												<div class="formfontdesc" id="cmdDesc">该工具用于“鸡或”“胃軟奥菲斯”和“胃軟操作系统”。</div>
+												<div class="formfontdesc" id="cmdDesc">该工具用于“DC1插排”。</div>
 												<div class="formfontdesc" id="cmdDesc"></div>
-												<table style="margin:10px 0px 0px 0px;" width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bordercolor="#6b8fa3" class="FormTable" id="kms_table">
+												<table style="margin:10px 0px 0px 0px;" width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bordercolor="#6b8fa3" class="FormTable" id="dc1_table">
 													<thead>
 														<tr>
-															<td colspan="2">系统工具选项</td>
+															<td colspan="2">工具选项</td>
 														</tr>
 													</thead>
 													<tr>
-														<th>开启系统工具</th>
+														<th>开启DC1服务器</th>
 														<td colspan="2">
 															<div class="switch_field" style="display:table-cell;float: left;">
 																<label for="switch">
@@ -150,21 +146,10 @@
 																	</div>
 																</label>
 															</div>
-															<div id="kms_version_show" style="padding-top:5px;margin-left:230px;margin-top:0px;"><i>当前版本：<% dbus_get_def("kms_version", "未知"); %></i>
+															<div id="dc1svr_version_show" style="padding-top:5px;margin-left:230px;margin-top:0px;"><i>当前版本：<% dbus_get_def("dc1svr_version", "未知"); %></i>
 															</div>
-															<div id="kms_install_show" style="padding-top:5px;margin-left:330px;margin-top:-25px;"></div>
-															<a style="margin-left: 318px;" href="https://raw.githubusercontent.com/paldier/softcenter/master/kms/Changelog.txt" target="_blank"><em>[<u> 更新日志 </u>]</em></a>
-														</td>
-													</tr>
-													<tr id="port_tr">
-														<th width="35%">外网开关</th>
-														<td>
-															<div style="float:left; width:165px; height:25px">
-																<select id="kms_wan_port" name="kms_wan_port" style="width:164px;margin:0px 0px 0px 2px;" class="input_option">
-																	<option value="0">关闭</option>
-																	<option value="1">开启</option>
-																</select>
-															</div>
+															<div id="dc1svr_install_show" style="padding-top:5px;margin-left:330px;margin-top:-25px;"></div>
+															<a style="margin-left: 318px;" href="https://raw.githubusercontent.com/paldier/softcenter/master/dc1svr/Changelog.txt" target="_blank"><em>[<u> 更新日志 </u>]</em></a>
 														</td>
 													</tr>
 												</table>
@@ -176,32 +161,18 @@
 												</div>
 												<div id="NoteBox">
 													<h2>使用说明：</h2>
-													<h3>以管理员身份运行CMD输入以下命令，红色字体代表变量不是固定的，请参照自己的计算机修改。</h3>
-													<h3>【1】 奥菲斯鸡或</h3>
-													<p>CD <font color="red">X</font>:\Program Files<font color="red">(X86)</font>\Microsoft Office\Office<font color="red">14</font>
-													</p>
-													<p>cscript ospp.vbs /sethst:<font color="red">192.168.50.1</font>
-													</p>
-													<p>cscript ospp.vbs /act</p>
-													<p>cscript ospp.vbs /dstatus</p>
-													<h3>【2】 操作系统鸡或</h3>
-													<p>slmgr /ipk <font color="red">MHF9N-XY6XB-WVXMC-BTDCT-MKKG7</font>
-													</p>
-													<p>slmgr /skms <font color="red">192.168.50.1</font>
-													</p>
-													<p>slmgr /ato</p>
-													<h2>申明：本工具来自国外互联网 <a href="https://forums.mydigitallife.info/threads/50234-Emulated-KMS-Servers-on-non-Windows-platforms" target="_blank">点我跳转</a></h2>
+													<a style="margin-left: 318px;" href="https://www.right.com.cn/forum/thread-448025-1-1.html" target="_blank"><em>[<u> 点我跳转 </u>]</em></a>
+													<h2>申明：本工具来自恩山论坛 <a href="https://www.right.com.cn/forum/thread-448025-1-1.html" target="_blank">点我跳转</a></h2>
 												</div>
 												<div style="margin-left:5px;margin-top:10px;margin-bottom:10px">
 													<img src="/images/New_ui/export/line_export.png">
 												</div>
-												<div class="KoolshareBottom">
+												<div class="Bottom">
 													<br/>论坛技术支持：
 													<a href="http://www.koolshare.cn" target="_blank"> <i><u>www.koolshare.cn</u></i> 
 													</a>
 													<br/>后台技术支持： <i>Xiaobao</i> 
-													<br/>Shell, Web by： <i>fw867</i>
-													<br/>修改版 by： <i>paldier</i>
+													<br/>Shell, Web by： <i>paldier</i>
 													<br/>
 												</div>
 											</td>
