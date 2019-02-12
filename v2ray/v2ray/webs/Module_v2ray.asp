@@ -177,9 +177,7 @@ if (E("v2ray_use_json").checked == true){
 				return false;
 			}
 }
-document.form.save_name.disabled=true;
-document.form.save_content.disabled=true;
-showLoading(1);
+showLoading(5);
 document.form.submit();
 }
 function reload_Soft_Center() {
@@ -306,7 +304,7 @@ function verifyFields(r) {
 <div id="TopBanner"></div>
 <div id="Loading" class="popup_bg"></div>
 <iframe name="hidden_frame" id="hidden_frame" width="0" height="0" frameborder="0"></iframe>
-<form method="post" name="form" action="/applydb.cig?p=v2ray" target="hidden_frame">
+<form method="post" name="form" action="/applydb.cgi?p=v2ray" target="hidden_frame">
 <input type="hidden" name="productid" value="<% nvram_get("productid"); %>">
 <input type="hidden" name="current_page" value="Module_v2ray.asp">
 <input type="hidden" name="next_page" value="Module_v2ray.asp">
@@ -322,9 +320,7 @@ function verifyFields(r) {
 <input type="hidden" name="ss_foreign_state" value="<% nvram_get("ss_foreign_state"); %>">
 <input type="hidden" name="v2ray_dns" value="<% dbus_get_def("v2ray_dns", "0"); %>">
 <input type="hidden" name="v2ray_use_json" value="<% dbus_get_def("v2ray_use_json", "0"); %>">
-<input type="hidden" name="v2ray_json" value="<% dbus_get_def("v2ray_use_json", "0"); %>">
-<input type="hidden" name="save_name" value="">
-<input type="hidden" name="save_content" value="">
+<input type="hidden" name="v2ray_json" value="<% dbus_get_def("v2ray_json", ""); %>">
 <table class="content" align="center" cellpadding="0" cellspacing="0" >
 <tr>
 <td width="17">&nbsp;</td>

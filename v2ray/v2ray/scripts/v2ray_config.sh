@@ -285,6 +285,7 @@ killall -q -9 v2ray_mon.sh >/dev/null 2>&1 && killall v2ray_mon.sh >/dev/null 2>
 killall -q -9 dns2socks 2>/dev/null && killall dns2socks 2>/dev/null
 killall -q -9 v2ray 2>/dev/null && killall v2ray 2>/dev/null
 killall -q pdnsd 2>/dev/null
+/jffs/softcenter/scripts/v2ray-rules.sh clean 2>/dev/null
 service restart_dnsmasq >/dev/null 2>&1
 [ "-e /jffs/softcenter/init.d/S99v2ray.sh" ] && rm -rf /jffs/softcenter/init.d/S99v2ray.sh
 }
@@ -312,7 +313,7 @@ if [ "$v2ray_dnsmode" == "0" ];then
 fi
 v2ray_serverip
 /jffs/softcenter/bin/v2ray -format pb -config "$V2RAY_CONFIG_FILE_PB" >/dev/null 2>&1 &
-/jffs/softcenter/scripts/v2ray-rules.sh  $mip  1234 &
+/jffs/softcenter/scripts/v2ray-rules.sh $mip 1234 &
 /usr/sbin/ssr-state 2>/dev/null &
 exit 0
 }

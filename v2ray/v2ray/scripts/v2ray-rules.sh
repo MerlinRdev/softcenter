@@ -192,7 +192,7 @@ service restart_dnsmasq
 /jffs/softcenter/scripts/v2ray_mon.sh &
 
 logger -t "v2ray" "守护进程启动"
-
+echo "$(date "+%F %T"): 守护进程启动"  >> /tmp/v2ray.log
 
 if [ "$all_proxy" = "1" ] ;then
 
@@ -246,6 +246,7 @@ if [ "$udp_enable" == "1" ] ;then
 	fi
 fi
 	logger -t "v2ray" "启动完毕!"
+echo "$(date "+%F %T"): 启动完毕"  >> /tmp/v2ray.log
 exit 0
 fi
 
