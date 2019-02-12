@@ -5,6 +5,7 @@ source /jffs/softcenter/scripts/base.sh
 CONFIG_FILE=/tmp/etc/dnsmasq.user/dc1.conf
 
 start_dc1(){
+	cd /jffs/softcenter/bin/
 	/jffs/softcenter/bin/dc1svr &
 	echo "address=/Smartplugconnect.phicomm.com/$(nvram get lan_ipaddr)" > $CONFIG_FILE
 	service restart_dnsmasq

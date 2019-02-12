@@ -4,7 +4,7 @@ enable=`dbus get dc1svr_enable`
 if [ "$enable" == "1" ];then
 	restart=1
 	dbus set dc1svr_enable=0
-	sh /jffs/softcenter/scripts/dc1.sh
+	sh /jffs/softcenter/scripts/dc1svr.sh
 fi
 
 # cp files
@@ -26,6 +26,6 @@ dbus set softcenter_module_dc1svr_name=dc1svr
 dbus set softcenter_module_dc1svr_title="dc1服务器"
 if [ "$restart" == "1" ];then
 	dbus set dc1svr_enable=1
-	sh /jffs/softcenter/scripts/dc1.sh
+	sh /jffs/softcenter/scripts/dc1svr.sh
 fi
 
