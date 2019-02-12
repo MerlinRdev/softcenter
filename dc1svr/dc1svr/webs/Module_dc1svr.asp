@@ -95,7 +95,7 @@
 			<input type="hidden" name="group_id" value="" />
 			<input type="hidden" name="modified" value="0" />
 			<input type="hidden" name="action_mode" value="" />
-			<input type="hidden" name="action_script" value="dc1.sh" />
+			<input type="hidden" name="action_script" value="dc1svr.sh" />
 			<input type="hidden" name="action_wait" value="5" />
 			<input type="hidden" name="first_time" value="" />
 			<input type="hidden" name="preferred_lang" id="preferred_lang" value="<% nvram_get(" preferred_lang "); %>"/>
