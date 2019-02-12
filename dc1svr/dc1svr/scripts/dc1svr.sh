@@ -23,9 +23,14 @@ startdc1(){
 	if [ "$dc1svr_enable" == "1" ]; then
 		logger "[软件中心]: 启动dc1服务器！"
 		start_dc1
+	else
+		stop_dc1
 	fi
 }
 case $ACTION in
+	stop)
+		stop_dc1
+	;;
 	*)
 		startdc1
 	;;

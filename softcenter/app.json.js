@@ -101,10 +101,10 @@
             "version": "1.5"
         }, 
         {
-            "build_date": "2019-02-12_19:06:06", 
+            "build_date": "2019-02-12_19:19:20", 
             "description": "dc1服务器", 
             "home_url": "Module_dc1svr.asp", 
-            "md5": "8819b07ce564cb99e5e3b2d18c10329b", 
+            "md5": "9518560a3c57c72e42052e813792fd28", 
             "name": "dc1svr", 
             "tar_url": "dc1svr/dc1svr.tar.gz", 
             "title": "dc1服务器", 
