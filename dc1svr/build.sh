@@ -2,7 +2,7 @@
 
 
 MODULE=dc1svr
-VERSION=1.0
+VERSION=1.1
 TITLE=dc1服务器
 DESCRIPTION=dc1服务器
 HOME_URL=Module_dc1svr.asp

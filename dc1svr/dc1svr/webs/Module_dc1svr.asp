@@ -100,6 +100,7 @@
 			<input type="hidden" name="preferred_lang" id="preferred_lang" value="<% nvram_get(" preferred_lang "); %>"/>
 			<input type="hidden" name="firmver" value="<% nvram_get(" firmver "); %>"/>
 			<input type="hidden" id="dc1svr_enable" name="dc1svr_enable" value='<% dbus_get_def("dc1svr_enable", "0"); %>' />
+			<input type="hidden" id="dc1svr_key" name="dc1svr_key" value='<% dbus_get_def("dc1svr_key", "0"); %>' />
 			<table class="content" align="center" cellpadding="0" cellspacing="0">
 				<tr>
 					<td width="17">&nbsp;</td>
@@ -151,6 +152,12 @@
 															<a style="margin-left: 318px;" href="https://raw.githubusercontent.com/paldier/softcenter/master/dc1svr/Changelog.txt" target="_blank"><em>[<u> 更新日志 </u>]</em></a>
 														</td>
 													</tr>
+													<tr id="key_tr">
+														<th width="35%">连接密码</th>
+														<td>
+															<textarea  style="width:99%;background-color: #475A5F;color:#FFFFFF;" placeholder="# 此处填入连接密码，初始密码为路由器密码" rows="2" style="width:99%; font-family:'Lucida Console'; font-size:12px;background:#475A5F;color:#FFFFFF;" id="dc1svr_key" name="dc1svr_key" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" title=""></textarea>
+														</td>
+													</tr>
 												</table>
 												<div class="apply_gen">
 													<button id="cmdBtn" class="button_gen" onclick="onSubmitCtrl()">提交</button>
@@ -160,7 +167,12 @@
 												</div>
 												<div id="NoteBox">
 													<h2>使用说明：</h2>
-													<a style="margin-left: 318px;" href="https://www.right.com.cn/forum/thread-448025-1-1.html" target="_blank"><em>[<u> 点我跳转 </u>]</em></a>
+													<h3>连接密码</h3>
+													<p>默认密码为<font color="red">路由器密码</font></p>
+													<h3>重启插排</h3>
+													<p>启用本插件后<font color="red">必需把排插断电重启一次</font></p>
+													<h3><font color="red">手机APP下载</font></h3>
+													<a href="https://www.right.com.cn/forum/thread-448025-1-1.html" target="_blank">[<u> 点我跳转 </u>]</a>
 													<h2>申明：本工具来自恩山论坛 <a href="https://www.right.com.cn/forum/thread-448025-1-1.html" target="_blank">点我跳转</a></h2>
 												</div>
 												<div style="margin-left:5px;margin-top:10px;margin-bottom:10px">

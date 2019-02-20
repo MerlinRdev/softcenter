@@ -18,7 +18,7 @@ rm -rf /tmp/dc1svr* >/dev/null 2>&1
 
 chmod a+x /jffs/softcenter/scripts/dc1.sh
 chmod 0755 /jffs/softcenter/bin/dc1svr
-dbus set dc1svr_version="1.0"
+dbus set dc1svr_version="1.1"
 dbus set softcenter_module_dc1svr_version="1.0"
 dbus set softcenter_module_dc1svr_description="dc1服务器"
 dbus set softcenter_module_dc1svr_install=1
