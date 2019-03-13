@@ -52,8 +52,7 @@
 				});
 			}
 			
-			function onSubmitCtrl(o, s) {
-				document.form.action_mode.value = s;
+			function onSubmitCtrl() {
 				showLoading(3);
 				document.form.submit();
 			}
@@ -68,7 +67,6 @@
 			        url: 'https://raw.githubusercontent.com/paldier/softcenter/master/kms/config.json.js',
 			        type: 'GET',
 			        success: function(res) {
-			            var txt = $j(res.responseText).text();
 			            if(typeof(txt) != "undefined" && txt.length > 0) {
 			                //console.log(txt);
 			                var obj = $j.parseJSON(txt.replace("'", "\""));
@@ -81,8 +79,6 @@
 			    });
 			}
 			
-			var enable_ss = "<% nvram_get("enable_ss"); %>";
-			var enable_soft = "<% nvram_get("enable_soft"); %>";
 			function menu_hook(title, tab) {
 				tabtitle[tabtitle.length -1] = new Array("", "软件中心", "离线安装", "KMS");
 				tablink[tablink.length -1] = new Array("", "Main_Soft_center.asp", "Main_Soft_setting.asp", "Module_kms.asp");
@@ -98,7 +94,7 @@
 			<input type="hidden" name="next_page" value="Module_kms.asp" />
 			<input type="hidden" name="group_id" value="" />
 			<input type="hidden" name="modified" value="0" />
-			<input type="hidden" name="action_mode" value="" />
+			<input type="hidden" name="action_mode" value=" Refresh " />
 			<input type="hidden" name="action_script" value="kms.sh" />
 			<input type="hidden" name="action_wait" value="5" />
 			<input type="hidden" name="first_time" value="" />
@@ -152,7 +148,7 @@
 															</div>
 															<div id="kms_version_show" style="padding-top:5px;margin-left:230px;margin-top:0px;"><i>当前版本：<% dbus_get_def("kms_version", "未知"); %></i>
 															</div>
-															<div id="kms_install_show" style="padding-top:5px;margin-left:330px;margin-top:-25px;"></div>
+															<div id="kms_version_status" style="padding-top:5px;margin-left:330px;margin-top:-25px;"></div>
 															<a style="margin-left: 318px;" href="https://raw.githubusercontent.com/paldier/softcenter/master/kms/Changelog.txt" target="_blank"><em>[<u> 更新日志 </u>]</em></a>
 														</td>
 													</tr>

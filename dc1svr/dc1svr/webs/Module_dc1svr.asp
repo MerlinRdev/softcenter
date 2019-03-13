@@ -66,12 +66,11 @@
 			        url: 'https://raw.githubusercontent.com/paldier/softcenter/master/dc1svr/config.json.js',
 			        type: 'GET',
 			        success: function(res) {
-			            var txt = $j(res.responseText).text();
 			            if(typeof(txt) != "undefined" && txt.length > 0) {
 			                //console.log(txt);
 			                var obj = $j.parseJSON(txt.replace("'", "\""));
 					$j("#dc1svr_version_status").html("<i>当前版本：" + obj.version);
-					if(obj.version != db_dc1svr_["dc1svr_version"]) {
+					if(obj.version != db_dc1svr_['dc1svr_version']) {
 						$j("#dc1svr_version_status").html("<i>有新版本：" + obj.version);
 					}
 			            }
@@ -148,8 +147,7 @@
 															</div>
 															<div id="dc1svr_version_show" style="padding-top:5px;margin-left:230px;margin-top:0px;"><i>当前版本：<% dbus_get_def("dc1svr_version", "未知"); %></i>
 															</div>
-															<div id="dc1svr_install_show" style="padding-top:5px;margin-left:330px;margin-top:-25px;"></div>
-															<a style="margin-left: 318px;" href="https://raw.githubusercontent.com/paldier/softcenter/master/dc1svr/Changelog.txt" target="_blank"><em>[<u> 更新日志 </u>]</em></a>
+															<div id="dc1svr_version_status" style="padding-top:5px;margin-left:330px;margin-top:-25px;"></div>
 														</td>
 													</tr>
 													<tr id="key_tr">

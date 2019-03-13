@@ -268,7 +268,7 @@ creat_v2ray_json(){
 	fi
 
 	echo "$(date "+%F %T")测试V2Ray配置文件..... " >> /tmp/v2ray.log
-	cd /koolshare/bin
+	cd /jffs/softcenter/bin
 	result=$(v2ray -test -config="$V2RAY_CONFIG_FILE" | grep "Configuration OK.")
 	if [ -n "$result" ];then
 		echo "$(date "+%F %T") $result" >> /tmp/v2ray.log

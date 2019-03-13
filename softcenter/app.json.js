@@ -11,14 +11,24 @@
             "version": "0.2.3"
         }, 
         {
-            "build_date": "2019-01-27_22:50:42", 
+            "build_date": "2019-03-11_23:33:28", 
             "description": "科学上网", 
             "home_url": "Main_Ss_Content.asp", 
-            "md5": "e385009a9ab5998e14ba6dc8b58a1a20", 
+            "md5": "788b5477ee258af4e7303d8e3b40b912", 
             "name": "shadowsocks", 
             "tar_url": "shadowsocks/shadowsocks.tar.gz", 
             "title": "科学上网", 
             "version": "4.1.7"
+        }, 
+        {
+            "build_date": "2019-03-12_12:30:05", 
+            "description": "超强的SSH网页客户端~", 
+            "home_url": "Module_shellinabox.asp", 
+            "md5": "e9eea13a1762f8a08795b396fa586736", 
+            "name": "shellinabox", 
+            "tar_url": "shellinabox/shellinabox.tar.gz", 
+            "title": "shellinabox", 
+            "version": "2.0"
         }, 
         {
             "build_date": "2019-01-13_23:00:27", 
@@ -91,14 +101,14 @@
             "version": "2.1"
         }, 
         {
-            "build_date": "2019-01-13_19:04:43", 
+            "build_date": "2019-03-12_22:24:36", 
             "description": "kms", 
             "home_url": "Module_kms.asp", 
-            "md5": "963a0702e0e37aa67a64c674544f30a6", 
+            "md5": "350c920ca9d060b2bd86885fb4c37b16", 
             "name": "kms", 
             "tar_url": "kms/kms.tar.gz", 
             "title": "kms", 
-            "version": "1.5"
+            "version": "1.6.1"
         }, 
         {
             "build_date": "2019-02-20_23:06:16", 
@@ -121,10 +131,10 @@
             "version": "1.4.16"
         }, 
         {
-            "build_date": "2019-01-12_22:19:14", 
+            "build_date": "2019-03-12_21:19:57", 
             "description": "阿里云解析自动更新IP", 
             "home_url": "Module_aliddns.asp", 
-            "md5": "b775cde3f6f8f552f28c59e8d2d95bc1", 
+            "md5": "15afe00f95c31fdee8ae7a0ada6518ea", 
             "name": "aliddns", 
             "tar_url": "aliddns/aliddns.tar.gz", 
             "title": "aliddns", 
@@ -151,10 +161,10 @@
             "version": "0.1.6"
         }, 
         {
-            "build_date": "2019-02-04_20:27:44", 
+            "build_date": "2019-03-13_21:53:27", 
             "description": "v2ray", 
             "home_url": "Module_v2ray.asp", 
-            "md5": "72a421802e093e7cc52d89c8e05a5bbf", 
+            "md5": "700544f47fff165b2b6644ec6bd6a84c", 
             "name": "v2ray", 
             "tar_url": "v2ray/v2ray.tar.gz", 
             "title": "v2ray", 

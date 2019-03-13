@@ -16,7 +16,7 @@ cp -rf /tmp/dc1svr/res/* /jffs/softcenter/res/
 # delete install tar
 rm -rf /tmp/dc1svr* >/dev/null 2>&1
 
-chmod a+x /jffs/softcenter/scripts/dc1.sh
+chmod a+x /jffs/softcenter/scripts/dc1svr.sh
 chmod 0755 /jffs/softcenter/bin/dc1svr
 dbus set dc1svr_version="1.1"
 dbus set softcenter_module_dc1svr_version="1.0"
