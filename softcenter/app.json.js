@@ -31,10 +31,10 @@
             "version": "2.0"
         }, 
         {
-            "build_date": "2019-01-13_23:00:27", 
+            "build_date": "2019-03-26_11:27:43", 
             "description": "Cloudflare解析自动更新IP", 
             "home_url": "Module_cfddns.asp", 
-            "md5": "d3b550113999b43294927d3b279a980a", 
+            "md5": "51658fc5d42aa4fd2ad0f63ed1e972a0", 
             "name": "cfddns", 
             "tar_url": "cfddns/cfddns.tar.gz", 
             "title": "", 

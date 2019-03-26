@@ -62,24 +62,6 @@ unset_lock(){
 	rm -rf "$LOCK_FILE"
 }
 
-detect(){
-	# 检测版本号
-	firmware_version=`nvram get extendno|cut -d "X" -f2|cut -d "-" -f1|cut -d "_" -f1`
-	if [ -f "/usr/bin/versioncmp" ];then
-		firmware_comp=`versioncmp $firmware_version 7.7`
-	else
-		firmware_comp="1"
-	fi
-	
-	if [ "$firmware_comp" == "0" -o "$firmware_comp" == "-1" ];then
-		echo_date 检测到$firmware_version固件，支持订阅！
-	else
-		echo_date 订阅功能不支持X7.7以下的固件，当前固件版本$firmware_version，请更新固件！
-		unset lock
-		exit 1
-	fi
-}
-
 prepare(){
 	# 0 检测排序
 	seq_nu=`dbus list ssconf_basic_|grep _name_ | cut -d "=" -f1|cut -d "_" -f4|sort -n|wc -l`
@@ -1049,21 +1031,18 @@ case $ss_online_action in
 0)
 	# 删除所有节点
 	set_lock
-	detect
 	remove_all
 	unset_lock
 	;;
 1)
 	# 删除所有订阅节点
 	set_lock
-	detect
 	remove_online
 	unset_lock
 	;;
 2)
 	# 保存订阅设置但是不订阅
 	set_lock
-	detect
 	local_groups=`dbus list ssconf_basic_|grep group|cut -d "=" -f2|sort -u|wc -l`
 	online_group=`dbus get ss_online_links|base64_decode|sed 's/$/\n/'|sed '/^$/d'|wc -l`
 	echo_date "保存订阅节点成功，现共有 $online_group 组订阅来源，当前节点列表内已经订阅了 $local_groups 组..."
@@ -1085,7 +1064,6 @@ case $ss_online_action in
 3)
 	# 订阅节点
 	set_lock
-	detect
 	echo_date "开始订阅"
 	start_update
 	unset_lock
@@ -1093,7 +1071,6 @@ case $ss_online_action in
 4)
 	# 通过链接添加ss:// ssr:// vmess://
 	set_lock
-	detect
 	add
 	unset_lock
 	;;
