@@ -11,10 +11,10 @@
             "version": "0.2.3"
         }, 
         {
-            "build_date": "2019-04-19_00:52:02", 
+            "build_date": "2019-04-26_22:15:04", 
             "description": "科学上网", 
             "home_url": "Main_Ss_Content.asp", 
-            "md5": "6808754a202f9be36ef56ea5b350c51c", 
+            "md5": "702329fd6a5fd5fb45d3b711e4efe71e", 
             "name": "shadowsocks", 
             "tar_url": "shadowsocks/shadowsocks.tar.gz", 
             "title": "科学上网", 
@@ -161,10 +161,10 @@
             "version": "0.1.6"
         }, 
         {
-            "build_date": "2019-04-19_02:21:32", 
+            "build_date": "2019-04-26_00:09:33", 
             "description": "v2ray", 
             "home_url": "Module_v2ray.asp", 
-            "md5": "44034c03b36ea04fbbea5dbd38e8e432", 
+            "md5": "ad7434907d5a965e04951c3049ef3e7c", 
             "name": "v2ray", 
             "tar_url": "v2ray/v2ray.tar.gz", 
             "title": "v2ray", 
