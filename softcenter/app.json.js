@@ -171,6 +171,16 @@
             "version": "4.18.0"
         }, 
         {
+            "build_date": "2019-05-01_10:36:20", 
+            "description": "广告屏蔽大师", 
+            "home_url": "Module_adbyby.asp", 
+            "md5": "52e95b0533fc819abbf552b6ae20c6fb", 
+            "name": "adbyby", 
+            "tar_url": "adbyby/adbyby.tar.gz", 
+            "title": "adbyby", 
+            "version": "1.1"
+        }, 
+        {
             "build_date": "2019-01-30_19:23:59", 
             "description": "Intel CPU频率设置", 
             "home_url": "Module_cpufreq.asp", 
