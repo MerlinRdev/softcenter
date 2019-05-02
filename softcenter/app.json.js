@@ -71,10 +71,10 @@
             "version": "0.3.6"
         }, 
         {
-            "build_date": "2019-01-23_19:00:26", 
+            "build_date": "2019-05-02_22:00:54", 
             "description": "linux下载利器", 
             "home_url": "Module_aria2.asp", 
-            "md5": "bb97c3ddf4f861781df65e6f0b7cb775", 
+            "md5": "aa73892963e42a6e52ab0b6a5b3e8017", 
             "name": "aria2", 
             "tar_url": "aria2/aria2.tar.gz", 
             "title": "Aria2", 

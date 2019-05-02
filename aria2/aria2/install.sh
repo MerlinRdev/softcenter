@@ -1,6 +1,6 @@
 #! /bin/sh
 cd /tmp
-cp -rf /tmp/aria2/bin/* /jffs/softcenter/bin/*
+cp -rf /tmp/aria2/bin/* /jffs/softcenter/bin/
 cp -rf /tmp/aria2/res/* /jffs/softcenter/res/
 cp -rf /tmp/aria2/scripts/* /jffs/softcenter/scripts/
 cp -rf /tmp/aria2/webs/* /jffs/softcenter/webs/
