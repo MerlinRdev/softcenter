@@ -7,7 +7,8 @@ softcenter_install() {
 		cp -rf /tmp/softcenter/bin/* /jffs/softcenter/bin/
 		cp -rf /tmp/softcenter/perp/* /jffs/softcenter/perp/
 		cp -rf /tmp/softcenter/scripts/* /jffs/softcenter/scripts/
-		mkdir /jffs/softcenter/lib/
+		mkdir -p /jffs/softcenter/lib/
+		mkdir -p /jffs/softcenter/etc/
 		cp -rf /tmp/softcenter/lib/* /jffs/softcenter/lib/
 		chmod 755 /jffs/softcenter/bin/*
 		chmod 755 /jffs/softcenter/perp/*
