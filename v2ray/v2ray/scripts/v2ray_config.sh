@@ -314,7 +314,7 @@ fi
 v2ray_serverip
 /jffs/softcenter/bin/v2ray -format pb -config "$V2RAY_CONFIG_FILE_PB" >/dev/null 2>&1 &
 /jffs/softcenter/scripts/v2ray-rules.sh $mip 1234 &
-/usr/sbin/ssr-state 2>/dev/null &
+/jffs/softcenter/scripts/ssr-state 2>/dev/null &
 exit 0
 }
 restart() {

@@ -16,6 +16,8 @@ if [ -f /tmp/$soft_name ];then
 	echo $(date): 解压完成！ >> /tmp/syscmd.log
 	if [ -f /tmp/$name/install.sh ];then
 		echo $(date): 找到安装脚本！ >> /tmp/syscmd.log
+		ks=`cat /tmp/$name/install.sh | grep koolshare`
+		[ -n "$ks" ] && echo $(date): 检测到插件是koolshare版本，退出... >> /tmp/syscmd.log && rm -rf /tmp/$soft_name && rm -rf /tmp/$name && exit
 		echo $(date): 运行安装脚本... >> /tmp/syscmd.log
 		chmod +x /tmp/$name/install.sh >/dev/null 2>&1
 		sh /tmp/$name/install.sh >/dev/null 2>&1

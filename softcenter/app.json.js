@@ -51,6 +51,16 @@
             "version": "2.2"
         }, 
         {
+            "build_date": "2019-05-24_23:14:31", 
+            "description": "天翼云盘，为宽带提速而生！！！", 
+            "home_url": "Module_speedup.asp", 
+            "md5": "80afdd422135f0883ee43a3cf007a72a", 
+            "name": "speedup", 
+            "tar_url": "speedup/speedup.tar.gz", 
+            "title": "天翼云盘", 
+            "version": "2.1.1"
+        }, 
+        {
             "build_date": "2019-01-13_02:08:34", 
             "description": "去广告，没烦恼", 
             "home_url": "Module_koolproxy.asp", 
