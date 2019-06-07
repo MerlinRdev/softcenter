@@ -280,14 +280,14 @@ creat_v2ray_json(){
 		echo "$(date "+%F %T") V2Ray配置文件没有通过测试，请检查设置!!!" >> /tmp/v2ray.log
 	fi
 }
-stop() {
+stop_v2ray() {
 killall -q -9 v2ray_mon.sh >/dev/null 2>&1 && killall v2ray_mon.sh >/dev/null 2>&1
 killall -q -9 dns2socks 2>/dev/null && killall dns2socks 2>/dev/null
 killall -q -9 v2ray 2>/dev/null && killall v2ray 2>/dev/null
 killall -q pdnsd 2>/dev/null
 /jffs/softcenter/scripts/v2ray-rules.sh clean 2>/dev/null
 service restart_dnsmasq >/dev/null 2>&1
-[ "-e /jffs/softcenter/init.d/S99v2ray.sh" ] && rm -rf /jffs/softcenter/init.d/S99v2ray.sh
+[ -e "/jffs/softcenter/init.d/S99v2ray.sh" ] && rm -rf /jffs/softcenter/init.d/S99v2ray.sh
 }
 start_v2ray(){
 illall -q -9 v2ray_mon.sh >/dev/null 2>&1
@@ -317,15 +317,22 @@ v2ray_serverip
 /jffs/softcenter/scripts/ssr-state 2>/dev/null &
 exit 0
 }
-restart() {
-	stop
+restart_v2ray() {
+	stop_v2ray
 	sleep 2
 	if [ "`dbus get v2ray_enable`" == "1" ];then
 		creat_v2ray_json
 		start_v2ray
-		[ "! -e /jffs/softcenter/init.d/S99v2ray.sh" ] && cp -r /jffs/softcenter/scripts/v2ray_config.sh /jffs/softcenter/init.d/S99v2ray.sh
+		[ ! -e "/jffs/softcenter/init.d/S99v2ray.sh" ] && cp -r /jffs/softcenter/scripts/v2ray_config.sh /jffs/softcenter/init.d/S99v2ray.sh
 	fi
 }
 
-restart
+case $ACTION in
+stop)
+	stop_v2ray
+	;;
+*)
+	restart_v2ray
+	;;
+esac
 
