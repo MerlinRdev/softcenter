@@ -15,17 +15,12 @@
 =======
 * Skipdbv2 [项目地址](https://github.com/koolshare/skipdbv2)
 
-开发与调试方式
-======
-* 最好在 linux 环境下进行开发
-* TODO
 
-感谢人员
+软件中心开发介绍
 ======
-* 排名不分先后
-* TODO
+* [地址](https://github.com/paldier/softcenter/wiki/%E8%BD%AF%E4%BB%B6%E4%B8%AD%E5%BF%83%E5%BC%80%E5%8F%91%E4%BB%8B%E7%BB%8D)
 
-交流场地
+
+和小宝的软件中心差异说明
 ======
-* 目前我们在 [Koolshare 论坛](https://koolshare.cn/forum.php)
-
+* [地址](https://github.com/paldier/softcenter/wiki/%E5%92%8Cks%E5%B7%AE%E5%BC%82%E8%AF%B4%E6%98%8E)
