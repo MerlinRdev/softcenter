@@ -934,6 +934,7 @@ create_dnsmasq_conf(){
 
 	#echo_date 创建dnsmasq.postconf软连接到/jffs/scripts/文件夹.
 	[ ! -L "/jffs/scripts/dnsmasq.postconf" ] && ln -sf /jffs/softcenter/ss/rules/dnsmasq.postconf /jffs/scripts/dnsmasq.postconf
+	echo "server=127.0.0.1" > /tmp/resolv.dnsmasq
 }
 
 start_haveged(){

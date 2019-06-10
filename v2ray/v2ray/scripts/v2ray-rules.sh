@@ -163,7 +163,7 @@ done
 ipset -! create ssr nethash && ipset flush ssr
 ipset -! create white_list nethash && ipset flush white_list
 if [ "$dns_mode" = "1" ] ;then
- cp -f /usr/sbin/ssr/gfw_list.conf /tmp/etc/dnsmasq.user/gfw_list.conf
+ cp -f /jffs/softcenter/scripts/gfwlist.conf /tmp/etc/dnsmasq.user/gfw_list.conf
  if [ -f "/jffs/configs/ssr_gfw.txt" ] ;then
   icount=`cat /jffs/configs/ssr_gfw.txt|grep .|wc -l`
   if [ $icount -gt 0 ] ;then
@@ -174,7 +174,7 @@ if [ "$dns_mode" = "1" ] ;then
  fi
 start_pdnsd
 else
- cp -f /usr/sbin/ssr/gfw_addr.conf /tmp/etc/dnsmasq.user/gfw_addr.conf
+ cp -f /jffs/softcenter/scripts/gfw_addr.conf /tmp/etc/dnsmasq.user/gfw_addr.conf
  if [ -f "/jffs/configs/ssr_gfw.txt" ] ;then
   icount=`cat /jffs/configs/ssr_gfw.txt|grep .|wc -l`
   if [ $icount -gt 0 ] ;then

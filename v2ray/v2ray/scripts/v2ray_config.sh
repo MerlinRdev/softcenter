@@ -286,11 +286,19 @@ killall -q -9 dns2socks 2>/dev/null && killall dns2socks 2>/dev/null
 killall -q -9 v2ray 2>/dev/null && killall v2ray 2>/dev/null
 killall -q pdnsd 2>/dev/null
 /jffs/softcenter/scripts/v2ray-rules.sh clean 2>/dev/null
+rm -rf /tmp/etc/dnsmasq.user/gfw_list.conf 2>/dev/null
+rm -rf /tmp/etc/dnsmasq.user/gfw_user.conf 2>/dev/null
+ISP_DNS1=$(nvram get wan0_dns|sed 's/ /\n/g'|grep -v 0.0.0.0|grep -v 127.0.0.1|sed -n 1p)
+ISP_DNS2=$(nvram get wan0_dns|sed 's/ /\n/g'|grep -v 0.0.0.0|grep -v 127.0.0.1|sed -n 2p)
+IFIP_DNS1=`echo $ISP_DNS1|grep -E "([0-9]{1,3}[\.]){3}[0-9]{1,3}|:"`
+IFIP_DNS2=`echo $ISP_DNS2|grep -E "([0-9]{1,3}[\.]){3}[0-9]{1,3}|:"`
+echo "nameserver $IFIP_DNS1" > /tmp/resolv.conf
+echo "nameserver $IFIP_DNS2" >> /tmp/resolv.conf
 service restart_dnsmasq >/dev/null 2>&1
 [ -e "/jffs/softcenter/init.d/S99v2ray.sh" ] && rm -rf /jffs/softcenter/init.d/S99v2ray.sh
 }
 start_v2ray(){
-illall -q -9 v2ray_mon.sh >/dev/null 2>&1
+killall -q -9 v2ray_mon.sh >/dev/null 2>&1
 icount=`ps -w|grep v2rayconfig |grep -v grep|wc -l`
 
 if [ $icount != 0 ] ;then
@@ -312,9 +320,10 @@ if [ "$v2ray_dnsmode" == "0" ];then
 	exit 1
 fi
 v2ray_serverip
+echo "nameserver 127.0.0.1" > /tmp/resolv.conf
 /jffs/softcenter/bin/v2ray -format pb -config "$V2RAY_CONFIG_FILE_PB" >/dev/null 2>&1 &
 /jffs/softcenter/scripts/v2ray-rules.sh $mip 1234 &
-/jffs/softcenter/scripts/ssr-state 2>/dev/null &
+/jffs/softcenter/scripts/ssr-state.sh 2>/dev/null &
 exit 0
 }
 restart_v2ray() {

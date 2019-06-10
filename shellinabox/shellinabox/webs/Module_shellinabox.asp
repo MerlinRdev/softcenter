@@ -34,8 +34,8 @@ show_footer();
 function reactive(){
 window.open("http://"+window.location.hostname+":4200");
 }
-function applyRule(_on){
-showLoading();
+function applyRule(){
+showLoading(2);
 document.form.submit();
 }
 function reload_Soft_Center() {
@@ -46,7 +46,7 @@ function reload_Soft_Center() {
 <div id="TopBanner"></div>
 <div id="Loading" class="popup_bg"></div>
 <iframe name="hidden_frame" id="hidden_frame" width="0" height="0" frameborder="0"></iframe>
-<form method="post" name="form" action="/applydb?p=webshell" target="hidden_frame">
+<form method="post" name="form" action="/applydb.cgi?p=webshell" target="hidden_frame">
 <input type="hidden" name="productid" value="<% nvram_get("productid"); %>">
 <input type="hidden" name="current_page" value="Module_shellinabox.asp">
 <input type="hidden" name="next_page" value="Module_shellinabox.asp">
@@ -56,7 +56,7 @@ function reload_Soft_Center() {
 <input type="hidden" name="action_script" value="shellinabox_start.sh">
 <input type="hidden" name="preferred_lang" id="preferred_lang" value="<% nvram_get("preferred_lang"); %>" disabled>
 <input type="hidden" name="firmver" value="<% nvram_get("firmver"); %>">
-<input type="hidden" name="webshell_enable" value="<% dbus_get("webshell_enable"); %>">
+<input type="hidden" name="webshell_enable" value="<% dbus_get_def("webshell_enable", "0"); %>">
 <table class="content" align="center" cellpadding="0" cellspacing="0" >
 <tr>
 <td width="17">&nbsp;</td>
@@ -116,10 +116,10 @@ function reload_Soft_Center() {
 <tr>
 <th id="PC_enable">启用WebShell</th>
 <td>
-<div align="center" class="left" style="width:94px; float:left; cursor:pointer;" id="radio_xunlei_enable"></div>
+<div align="center" class="left" style="width:94px; float:left; cursor:pointer;" id="radio_webshell_enable"></div>
 <div class="iphone_switch_container" style="height:32px; width:74px; position: relative; overflow: hidden">
 <script type="text/javascript">
-$('#radio_xunlei_enable').iphoneSwitch('<% dbus_get("webshell_enable"); %>',
+$('#radio_webshell_enable').iphoneSwitch('<% dbus_get_def("webshell_enable", "0"); %>',
 function(){
 document.form.webshell_enable.value = 1;
 },
