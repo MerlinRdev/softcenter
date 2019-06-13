@@ -1948,7 +1948,7 @@ function updatelist(action) {
 
 function version_show() {
 	$.ajax({
-		url: 'https://raw.githubusercontent.com/hq450/fancyss/master/fancyss_arm/config.json.js',
+		url: 'https://raw.githubusercontent.com/paldier/softcenter/master/shadowsocks/config.json.js',
 		type: 'GET',
 		dataType: 'json',
 		success: function(res) {

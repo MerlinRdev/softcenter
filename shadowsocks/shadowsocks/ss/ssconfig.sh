@@ -20,7 +20,6 @@ IFIP_DNS2=`echo $ISP_DNS2|grep -E "([0-9]{1,3}[\.]){3}[0-9]{1,3}|:"`
 lan_ipaddr=$(nvram get lan_ipaddr)
 ip_prefix_hex=`nvram get lan_ipaddr | awk -F "." '{printf ("0x%02x", $1)} {printf ("%02x", $2)} {printf ("%02x", $3)} {printf ("00/0xffffff00\n")}'`
 ARG_OBFS=""
-NAT_START=/jffs/scripts/nat-start
 
 #-----------------------------------------------
 get_config(){
@@ -789,6 +788,28 @@ create_dnsmasq_conf(){
 		echo_date 添加自定义dnsmasq设置到/tmp/custom.conf
 		echo "$ss_dnsmasq" | base64_decode | sort -u >> /tmp/custom.conf
 	fi
+	#*******************************************************************
+	# these sites need to go ss inside router
+	if [ "$ss_basic_mode" != "6" ];then
+		echo "#for router itself" >> /tmp/wblist.conf
+		echo "server=/.google.com.tw/127.0.0.1#7913" >> /tmp/wblist.conf
+		echo "ipset=/.google.com.tw/router" >> /tmp/wblist.conf
+		#echo "server=/dns.google.com/127.0.0.1#7913" >> /tmp/wblist.conf
+		#echo "ipset=/dns.google.com/router" >> /tmp/wblist.conf
+		#echo "server=/.github.com/127.0.0.1#7913" >> /tmp/wblist.conf
+		#echo "ipset=/.github.com/router" >> /tmp/wblist.conf
+		#echo "server=/.github.io/127.0.0.1#7913" >> /tmp/wblist.conf
+		#echo "ipset=/.github.io/router" >> /tmp/wblist.conf
+		#echo "server=/.raw.githubusercontent.com/127.0.0.1#7913" >> /tmp/wblist.conf
+		#echo "ipset=/.raw.githubusercontent.com/router" >> /tmp/wblist.conf
+		#echo "server=/.adblockplus.org/127.0.0.1#7913" >> /tmp/wblist.conf
+		#echo "ipset=/.adblockplus.org/router" >> /tmp/wblist.conf
+		#echo "server=/.entware.net/127.0.0.1#7913" >> /tmp/wblist.conf
+		#echo "ipset=/.entware.net/router" >> /tmp/wblist.conf
+		#echo "server=/.apnic.net/127.0.0.1#7913" >> /tmp/wblist.conf
+		#echo "ipset=/.apnic.net/router" >> /tmp/wblist.conf
+	fi
+	#*******************************************************************
 
 	# append white domain list, not through ss
 	wanwhitedomain=$(echo $ss_wan_white_domain | base64_decode)
@@ -934,7 +955,6 @@ create_dnsmasq_conf(){
 
 	#echo_date 创建dnsmasq.postconf软连接到/jffs/scripts/文件夹.
 	[ ! -L "/jffs/scripts/dnsmasq.postconf" ] && ln -sf /jffs/softcenter/ss/rules/dnsmasq.postconf /jffs/scripts/dnsmasq.postconf
-	echo "server=127.0.0.1" > /tmp/resolv.dnsmasq
 }
 
 start_haveged(){
@@ -947,25 +967,18 @@ auto_start(){
 	[ ! -e "/jffs/softcenter/init.d/N99shadowsocks.sh" ] && cp -rf /jffs/softcenter/ss/ssconfig.sh /jffs/softcenter/init.d/N99shadowsocks.sh
 }
 write_nat_start(){
+	if [ $(nvram get buildno_org) -eq 380 ]; then
 	echo_date 添加nat-start触发事件...
-	if [ ! -f $NAT_START ]; then
-		cat > $NAT_START <<-EOF
-		#!/bin/sh
-		EOF
-	fi
-
-	fire_rule=$(cat $NAT_START | grep ssconfig)
-	if [ -z "$fire_rule" ];then
-		cat >> $NAT_START <<-EOF
-		/bin/sh /jffs/softcenter/ss/ssconfig.sh
-		EOF
+	dbus set __event__onnatstart_ssconfig="/jffs/softcenter/ss/ssconfig.sh"
 	fi
 }
 
 remove_nat_start(){
-	fire_rule=$(cat $NAT_START | grep ssconfig)
-	if [ ! -z "$fire_rule" ];then
-		sed -i '/ssconfig/d' $NAT_START >/dev/null 2>&1
+	if [ $(nvram get buildno_org) -eq 380 ]; then
+		[ -n "`dbus get __event__onnatstart_ssconfig`" ] && {
+			echo_date 删除nat-start触发...
+			dbus remove __event__onnatstart_ssconfig
+		}
 	fi
 }
 start_kcp(){
@@ -1708,7 +1721,7 @@ flush_nat(){
 	
 	iptables -t mangle -F SHADOWSOCKS >/dev/null 2>&1 && iptables -t mangle -X SHADOWSOCKS >/dev/null 2>&1
 	iptables -t mangle -F SHADOWSOCKS_GAM > /dev/null 2>&1 && iptables -t mangle -X SHADOWSOCKS_GAM > /dev/null 2>&1
-	iptables -t nat -D OUTPUT -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-ports 3333 >/dev/null 2>&1
+	iptables -t nat -D OUTPUT -p tcp -m set --match-set router dst -j REDIRECT --to-ports 3333 >/dev/null 2>&1
 	iptables -t nat -F OUTPUT > /dev/null 2>&1
 	iptables -t nat -X SHADOWSOCKS_EXT > /dev/null 2>&1
 	#iptables -t nat -D PREROUTING -p udp -s $(get_lan_cidr) --dport 53 -j DNAT --to $lan_ipaddr >/dev/null 2>&1
@@ -1746,6 +1759,8 @@ create_ipset(){
 	ipset -! create router nethash && ipset flush router
 	ipset -! create chnroute nethash && ipset flush chnroute
 	sed -e "s/^/add chnroute &/g" /jffs/softcenter/ss/rules/chnroute.txt | awk '{print $0} END{print "COMMIT"}' | ipset -R
+	#for router
+	ipset add router 172.217.4.131
 }
 
 add_white_black_ip(){
@@ -1965,7 +1980,7 @@ apply_nat_rules(){
 	lan_acess_control
 	#-----------------------FOR ROUTER---------------------
 	# router itself
-	[ "$ss_basic_mode" != "6" ] && iptables -t nat -A OUTPUT -p tcp -m set --match-set gfwlist dst -j REDIRECT --to-ports 3333
+	[ "$ss_basic_mode" != "6" ] && iptables -t nat -A OUTPUT -p tcp -m set --match-set router dst -j REDIRECT --to-ports 3333
 	iptables -t nat -A OUTPUT -p tcp -m mark --mark "$ip_prefix_hex" -j SHADOWSOCKS_EXT
 	
 	# 把最后剩余流量重定向到相应模式的nat表中对应的主模式的链
@@ -2008,8 +2023,13 @@ chromecast(){
 
 restart_dnsmasq(){
 	# Restart dnsmasq
+	#这里有一个bug，可能是部分机型问题
 	echo_date 重启dnsmasq服务...
-	service restart_dnsmasq >/dev/null 2>&1
+	if [ -z "$(nvram get rc_service)" -a -z "$(nvram get rc_service_pid)" ]; then
+		service restart_dnsmasq >/dev/null 2>&1
+	else
+		delay_exec 30 service restart_dnsmasq &
+	fi
 }
 
 load_module(){

@@ -186,7 +186,8 @@ else
 fi
 
 service restart_dnsmasq
-
+echo "172.217.4.131 google.com.tw" >> /etc/hosts
+ipset add gfwlist 172.217.4.131
 
 
 /jffs/softcenter/scripts/v2ray_mon.sh &

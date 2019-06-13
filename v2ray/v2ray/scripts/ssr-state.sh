@@ -15,7 +15,7 @@ nvram set ss_china_state="$log"
 
 google_state()
 {
-/usr/sbin/wget --no-check-certificate -4 --spider --quiet --tries=2 --timeout=2 https://www.google.com
+/usr/sbin/wget --no-check-certificate -4 --spider --quiet --tries=2 --timeout=2 https://www.google.com.tw
 if [ "$?" == "0" ]; then
 	log=' google - [ '$LOGTIME' ]    OK '
 else
