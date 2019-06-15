@@ -181,6 +181,16 @@
             "version": "4.18.0"
         }, 
         {
+            "build_date": "2019-06-15_12:50:57", 
+            "description": "百度盘", 
+            "home_url": "Module_baidupcs.asp", 
+            "md5": "7acda773d4d2a2da4f9ae5d514acc74e", 
+            "name": "baidupcs", 
+            "tar_url": "baidupcs/baidupcs.tar.gz", 
+            "title": "百度盘", 
+            "version": "1.0"
+        }, 
+        {
             "build_date": "2019-05-01_10:36:20", 
             "description": "广告屏蔽大师", 
             "home_url": "Module_adbyby.asp", 
