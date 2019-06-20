@@ -222,6 +222,7 @@ function onSubmitCtrl(o, s) {
   alert_custom();
   if (validForm()) {
     document.aria2_form.action_mode.value = s;
+    document.aria2_form.action_script.value = "aria2_config.sh";
     showLoading(5);
     refreshpage(10);
     document.aria2_form.submit();

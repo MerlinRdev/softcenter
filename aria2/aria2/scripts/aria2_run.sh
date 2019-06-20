@@ -5,6 +5,9 @@ eval `dbus export aria2`
 source /jffs/softcenter/scripts/base.sh
 export PERP_BASE=/jffs/softcenter/perp
 #old_token=$(cat /jffs/softcenter/aria2/aria2.conf|grep rpc-secret|cut -d "=" -f2)
+if [ -z "$aria2_rpc_secret" ];then
+	dbus set aria2_rpc_secret=`head -c 100 /dev/urandom | tr -dc a-z0-9A-Z |head -c 32`
+fi
 check_ddnsto=`dbus get aria2_ddnsto`
 if [ "${check_ddnsto}"x = "true"x ]; then
   ddnsto_route_id=`/jffs/softcenter/bin/ddnsto -w | awk '{print $2}'`

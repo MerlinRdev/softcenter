@@ -31,6 +31,16 @@
             "version": "2.0"
         }, 
         {
+            "build_date": "2019-01-13_02:08:34", 
+            "description": "去广告，没烦恼", 
+            "home_url": "Module_koolproxy.asp", 
+            "md5": "1ad5b05d424832237b00028327e9a90e", 
+            "name": "koolproxyr", 
+            "tar_url": "koolproxyr/koolproxyr.tar.gz", 
+            "title": "koolproxy", 
+            "version": "3.8.4"
+        }, 
+        {
             "build_date": "2019-03-26_11:27:43", 
             "description": "Cloudflare解析自动更新IP", 
             "home_url": "Module_cfddns.asp", 
@@ -81,10 +91,10 @@
             "version": "0.3.6"
         }, 
         {
-            "build_date": "2019-05-04_13:37:10", 
+            "build_date": "2019-06-20_13:38:16", 
             "description": "linux下载利器", 
             "home_url": "Module_aria2.asp", 
-            "md5": "4e1f3313c65048a7e0cfa5ec1e4cc4c5", 
+            "md5": "259a9e1a0f2594831748a243c5c5b245", 
             "name": "aria2", 
             "tar_url": "aria2/aria2.tar.gz", 
             "title": "Aria2", 
@@ -129,6 +139,16 @@
             "tar_url": "dc1svr/dc1svr.tar.gz", 
             "title": "dc1服务器", 
             "version": "1.1"
+        }, 
+        {
+            "build_date": "2019-06-15_14:07:10", 
+            "description": "这是一只自动帮你签到的dog", 
+            "home_url": "Module_qiandao.asp", 
+            "md5": "eb18d660a1d10980cdb69245c77ce831", 
+            "name": "qiandao", 
+            "tar_url": "qiandao/qiandao.tar.gz", 
+            "title": "签到dog", 
+            "version": "1.4"
         }, 
         {
             "build_date": "2019-01-16_20:13:34", 
@@ -188,6 +208,16 @@
             "name": "baidupcs", 
             "tar_url": "baidupcs/baidupcs.tar.gz", 
             "title": "百度盘", 
+            "version": "1.0"
+        }, 
+        {
+            "build_date": "2019-06-20_11:40:16", 
+            "description": "从路由器推送状态及通知的工具", 
+            "home_url": "Module_serverchan.asp", 
+            "md5": "3760f6363116faac7da9c3db5d857ad3", 
+            "name": "serverchan", 
+            "tar_url": "serverchan/serverchan.tar.gz", 
+            "title": "serverChan微信推送", 
             "version": "1.0"
         }, 
         {

@@ -318,6 +318,7 @@ v2ray_serverip
 /jffs/softcenter/bin/v2ray -format pb -config "$V2RAY_CONFIG_FILE_PB" >/dev/null 2>&1 &
 /jffs/softcenter/scripts/v2ray-rules.sh $mip 1234 &
 /jffs/softcenter/scripts/ssr-state.sh 2>/dev/null &
+[ ! -e "/jffs/softcenter/init.d/S99v2ray.sh" ] && cp -r /jffs/softcenter/scripts/v2ray_config.sh /jffs/softcenter/init.d/S99v2ray.sh
 exit 0
 }
 restart_v2ray() {
@@ -326,7 +327,6 @@ restart_v2ray() {
 	if [ "`dbus get v2ray_enable`" == "1" ];then
 		creat_v2ray_json
 		start_v2ray
-		[ ! -e "/jffs/softcenter/init.d/S99v2ray.sh" ] && cp -r /jffs/softcenter/scripts/v2ray_config.sh /jffs/softcenter/init.d/S99v2ray.sh
 	fi
 }
 
