@@ -18,7 +18,7 @@ cp -rf /tmp/mdial/uninstall.sh /jffs/softcenter/scripts/uninstall_mdial.sh
 rm -fr /tmp/mdial* >/dev/null 2>&1
 chmod +x /jffs/softcenter/scripts/mdial*.sh
 chmod +x /jffs/softcenter/scripts/uninstall_mdial.sh
-[ ! -L "/jffs/softcenter/init.d/S10mdial.sh" ] && cp -rf /jffs/softcenter/scripts/mdial_config.sh /jffs/softcenter/init.d/S10mdial.sh
+[ ! -f "/jffs/softcenter/init.d/S10mdial.sh" ] && cp -rf /jffs/softcenter/scripts/mdial_config.sh /jffs/softcenter/init.d/S10mdial.sh
 
 
 dbus set mdial_version="1.0"

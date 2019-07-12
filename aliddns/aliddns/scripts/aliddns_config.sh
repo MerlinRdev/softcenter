@@ -8,8 +8,10 @@ start_aliddns(){
 	cru a aliddns_checker "*/$aliddns_interval * * * * /jffs/softcenter/scripts/aliddns_update.sh"
 	sh /jffs/softcenter/scripts/aliddns_update.sh
 
-	if [ ! -L "/jffs/softcenter/init.d/S98Aliddns.sh" ]; then 
-		ln -sf /jffs/softcenter/scripts/aliddns_config.sh /jffs/jffs/softcenter/init.d/S98Aliddns.sh
+	if [ "$(nvram get productid)" = "BLUECAVE" ];then
+		[ ! -L "/jffs/softcenter/init.d/M98Aliddns.sh" ] && ln -sf /jffs/softcenter/scripts/aliddns_config.sh /jffs/jffs/softcenter/init.d/M98Aliddns.sh
+	else
+		[ ! -L "/jffs/softcenter/init.d/S98Aliddns.sh" ] && ln -sf /jffs/softcenter/scripts/aliddns_config.sh /jffs/jffs/softcenter/init.d/S98Aliddns.sh
 	fi
 }
 
@@ -22,7 +24,7 @@ stop_aliddns(){
 	nvram set ddns_hostname_x=`nvram get ddns_hostname_old`
 }
 
-case $ACTION in
+case $1 in
 start)
 	if [ "$aliddns_enable" == "1" ];then
 		logger "[软件中心]: 启动阿里DDNS！"
@@ -40,7 +42,6 @@ stop)
 	else
 		stop_aliddns
 	fi
-	http_response "$1"
 	;;
 esac
 

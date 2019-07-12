@@ -6,6 +6,7 @@ source /jffs/softcenter/scripts/base.sh
 V2RAY_CONFIG_FILE="/tmp/etc/v2rayconfig.json"
 V2RAY_CONFIG_FILE_PB="/tmp/v2rayconfig.pb"
 V2RAY_CONFIG_FILE_TMP="/tmp/v2rayconfig.json"
+
 gen_conf() {
 json_data=`/jffs/softcenter/bin/jq . $V2RAY_CONFIG_FILE`
 /jffs/softcenter/bin/jq -e . $V2RAY_CONFIG_FILE >/dev/null 2>&1 || return 2
@@ -287,10 +288,15 @@ killall -q pdnsd 2>/dev/null
 /jffs/softcenter/scripts/v2ray-rules.sh clean 2>/dev/null
 rm -rf /tmp/etc/dnsmasq.user/gfw_list.conf 2>/dev/null
 rm -rf /tmp/etc/dnsmasq.user/gfw_user.conf 2>/dev/null
+ISP_DNS1=$(nvram get wan0_dns|sed 's/ /\n/g'|grep -v 0.0.0.0|grep -v 127.0.0.1|sed -n 1p)
+ISP_DNS2=$(nvram get wan0_dns|sed 's/ /\n/g'|grep -v 0.0.0.0|grep -v 127.0.0.1|sed -n 2p)
+IFIP_DNS1=`echo $ISP_DNS1|grep -E "([0-9]{1,3}[\.]){3}[0-9]{1,3}|:"`
+IFIP_DNS2=`echo $ISP_DNS2|grep -E "([0-9]{1,3}[\.]){3}[0-9]{1,3}|:"`
 echo "nameserver $IFIP_DNS1" > /tmp/resolv.conf
 echo "nameserver $IFIP_DNS2" >> /tmp/resolv.conf
 service restart_dnsmasq >/dev/null 2>&1
-[ -e "/jffs/softcenter/init.d/S99v2ray.sh" ] && rm -rf /jffs/softcenter/init.d/S99v2ray.sh
+[ -e "/jffs/softcenter/init.d/M99v2ray.sh" ] && rm -rf /jffs/softcenter/init.d/M99v2ray.sh
+[ -e "/jffs/softcenter/init.d/N99v2ray.sh" ] && rm -rf /jffs/softcenter/init.d/N99v2ray.sh
 }
 start_v2ray(){
 killall -q -9 v2ray_mon.sh >/dev/null 2>&1
@@ -315,10 +321,12 @@ if [ "$v2ray_dnsmode" == "0" ];then
 	exit 1
 fi
 v2ray_serverip
+echo "nameserver 127.0.0.1" > /tmp/resolv.conf
 /jffs/softcenter/bin/v2ray -format pb -config "$V2RAY_CONFIG_FILE_PB" >/dev/null 2>&1 &
 /jffs/softcenter/scripts/v2ray-rules.sh $mip 1234 &
 /jffs/softcenter/scripts/ssr-state.sh 2>/dev/null &
-[ ! -e "/jffs/softcenter/init.d/S99v2ray.sh" ] && cp -r /jffs/softcenter/scripts/v2ray_config.sh /jffs/softcenter/init.d/S99v2ray.sh
+[ ! -e "/jffs/softcenter/init.d/M99v2ray.sh" ] && cp -r /jffs/softcenter/scripts/v2ray_config.sh /jffs/softcenter/init.d/M99v2ray.sh
+[ ! -e "/jffs/softcenter/init.d/N99v2ray.sh" ] && cp -r /jffs/softcenter/scripts/v2ray_config.sh /jffs/softcenter/init.d/N99v2ray.sh
 exit 0
 }
 restart_v2ray() {
@@ -334,8 +342,12 @@ case $ACTION in
 stop)
 	stop_v2ray
 	;;
+start_nat)
+	if [ "$(ps |grep v2ray| wc -l)" -eq 3 -a "`dbus get v2ray_enable`" -eq 1 ];then
+		restart_v2ray
+	fi
+	;;
 *)
 	restart_v2ray
 	;;
 esac
-

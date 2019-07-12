@@ -7,11 +7,10 @@ alias echo_date='echo $(date +%Y年%m月%d日\ %X):'
 baidu_nat_start(){
 	if [ "${baidupcs_enable}"x = "1"x ];then
 		echo_date 添加nat-start触发事件... >> /tmp/baidupcs.log
-		dbus remove __event__onnatstart_baidupcs
-		dbus set __event__onnatstart_baidupcs="/jffs/softcenter/scripts/baidupcs_config.sh"
+		cp -r /jffs/softcenter/scripts/baidupcs_config.sh /jffs/softcenter/init.d/M98baidupcs.sh
 	else
 		echo_date 删除nat-start触发... >> /tmp/baidupcs.log
-		dbus remove __event__onnatstart_baidupcs
+		rm -rf /jffs/softcenter/init.d/M98baidupcs.sh
 	fi
 }
 
@@ -102,7 +101,7 @@ restart_baidu() {
 	fi
 }
 
-case ${ACTION} in
+case $1 in
 stop)
 	stop_baidu
 	baidu_nat_start

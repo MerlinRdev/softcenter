@@ -72,7 +72,8 @@ install_module() {
 	# Just ignore the old installing_module
 	export softcenter_installing_module=$softcenter_installing_todo
 	export softcenter_installing_tick=`date +%s`
-	export softcenter_installing_status="2"
+	dbus set softcenter_installing_status="2"
+	sleep 1
 	dbus save softcenter_installing_
 
 	URL_SPLIT="/"
@@ -95,17 +96,18 @@ install_module() {
 	cd /tmp
 	rm -f $FNAME
 	rm -rf "/tmp/$softcenter_installing_module"
+	dbus set softcenter_installing_status="3"
+	sleep 1
 	wget --no-check-certificate --tries=1 --timeout=15 $TAR_URL
 	RETURN_CODE=$?
 
 	if [ "$RETURN_CODE" != "0" ]; then
-	dbus set softcenter_installing_status="12"
-	sleep 2
-
-	dbus set softcenter_installing_status="0"
-	dbus set softcenter_installing_module=""
-	dbus set softcenter_installing_todo=""
-	LOGGER "wget error, $RETURN_CODE"
+		dbus set softcenter_installing_status="12"
+		sleep 2
+		dbus set softcenter_installing_status="0"
+		dbus set softcenter_installing_module=""
+		dbus set softcenter_installing_todo=""
+		LOGGER "wget $TAR_URL error, $RETURN_CODE"
 	exit 4
 	fi
 

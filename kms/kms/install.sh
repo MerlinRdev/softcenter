@@ -3,9 +3,7 @@
 # stop kms first
 enable=`dbus get kms_enable`
 if [ "$enable" == "1" ];then
-	restart=1
-	dbus set kms_enable=0
-	sh /jffs/softcenter/scripts/kms.sh
+	sh /jffs/softcenter/scripts/kms_config.sh stop
 fi
 
 # cp files
@@ -17,11 +15,13 @@ cp -rf /tmp/kms/res/* /jffs/softcenter/res/
 # delete install tar
 rm -rf /tmp/kms* >/dev/null 2>&1
 
-chmod a+x /jffs/softcenter/scripts/kms.sh
-chmod 0755 /jffs/softcenter/bin/vlmcsd
+chmod +x /jffs/softcenter/scripts/kms*
+chmod +x /jffs/softcenter/bin/vlmcsd
 
 # re-enable kms
-if [ "$restart" == "1" ];then
-	dbus set kms_enable=1
-	sh /jffs/softcenter/scripts/kms.sh
+if [ "$enable" == "1" ];then
+	sh /jffs/softcenter/scripts/kms_config.sh start
 fi
+
+
+

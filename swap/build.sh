@@ -2,7 +2,7 @@
 
 
 MODULE=swap
-VERSION=2.2
+VERSION=2.3
 TITLE=虚拟内存
 DESCRIPTION=老板，来一斤虚拟内存~
 HOME_URL=Module_swap.asp

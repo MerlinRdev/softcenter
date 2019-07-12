@@ -2,8 +2,8 @@
 
 
 MODULE=kms
-VERSION=1.6.1
-TITLE=kms
+VERSION=1.4
+TITLE="系统工具"
 DESCRIPTION=kms
 HOME_URL=Module_kms.asp
 

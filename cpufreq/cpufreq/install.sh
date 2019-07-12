@@ -14,7 +14,7 @@ cp -rf /tmp/cpufreq/uninstall.sh /jffs/softcenter/scripts/uninstall_cpufreq.sh
 rm -fr /tmp/cpufreq* >/dev/null 2>&1
 chmod +x /jffs/softcenter/scripts/cpufreq*.sh
 chmod +x /jffs/softcenter/scripts/uninstall_cpufreq.sh
-[ ! -L "/jffs/softcenter/init.d/S99cpufreq.sh" ] && cp -rf /jffs/softcenter/scripts/cpufreq_config.sh /jffs/softcenter/init.d/S99cpufreq.sh
+cp -rf /jffs/softcenter/scripts/cpufreq_config.sh /jffs/softcenter/init.d/M40cpufreq.sh
 
 dbus set cpufreq_version="1.0"
 dbus set softcenter_module_cpufreq_version="1.0"

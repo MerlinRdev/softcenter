@@ -28,10 +28,6 @@ function init() {
 	buildswitch();
 	conf2obj();
 }
-function menu_hook() {
-	tabtitle[tabtitle.length - 1] = new Array("", "ssserver");
-	tablink[tablink.length - 1] = new Array("", "Module_ssserver.asp");
-}
 function done_validating() {
 	refreshpage(5);
 }
@@ -249,4 +245,3 @@ function menu_hook(title, tab) {
 	<div id="footer"></div>
 </body>
 </html>
-

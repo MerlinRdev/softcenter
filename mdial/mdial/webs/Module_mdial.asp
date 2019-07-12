@@ -15,6 +15,7 @@
 <link rel="stylesheet" type="text/css" href="ParentalControl.css">
 <link rel="stylesheet" type="text/css" href="css/icon.css">
 <link rel="stylesheet" type="text/css" href="/device-map/device-map.css">
+<link rel="stylesheet" type="text/css" href="res/softcenter.css">
 <script type="text/javascript" src="/state.js"></script>
 <script type="text/javascript" src="/popup.js"></script>
 <script type="text/javascript" src="/help.js"></script>
@@ -329,9 +330,9 @@ function clean_log() {
 		dataType: "json",
 		success: function(response) {
 			console.log(response);
-			if (response.result == id){
+			//if (response.result == id){
 				E("log_content1").value = "";
-			}
+			//}
 		}
 	});
 }
@@ -630,7 +631,7 @@ function reload_Soft_Center(){
 													<td>
 														<select id="mdial_if" name="mdial_if" class="ssconfig input_option" >
 														</select>
-														<input type="text" class="input_ss_table" name="mdial_nu" id="mdial_nu" style="width:80px" value="<% dbus_get("mdial_nu"); %>" />
+														<input type="text" class="input_ss_table" name="mdial_nu" id="mdial_nu" style="width:80px" value="<% dbus_get_def("mdial_nu", "4"); %>" />
 													</td>
 												</tr>
 												<tr>
