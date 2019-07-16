@@ -69,7 +69,7 @@ rm -rf /jffs/softcenter/res/game.png
 rm -rf /jffs/softcenter/res/shadowsocks.css
 rm -rf /jffs/softcenter/res/gameV2.png
 rm -rf /jffs/softcenter/res/ss_proc_status.htm
-rm -rf /jffs/softcenter/init.d/S89Socks5.sh
+find /jffs/softcenter/init.d/ -name "*shadowsocks.sh" | xargs rm -rf
 find /jffs/softcenter/init.d/ -name "*socks5.sh" | xargs rm -rf
 
 echo_date 开始复制文件！
@@ -107,12 +107,14 @@ if [ -n "`ls /tmp/ss_backup/P*.sh 2>/dev/null`" ];then
 fi
 
 echo_date 创建一些二进制文件的软链接！
-[ ! -L "/jffs/softcenter/bin/rss-tunnel" ] && cp -rf /jffs/softcenter/bin/rss-local /jffs/softcenter/bin/rss-tunnel
-[ ! -L "/jffs/softcenter/bin/base64" ] && cp -rf /jffs/softcenter/bin/koolbox /jffs/softcenter/bin/base64
-[ ! -L "/jffs/softcenter/bin/shuf" ] && cp -rf /jffs/softcenter/bin/koolbox /jffs/softcenter/bin/shuf
-[ ! -L "/jffs/softcenter/bin/netstat" ] && cp -rf /jffs/softcenter/bin/koolbox /jffs/softcenter/bin/netstat
-[ ! -L "/jffs/softcenter/bin/base64_decode" ] && cp -rf /jffs/softcenter/bin/base64_encode /jffs/softcenter/bin/base64_decode
-[ ! -L "/jffs/softcenter/init.d/S99socks5.sh" ] && cp -rf /jffs/softcenter/scripts/ss_socks5.sh /jffs/softcenter/init.d/S99socks5.sh
+[ ! -e "/jffs/softcenter/bin/rss-tunnel" ] && cp -rf /jffs/softcenter/bin/rss-local /jffs/softcenter/bin/rss-tunnel
+[ ! -e "/jffs/softcenter/bin/base64" ] && cp -rf /jffs/softcenter/bin/koolbox /jffs/softcenter/bin/base64
+[ ! -e "/jffs/softcenter/bin/shuf" ] && cp -rf /jffs/softcenter/bin/koolbox /jffs/softcenter/bin/shuf
+[ ! -e "/jffs/softcenter/bin/netstat" ] && cp -rf /jffs/softcenter/bin/koolbox /jffs/softcenter/bin/netstat
+[ ! -e "/jffs/softcenter/bin/base64_decode" ] && cp -rf /jffs/softcenter/bin/base64_encode /jffs/softcenter/bin/base64_decode
+[ ! -e "/jffs/softcenter/init.d/M99shadowsocks.sh" ] && cp -rf /jffs/softcenter/ss/ssconfig.sh /jffs/softcenter/init.d/M99shadowsocks.sh
+[ ! -e "/jffs/softcenter/init.d/N99shadowsocks.sh" ] && cp -rf /jffs/softcenter/ss/ssconfig.sh /jffs/softcenter/init.d/N99shadowsocks.sh
+[ ! -e "/jffs/softcenter/init.d/M99socks5.sh" ] && cp -rf /jffs/softcenter/scripts/ss_socks5.sh /jffs/softcenter/init.d/M99socks5.sh
 
 echo_date 设置一些默认值
 [ -z "$ss_dns_china" ] && dbus set ss_dns_china=11

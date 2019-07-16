@@ -438,7 +438,7 @@ function save() {
 	}
 	console.log("post_dbus", post_dbus);
 	post_dbus["action_script"] = "ss_config.sh";
-	post_dbus["action_mode"] = " Refresh ";
+	post_dbus["action_mode"] = "restart";
 	post_dbus["current_page"] = "Main_Ss_Content.asp";
 	push_data(post_dbus);
 }
@@ -1776,7 +1776,7 @@ function restore_ss_conf() {
 	db_ss["ss_basic_action"] = "9";
 	var dbus = {};
 	dbus["action_script"] = "ss_conf_restore.sh";
-	dbus["action_mode"] = " Refresh ";
+	dbus["action_mode"] = "restart";
 	dbus["current_page"] = "Main_Ss_Content.asp";
 	push_data(dbus);
 }
@@ -1786,7 +1786,7 @@ function remove_SS_node() {
 	db_ss["ss_basic_action"] = "10";
 	var dbus = {};
 	dbus["action_script"] = "ss_conf_remove.sh";
-	dbus["action_mode"] = " Refresh ";
+	dbus["action_mode"] = "restart";
 	dbus["current_page"] = "Main_Ss_Content.asp";
 	push_data(dbus);
 }
@@ -1935,7 +1935,7 @@ function updatelist(action) {
 	db_ss["ss_basic_action"] = "8";
 	var dbus = {};
 	dbus["action_script"] = "ss_rule_update.sh";
-	dbus["action_mode"] = " Refresh ";
+	dbus["action_mode"] = "restart";
 	dbus["current_page"] = "Main_Ss_Content.asp";
 	dbus["ss_basic_update_action"] = action;
 	dbus["ss_basic_rule_update"] = E("ss_basic_rule_update").value;
@@ -2012,7 +2012,7 @@ function get_ss_status_data() {
 
 function get_udp_status() {
 	$.ajax({
-		url: 'apply.cgi?current_page=Main_Ss_Content.asp.asp&next_page=Main_Ss_Content.asp.asp&group_id=&modified=0&action_mode=+Refresh+&action_script=ss_udp_status.sh&action_wait=&first_time=&preferred_lang=CN&firmver=3.0.0.4',
+		url: 'applydb.cgi?current_page=Main_Ss_Content.asp.asp&next_page=Main_Ss_Content.asp.asp&group_id=&modified=0&action_mode=+Refresh+&action_script=ss_udp_status.sh&action_wait=&first_time=&preferred_lang=CN&firmver=3.0.0.4',
 		dataType: 'html',
 		success: function (response) {
 			setTimeout("write_udp_status();", 1000);
@@ -2056,7 +2056,7 @@ function update_ss() {
 	db_ss["ss_basic_action"] = "7";
 	var dbus = {};
 	dbus["action_script"] = "ss_update.sh";
-	dbus["action_mode"] = " Refresh ";
+	dbus["action_mode"] = "restart";
 	dbus["current_page"] = "Main_Ss_Content.asp";
 	push_data(dbus);
 }
@@ -2812,7 +2812,7 @@ function save_online_nodes(action) {
 	db_ss["ss_basic_action"] = "13";
 	var dbus = {};
 	dbus["action_script"] = "ss_online_update.sh";
-	dbus["action_mode"] = " Refresh ";
+	dbus["action_mode"] = "restart";
 	dbus["current_page"] = "Main_Ss_Content.asp";
 	dbus["ss_online_action"] = action;
 	dbus["ss_online_links"] = Base64.encode(E("ss_online_links").value);
@@ -2832,7 +2832,7 @@ function v2ray_binary_update (){
 	db_ss["ss_basic_action"] = "15";
 	var dbus = {};
 	dbus["action_script"] = "ss_v2ray.sh";
-	dbus["action_mode"] = " Refresh ";
+	dbus["action_mode"] = "restart";
 	dbus["current_page"] = "Main_Ss_Content.asp";
 	require(['/res/layer/layer.js'], function(layer) {
 		layer.confirm('<li>为了避免不必要的问题，请保证路由器和服务器上的v2ray版本一致！</li><br /><li>你确定要更新v2ray二进制吗？</li>', {
@@ -2957,7 +2957,7 @@ function inter_pre_onchange(){
 function set_cron(action) {
 	var dbus = {};
 	dbus["action_script"] = "ss_reboot_job.sh";
-	dbus["action_mode"] = " Refresh ";
+	dbus["action_mode"] = "restart";
 	dbus["current_page"] = "Main_Ss_Content.asp";
 	dbus["ss_basic_reboot_action"] = action;
 	if(action == 1){

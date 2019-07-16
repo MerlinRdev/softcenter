@@ -10,8 +10,8 @@ username=`nvram get http_username`
 alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
 
 write_haproxy_cfg(){
-	echo_date 生成haproxy配置文件到/jffs/softcenter/configs目录.
-	cat > /jffs/softcenter/configs/haproxy.cfg <<-EOF
+	echo_date 生成haproxy配置文件到/jffs/softcenter/etc目录.
+	cat > /jffs/softcenter/etc/haproxy.cfg <<-EOF
 		global
 		    log         127.0.0.1 local2
 		    chroot      /usr/bin
@@ -100,17 +100,17 @@ if [ "$ss_lb_heartbeat" == "1" ];then
 			mode=`dbus get ssconf_basic_lbmode_$node`
 			if [ "$mode" == "3" ];then
 				echo_date 载入【"$nick_name"】作为备用节点...
-				cat >> /jffs/softcenter/configs/haproxy.cfg <<-EOF
+				cat >> /jffs/softcenter/etc/haproxy.cfg <<-EOF
 				    server $name $server:$port weight $weight rise $up fall $down check inter $interval resolvers mydns backup
 				EOF
 			elif [ "$mode" == "2" ];then
 				echo_date 载入【"$nick_name"】作为主用节点...
-				cat >> /jffs/softcenter/configs/haproxy.cfg <<-EOF
+				cat >> /jffs/softcenter/etc/haproxy.cfg <<-EOF
 				    server $name $server:$port weight $weight rise $up fall $down check inter $interval resolvers mydns
 				EOF
 			else
 				echo_date 载入【"$nick_name"】作为负载均衡节点...
-				cat >> /jffs/softcenter/configs/haproxy.cfg <<-EOF
+				cat >> /jffs/softcenter/etc/haproxy.cfg <<-EOF
 				    server $name $server:$port weight $weight rise $up fall $down check inter $interval resolvers mydns
 				EOF
 			fi
@@ -162,17 +162,17 @@ else
 			mode=`dbus get ssconf_basic_lbmode_$node`
 			if [ "$mode" == "3" ];then
 				echo_date 载入节点："$nick_name"，作为备用节点...
-				cat >> /jffs/softcenter/configs/haproxy.cfg <<-EOF
+				cat >> /jffs/softcenter/etc/haproxy.cfg <<-EOF
 				    server $name $server:$port weight $weight resolvers mydns backup
 				EOF
 			elif [ "$mode" == "2" ];then
 				echo_date 载入节点："$nick_name"，作为主节点...
-				cat >> /jffs/softcenter/configs/haproxy.cfg <<-EOF
+				cat >> /jffs/softcenter/etc/haproxy.cfg <<-EOF
 				    server $name $server:$port weight $weight resolvers mydns
 				EOF
 			else
 				echo_date 载入节点："$nick_name"，作为负载均衡节点...
-				cat >> /jffs/softcenter/configs/haproxy.cfg <<-EOF
+				cat >> /jffs/softcenter/etc/haproxy.cfg <<-EOF
 				    server $name $server:$port weight $weight resolvers mydns
 				EOF
 			fi
@@ -191,7 +191,7 @@ start_haproxy(){
 		echo_date ┣如果此处等待过久，可能服务器域名解析失败造成的！可以刷新页面后关闭一次SS!
 		echo_date ┣然后进入附加设置-SS服务器地址解析，更改解析dns或者更换解析方式！
 		echo_date ┗启动haproxy主进程...
-		haproxy -f /jffs/softcenter/configs/haproxy.cfg
+		haproxy -f /jffs/softcenter/etc/haproxy.cfg
 	fi
 }
 
