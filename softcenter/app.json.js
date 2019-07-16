@@ -61,10 +61,10 @@
             "version": "3.8.4"
         }, 
         {
-            "build_date": "2019-06-28_11:21:30", 
+            "build_date": "2019-07-16_22:37:09", 
             "description": "linux下载利器", 
             "home_url": "Module_aria2.asp", 
-            "md5": "bda05ae13272eef7fac478b6c0896511", 
+            "md5": "311552da7b0a90a99406d39a64cdfe32", 
             "name": "aria2", 
             "tar_url": "aria2/aria2.tar.gz", 
             "title": "Aria2", 
@@ -121,10 +121,10 @@
             "version": "1.1"
         }, 
         {
-            "build_date": "2019-03-12_21:19:57", 
+            "build_date": "2019-07-16_22:37:03", 
             "description": "阿里云解析自动更新IP", 
             "home_url": "Module_aliddns.asp", 
-            "md5": "15afe00f95c31fdee8ae7a0ada6518ea", 
+            "md5": "5f7a589c1ef3d3604b50319b7c0d79a9", 
             "name": "aliddns", 
             "tar_url": "aliddns/aliddns.tar.gz", 
             "title": "aliddns", 
@@ -161,20 +161,20 @@
             "version": "4.18.0"
         }, 
         {
-            "build_date": "2019-06-15_12:50:57", 
+            "build_date": "2019-07-16_22:37:19", 
             "description": "百度盘", 
             "home_url": "Module_baidupcs.asp", 
-            "md5": "7acda773d4d2a2da4f9ae5d514acc74e", 
+            "md5": "7d7edd80f3dce3e7bb6cfdf0fc2f9783", 
             "name": "baidupcs", 
             "tar_url": "baidupcs/baidupcs.tar.gz", 
             "title": "百度盘", 
             "version": "1.0"
         }, 
         {
-            "build_date": "2019-07-06_22:30:22", 
+            "build_date": "2019-07-16_22:36:57", 
             "description": "广告屏蔽大师", 
             "home_url": "Module_adbyby.asp", 
-            "md5": "c4168560f50db1fb1e46c4fab1c688ce", 
+            "md5": "9d5b63bf92fdf9041734d42d717cd06f", 
             "name": "adbyby", 
             "tar_url": "adbyby/adbyby.tar.gz", 
             "title": "adbyby", 
