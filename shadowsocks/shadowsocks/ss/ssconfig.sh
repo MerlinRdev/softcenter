@@ -963,24 +963,10 @@ start_haveged(){
 }
 
 auto_start(){
-	[ ! -e "/jffs/softcenter/init.d/S99shadowsocks.sh" ] && cp -rf /jffs/softcenter/ss/ssconfig.sh /jffs/softcenter/init.d/S99shadowsocks.sh
+	[ ! -e "/jffs/softcenter/init.d/M99shadowsocks.sh" ] && cp -rf /jffs/softcenter/ss/ssconfig.sh /jffs/softcenter/init.d/M99shadowsocks.sh
 	[ ! -e "/jffs/softcenter/init.d/N99shadowsocks.sh" ] && cp -rf /jffs/softcenter/ss/ssconfig.sh /jffs/softcenter/init.d/N99shadowsocks.sh
 }
-write_nat_start(){
-	if [ $(nvram get buildno_org) -eq 380 ]; then
-	echo_date 添加nat-start触发事件...
-	dbus set __event__onnatstart_ssconfig="/jffs/softcenter/ss/ssconfig.sh"
-	fi
-}
 
-remove_nat_start(){
-	if [ $(nvram get buildno_org) -eq 380 ]; then
-		[ -n "`dbus get __event__onnatstart_ssconfig`" ] && {
-			echo_date 删除nat-start触发...
-			dbus remove __event__onnatstart_ssconfig
-		}
-	fi
-}
 start_kcp(){
 	# Start kcp
 	if [ "$ss_basic_use_kcp" == "1" ];then
@@ -2311,7 +2297,6 @@ apply_ss(){
 	remove_ss_trigger_job
 	remove_ss_reboot_job
 	restore_conf
-	remove_nat_start
 	# restart dnsmasq when ss server is not ip or on router boot
 	restart_dnsmasq
 	flush_nat
@@ -2327,7 +2312,6 @@ apply_ss(){
 	ss_arg
 	load_module
 	create_ipset
-	write_nat_start
 	create_dnsmasq_conf
 	# do not re generate json on router start, use old one
 	[ -z "$WAN_ACTION" ] && [ "$ss_basic_type" != "3" ] && create_ss_json
@@ -2398,7 +2382,6 @@ start)
 	;;
 stop)
 	set_lock
-	remove_nat_start
 	disable_ss
 	echo_date
 	echo_date 你已经成功关闭科学上网服务~
@@ -2419,6 +2402,15 @@ restart)
 flush_nat)
 	set_lock
 	flush_nat
+	unset_lock
+	;;
+start_nat)
+	set_lock
+	if [ "$ss_basic_enable" == "1" ];then
+		if [ -n "$(pidof v2ray)" -o -n "$(pidof rss-redir)" -o -n "$(pidof ss-redir)" ];then
+			apply_ss
+		fi
+	fi
 	unset_lock
 	;;
 *)
