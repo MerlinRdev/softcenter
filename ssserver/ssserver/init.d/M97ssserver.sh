@@ -17,12 +17,12 @@ start_ssserver(){
 	ss-server -s 0.0.0.0 -p $ssserver_port -k $ssserver_password -m $ssserver_method -t $ssserver_time $ARG_UDP $ARG_OBFS -f /tmp/ssserver.pid 
 
 	# creat start_up file
-	if [ ! -e "/jffs/softcenter/init.d/N98ssserver.sh" ]; then 
+	if [ ! -e "/jffs/softcenter/init.d/N97ssserver.sh" ]; then 
 		cp -r /jffs/softcenter/scripts/ssserver_config.sh /jffs/softcenter/init.d/N97ssserver.sh
 	fi
 
 	# creat start_up file
-	if [ ! -e "/jffs/softcenter/init.d/M98ssserver.sh" ]; then 
+	if [ ! -e "/jffs/softcenter/init.d/M97ssserver.sh" ]; then 
 		cp -r /jffs/softcenter/scripts/ssserver_config.sh /jffs/softcenter/init.d/M97ssserver.sh
 	fi
 }

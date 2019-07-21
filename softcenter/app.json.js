@@ -81,10 +81,10 @@
             "version": "1.6"
         }, 
         {
-            "build_date": "2019-07-16_22:33:12", 
+            "build_date": "2019-07-21_20:27:31", 
             "description": "ss-server", 
             "home_url": "Module_ssserver.asp", 
-            "md5": "b92b4fe6c519945a14b0df1b86a5dfae", 
+            "md5": "a8f973bcbbc8c4ca2cd2cc46e40b4a64", 
             "name": "ssserver", 
             "tar_url": "ssserver/ssserver.tar.gz", 
             "title": "ss-server", 
@@ -192,7 +192,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "d98e492f03c7e12169bff9575c892357", 
+    "md5": "09f6d65dd7093e3e61ff845d67450040", 
     "tar_url": "softcenter/softcenter.tar.gz", 
     "version": "1.2.0"
 }

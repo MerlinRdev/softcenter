@@ -250,7 +250,17 @@ function appPostScript(moduleInfo, script) {
 
     //currState.name = moduleInfo.name;
     //TODO auto choose for home_url
-    data["softcenter_home_url"] = "https://sc.paldier.com";
+    if(typeof db_softcenter_["softcenter_server_tcode"] == "undefined") {
+        data["softcenter_home_url"] = "http://update.wifi.com.cn/mips";
+    }
+    else if(db_softcenter_["softcenter_server_tcode"] == "CN") {
+        data["softcenter_home_url"] = "http://update.wifi.com.cn/mips";
+    }
+    else if(db_softcenter_["softcenter_server_tcode"] == "GB") {
+        data["softcenter_home_url"] = "https://sc.paldier.com";
+    }
+    else
+        data["softcenter_home_url"] = "http://update.wifi.com.cn/mips";
     data["softcenter_installing_todo"] = moduleInfo.name;
     if(script == "ks_app_install.sh") {
     data["softcenter_installing_tar_url"] = moduleInfo.tar_url;
@@ -290,8 +300,17 @@ function appUninstallModule(moduleInfo) {
 </script>
 <script>
     //TODO auto detect home url
-    db_softcenter_["softcenter_home_url"] = "https://sc.paldier.com";
-    
+    if(typeof db_softcenter_["softcenter_server_tcode"] == "undefined") {
+        db_softcenter_["softcenter_home_url"] = "http://update.wifi.com.cn/mips";
+    }
+    else if(db_softcenter_["softcenter_server_tcode"] == "CN") {
+        db_softcenter_["softcenter_home_url"] = "http://update.wifi.com.cn/mips";
+    }
+    else if(db_softcenter_["softcenter_server_tcode"] == "GB") {
+        db_softcenter_["softcenter_home_url"] = "https://sc.paldier.com";
+    }
+    else
+        db_softcenter_["softcenter_home_url"] = "http://update.wifi.com.cn/mips";
     // 安装信息更新策略:
     // 当软件安装的时候,安装进程内部会有超时时间. 超过超时时间 没安装成功,则认为失败.
     // 但是路由内部的绝对时间与浏览器上的时间可能不同步,所以无法使用路由器内的时间. 浏览器的策略是,

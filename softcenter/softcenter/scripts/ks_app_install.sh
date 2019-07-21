@@ -233,7 +233,12 @@ uninstall_module() {
 		rm -f /jffs/softcenter/webs/Module_$softcenter_installing_todo.asp
         rm -f /jffs/softcenter/init.d/S*$softcenter_installing_todo.sh
 	fi
-	curl -s https://sc.paldier.com/"$softcenter_installing_module"/"$softcenter_installing_module"/install.sh >/dev/null 2>&1
+	[ -z "$softcenter_server_tcode" ] && dbus set softcenter_server_tcode=`nvram get territory_code |cut -c 1-2`
+	if [ "$(dbus get softcenter_server_tcode)" == "CN" ]; then
+		curl -s http://update.wifi.com.cn/mips/"$softcenter_installing_module"/"$softcenter_installing_module"/install.sh >/dev/null 2>&1
+	else
+		curl -s https://sc.paldier.com/"$softcenter_installing_module"/"$softcenter_installing_module"/install.sh >/dev/null 2>&1
+	fi
 }
 
 #LOGGER $BIN_NAME

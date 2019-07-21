@@ -44,7 +44,7 @@ softcenter_install() {
 		else
 			[ ! -L "/jffs/softcenter/bin/base64_decode" ] && ln -sf /jffs/softcenter/bin/base64_encode /jffs/softcenter/bin/base64_decode
 			[ ! -L "/jffs/softcenter/scripts/ks_app_remove.sh" ] && ln -sf /jffs/softcenter/scripts/ks_app_install.sh /jffs/softcenter/scripts/ks_app_remove.sh
-			[ ! -L "/jffs/.asusrouter" ] && ln -sf /koolshare/bin/softcenter.sh /jffs/.asusrouter
+			[ ! -L "/jffs/.asusrouter" ] && ln -sf /jffs/softcenter/bin/softcenter.sh /jffs/.asusrouter
 			[ -L "/jffs/softcenter/bin/base64" ] && rm -rf /jffs/softcenter/bin/base64
 		fi
 		chmod 755 /jffs/softcenter/bin/*

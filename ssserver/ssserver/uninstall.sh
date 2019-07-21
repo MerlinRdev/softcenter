@@ -1,9 +1,9 @@
 #!/bin/sh
 
-sh /koolshare/scripts/ssserver_config.sh stop
-rm /koolshare/bin/ss-server
-rm /koolshare/bin/obfs-server
-rm /koolshare/scripts/uninstall_ssserver.sh
-rm /koolshare/res/icon-ssserver.png
-rm /koolshare/scripts/ssserver*
-rm /koolshare/webs/Module_ssserver.asp
+sh /jffs/softcenter/scripts/ssserver_config.sh stop
+rm /jffs/softcenter/bin/ss-server
+rm /jffs/softcenter/bin/obfs-server
+rm /jffs/softcenter/scripts/uninstall_ssserver.sh
+rm /jffs/softcenter/res/icon-ssserver.png
+rm /jffs/softcenter/scripts/ssserver*
+rm /jffs/softcenter/webs/Module_ssserver.asp
