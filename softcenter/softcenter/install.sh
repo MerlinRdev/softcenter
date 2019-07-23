@@ -26,7 +26,7 @@ softcenter_install() {
 			#cp -rf /tmp/softcenter/ROG/webs/* /koolshare/webs/
 			#cp -rf /tmp/softcenter/ROG/res/* /koolshare/res/
 		#fi
-		cp -rf /tmp/softcenter/init.d/* /jffs/softcenter/init.d/
+		#cp -rf /tmp/softcenter/init.d/* /jffs/softcenter/init.d/
 		cp -rf /tmp/softcenter/bin/* /jffs/softcenter/bin/
 		#for axhnd
 		#if [ "`nvram get model`" == "RT-AX88U" ] || [ "`nvram get model`" == "GT-AX11000" ];then
@@ -48,7 +48,7 @@ softcenter_install() {
 			[ -L "/jffs/softcenter/bin/base64" ] && rm -rf /jffs/softcenter/bin/base64
 		fi
 		chmod 755 /jffs/softcenter/bin/*
-		chmod 755 /jffs/softcenter/init.d/*
+		#chmod 755 /jffs/softcenter/init.d/*
 		chmod 755 /jffs/softcenter/perp/*
 		chmod 755 /jffs/softcenter/perp/.boot/*
 		chmod 755 /jffs/softcenter/perp/.control/*
@@ -88,11 +88,12 @@ softcenter_install() {
 			EOF
 			chmod +x /jffs/scripts/post-mount
 		else
-			STARTCOMAND2=`cat /jffs/scripts/post-mount | grep "/jffs/softcenter/bin/softcenter-mount.sh start"`
+			STARTCOMAND2=`cat /jffs/scripts/post-mount | grep -c "/jffs/softcenter/bin/softcenter-mount.sh start"`
 			[ "$STARTCOMAND2" -gt "1" ] && sed -i '/softcenter-mount.sh/d' /jffs/scripts/post-mount && sed -i '1a /jffs/softcenter/bin/softcenter-mount.sh start' /jffs/scripts/post-mount
 			[ "$STARTCOMAND2" == "0" ] && sed -i '1a /jffs/softcenter/bin/softcenter-mount.sh start' /jffs/scripts/post-mount
 		fi
 	fi
+	exit 0
 }
 
 softcenter_install
