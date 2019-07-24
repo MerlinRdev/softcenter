@@ -9,7 +9,7 @@ start_aliddns(){
 	sh /jffs/softcenter/scripts/aliddns_update.sh
 
 	if [ "$(nvram get productid)" = "BLUECAVE" ];then
-		[ ! -L "/jffs/softcenter/init.d/M98Aliddns.sh" ] && ln -sf /jffs/softcenter/scripts/aliddns_config.sh /jffs/jffs/softcenter/init.d/M98Aliddns.sh
+		[ ! -f "/jffs/softcenter/init.d/M98Aliddns.sh" ] && cp -r /jffs/softcenter/scripts/aliddns_config.sh /jffs/jffs/softcenter/init.d/M98Aliddns.sh
 	else
 		[ ! -L "/jffs/softcenter/init.d/S98Aliddns.sh" ] && ln -sf /jffs/softcenter/scripts/aliddns_config.sh /jffs/jffs/softcenter/init.d/S98Aliddns.sh
 	fi

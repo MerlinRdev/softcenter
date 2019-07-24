@@ -21,13 +21,13 @@
             "version": "2.1"
         }, 
         {
-            "build_date": "2019-07-16_22:30:10", 
+            "build_date": "2019-07-24_10:24:49", 
             "description": "Cloudflare解析自动更新IP", 
             "home_url": "Module_cfddns.asp", 
-            "md5": "9aaebd5749d90ced57981dc8e3e548e4", 
+            "md5": "1e0d29dca8729a7e50bb99b49b95331b", 
             "name": "cfddns", 
             "tar_url": "cfddns/cfddns.tar.gz", 
-            "title": "", 
+            "title": "Cloudflare DDNS", 
             "version": "1.3"
         }, 
         {
@@ -111,10 +111,10 @@
             "version": "1.6"
         }, 
         {
-            "build_date": "2019-07-16_22:30:22", 
+            "build_date": "2019-07-24_11:01:53", 
             "description": "dc1服务器", 
             "home_url": "Module_dc1svr.asp", 
-            "md5": "dc3e6f40b74fa0f15e6594357c6579eb", 
+            "md5": "7635fc44e5575ade4bc616ac4293e194", 
             "name": "dc1svr", 
             "tar_url": "dc1svr/dc1svr.tar.gz", 
             "title": "dc1服务器", 
@@ -141,14 +141,14 @@
             "version": "1.3"
         }, 
         {
-            "build_date": "2019-07-16_22:30:28", 
+            "build_date": "2019-07-24_11:34:21", 
             "description": "使用Dnspod的ddns服务", 
             "home_url": "Module_ddnspod.asp", 
-            "md5": "0abd56d520f0ecd28904cc5a394e56ac", 
+            "md5": "674bcf345be223ef3fa3bd7aaf2470c1", 
             "name": "ddnspod", 
             "tar_url": "ddnspod/ddnspod.tar.gz", 
             "title": "DDnspod", 
-            "version": "0.1.6"
+            "version": "1.3"
         }, 
         {
             "build_date": "2019-07-16_22:33:28", 

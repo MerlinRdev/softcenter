@@ -48,6 +48,7 @@ stop_dc1(){
 		rm /jffs/softcenter/init.d/M97dc1svr.sh
 	else
 		rm /jffs/softcenter/init.d/S97dc1svr.sh
+	fi
 	service restart_dnsmasq
 }
 startdc1(){
