@@ -12,9 +12,6 @@
 <link rel="stylesheet" type="text/css" href="form_style.css"/>
 <link rel="stylesheet" type="text/css" href="usp_style.css"/>
 <link rel="stylesheet" type="text/css" href="css/element.css">
-<link rel="stylesheet" type="text/css" href="ParentalControl.css">
-<link rel="stylesheet" type="text/css" href="css/icon.css">
-<link rel="stylesheet" type="text/css" href="/device-map/device-map.css">
 <link rel="stylesheet" type="text/css" href="res/softcenter.css">
 <script type="text/javascript" src="/state.js"></script>
 <script type="text/javascript" src="/popup.js"></script>
@@ -24,8 +21,8 @@
 <script type="text/javascript" src="/general.js"></script>
 <script type="text/javascript" src="/switcherplugin/jquery.iphone-switch.js"></script>
 <script type="text/javascript" src="/res/softcenter.js"></script>
-<script type="text/javascript" src="/dbconf?p=mdial&v=<% uptime(); %>"></script>
-<script type="text/javascript" src="/client_function.js"></script>
+<script src="/state.js"></script>
+<script src="/help.js"></script>
 <style>
 	.show-btn1, .show-btn2, .show-btn3 {
 		border: 1px solid #222;
@@ -98,152 +95,43 @@
 	}
 </style>
 <script>
-var $j = jQuery.noConflict();
 var dbus = {};
 var _responseLen;
 var noChange = 0;
 var x = 5;
+var params_inp = ['mdial_nu'];
+var params_chk = ['mdial_enable'];
 var wans_mode = '<% nvram_get("wans_mode"); %>'
 function init() {
 	show_menu(menu_hook);
+	generate_options();
 	get_dbus_data();
-	buildswitch();
-	var rrt = document.getElementById("switch");
-				if (document.form.mdial_enable.value != "1") {
-					rrt.checked = false;
-				} else {
-					rrt.checked = true;
-				}
 }
-function E(e) {
-	return (typeof(e) == 'string') ? document.getElementById(e) : e;
-}
-var Base64;
-if (typeof btoa == "Function") {
-	Base64 = {
-		encode: function(e) {
-			return btoa(e);
-		},
-		decode: function(e) {
-			return atob(e);
+function conf2obj(){
+	for (var i = 0; i < params_inp.length; i++) {
+		if(dbus[params_inp[i]]){
+			E(params_inp[i]).value = dbus[params_inp[i]];
 		}
-	};
-} else {
-	Base64 = {
-		_keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
-		encode: function(e) {
-			var t = "";
-			var n, r, i, s, o, u, a;
-			var f = 0;
-			e = Base64._utf8_encode(e);
-			while (f < e.length) {
-				n = e.charCodeAt(f++);
-				r = e.charCodeAt(f++);
-				i = e.charCodeAt(f++);
-				s = n >> 2;
-				o = (n & 3) << 4 | r >> 4;
-				u = (r & 15) << 2 | i >> 6;
-				a = i & 63;
-				if (isNaN(r)) {
-					u = a = 64
-				} else if (isNaN(i)) {
-					a = 64
-				}
-				t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a)
-			}
-			return t
-		},
-		decode: function(e) {
-			var t = "";
-			var n, r, i;
-			var s, o, u, a;
-			var f = 0;
-			e = e.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-			while (f < e.length) {
-				s = this._keyStr.indexOf(e.charAt(f++));
-				o = this._keyStr.indexOf(e.charAt(f++));
-				u = this._keyStr.indexOf(e.charAt(f++));
-				a = this._keyStr.indexOf(e.charAt(f++));
-				n = s << 2 | o >> 4;
-				r = (o & 15) << 4 | u >> 2;
-				i = (u & 3) << 6 | a;
-				t = t + String.fromCharCode(n);
-				if (u != 64) {
-					t = t + String.fromCharCode(r)
-				}
-				if (a != 64) {
-					t = t + String.fromCharCode(i)
-				}
-			}
-			t = Base64._utf8_decode(t);
-			return t
-		},
-		_utf8_encode: function(e) {
-			e = e.replace(/\r\n/g, "\n");
-			var t = "";
-			for (var n = 0; n < e.length; n++) {
-				var r = e.charCodeAt(n);
-				if (r < 128) {
-					t += String.fromCharCode(r)
-				} else if (r > 127 && r < 2048) {
-					t += String.fromCharCode(r >> 6 | 192);
-					t += String.fromCharCode(r & 63 | 128)
-				} else {
-					t += String.fromCharCode(r >> 12 | 224);
-					t += String.fromCharCode(r >> 6 & 63 | 128);
-					t += String.fromCharCode(r & 63 | 128)
-				}
-			}
-			return t
-		},
-		_utf8_decode: function(e) {
-			var t = "";
-			var n = 0;
-			var r = c1 = c2 = 0;
-			while (n < e.length) {
-				r = e.charCodeAt(n);
-				if (r < 128) {
-					t += String.fromCharCode(r);
-					n++
-				} else if (r > 191 && r < 224) {
-					c2 = e.charCodeAt(n + 1);
-					t += String.fromCharCode((r & 31) << 6 | c2 & 63);
-					n += 2
-				} else {
-					c2 = e.charCodeAt(n + 1);
-					c3 = e.charCodeAt(n + 2);
-					t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63);
-					n += 3
-				}
-			}
-			return t
+	}
+	for (var i = 0; i < params_chk.length; i++) {
+		if(dbus[params_chk[i]]){
+			E(params_chk[i]).checked = dbus[params_chk[i]] == "1";
 		}
 	}
 }
-function buildswitch(){
-	$j("#switch").click(
-	function(){
-		if(document.getElementById('switch').checked){
-			document.form.mdial_enable.value = 1;
-		}else{
-			document.form.mdial_enable.value = 0;
-		}
-	});
-}
-function get_dbus_data(){
-	$j.ajax({
+function get_dbus_data() {
+	$.ajax({
 		type: "GET",
-		url: "dbconf?p=mdial&v=<% uptime(); %>",
-		dataType: "html",
-		cache:false,
-		success: function(response) {
-			$j.globalEval(response)
-			dbus = db_mdial
+		url: "/dbconf?p=mdial",
+		dataType: "script",
+		success: function(data) {
+			//console.log("222")
+			dbus = db_mdial;
+			conf2obj();
 			toggle_func();
 			update_visibility();
-			get_run_status();
+			get_ppp_status();
 			set_version();
-			generate_options();
 		}
 	});
 }
@@ -255,35 +143,25 @@ function set_version(){
 function generate_options(){
 	if(wans_mode == "lb"){
 		for(var i = 1; i < 3; i++) {
-			$j("#mdial_if").append("<option value='"  + i + "'>wan" + i + "</option>");
+			$("#mdial_if").append("<option value='"  + i + "'>wan" + i + "</option>");
 		}
-		$j("#mdial_if").val(1);
+		$("#mdial_if").val(1);
 	} else {
-		$j("#mdial_if").append("<option value='1'>wan0</option>");
-		$j("#mdial_if").val(1);
+		$("#mdial_if").append("<option value='1'>wan1</option>");
+		$("#mdial_if").val(1);
 	}
 }
-function get_run_status(){
-	$j.ajax({
-		url: 'applydb.cgi?current_page=Module_mdial.asp&next_page=Module_mdial.asp&group_id=&modified=0&action_mode=+Refresh+&action_script=mdial_status.sh&action_wait=&first_time=&preferred_lang=CN&firmver=3.0.0.4',
-		dataType: "html",
-		error: function(xhr) {
-			alert("error");
-		},
-		success: function(response) {
-			setTimeout("get_ppp_status();", 2000);
-		}
-	});
-}
 function get_ppp_status(){
-
-	$j.ajax({
-		url: '/res/mdial_check.htm',
+	//var id = parseInt(Math.random() * 100000000);
+	//var postData = {"id": id, "method": "mdial_status.sh", "params":[1], "fields": ""};
+	$.ajax({
+		type: "POST",
+		url: '/logreaddb.cgi?p=mdial.log&script=mdial_status.sh',
 		dataType: "html",
 		success: function(response){
-			var data = JSON.parse(Base64.decode(response))
+			var data = Base64.decode(response)
 			console.log(data)
-			$j("#script_status_table").find("tr:gt(1)").remove();
+			$("#script_status_table").find("tr:gt(1)").remove();
 			var code = ''
 			for (var field in data) {
 				var f = data[field];
@@ -295,41 +173,70 @@ function get_ppp_status(){
 				code = code + '<td>' + f.tx + '</td>';
 				code = code + '</tr>';
 			}
-			$j('#script_status_table tr:last').after(code);
+			$('#script_status_table tr:last').after(code);
 			setTimeout("get_ppp_status();", 6000);
 		},
-		error: function(xhr){
+		error: function(){
 			E("script_status").innerHTML = "获取运行状态失败！";
 			setTimeout("get_ppp_status();", 8000);
 		}
 	});
 }
 function save() {
+	var dbus_new = {}
 	mdial_action = 0;
 	//showLoadingBar();
-	$j('.show-btn1').removeClass('active');
-	$j('.show-btn2').addClass('active');
-	$j('.show-btn3').removeClass('active');
+	$('.show-btn1').removeClass('active');
+	$('.show-btn2').addClass('active');
+	$('.show-btn3').removeClass('active');
 	E("mdial_settings").style.display = "none";
 	E("mdial_log").style.display = "";
 	E("mdial_help").style.display = "none";
 	E('cmdBtn1').style.display = "";
 	
+	// collect data from input and checkbox
+	for (var i = 0; i < params_inp.length; i++) {
+		dbus_new[params_inp[i]] = E(params_inp[i]).value;
+	}
+	for (var i = 0; i < params_chk.length; i++) {
+		dbus_new[params_chk[i]] = E(params_chk[i]).checked ? '1' : '0';
+	}
 	// 提交数据
-	document.form.action_mode.value = 'toolscript';
-	document.form.action_script.value = "mdial_config.sh";
-	document.form.submit();
+	//var id = parseInt(Math.random() * 100000000);
+	//var postData = {"id": id, "method": "mdial_config.sh", "params": [1], "fields": dbus_new };
+	dbus_new["action_script"]="mdial_config.sh";
+	dbus_new["action_mode"] = "restart";
+	dbus_new["current_page"] = "Module_mdial.asp";
+	dbus_new["next_page"] = "Module_mdial.asp";
+	$.ajax({
+		url: "/applydb.cgi?p=mdial",
+		cache: false,
+		type: "POST",
+		dataType: "text",
+		data: $.param(dbus_new),
+		success: function(response) {
+			//console.log(response);
+			//if (response.result == id){
+				get_log();
+			//}
+		}
+	});
 }
 function clean_log() {
-	document.form.action_mode.value = 'toolscript';
-	document.form.action_script.value = "mdial_config.sh";
-	document.form.submit();
-	$j.ajax({
+	//var id = parseInt(Math.random() * 100000000);
+	//var postData = {"id": id, "method": "mdial_config.sh", "params": [2], "fields": "" };
+	var cleanlog = {}
+	cleanlog["action_script"]="mdial_config.sh";
+	cleanlog["action_mode"] = "clean";
+	cleanlog["current_page"] = "Module_mdial.asp";
+	cleanlog["next_page"] = "Module_mdial.asp";
+	$.ajax({
 		url: '/applydb.cgi?p=mdial',
 		type: "POST",
-		dataType: "json",
+		dataType: "text",
+		data: $.param(cleanlog),
 		success: function(response) {
-			console.log(response);
+			//console.log(response);
 			//if (response.result == id){
 				E("log_content1").value = "";
 			//}
@@ -337,8 +244,9 @@ function clean_log() {
 	});
 }
 function get_log() {
-	$j.ajax({
-		url: '/res/mdial_log.htm',
+	$.ajax({
+		url: '/logreaddb.cgi?p=mdial_log.log',
+		type: 'POST',
 		dataType: 'html',
 		success: function(response) {
 			var retArea = E("log_content1");
@@ -358,11 +266,9 @@ function get_log() {
 			} else {
 				setTimeout("get_log();",200);
 			}
+			retArea.value = response.replace("XU6J03M6", "");
 			retArea.scrollTop = retArea.scrollHeight;
 			_responseLen = response.length;
-			if (retArea.value == "") {
-				E("log_content1").value = "暂无日志信息！";
-			}
 		},
 		error: function(xhr) {
 			//setTimeout("get_log();", 1000);
@@ -423,7 +329,7 @@ function showLoadingBar() {
 function LoadingProgress() {
 	E("LoadingBar").style.visibility = "visible";
 	if (mdial_action == 0) {
-		if(E("switch").checked ? '1' : '0' == "1"){
+		if(E("mdial_enable").checked ? '1' : '0' == "1"){
 			E("loading_block3").innerHTML = "单线多拨启用中 ..."
 		}else{
 			E("loading_block3").innerHTML = "单线多拨关闭中 ..."
@@ -431,7 +337,7 @@ function LoadingProgress() {
 	} else if (mdial_action == 1) {
 		E("loading_block3").innerHTML = "mdial配置恢复 ..."
 	}
-	$j("#loading_block2").html("<li><font color='#ffcc00'>插件工作有问题？请到我们的论坛 <a href='http://koolshare.cn/forum-98-1.html' target='_blank'><u><em>http://koolshare.cn</em></u></a> 反馈...</li></font>");
+	$("#loading_block2").html("<li><font color='#ffcc00'>插件工作有问题？请到我们的论坛 <a href='http://koolshare.cn/forum-98-1.html' target='_blank'><u><em>http://koolshare.cn</em></u></a> 反馈...</li></font>");
 }
 function hideSSLoadingBar() {
 	x = -1;
@@ -439,59 +345,59 @@ function hideSSLoadingBar() {
 	refreshpage();
 }
 function toggle_func() {
-	$j('.show-btn1').addClass('active');
-	$j(".show-btn1").click(
+	$('.show-btn1').addClass('active');
+	$(".show-btn1").click(
 		function() {
-			$j('.show-btn1').addClass('active');
-			$j('.show-btn2').removeClass('active');
-			$j('.show-btn3').removeClass('active');
+			$('.show-btn1').addClass('active');
+			$('.show-btn2').removeClass('active');
+			$('.show-btn3').removeClass('active');
 			E("mdial_settings").style.display = "";
 			E("mdial_log").style.display = "none";
 			E("mdial_help").style.display = "none";
 			E('cmdBtn1').style.display = "none";
 		});
-	$j(".show-btn2").click(
+	$(".show-btn2").click(
 		function() {
-			$j('.show-btn1').removeClass('active');
-			$j('.show-btn2').addClass('active');
-			$j('.show-btn3').removeClass('active');
+			$('.show-btn1').removeClass('active');
+			$('.show-btn2').addClass('active');
+			$('.show-btn3').removeClass('active');
 			E("mdial_settings").style.display = "none";
 			E("mdial_log").style.display = "";
 			E("mdial_help").style.display = "none";
 			E('cmdBtn1').style.display = "";
 			get_log();
 		});
-	$j(".show-btn3").click(
+	$(".show-btn3").click(
 		function() {
-			$j('.show-btn1').removeClass('active');
-			$j('.show-btn2').removeClass('active');
-			$j('.show-btn3').addClass('active');
+			$('.show-btn1').removeClass('active');
+			$('.show-btn2').removeClass('active');
+			$('.show-btn3').addClass('active');
 			E("mdial_settings").style.display = "none";
 			E("mdial_log").style.display = "none";
 			E("mdial_help").style.display = "";
 			E('cmdBtn1').style.display = "none";
 		});
-	$j("#log_content2").click(
+	$("#log_content2").click(
 		function() {
 			x = -1;
 		});
 }
 function update_visibility(){
-	if($j('.show-btn1').hasClass("active")){
+	if($('.show-btn1').hasClass("active")){
 		E('mdial_status').style.display = "";
 		E('tablet_show').style.display = "";
 		E('mdial_settings').style.display = "";
 		E('mdial_log').style.display = "none";
 		E('mdial_help').style.display = "none";
 		E('cmdBtn1').style.display = "none";
-	}else if($j('.show-btn2').hasClass("active")){
+	}else if($('.show-btn2').hasClass("active")){
 		E('mdial_status').style.display = "";
 		E('tablet_show').style.display = "";
 		E('mdial_settings').style.display = "none";
 		E('mdial_log').style.display = "";
 		E('mdial_help').style.display = "none";
 		E('cmdBtn1').style.display = "";
-	}else if($j('.show-btn3').hasClass("active")){
+	}else if($('.show-btn3').hasClass("active")){
 		E('mdial_status').style.display = "";
 		E('tablet_show').style.display = "";
 		E('mdial_settings').style.display = "none";
@@ -504,10 +410,6 @@ function menu_hook(title, tab) {
 	tabtitle[tabtitle.length -1] = new Array("", "软件中心", "离线安装", "单线多拨");
 	tablink[tablink.length -1] = new Array("", "Main_Soft_center.asp", "Main_Soft_setting.asp", "Module_mdial.asp");
 }
-function reload_Soft_Center(){
-	location.href = "/Main_Soft_center.asp";
-}
-
 </script>
 </head>
 <body onload="init();">
@@ -535,7 +437,7 @@ function reload_Soft_Center(){
 <input type="hidden" name="next_page" value="Module_mdial.asp"/>
 <input type="hidden" name="group_id" value=""/>
 <input type="hidden" name="modified" value="0"/>
-<input type="hidden" name="action_mode" value=" Refresh "/>
+<input type="hidden" name="action_mode" value=""/>
 <input type="hidden" name="action_script" value="mdial_config.sh"/>
 <input type="hidden" name="action_wait" value="5"/>
 <input type="hidden" name="first_time" value=""/>
@@ -577,8 +479,8 @@ function reload_Soft_Center(){
 													</th>
 													<td colspan="2">
 														<div class="switch_field" style="display:table-cell">
-															<label for="switch">
-																<input id="switch" class="switch" type="checkbox" style="display: none;">
+															<label for="mdial_enable">
+																<input id="mdial_enable" class="switch" type="checkbox" style="display: none;">
 																<div class="switch_container" >
 																	<div class="switch_bar"></div>
 																	<div class="switch_circle transition_style">
@@ -588,7 +490,7 @@ function reload_Soft_Center(){
 															</label>
 														</div>
 														<div style="display:table-cell;float: left;margin-left:270px;margin-top:-32px;position: absolute;padding: 5.5px 0px;">
-															<a type="button" class="ss_btn" target="_blank" href="https://github.com/koolshare/rogsoft/blob/master/mdial/Changelog.txt">更新日志</a>
+															<a type="button" class="ss_btn" target="_blank" href="https://github.com/koolshare/armsoft/blob/master/mdial/Changelog.txt">更新日志</a>
 														</div>
 													</td>
 												</tr>
@@ -607,9 +509,7 @@ function reload_Soft_Center(){
 													<th style="width:20%">网关</th>
 													<th style="width:20%">下行</th>
 													<th style="width:20%">上行</th>
-												</tr>
-												<tr>
-													<span id="script_status"></span>
+													
 												</tr>
 											</table>
 										</div>
@@ -629,9 +529,7 @@ function reload_Soft_Center(){
 												<tr id="mdial_if_tr">
 													<th>多拨数量</th>
 													<td>
-														<select id="mdial_if" name="mdial_if" class="ssconfig input_option" >
-														</select>
-														<input type="text" class="input_ss_table" name="mdial_nu" id="mdial_nu" style="width:80px" value="<% dbus_get_def("mdial_nu", "4"); %>" />
+														<input type="text" class="input_ss_table" name="mdial_nu" id="mdial_nu" style="width:80px" value="4" />
 													</td>
 												</tr>
 												<tr>
@@ -655,7 +553,7 @@ function reload_Soft_Center(){
 														<li>注意：本插件仅适用于蓝洞固件和K3C固件！</li>
 														<li>多拨插件需要光猫桥接，由路由器来进行pppoe拨号。</li>
 														<li>不是所有运营商都能多拨！也不是所有多拨都能叠加!</li>
-														<li>本插件的维护地址在<a href="https://github.com/koolshare/rogsoft" target="_blank" ><i><u>https://github.com/koolshare/rogsoft</u></i></a>，欢迎到此反馈问题！</li>
+														<li>本插件的维护地址在<a href="https://github.com/koolshare/armsoft" target="_blank" ><i><u>https://github.com/koolshare/armsoft</u></i></a>，欢迎到此反馈问题！</li>
 													</ul>
 												</td>
 												</tr>
@@ -667,7 +565,7 @@ function reload_Soft_Center(){
 										</div>
 										<div class="KoolshareBottom">
 											论坛技术支持： <a href="http://www.koolshare.cn" target="_blank"> <i><u>www.koolshare.cn</u></i> </a> <br/>
-											Github项目： <a href="https://github.com/koolshare/rogsoft" target="_blank"> <i><u>github.com/koolshare/rogsoft</u></i> </a> <br/>
+											Github项目： <a href="https://github.com/koolshare/armsoft" target="_blank"> <i><u>github.com/koolshare/armsoft</u></i> </a> <br/>
 											Shell&Web by： <i>sadog</i>
 										</div>
 									</td>

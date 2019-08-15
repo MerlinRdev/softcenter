@@ -1,11 +1,10 @@
 #!/bin/sh
 
-
-MODULE=ssserver
-VERSION=2.2
-TITLE=ss-server
-DESCRIPTION=ss-server
-HOME_URL=Module_ssserver.asp
+MODULE="ssserver"
+VERSION="2.3"
+TITLE="ss-server"
+DESCRIPTION="ss-server"
+HOME_URL="Module_ssserver.asp"
 
 # Check and include base
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -26,7 +25,5 @@ fi
 cd $DIR
 
 # do something here
-
 do_build_result
 
-sh backup.sh $MODULE

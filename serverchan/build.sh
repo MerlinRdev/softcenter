@@ -1,11 +1,10 @@
 #!/bin/sh
 
-
-MODULE=serverchan
-VERSION=1.0
-TITLE=serverChan微信推送
-DESCRIPTION=从路由器推送状态及通知的工具
-HOME_URL=Module_serverchan.asp
+MODULE="serverchan"
+VERSION="1.0"
+TITLE="ServerChan微信推送"
+DESCRIPTION="从路由器推送状态及通知的工具"
+HOME_URL="Module_serverchan.asp"
 
 # Check and include base
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -26,7 +25,4 @@ fi
 cd $DIR
 
 # do something here
-
 do_build_result
-
-sh backup.sh $MODULE

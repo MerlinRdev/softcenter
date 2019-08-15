@@ -65,7 +65,7 @@ start)
 	# web提交
 	echo "------------------------------ MrelinR 自动签到程序 -------------------------------" > $LOGFILE
 	echo "" >> $LOGFILE
-	[ ! -f "/jffs/softcenter/init.d/S99qiandao.sh" ] && cp -r /jffs/softcenter/scripts/qiandao_config.sh /jffs/softcenter/init.d/S99qiandao.sh
+	#[ ! -f "/jffs/softcenter/init.d/S99qiandao.sh" ] && cp -r /jffs/softcenter/scripts/qiandao_config.sh /jffs/softcenter/init.d/S99qiandao.sh
 	if [ "$qiandao_enable" == "1" ];then
 		if [ "$qiandao_action" == "2" ];then
 			echo_date "保存设置并立即签到！" >> $LOGFILE

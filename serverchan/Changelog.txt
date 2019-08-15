@@ -1,3 +1,0 @@
-MerlinR serverChan Changelog
-1.0
-	第一个预览版

@@ -1,20 +1,20 @@
 {
     "apps": [
         {
-            "build_date": "2019-07-17_01:07:24", 
+            "build_date": "2019-07-25_22:24:43", 
             "description": "科学上网", 
             "home_url": "Main_Ss_Content.asp", 
-            "md5": "2933196c09385e928250a60de4670d98", 
+            "md5": "49796e1fe3bc01c34c655d4a3612ec07", 
             "name": "shadowsocks", 
             "tar_url": "shadowsocks/shadowsocks.tar.gz", 
             "title": "科学上网", 
             "version": "4.1.8"
         }, 
         {
-            "build_date": "2019-07-16_22:31:28", 
+            "build_date": "2019-07-26_12:00:35", 
             "description": "超强的SSH网页客户端~", 
             "home_url": "Module_shellinabox.asp", 
-            "md5": "aa972665775f8705afc1e3e8c61b3174", 
+            "md5": "a36a0a2a9cb5917b2c4ab546ba16f73d", 
             "name": "shellinabox", 
             "tar_url": "shellinabox/shellinabox.tar.gz", 
             "title": "shellinabox", 
@@ -71,24 +71,24 @@
             "version": "2.5"
         }, 
         {
-            "build_date": "2019-07-16_22:30:56", 
+            "build_date": "2019-07-25_11:38:03", 
             "description": "内网穿透利器，谁用谁知道。", 
             "home_url": "Module_frpc.asp", 
-            "md5": "1096add07c12c8a92ff41e1d1aaa8e1e", 
+            "md5": "45eac9fa8efc1b676ed71b858e9edd69", 
             "name": "frpc", 
             "tar_url": "frpc/frpc.tar.gz", 
             "title": "frpc穿透", 
             "version": "1.6"
         }, 
         {
-            "build_date": "2019-07-21_20:27:31", 
+            "build_date": "2019-08-11_21:11:55", 
             "description": "ss-server", 
             "home_url": "Module_ssserver.asp", 
-            "md5": "a8f973bcbbc8c4ca2cd2cc46e40b4a64", 
+            "md5": "2d3e274eeff69b5ddf1fdb37fc22223d", 
             "name": "ssserver", 
             "tar_url": "ssserver/ssserver.tar.gz", 
             "title": "ss-server", 
-            "version": "2.2"
+            "version": "2.3"
         }, 
         {
             "build_date": "2019-07-16_22:31:05", 
@@ -121,20 +121,50 @@
             "version": "1.1"
         }, 
         {
-            "build_date": "2019-07-16_22:37:03", 
+            "build_date": "2019-08-12_15:51:28", 
+            "description": "这是一只自动帮你签到的dog", 
+            "home_url": "Module_qiandao.asp", 
+            "md5": "c5a8665924c88480a2b2c98b60ebe9a2", 
+            "name": "qiandao", 
+            "tar_url": "qiandao/qiandao.tar.gz", 
+            "title": "签到dog", 
+            "version": "1.5"
+        }, 
+        {
+            "build_date": "2019-07-24_12:33:42", 
             "description": "阿里云解析自动更新IP", 
             "home_url": "Module_aliddns.asp", 
-            "md5": "5f7a589c1ef3d3604b50319b7c0d79a9", 
+            "md5": "a805031000749b412c52e7a159523e45", 
             "name": "aliddns", 
             "tar_url": "aliddns/aliddns.tar.gz", 
             "title": "aliddns", 
             "version": "1.2"
         }, 
         {
-            "build_date": "2019-07-16_22:31:18", 
+            "build_date": "2019-08-12_22:03:09", 
+            "description": "网易uu", 
+            "home_url": "Module_uu.asp", 
+            "md5": "81a38159ec791c65e428d78963714d27", 
+            "name": "uu", 
+            "tar_url": "uu/uu.tar.gz", 
+            "title": "网易uu", 
+            "version": "1.2.12"
+        }, 
+        {
+            "build_date": "2019-08-16_00:18:09", 
+            "description": "VPN全家桶, ver 4.29 build 9680", 
+            "home_url": "Module_softether.asp", 
+            "md5": "5e353277080f862d9af3aff9b3268263", 
+            "name": "softether", 
+            "tar_url": "softether/softether.tar.gz", 
+            "title": "SoftEther_VPN_Server", 
+            "version": "1.9"
+        }, 
+        {
+            "build_date": "2019-08-12_15:58:21", 
             "description": "pppoe单线多拨，带宽提升神器！", 
             "home_url": "Module_mdial.asp", 
-            "md5": "4d0d3f20fba405a4f5858e62f6c7794b", 
+            "md5": "57790df745d9e01d100e4fe35709ce4c", 
             "name": "mdial", 
             "tar_url": "mdial/mdial.tar.gz", 
             "title": "单线多拨", 
@@ -151,14 +181,14 @@
             "version": "1.3"
         }, 
         {
-            "build_date": "2019-07-16_22:33:28", 
+            "build_date": "2019-07-26_11:15:14", 
             "description": "v2ray", 
             "home_url": "Module_v2ray.asp", 
-            "md5": "137185256c3d11242316cc2e4259a294", 
+            "md5": "11ecc6502b551108d2736eea14ffe4a9", 
             "name": "v2ray", 
             "tar_url": "v2ray/v2ray.tar.gz", 
             "title": "v2ray", 
-            "version": "4.18.0"
+            "version": "4.18.1"
         }, 
         {
             "build_date": "2019-07-16_22:37:19", 
@@ -168,6 +198,16 @@
             "name": "baidupcs", 
             "tar_url": "baidupcs/baidupcs.tar.gz", 
             "title": "百度盘", 
+            "version": "1.0"
+        }, 
+        {
+            "build_date": "2019-08-11_20:42:22", 
+            "description": "从路由器推送状态及通知的工具", 
+            "home_url": "Module_serverchan.asp", 
+            "md5": "071e2e81090512de4a92be30695ce60b", 
+            "name": "serverchan", 
+            "tar_url": "serverchan/serverchan.tar.gz", 
+            "title": "ServerChan微信推送", 
             "version": "1.0"
         }, 
         {
@@ -192,7 +232,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "329cfe61aa3cbf72807bfe3e6bfaefce", 
+    "md5": "c42b8aec3a73962d03a9d317989edfd9", 
     "tar_url": "softcenter/softcenter.tar.gz", 
     "version": "1.2.0"
 }

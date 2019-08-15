@@ -2752,7 +2752,7 @@ function close_proc_status() {
 
 function now_get_status() {
 	$.ajax({
-		url: 'apply.cgi?current_page=Main_Ss_Content.asp.asp&next_page=Main_Ss_Content.asp.asp&group_id=&modified=0&action_mode=+Refresh+&action_scriptss_proc_status.sh=&action_wait=&first_time=&preferred_lang=CN&firmver=3.0.0.4',
+		url: 'applydb.cgi?current_page=Main_Ss_Content.asp.asp&next_page=Main_Ss_Content.asp.asp&group_id=&modified=0&action_mode=+Refresh+&action_script=ss_proc_status.sh&action_wait=&first_time=&preferred_lang=CN&firmver=3.0.0.4',
 		dataType: 'html'
 	});
 }

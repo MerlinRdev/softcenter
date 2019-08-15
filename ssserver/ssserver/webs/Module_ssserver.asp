@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="ParentalControl.css">
 <link rel="stylesheet" type="text/css" href="css/icon.css">
 <link rel="stylesheet" type="text/css" href="css/element.css">
-<link rel="stylesheet" type="text/css" href="res/shadowsocks.css">
+<link rel="stylesheet" type="text/css" href="res/softcenter.css">
 <script type="text/javascript" src="/state.js"></script>
 <script type="text/javascript" src="/popup.js"></script>
 <script type="text/javascript" src="/help.js"></script>
@@ -22,54 +22,54 @@
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/general.js"></script>
 <script type="text/javascript" src="/switcherplugin/jquery.iphone-switch.js"></script>
+<script type="text/javascript" src="/res/softcenter.js"></script>
 <script>
+var db_ssserver = {}
 function init() {
 	show_menu(menu_hook);
-	buildswitch();
-	conf2obj();
+	get_dbus_data();
 }
-function done_validating() {
-	refreshpage(5);
-}
-function buildswitch() {
-	$("#switch").click(
-	function() {
-		if (document.getElementById('switch').checked) {
-			document.form.ssserver_enable.value = 1;
-		} else {
-			document.form.ssserver_enable.value = 0;
-		}
-	});
-}
-function onSubmitCtrl(o, s) {
-	document.form.action_mode.value = s;
-	showLoading(5);
-	document.form.submit();
-}
-function conf2obj() {
+function get_dbus_data() {
 	$.ajax({
 		type: "get",
 		url: "dbconf?p=ssserver",
 		dataType: "script",
-		success: function(xhr) {
-			var p = "ssserver";
+		success: function(data) {
+			db_ssserver = db_ssserver_;
+			E("ssserver_enable").checked = db_ssserver["ssserver_enable"] == "1";
 			var params = ["method", "password", "port", "udp", "time", "use_ss", "obfs"];
 			for (var i = 0; i < params.length; i++) {
-				if (db_ssserver[p + "_" + params[i]]) {
-					$("#ssserver_" + params[i]).val(db_ssserver[p + "_" + params[i]]);
+				if (db_ssserver["ssserver_" + params[i]]) {
+					//$("#ssserver_" + params[i]).val(db_ssserver["ssserver_" + params[i]]);
+					E("ssserver_" + params[i]).value = db_ssserver["ssserver_" + params[i]];
 				}
-			}
-			var rrt = document.getElementById("switch");
-			if (db_ssserver["ssserver_enable"] != "1") {
-				rrt.checked = false;
-			} else {
-				rrt.checked = true;
 			}
 		}
 	});
 }
-function reload_Soft_Center() {
-	location.href = "/Main_Soft_center.asp";
+function save() {
+	showLoading(2);
+	//refreshpage(2);
+	// collect data from checkbox
+	db_ssserver["ssserver_enable"] = E("ssserver_enable").checked ? '1' : '0';
+	var params = ["method", "password", "port", "udp", "time", "use_ss", "obfs"];
+	for (var i = 0; i < params.length; i++) {
+    	db_ssserver["ssserver_" + params[i]] = E("ssserver_" + params[i]).value;
+	}
+	// post data
+	//var id = parseInt(Math.random() * 100000000);
+	//var postData = {"id": id, "method": "ssserver_config.sh", "params": [1], "fields": db_ssserver };
+	db_ssserver["action_script"]="ssserver_config.sh";
+	db_ssserver["action_mode"] = "restart";
+	db_ssserver["current_page"] = "Module_ssserver.asp";
+	db_ssserver["next_page"] = "Module_ssserver.asp";
+	$.ajax({
+		url: "/applydb.cgi?p=ssserver",
+		cache: false,
+		type: "POST",
+		dataType: "text",
+		data: $.param(db_ssserver)
+	});
 }
 function menu_hook(title, tab) {
 	tabtitle[tabtitle.length -1] = new Array("", "软件中心", "离线安装", "ss-server");
@@ -87,7 +87,7 @@ function menu_hook(title, tab) {
 	<input type="hidden" name="group_id" value=""/>
 	<input type="hidden" name="modified" value="0"/>
 	<input type="hidden" name="action_mode" value=""/>
-	<input type="hidden" name="action_script" value="ssserver_config.sh"/>
+	<input type="hidden" name="action_script" value=""/>
 	<input type="hidden" name="action_wait" value="5"/>
 	<input type="hidden" name="first_time" value=""/>
 	<input type="hidden" name="preferred_lang" id="preferred_lang" value="<% nvram_get("preferred_lang"); %>"/>
@@ -111,7 +111,7 @@ function menu_hook(title, tab) {
 										<div>&nbsp;</div>
 										<div style="float:left;" class="formfonttitle">SS-SERVER</div>
 										<div style="float:right; width:15px; height:25px;margin-top:10px"><img id="return_btn" onclick="reload_Soft_Center();" align="right" style="cursor:pointer;position:absolute;margin-left:-30px;margin-top:-25px;" title="返回软件中心" src="/images/backprev.png" onMouseOver="this.src='/images/backprevclick.png'" onMouseOut="this.src='/images/backprev.png'"></div>
-										<div style="margin-left:5px;margin-top:10px;margin-bottom:10px"><img src="/images/New_ui/export/line_export.png"></div>
+										<div style="margin:30px 0 10px 5px;" class="splitLine"></div>
 										<div class="formfontdesc" id="cmdDesc">开启ss-server后，就可以类似VPN一样，将你的网络共享到公网，让你和你的小伙伴远程连接。</div>										
 										<table style="margin:10px 0px 0px 0px;" width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bordercolor="#6b8fa3" class="FormTable">
 											<thead>
@@ -122,9 +122,9 @@ function menu_hook(title, tab) {
 											<tr>
 											<th>开启ss-server</th>
 												<td colspan="2">
-													<div class="switch_field" style="display:table-cell">
-														<label for="switch">
-															<input id="switch" class="switch" type="checkbox" style="display: none;">
+													<div class="switch_field" style="display:table-cell;float: left;">
+														<label for="ssserver_enable">
+															<input id="ssserver_enable" class="switch" type="checkbox" style="display: none;">
 															<div class="switch_container" >
 																<div class="switch_bar"></div>
 																<div class="switch_circle transition_style">
@@ -133,7 +133,10 @@ function menu_hook(title, tab) {
 															</div>
 														</label>
 													</div>
-													<span style="float: left;">二进制版本: 3.2.1</span>
+													<div style="display:table-cell;float: left;position: absolute;margin-left:70px;padding: 5.5px 0px;">
+														<span style="float: left;">二进制版本: 3.1.1</span>
+													</div>
+													
 												</td>
 											</tr>
                                     	</table>                                    	
@@ -228,9 +231,9 @@ function menu_hook(title, tab) {
 										</table>
  										<div id="warn" style="display: none;margin-top: 20px;text-align: center;font-size: 20px;margin-bottom: 20px;" class="formfontdesc" id="cmdDesc"><i>开启双线路负载均衡模式才能进行本页面设置，建议负载均衡设置比例1：1</i></div>
 										<div class="apply_gen">
-											<button id="cmdBtn" class="button_gen" onclick="onSubmitCtrl(this, ' Refresh ')">提交</button>
+											<button id="cmdBtn" class="button_gen" onclick="save()">提交</button>
 										</div>
-										<div style="margin-left:5px;margin-top:10px;margin-bottom:10px"><img src="/images/New_ui/export/line_export.png"></div>
+										<div style="margin:10px 0 10px 5px;" class="splitLine"></div>
 									</td>
 								</tr>
 							</table>

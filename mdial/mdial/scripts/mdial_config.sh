@@ -4,7 +4,6 @@ eval `dbus export mdial_`
 source /jffs/softcenter/scripts/base.sh
 alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
 LOG_FILE=/tmp/mdial_log.log
-echo " " > $LOG_FILE
 
 start(){
 	echo_date "==========================================================="
@@ -159,20 +158,28 @@ case $1 in
 start)
 	if [ "$mdial_enable" == "1" ];then
 		logger "[软件中心]: 启动单线多拨！"
-		start >> $LOG_FILE
+		start
 	else
 		logger "[软件中心]: 单线多拨未设置开机启动，跳过！"
 	fi
 	;;
 stop)
-	stop >> $LOG_FILE
+	stop
 	;;
-esac
 
-if  [ -z "$1" ];then
+restart)
+	echo " " > $LOG_FILE
 	if [ "$mdial_enable" == "1" ];then
+		stop >> $LOG_FILE
+		sleep 1
 		start >> $LOG_FILE
+		echo XU6J03M6 >> $LOG_FILE
 	else
 		stop >> $LOG_FILE
+		echo XU6J03M6 >> $LOG_FILE
 	fi
-fi
+	;;
+clean)
+	echo " " > $LOG_FILE
+	;;
+esac

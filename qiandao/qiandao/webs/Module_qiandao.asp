@@ -22,7 +22,6 @@
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/switcherplugin/jquery.iphone-switch.js"></script>
 <script type="text/javascript" src="/res/softcenter.js"></script>
-<script type="text/javascript" src="/dbconf?p=qiandao&v=<% uptime(); %>"></script>
 <style> 
 .test-textarea {
 	width: 585px;
@@ -77,156 +76,62 @@ input[type=button]:focus {
 }
 </style>
 <script>
+var db_qiandao = {}
 var _responseLen;
 var noChange = 0;
 var params_input = ["qiandao_time"];
 var params_check = ["qiandao_enable"];
 var params_sites = ["koolshare", "baidu", "v2ex", "hostloc", "acfun", "bilibili", "smzdm", "xiami", "163music", "miui", "52pojie", "kafan", "right", "mydigit"];
-function E(e) {
-	return (typeof(e) == 'string') ? document.getElementById(e) : e;
-}
-
-var Base64;
-if (typeof btoa == "Function") {
-	Base64 = {
-		encode: function(e) {
-			return btoa(e);
-		},
-		decode: function(e) {
-			return atob(e);
-		}
-	};
-} else {
-	Base64 = {
-		_keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
-		encode: function(e) {
-			var t = "";
-			var n, r, i, s, o, u, a;
-			var f = 0;
-			e = Base64._utf8_encode(e);
-			while (f < e.length) {
-				n = e.charCodeAt(f++);
-				r = e.charCodeAt(f++);
-				i = e.charCodeAt(f++);
-				s = n >> 2;
-				o = (n & 3) << 4 | r >> 4;
-				u = (r & 15) << 2 | i >> 6;
-				a = i & 63;
-				if (isNaN(r)) {
-					u = a = 64
-				} else if (isNaN(i)) {
-					a = 64
-				}
-				t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a)
-			}
-			return t
-		},
-		decode: function(e) {
-			var t = "";
-			var n, r, i;
-			var s, o, u, a;
-			var f = 0;
-			e = e.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-			while (f < e.length) {
-				s = this._keyStr.indexOf(e.charAt(f++));
-				o = this._keyStr.indexOf(e.charAt(f++));
-				u = this._keyStr.indexOf(e.charAt(f++));
-				a = this._keyStr.indexOf(e.charAt(f++));
-				n = s << 2 | o >> 4;
-				r = (o & 15) << 4 | u >> 2;
-				i = (u & 3) << 6 | a;
-				t = t + String.fromCharCode(n);
-				if (u != 64) {
-					t = t + String.fromCharCode(r)
-				}
-				if (a != 64) {
-					t = t + String.fromCharCode(i)
-				}
-			}
-			t = Base64._utf8_decode(t);
-			return t
-		},
-		_utf8_encode: function(e) {
-			e = e.replace(/\r\n/g, "\n");
-			var t = "";
-			for (var n = 0; n < e.length; n++) {
-				var r = e.charCodeAt(n);
-				if (r < 128) {
-					t += String.fromCharCode(r)
-				} else if (r > 127 && r < 2048) {
-					t += String.fromCharCode(r >> 6 | 192);
-					t += String.fromCharCode(r & 63 | 128)
-				} else {
-					t += String.fromCharCode(r >> 12 | 224);
-					t += String.fromCharCode(r >> 6 & 63 | 128);
-					t += String.fromCharCode(r & 63 | 128)
-				}
-			}
-			return t
-		},
-		_utf8_decode: function(e) {
-			var t = "";
-			var n = 0;
-			var r = c1 = c2 = 0;
-			while (n < e.length) {
-				r = e.charCodeAt(n);
-				if (r < 128) {
-					t += String.fromCharCode(r);
-					n++
-				} else if (r > 191 && r < 224) {
-					c2 = e.charCodeAt(n + 1);
-					t += String.fromCharCode((r & 31) << 6 | c2 & 63);
-					n += 2
-				} else {
-					c2 = e.charCodeAt(n + 1);
-					c3 = e.charCodeAt(n + 2);
-					t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63);
-					n += 3
-				}
-			}
-			return t
-		}
-	}
-}
-
 function init() {
 	show_menu(menu_hook);
+	get_dbus_data();
 	generate_time_options();
-	conf_to_obj();
 	update_visibility();
 	tab_switch();
 }
+function get_dbus_data() {
+	$.ajax({
+		type: "GET",
+		url: "/dbconf?p=qiandao_",
+		dataType: "script",
+		async: false,
+		success: function(data) {
+			db_qiandao = db_qiandao_;
+			conf_to_obj();
+		}
+	});
+}
 function generate_time_options() {
 	for (var i = 0; i < 24; i++) {
-		$j("#qiandao_time").append("<option value='" + i + "'>" + i + "点</option>");
-		$j("#qiandao_time").val(8);
+		$("#qiandao_time").append("<option value='" + i + "'>" + i + "点</option>");
+		$("#qiandao_time").val(8);
 	}
 }
 function tab_switch(){
-	if($j('.show-btn1').hasClass("active")){
+	if($('.show-btn1').hasClass("active")){
 		E("qiandao_setting").style.display = "";
 		E("qiandao_log").style.display = "none";
-	}else if($j('.show-btn2').hasClass("active")){
+	}else if($('.show-btn2').hasClass("active")){
 		E("qiandao_setting").style.display = "none";
 		E("qiandao_log").style.display = "";
 	}else{
-		$j('.show-btn1').addClass('active');
-		$j('.show-btn2').removeClass('active');
+		$('.show-btn1').addClass('active');
+		$('.show-btn2').removeClass('active');
 		E("qiandao_setting").style.display = "";
 		E("qiandao_log").style.display = "none";
 	}
-	$j(".show-btn1").click(
+	$(".show-btn1").click(
 	function() {
-		$j('.show-btn1').addClass('active');
-		$j('.show-btn2').removeClass('active');
+		$('.show-btn1').addClass('active');
+		$('.show-btn2').removeClass('active');
 		E("qiandao_setting").style.display = "";
 		E("qiandao_log").style.display = "none";
 	});
-	$j(".show-btn2").click(
+	$(".show-btn2").click(
 	function() {
 		setTimeout("get_realtime_log();", 200);
-		$j('.show-btn1').removeClass('active');
-		$j('.show-btn2').addClass('active');
+		$('.show-btn1').removeClass('active');
+		$('.show-btn2').addClass('active');
 		E("qiandao_setting").style.display = "none";
 		E("qiandao_log").style.display = "";
 	});
@@ -251,7 +156,7 @@ function conf_to_obj() {
 	// data to div （base64 decode）
 	for (var i = 0; i < params_sites.length; i++) {
 		if(db_qiandao["qiandao_" + params_sites[i] + "_setting"]){
-			$j("#qiandao_" + params_sites[i] + "_setting").text(Base64.decode(db_qiandao["qiandao_" + params_sites[i] + "_setting"]));
+			$("#qiandao_" + params_sites[i] + "_setting").text(Base64.decode(db_qiandao["qiandao_" + params_sites[i] + "_setting"]));
 		}
 	}
 	// data to checkbox
@@ -269,7 +174,7 @@ function conf_to_obj() {
 
 function save(action){
 	db_qiandao["action_script"] = "qiandao_config.sh";
-	db_qiandao["action_mode"] = " Refresh ";
+	db_qiandao["action_mode"] = "restart";
 	db_qiandao["current_page"] = "Module_qiandao.asp";
 	db_qiandao["qiandao_action"] = action;
 	// data from input/select
@@ -280,8 +185,8 @@ function save(action){
 	}
 	// data from div （base64 encode）
 	for (var i = 0; i < params_sites.length; i++) {
-		if($j("#qiandao_" + params_sites[i] + "_setting").text()){
-			db_qiandao["qiandao_" + params_sites[i] + "_setting"] = Base64.encode($j("#qiandao_" + params_sites[i] + "_setting").text());
+		if($("#qiandao_" + params_sites[i] + "_setting").text()){
+			db_qiandao["qiandao_" + params_sites[i] + "_setting"] = Base64.encode($("#qiandao_" + params_sites[i] + "_setting").text());
 		}else{
 			db_qiandao["qiandao_" + params_sites[i] + "_setting"] = "";
 		}
@@ -297,25 +202,25 @@ function save(action){
 }
 
 function push_data(obj) {
-	$j.ajax({
+	$.ajax({
 		type: "POST",
-		url: '/applydb.cgi?p=qiandao_',
+		url: '/applydb.cgi?p=qiandao',
 		contentType: "application/x-www-form-urlencoded",
 		dataType: 'text',
-		data: $j.param(obj),
+		data: $.param(obj),
 		success: function(response) {
-			$j('.show-btn1').removeClass('active');
-			$j('.show-btn2').addClass('active');
+			$('.show-btn1').removeClass('active');
+			$('.show-btn2').addClass('active');
 			E("qiandao_setting").style.display = "none";
 			E("qiandao_log").style.display = "";
 			noChange = 0;
-			setTimeout("get_realtime_log(1);", 500);
+			get_realtime_log(1);
 		}
 	});
 }
 
 function get_realtime_log(refresh) {
-	$j.ajax({
+	$.ajax({
 		url: '/res/qiandao_run.htm',
 		dataType: 'html',
 		error: function(xhr) {
@@ -341,22 +246,16 @@ function get_realtime_log(refresh) {
 			} else {
 				setTimeout("get_realtime_log(1);", 500);
 			}
-			retArea.value = response;
+			retArea.value = response.replace("XU6J03M6", " ");
 			retArea.scrollTop = retArea.scrollHeight;
 			_responseLen = response.length;
 		}
 	});
 }
-
 function menu_hook(title, tab) {
 	tabtitle[tabtitle.length - 1] = new Array("", "自动签到");
 	tablink[tablink.length - 1] = new Array("", "Module_qiandao.asp");
 }
-
-function reload_Soft_Center() {
-	location.href = "/Main_Soft_center.asp";
-}
-
 </script>
 </head>
 <body onload="init();">
