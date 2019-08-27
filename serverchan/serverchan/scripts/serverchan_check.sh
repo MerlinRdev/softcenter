@@ -106,6 +106,7 @@ if [[ "${serverchan_info_temp}" == "1" ]]; then
     echo "---" >> ${serverchan_info_text}
     interface_2=`nvram get wl0_ifname`
     interface_5=`nvram get wl1_ifname`
+    interface_52=`nvram get wl2_ifname`
 	if [ "$productid" == "BLUECAVE" ];then
 		interface_2_temperature=`iwpriv ${interface_2} gTemperature | awk '{print $3}'`
 		interface_5_temperature=`iwpriv ${interface_5} gTemperature | awk '{print $3}'`
@@ -113,14 +114,20 @@ if [[ "${serverchan_info_temp}" == "1" ]]; then
 	else
 		interface_2_temperature=`wl -i ${interface_2} phy_tempsense | awk '{print $1}'`
 		interface_5_temperature=`wl -i ${interface_5} phy_tempsense | awk '{print $1}'`
+		[ -n "$interface_52" ] && interface_52_temperature=`wl -i ${interface_52} phy_tempsense | awk '{print $1}'`
 		router_cpu_temperature=`cat /proc/dmu/temperature | awk '{print $4}' | grep -Eo '[0-9]+'`
 	fi
     if [ "${interface_2_temperature}" != "" ] || [ "${interface_5_temperature}" != "" ] || [ "${router_cpu_temperature}" != "" ]; then
 	if [ "$productid" != "BLUECAVE" ];then
 		interface_2_temperature_c=`expr ${interface_2_temperature} / 2 + 20`
 		interface_5_temperature_c=`expr ${interface_5_temperature} / 2 + 20`
+		[ -n "$interface_52" ] && interface_52_temperature_c=`expr ${interface_52_temperature} / 2 + 20`
 	fi
-        router_temperature="2.4GHz: ${interface_2_temperature_c}°C | 5GHz: ${interface_5_temperature_c}°C | CPU: ${router_cpu_temperature}°C"
+	if [ -n "$interface_52" ];then
+		router_temperature="2.4G: ${interface_2_temperature_c}°C | 5G_1: ${interface_5_temperature_c}°C | 5G_2: ${interface_52_temperature_c}°C | CPU: ${router_cpu_temperature}°C"
+	else
+		router_temperature="2.4GHz: ${interface_2_temperature_c}°C | 5GHz: ${interface_5_temperature_c}°C | CPU: ${router_cpu_temperature}°C"
+	fi
     else
         router_temperature="找不到或不支持当前温度传感器"
     fi

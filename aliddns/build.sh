@@ -1,11 +1,10 @@
 #!/bin/sh
 
-
-MODULE=aliddns
-VERSION=1.2
-TITLE=aliddns
-DESCRIPTION=阿里云解析自动更新IP
-HOME_URL=Module_aliddns.asp
+MODULE="aliddns"
+VERSION="1.3"
+TITLE="阿里DDNS"
+DESCRIPTION="aliddns"
+HOME_URL="Module_aliddns.asp"
 
 # Check and include base
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -26,7 +25,4 @@ fi
 cd $DIR
 
 # do something here
-
 do_build_result
-
-sh backup.sh $MODULE

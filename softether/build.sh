@@ -3,7 +3,7 @@
 MODULE="softether"
 VERSION="1.9"
 TITLE="SoftEther_VPN_Server"
-DESCRIPTION="VPN全家桶, ver 4.29 build 9680"
+DESCRIPTION="VPN全家桶, ver 4.30 build 9700"
 HOME_URL="Module_softether.asp"
 
 # Check and include base

@@ -69,6 +69,11 @@ remove_trigger_ifup(){
 }
 
 onstart(){
+	if [ "`nvram get productid`" == "BLUECAVE" ];then
+		cp -r /jffs/softcenter/scripts/serverchan_config.sh /jffs/softcenter/init.d/M98serverchan.sh
+	else
+		ln -sf /jffs/softcenter/scripts/serverchan_config.sh /jffs/softcenter/init.d/S98serverchan.sh
+	fi
     creat_cron_job
     creat_trigger_ifup
     if [ "${serverchan_trigger_dhcp}" == "1" ]; then

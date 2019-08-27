@@ -131,14 +131,14 @@
             "version": "1.5"
         }, 
         {
-            "build_date": "2019-07-24_12:33:42", 
-            "description": "阿里云解析自动更新IP", 
+            "build_date": "2019-08-27_19:45:52", 
+            "description": "aliddns", 
             "home_url": "Module_aliddns.asp", 
-            "md5": "a805031000749b412c52e7a159523e45", 
+            "md5": "d8a0bdc981a53a02f5102afbb6d276e0", 
             "name": "aliddns", 
             "tar_url": "aliddns/aliddns.tar.gz", 
-            "title": "aliddns", 
-            "version": "1.2"
+            "title": "阿里DDNS", 
+            "version": "1.3"
         }, 
         {
             "build_date": "2019-08-12_22:03:09", 

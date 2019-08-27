@@ -8,109 +8,160 @@
 <link rel="shortcut icon" href="images/favicon.png"/>
 <link rel="icon" href="images/favicon.png"/>
 <title>Aliddns</title>
-<link rel="stylesheet" type="text/css" href="ParentalControl.css">
 <link rel="stylesheet" type="text/css" href="index_style.css"/>
 <link rel="stylesheet" type="text/css" href="form_style.css"/>
 <link rel="stylesheet" type="text/css" href="usp_style.css"/>
 <link rel="stylesheet" type="text/css" href="css/element.css">
-<script type="text/javascript" src="/js/jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="res/softcenter.css">
 <script type="text/javascript" src="/state.js"></script>
 <script type="text/javascript" src="/popup.js"></script>
 <script type="text/javascript" src="/help.js"></script>
-<script type="text/javascript" src="/general.js"></script>
-<script type="text/javascript" src="/client_function.js"></script>
 <script type="text/javascript" src="/validator.js"></script>
 <script type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript" src="/calendar/jquery-ui.js"></script>
-<script type="text/javascript" src="/dbconf?p=aliddns&v=<% uptime(); %>"></script>
-<style>
-</style>
+<script type="text/javascript" src="/general.js"></script>
+<script type="text/javascript" src="/switcherplugin/jquery.iphone-switch.js"></script>
+<script type="text/javascript" src="/res/softcenter.js"></script>
+<script src="/state.js"></script>
+<script src="/help.js"></script>
 <script>
-function initial() {
-    show_menu(menu_hook);
-    var enable ="<% dbus_get_def("aliddns_enable", "0"); %>";
-    $('#switch').prop('checked', enable === "1");
-    buildswitch();
-    update_visibility();
+var dbus = {}
+function init() {
+	show_menu(menu_hook);
+	generate_options();
+	get_dbus_data();
+	update_visibility();
+	hook_event();
+	get_run_status();
+	setInterval("get_run_status()", 5000);
 }
-function applyRule() {
-    var posting = false;
-	var inputs = ['ak', 'sk', 'name', 'domain', 'interval', 'dns', 'curl', 'ttl'];
-        if(posting) return;
-        posting = true; // save
-		var data = {
-			aliddns_enable: $('#switch').prop('checked') | 0,
-			action_mode: ' Refresh ',
-			current_page: 'Module_aliddns.asp',
-			next_page: 'Module_aliddns.asp',
-			action_script: 'aliddns_config.sh'
-		};
-		for(var i = 0; i< inputs.length; i++) {
-			var key = 'aliddns_' + inputs[i];
-			data['aliddns_' + inputs[i]] = $('#aliddns_' + inputs[i]).val()
+function get_dbus_data() {
+	$.ajax({
+		type: "GET",
+		url: "/dbconf?p=aliddns",
+		dataType: "script",
+		async: false,
+		success: function(data) {
+			dbus = db_aliddns;
+			E("aliddns_enable").checked = dbus["aliddns_enable"] == "1";
+			var params = ['ak', 'sk', 'name', 'domain', 'interval', 'dns', 'curl', 'ttl'];
+			for (var i = 0; i < params.length; i++) {
+				if (dbus["aliddns_" + params[i]]) {
+					//$("#aliddns_" + params[i]).val(dbus["aliddns_" + params[i]]);
+					E("aliddns_" + params[i]).value = dbus["aliddns_" + params[i]];
+				}
+			}
 		}
-        $.ajax({
-            type: 'POST',
-            url: 'applydb.cgi?p=aliddns_',
-            data: $.param(data)
-        }).then(function () {
-            posting = false;
-            alert('saved');
-        }, function () {
-            posting = false;
-           alert('failed'); 
-        })
+	});
+}
+function get_run_status(){
+	$.ajax({
+		type: "GET",
+		url: "/dbconf?p=aliddns_last_act",
+		dataType: "script",
+		async: false,
+		success: function(data) {
+			var aliddns_status = db_aliddns_last_act;
+			if (aliddns_status["aliddns_last_act"]) {
+				E("run_status").innerHTML = aliddns_status["aliddns_last_act"];
+			}
+		}
+	});
+}
+function save() {
+	showLoading(2);
+	refreshpage(2);
+	// collect data from checkbox
+	dbus["aliddns_enable"] = E("aliddns_enable").checked ? '1' : '0';
+	var params = ['ak', 'sk', 'name', 'domain', 'interval', 'dns', 'curl', 'ttl'];
+	for (var i = 0; i < params.length; i++) {
+    	dbus["aliddns_" + params[i]] = E("aliddns_" + params[i]).value;
+	}
+	// post data
+	//var id = parseInt(Math.random() * 100000000);
+	//var postData = {"id": id, "method": "aliddns_config.sh", "params": [1], "fields": dbus };
+	dbus["action_script"]="aliddns_config.sh";
+	dbus["action_mode"] = "restart";
+	$.ajax({
+		url: "/applydb.cgi?p=aliddns",
+		cache: false,
+		type: "POST",
+		dataType: "text",
+		data: $.param(dbus)
+	});
+}
+function generate_options(){
+	for(var i = 2; i < 60; i++) {
+		$("#aliddns_interval").append("<option value='"  + i + "'>" + i + "</option>");
+		$("#aliddns_interval").val(2);
+	}
+}
+function hook_event(){
+	$("#aliddns_enable").click(
+		function(){
+		if(E('aliddns_enable').checked){
+			dbus["aliddns_enable"] = "1";
+			E("last_act_tr").style.display = "";
+			E("ak_tr").style.display = "";
+			E("sk_tr").style.display = "";
+			E("interval_tr").style.display = "";
+			E("name_tr").style.display = "";
+			E("dns_tr").style.display = "";
+			E("curl_tr").style.display = "";
+			E("ttl_tr").style.display = "";
+		}else{
+			dbus["aliddns_enable"] = "0";
+			E("last_act_tr").style.display = "none";
+			E("ak_tr").style.display = "none";
+			E("sk_tr").style.display = "none";
+			E("interval_tr").style.display = "none";
+			E("name_tr").style.display = "none";
+			E("dns_tr").style.display = "none";
+			E("curl_tr").style.display = "none";
+			E("ttl_tr").style.display = "none";
+		}
+	});
+}
+function update_visibility(){
+	if(dbus["aliddns_enable"] == "1"){
+		E("last_act_tr").style.display = "";
+		E("ak_tr").style.display = "";
+		E("sk_tr").style.display = "";
+		E("interval_tr").style.display = "";
+		E("name_tr").style.display = "";
+		E("dns_tr").style.display = "";
+		E("curl_tr").style.display = "";
+		E("ttl_tr").style.display = "";
+	}else{
+		E("last_act_tr").style.display = "none";
+		E("ak_tr").style.display = "none";
+		E("sk_tr").style.display = "none";
+		E("interval_tr").style.display = "none";
+		E("name_tr").style.display = "none";
+		E("dns_tr").style.display = "none";
+		E("curl_tr").style.display = "none";
+		E("ttl_tr").style.display = "none";
+	}
 }
 function menu_hook(title, tab) {
 	tabtitle[tabtitle.length -1] = new Array("", "软件中心", "离线安装", "Aliddns");
 	tablink[tablink.length -1] = new Array("", "Main_Soft_center.asp", "Main_Soft_setting.asp", "Module_aliddns.asp");
 }
-
-function reload_Soft_Center(){
-location.href = "/Main_Soft_center.asp";
-}
-
-function buildswitch(){
-	$("#switch").click(
-	function(){
-		update_visibility();
-	});
-}
-
-function update_visibility(){
-	if(document.getElementById('switch').checked){
-		document.getElementById("last_act_tr").style.display = "";
-		document.getElementById("ak_tr").style.display = "";
-		document.getElementById("sk_tr").style.display = "";
-		document.getElementById("interval_tr").style.display = "";
-		document.getElementById("name_tr").style.display = "";
-		document.getElementById("dns_tr").style.display = "";
-		document.getElementById("curl_tr").style.display = "";
-		document.getElementById("ttl_tr").style.display = "";
-		
-	}else{
-		document.getElementById("last_act_tr").style.display = "none";
-		document.getElementById("ak_tr").style.display = "none";
-		document.getElementById("sk_tr").style.display = "none";
-		document.getElementById("interval_tr").style.display = "none";
-		document.getElementById("name_tr").style.display = "none";
-		document.getElementById("dns_tr").style.display = "none";
-		document.getElementById("curl_tr").style.display = "none";
-		document.getElementById("ttl_tr").style.display = "none";
-	}
-}
-
 </script>
 </head>
-<body onload="initial();" onunload="unload_body();" onselectstart="return false;">
+<body onload="init();">
 <div id="TopBanner"></div>
 <div id="Loading" class="popup_bg"></div>
-<iframe name="hidden_frame" id="hidden_frame" width="0" height="0" frameborder="0"></iframe>
-<form method="post" name="form" action="/applydb.cgi?p=aliddns" target="hidden_frame">
-<input type="hidden" name="productid" value="<% nvram_get("productid"); %>">
-<input type="hidden" name="preferred_lang" id="preferred_lang" value="<% nvram_get("preferred_lang"); %>" disabled>
-<input type="hidden" name="firmver" value="<% nvram_get("firmver"); %>">
-<input type="hidden" name="aliddns_enable" value="<% dbus_get_def("aliddns_enable", "0"); %>">
+	<iframe name="hidden_frame" id="hidden_frame" src="" width="0" height="0" frameborder="0"></iframe>
+	<input type="hidden" name="current_page" value="Module_ssserver.asp"/>
+	<input type="hidden" name="next_page" value="Module_ssserver.asp"/>
+	<input type="hidden" name="group_id" value=""/>
+	<input type="hidden" name="modified" value="0"/>
+	<input type="hidden" name="action_mode" value=""/>
+	<input type="hidden" name="action_script" value=""/>
+	<input type="hidden" name="action_wait" value="5"/>
+	<input type="hidden" name="first_time" value=""/>
+	<input type="hidden" name="preferred_lang" id="preferred_lang" value="<% nvram_get("preferred_lang"); %>"/>
+	<input type="hidden" name="firmver" value="<% nvram_get("firmver"); %>"/>
 <table class="content" align="center" cellpadding="0" cellspacing="0">
     <tr>
         <td width="17">&nbsp;</td>
@@ -120,7 +171,6 @@ function update_visibility(){
         </td>
         <td valign="top">
             <div id="tabMenu" class="submenuBlock"></div>
-			<!--=====Beginning of Main Content=====-->
             <table width="98%" border="0" align="left" cellpadding="0" cellspacing="0" style="display: block;">
 				<tr>
 					<td align="left" valign="top">
@@ -131,8 +181,8 @@ function update_visibility(){
 										<div>&nbsp;</div>
                 						<div style="float:left;" class="formfonttitle" style="padding-top: 12px">Aliddns - 设置</div>
 										<div style="float:right; width:15px; height:25px;margin-top:10px"><img id="return_btn" onclick="reload_Soft_Center();" align="right" style="cursor:pointer;position:absolute;margin-left:-30px;margin-top:-25px;" title="返回软件中心" src="/images/backprev.png" onMouseOver="this.src='/images/backprevclick.png'" onMouseOut="this.src='/images/backprev.png'"></img></div>
-										<div style="margin-left:5px;margin-top:10px;margin-bottom:10px"><img src="/images/New_ui/export/line_export.png"></div>
-										<div class="SimpleNote" id="head_illustrate"><i></i><em>Aliddns</em>是一款基于阿里云解析的私人ddns解决方案。<a href='http://koolshare.cn/thread-64703-1-1.html' target='_blank'><i>&nbsp;&nbsp;<u>点击查看插件详情</u></i></a></div>
+										<div style="margin:30px 0 10px 5px;" class="splitLine"></div>
+										<div class="SimpleNote" id="head_illustrate"><i></i><em>Aliddns</em>是一款基于阿里云解析的私人ddns解决方案。V 1.41 by tkid 2019<a href='http://koolshare.cn/thread-64703-1-1.html' target='_blank'><i>&nbsp;&nbsp;<u>点击查看插件详情</u></i></a></div>
                 						<table style="margin:20px 0px 0px 0px;" width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bordercolor="#6b8fa3" class="FormTable">
 											<thead>
 											<tr>
@@ -145,8 +195,8 @@ function update_visibility(){
 												</th>
 												<td colspan="2">
 													<div class="switch_field" style="display:table-cell">
-														<label for="switch">
-															<input id="switch" class="switch" type="checkbox" style="display: none;">
+														<label for="aliddns_enable">
+															<input id="aliddns_enable" class="switch" type="checkbox" style="display: none;">
 															<div class="switch_container" >
 																<div class="switch_bar"></div>
 																<div class="switch_circle transition_style">
@@ -161,47 +211,49 @@ function update_visibility(){
                 						    <tr id="last_act_tr">
                 						        <th>上次运行</th>
                 						        <td>
-                						            <% dbus_get_def("aliddns_last_act", "--"); %>
+                						            <span id="run_status"></span>
                 						        </td>
                 						    </tr>
                 						    <tr id="ak_tr">
-                						        <th>app key</th>
+                						        <th>Access Key ID</th>
                 						        <td>
-                						            <input type="text" id="aliddns_ak" value="<% dbus_get_def("aliddns_ak", ""); %>" class="input_ss_table">
+                						            <input type="text" id="aliddns_ak" value="" class="input_ss_table" style="width:200px;">
                 						        </td>
                 						    </tr>
                 						    <tr id="sk_tr">
-                						        <th>app secret</th>
-                						        <td><input type="password" id="aliddns_sk" value="<% dbus_get_def("aliddns_sk", ""); %>" class="input_ss_table"></td>
+                						        <th>Access Key Secret</th>
+                						        <td><input type="password" id="aliddns_sk" value="" class="input_ss_table" style="width:260px;" autocomplete="off" autocorrect="off" autocapitalize="off" maxlength="100" readonly onBlur="switchType(this, false);" onFocus="switchType(this, true);this.removeAttribute('readonly');"/></td>
                 						    </tr>
                 						    <tr id="interval_tr">
                 						        <th>检查周期</th>
-                						        <td><input type="text" style="width: 2.5em" id="aliddns_interval" value="<% dbus_get_def("aliddns_interval", "120"); %>" class="input_ss_table">s</td>
+                						        <td>
+                						        	<select id="aliddns_interval" name="aliddns_interval" class="ssconfig input_option" ></select> min
+                						        </td>
                 						    </tr>
                 						    <tr id="name_tr">
                 						        <th>域名</th>
                 						        <td>
-                						            <input type="text" style="width: 4em" id="aliddns_name" placeholder="子域名" value="<% dbus_get_def("aliddns_name", "home"); %>" class="input_ss_table"
-                						            >.<input type="text"  id="aliddns_domain" placeholder="主域名" value="<% dbus_get_def("aliddns_domain", "example.com"); %>" class="input_ss_table">
+                						            <input type="text" style="width: 4em" id="aliddns_name" placeholder="子域名" value="router" class="input_ss_table">.
+                						            <input type="text"  id="aliddns_domain" placeholder="主域名" value="example.com" class="input_ss_table">
                 						        </td>
                 						    </tr>
                 						    <tr id="dns_tr">
                 						        <th title="查询域名当前IP时使用的DNS解析服务器，默认为阿里云DNS">DNS服务器(?)</th>
-                						        <td><input id="aliddns_dns" class="input_ss_table" value="<% dbus_get_def("aliddns_dns", "223.5.5.5"); %>"></td>
+                						        <td><input id="aliddns_dns" class="input_ss_table" value="223.5.5.5"></td>
                 						    </tr>
                 						    <tr id="curl_tr">
                 						        <th title="可自行修改命令行，以获得正确的公网IP。如添加 '--interface vlan2' 以指定多播情况下的端口支持">获得IP命令(?)</th>
-                						        <td><textarea id="aliddns_curl" class="input_ss_table" style="width: 94%; height: 2.4em"><% dbus_get_def("aliddns_curl", "curl -s --interface ppp0 whatismyip.akamai.com"); %></textarea></td>
+                						        <td><textarea id="aliddns_curl" class="input_ss_table" style="width: 94%; height: 2.4em">curl -s --interface ppp0 whatismyip.akamai.com</textarea></td>
                 						    </tr>
                 						    <tr id="ttl_tr">
                 						        <th title="设置解析TTL，默认10分钟，免费版的范围是600-86400">TTL(?)</th>
-                						        <td><input id="aliddns_ttl" style="width: 4.5em" class="input_ss_table" value="<% dbus_get_def("aliddns_ttl", "600"); %>">s (1~86400)</td>
+                						        <td><input id="aliddns_ttl" style="width: 4.5em" class="input_ss_table" value="600">s (1~86400)</td>
                 						    </tr>
                 						</table>
-                						<div class="apply_gen">
-									<input class="button_gen" onclick="applyRule()" type="button" value="应用设置"/>
-                						</div>
-										<div style="margin-left:5px;margin-top:10px;margin-bottom:10px"><img src="/images/New_ui/export/line_export.png"/></div>
+										<div style="margin:30px 0 10px 5px;" class="splitLine"></div>
+										<div class="apply_gen">
+											<button id="cmdBtn" class="button_gen" onclick="save()">提交</button>
+										</div>
 										<div class="KoolshareBottom" style="margin-top:540px;">
 											论坛技术支持： <a href="http://www.koolshare.cn" target="_blank"> <i><u>www.koolshare.cn</u></i> </a> <br/>
 											Github项目： <a href="https://github.com/koolshare/koolshare.github.io/tree/acelan_softcenter_ui" target="_blank"> <i><u>github.com/koolshare</u></i> </a> <br/>
@@ -214,7 +266,6 @@ function update_visibility(){
 					</td>
 				</tr>
 			</table>
-			<!--=====end of Main Content=====-->
         </td>
     </tr>
 </table>
