@@ -159,7 +159,7 @@ function get_ppp_status(){
 		url: '/logreaddb.cgi?p=mdial.log&script=mdial_status.sh',
 		dataType: "html",
 		success: function(response){
-			var data = Base64.decode(response)
+			var data = JSON.parse(Base64.decode(response))
 			console.log(data)
 			$("#script_status_table").find("tr:gt(1)").remove();
 			var code = ''
