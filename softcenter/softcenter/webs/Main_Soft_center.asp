@@ -10,6 +10,7 @@
 <title>Merlin software center</title>
 <link rel="stylesheet" type="text/css" href="index_style.css"/>
 <link rel="stylesheet" type="text/css" href="form_style.css"/>
+<link rel="stylesheet" type="text/css" href="/res/softcenter.css"/>
 <script language="JavaScript" type="text/javascript" src="/state.js"></script>
 <script language="JavaScript" type="text/javascript" src="/help.js"></script>
 <script language="JavaScript" type="text/javascript" src="/general.js"></script>
@@ -20,6 +21,7 @@
 <script type="text/javascript" src="/general.js"></script>
 <script type="text/javascript" src="/switcherplugin/jquery.iphone-switch.js"></script>
 <script type="text/javascript" src="/form.js"></script>
+<script type="text/javascript" src="/res/softcenter.js"></script>
 <script type="text/javascript" src="/dbconf?p=softcenter_&v=<% uptime(); %>"></script>
 <style>
 .cloud_main_radius_left{
