@@ -1,6 +1,16 @@
 {
     "apps": [
         {
+            "build_date": "2019-09-20_21:06:24", 
+            "description": "KPR更多规则更舒服！", 
+            "home_url": "Module_koolproxyR.asp", 
+            "md5": "026c8f6d6d8ffe3fab938ead0e7dc317", 
+            "name": "koolproxyR", 
+            "tar_url": "koolproxyR/koolproxyR.tar.gz", 
+            "title": "koolproxyR", 
+            "version": "1.0.0"
+        }, 
+        {
             "build_date": "2019-07-25_22:24:43", 
             "description": "科学上网", 
             "home_url": "Main_Ss_Content.asp", 
@@ -49,16 +59,6 @@
             "tar_url": "swap/swap.tar.gz", 
             "title": "虚拟内存", 
             "version": "2.3"
-        }, 
-        {
-            "build_date": "2019-07-16_22:31:11", 
-            "description": "去广告，没烦恼", 
-            "home_url": "Module_koolproxy.asp", 
-            "md5": "477d076e092c6368e6fef72535becc69", 
-            "name": "koolproxy", 
-            "tar_url": "koolproxy/koolproxy.tar.gz", 
-            "title": "koolproxy", 
-            "version": "3.8.4"
         }, 
         {
             "build_date": "2019-07-16_22:37:09", 

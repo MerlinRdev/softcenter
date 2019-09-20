@@ -6,23 +6,23 @@ DIR=$(cd $(dirname $0); pwd)
 touch /tmp/kp_log.txt
 productid=`nvram get productid`
 if [ "$productid" == "BLUECAVE" ];then
-	[ -z "$(nvram get buildno|grep R7.1)" -a -z "$(nvram get buildno|grep B22.1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+	[ -z "$(nvram get extendno|grep R7.1)" -a -z "$(nvram get extendno|grep B22.1)" ] && echo_date 固件版本过低，无法安装 && exit 1
 elif [ "$productid" == "RT-AC68U" ];then
-	[ -z "$(nvram get buildno|grep R4.2)" -a -z "$(nvram get buildno|grep B4.2)" ] && echo_date 固件版本过低，无法安装 && exit 1
+	[ -z "$(nvram get extendno|grep R4.2)" -a -z "$(nvram get extendno|grep B4.2)" ] && echo_date 固件版本过低，无法安装 && exit 1
 elif [ "$productid" == "RT-AC3200" ];then
-	[ -z "$(nvram get buildno|grep B4.2)" ] && echo_date 固件版本过低，无法安装 && exit 1
+	[ -z "$(nvram get extendno|grep B4.2)" ] && echo_date 固件版本过低，无法安装 && exit 1
 elif [ "$productid" == "RT-AC3100" ];then
-	[ -z "$(nvram get buildno|grep R4.1)" -a -z "$(nvram get buildno|grep B4.1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+	[ -z "$(nvram get extendno|grep R4.1)" -a -z "$(nvram get extendno|grep B4.1)" ] && echo_date 固件版本过低，无法安装 && exit 1
 elif [ "$productid" == "GT-AC5300" ];then
-	[ -z "$(nvram get buildno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+	[ -z "$(nvram get extendno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
 elif [ "$productid" == "GT-AC2900" ];then
-	[ -z "$(nvram get buildno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+	[ -z "$(nvram get extendno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
 elif [ "$productid" == "RT-AC86U" ];then
-	[ -z "$(nvram get buildno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+	[ -z "$(nvram get extendno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
 elif [ "$productid" == "RT-AC88U" ];then
-	[ -z "$(nvram get buildno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+	[ -z "$(nvram get extendno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
 elif [ "$productid" == "RT-ACRH17" ];then
-	[ -z "$(nvram get buildno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+	[ -z "$(nvram get extendno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
 else
 	echo_date 固件版本过低，无法安装
 	exit 1
