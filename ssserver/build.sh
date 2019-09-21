@@ -1,7 +1,7 @@
 #!/bin/sh
 
 MODULE="ssserver"
-VERSION="2.3"
+VERSION="2.4"
 TITLE="ss-server"
 DESCRIPTION="ss-server"
 HOME_URL="Module_ssserver.asp"

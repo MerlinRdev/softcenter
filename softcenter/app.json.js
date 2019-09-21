@@ -81,14 +81,14 @@
             "version": "1.6"
         }, 
         {
-            "build_date": "2019-08-11_21:11:55", 
+            "build_date": "2019-09-21_19:51:44", 
             "description": "ss-server", 
             "home_url": "Module_ssserver.asp", 
-            "md5": "2d3e274eeff69b5ddf1fdb37fc22223d", 
+            "md5": "6cd7d490feefae45af6e657acbd66ae6", 
             "name": "ssserver", 
             "tar_url": "ssserver/ssserver.tar.gz", 
             "title": "ss-server", 
-            "version": "2.3"
+            "version": "2.4"
         }, 
         {
             "build_date": "2019-07-16_22:31:05", 

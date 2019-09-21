@@ -32,7 +32,7 @@ function init() {
 function get_dbus_data() {
 	$.ajax({
 		type: "get",
-		url: "dbconf?p=ssserver",
+		url: "dbconf?p=ssserver_",
 		dataType: "script",
 		success: function(data) {
 			db_ssserver = db_ssserver_;
@@ -92,7 +92,6 @@ function menu_hook(title, tab) {
 	<input type="hidden" name="first_time" value=""/>
 	<input type="hidden" name="preferred_lang" id="preferred_lang" value="<% nvram_get("preferred_lang"); %>"/>
 	<input type="hidden" name="firmver" value="<% nvram_get("firmver"); %>"/>
-	<input type="hidden" id="ssserver_enable" name="ssserver_enable" value='<% dbus_get_def("ssserver_enable", "0"); %>'/>
 	<table class="content" align="center" cellpadding="0" cellspacing="0">
 		<tr>
 			<td width="17">&nbsp;</td>
