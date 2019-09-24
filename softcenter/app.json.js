@@ -1,10 +1,10 @@
 {
     "apps": [
         {
-            "build_date": "2019-09-20_21:06:24", 
+            "build_date": "2019-09-24_10:42:02", 
             "description": "KPR更多规则更舒服！", 
             "home_url": "Module_koolproxyR.asp", 
-            "md5": "026c8f6d6d8ffe3fab938ead0e7dc317", 
+            "md5": "7e579afe60b100df37ccd947d34e1300", 
             "name": "koolproxyR", 
             "tar_url": "koolproxyR/koolproxyR.tar.gz", 
             "title": "koolproxyR", 

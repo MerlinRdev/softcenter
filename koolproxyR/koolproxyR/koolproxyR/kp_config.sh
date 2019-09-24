@@ -112,7 +112,7 @@ write_reboot_job(){
 	elif [ "2" == "$koolproxyR_reboot" ]; then
 		echo_date 开启插件间隔重启，每隔"$koolproxyR_reboot_inter_hour"时"$koolproxyR_reboot_inter_min"分，自动更新规则...
 		
-                cru a koolproxyR_reboot "* */$koolproxyR_reboot_inter_hour * * * /bin/sh /jffs/softcenter/scripts/kp.sh "
+                cru a koolproxyR_reboot "0 */$koolproxyR_reboot_inter_hour * * * /bin/sh /jffs/softcenter/scripts/kp.sh "
 	fi
 }
 
