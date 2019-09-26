@@ -106,10 +106,10 @@ write_reboot_job(){
 	# start setvice
 	if [ "1" == "$koolproxy_reboot" ]; then
 		echo_date 开启插件定时重启，每天"$koolproxy_reboot_hour"时"$koolproxy_reboot_min"分，自动重启插件...
-		cru a koolproxy_reboot "$koolproxy_reboot_min $koolproxy_reboot_hour * * * /bin/sh /jffs/softcenter/koolproxy/kp_config.sh restart"
+		cru a koolproxy_reboot "$koolproxy_reboot_min $koolproxy_reboot_hour * * * /bin/sh /jffs/softcenter/scripts/koolproxy_config.sh"
 	elif [ "2" == "$koolproxy_reboot" ]; then
 		echo_date 开启插件间隔重启，每隔"$koolproxy_reboot_inter_hour"时"$koolproxy_reboot_inter_min"分，自动重启插件...
-		cru a koolproxy_reboot "*/$koolproxy_reboot_inter_min */$koolproxy_reboot_inter_hour * * * /bin/sh /jffs/softcenter/koolproxy/kp_config.sh restart"
+		cru a koolproxy_reboot "*/$koolproxy_reboot_inter_min */$koolproxy_reboot_inter_hour * * * /bin/sh /jffs/softcenter/scripts/koolproxy_config.sh"
 	fi
 }
 
@@ -356,7 +356,6 @@ stop)
 	set_lock
 	echo_date ================================ 关闭 ===============================
 	remove_reboot_job
-	add_ipset_conf && restart_dnsmasq
 	flush_nat
 	stop_koolproxy
 	remove_ipset_conf && restart_dnsmasq
@@ -386,3 +385,4 @@ start_nat)
 	unset_lock
 	;;
 esac
+

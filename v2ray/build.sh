@@ -2,7 +2,7 @@
 
 
 MODULE=v2ray
-VERSION=4.18.1
+VERSION=4.18.2
 TITLE=v2ray
 DESCRIPTION=v2ray
 HOME_URL=Module_v2ray.asp

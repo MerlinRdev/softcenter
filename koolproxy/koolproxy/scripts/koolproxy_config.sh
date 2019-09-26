@@ -17,8 +17,8 @@ clean)
 		sh /jffs/softcenter/koolproxy/kp_config.sh stop  > /tmp/koolproxy_run.log
 	fi
 	echo XU6J03M6 >> /tmp/koolproxy_run.log
-	#sleep 1
-	#rm -rf /tmp/koolproxy_run.log
+	sleep 1
+	rm -rf /tmp/koolproxy_run.log
 	;;
 esac
 

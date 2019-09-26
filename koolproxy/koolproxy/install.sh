@@ -1,9 +1,34 @@
 #! /bin/sh
 source /jffs/softcenter/scripts/base.sh
 eval `dbus export koolproxy`
+alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
+DIR=$(cd $(dirname $0); pwd)
 touch /tmp/kp_log.txt
-
+productid=`nvram get productid`
+if [ "$productid" == "BLUECAVE" ];then
+	[ -z "$(nvram get extendno|grep R7.1)" -a -z "$(nvram get extendno|grep B22.1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+elif [ "$productid" == "RT-AC68U" ];then
+	[ -z "$(nvram get extendno|grep R4.2)" -a -z "$(nvram get extendno|grep B4.2)" ] && echo_date 固件版本过低，无法安装 && exit 1
+elif [ "$productid" == "RT-AC3200" ];then
+	[ -z "$(nvram get extendno|grep B4.2)" ] && echo_date 固件版本过低，无法安装 && exit 1
+elif [ "$productid" == "RT-AC3100" ];then
+	[ -z "$(nvram get extendno|grep R4.1)" -a -z "$(nvram get extendno|grep B4.1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+elif [ "$productid" == "GT-AC5300" ];then
+	[ -z "$(nvram get extendno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+elif [ "$productid" == "GT-AC2900" ];then
+	[ -z "$(nvram get extendno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+elif [ "$productid" == "RT-AC86U" ];then
+	[ -z "$(nvram get extendno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+elif [ "$productid" == "RT-AC88U" ];then
+	[ -z "$(nvram get extendno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+elif [ "$productid" == "RT-ACRH17" ];then
+	[ -z "$(nvram get extendno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+else
+	echo_date 固件版本过低，无法安装
+	exit 1
+fi
 # stop first
+[ "$(dbus get koolproxyR_enable)" == "1" ] && dbus set koolproxyR_enable=0
 [ "$koolproxy_enable" == "1" ] && [ -f "/jffs/softcenter/koolproxy/kp_config.sh" ] && sh /jffs/softcenter/koolproxy/kp_config.sh stop
 
 # remove old files, do not remove user.txt incase of upgrade
@@ -46,7 +71,7 @@ chmod 755 /jffs/softcenter/scripts/*
 
 # 创建开机启动文件
 find /jffs/softcenter/init.d/ -name "*koolproxy*" | xargs rm -rf
-if [ "$(nvram get productid)" = "BLUECAVE" ];then
+if [ "$productid" = "BLUECAVE" ];then
 	[ ! -f "/jffs/softcenter/init.d/M98koolproxy.sh" ] && cp -r /jffs/softcenter/koolproxy/kp_config.sh /jffs/softcenter/init.d/M98koolproxy.sh
 	[ ! -f "/jffs/softcenter/init.d/N98koolproxy.sh" ] && cp -r /jffs/softcenter/koolproxy/kp_config.sh /jffs/softcenter/init.d/N98koolproxy.sh
 else
@@ -54,17 +79,18 @@ else
 	[ ! -L "/jffs/softcenter/init.d/N98koolproxy.sh" ] && ln -sf /jffs/softcenter/koolproxy/kp_config.sh /jffs/softcenter/init.d/N98koolproxy.sh
 fi
 
-# 删除安装包
-rm -rf /tmp/koolproxy* >/dev/null 2>&1
-
 [ -z "$koolproxy_mode" ] && dbus set koolproxy_mode=1
 [ -z "$koolproxy_acl_default" ] && dbus set koolproxy_acl_default=1
 
 dbus set softcenter_module_koolproxy_install=1
-dbus set softcenter_module_koolproxy_version=3.8.4
+dbus set softcenter_module_koolproxy_version="$(cat $DIR/version)"
 dbus set koolproxy_version=3.8.4
-
+dbus set softcenter_module_koolproxy_name="koolproxy"
+dbus set softcenter_module_koolproxy_title="koolproxy"
+# 删除安装包
+rm -rf /tmp/koolproxy* >/dev/null 2>&1
 # restart
 [ "$koolproxy_enable" == "1" ] && [ -f "/jffs/softcenter/koolproxy/kp_config.sh" ] && sh /jffs/softcenter/koolproxy/kp_config.sh restart
 
 exit 0
+

@@ -22,7 +22,7 @@ video_nu_local=`cat /jffs/softcenter/koolproxyR/data/rules/kp.dat.md5 | sed -n '
 #kpr规则
 rules_date_local=`cat /jffs/softcenter/koolproxyR/data/rules/koolproxy.txt  | sed -n '3p'|awk '{print $3,$4}'`
 rules_nu_local=`grep -E -v "^!" /jffs/softcenter/koolproxyR/data/rules/koolproxy.txt | wc -l`
-video_date_local=`cat $KSROOT/jffs/softcenter/koolproxyR/data/rules/koolproxy.txt  | sed -n '4p'|awk '{print $3,$4}'`
+video_date_local=`cat /jffs/softcenter/koolproxyR/data/rules/koolproxy.txt  | sed -n '4p'|awk '{print $3,$4}'`
 daily_nu_local=""
 [ -f "/jffs/softcenter/koolproxyR/data/rules/daily.txt" ] && daily_nu_local=`grep -E -v "^!" /jffs/softcenter/koolproxyR/data/rules/daily.txt | wc -l`
 custom_nu_local=`grep -E -v "^!" /jffs/softcenter/koolproxyR/data/rules/user.txt | wc -l`

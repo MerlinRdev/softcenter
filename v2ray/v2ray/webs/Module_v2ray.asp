@@ -322,10 +322,6 @@ function verifyFields(r) {
 <input type="hidden" name="v2ray_udp_enable" value="<% dbus_get_def('v2ray_udp_enable', '0'); %>">
 <input type="hidden" name="ss_china_state" value="<% nvram_get('ss_china_state'); %>">
 <input type="hidden" name="ss_foreign_state" value="<% nvram_get('ss_foreign_state'); %>">
-<input type="hidden" name="v2ray_dns" value="<% dbus_get_def('v2ray_dns', '0'); %>">
-<input type="hidden" name="v2ray_use_json" value="<% dbus_get_def('v2ray_use_json', '0'); %>">
-<input type="hidden" name="v2ray_mux_enable" value="<% dbus_get_def('v2ray_mux_enable', '0'); %>">
-<input type="hidden" name="v2ray_json" value="<% dbus_get_def('v2ray_json', ''); %>">
 <table class="content" align="center" cellpadding="0" cellspacing="0" >
 <tr>
 <td width="17">&nbsp;</td>

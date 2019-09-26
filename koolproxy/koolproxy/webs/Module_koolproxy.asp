@@ -168,13 +168,12 @@ function get_dbus_data(){
 	 	success: function(data){
 	 	 	dbus = db_koolproxy_;
 			conf2obj();
-			generate_options();
 			refresh_acl_table();
 			refresh_rule_table();
 			update_visibility();
 			get_user_rule();
 			hook_event();
-			get_run_status();
+			get_kp_status();
 			showDropdownClientList('setClientIP', 'ip', 'all', 'ClientList_Block', 'pull_arrow', 'online');
 		}
 	});
@@ -235,25 +234,13 @@ function generate_options(){
 		$("#koolproxy_reboot_inter_min").val(0);
 	}
 }
-function get_run_status(){
-	//E("koolproxy_status").innerHTML = "状态获取中..."
-	$.ajax({
-		url: 'applydb.cgi?current_page=Module_koolproxy.asp&next_page=Module_koolproxy.asp&group_id=&modified=0&action_mode=+Refresh+&action_script=koolproxy_status.sh&action_wait=&first_time=&preferred_lang=CN&firmver=3.0.0.4',
-		dataType: 'html',
-		error: function(xhr) {
-			alert("error");
-		},
-		success: function(response) {
-			setTimeout("get_kp_status();", 2000);
-		}
-	});
-}
+
 function get_kp_status(){
 	var maxid = parseInt($("#rule_table > tbody > tr:eq(-2) > td:nth-child(1) > input").attr("id").split("_")[3]);
 	//var id = parseInt(Math.random() * 100000000);
 	//var postData = {"id": id, "method": "KoolProxy_status.sh", "params":[2], "fields": ""};
 	$.ajax({
-		url: '/res/koolproxy_check.htm',
+		url: '/logreaddb.cgi?p=koolproxy.log&script=koolproxy_status.sh',
 		dataType: 'html',
 		success: function(response){
 			kp_status = response.replace("XU6J03M6", " ");
