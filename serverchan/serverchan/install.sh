@@ -6,7 +6,7 @@ DIR=$(cd $(dirname $0); pwd)
 # stop serverchan first
 enable=`dbus get serverchan_enable`
 if [ "$enable" == "1" ] && [ -f "/jffs/softcenter/scripts/serverchan_config.sh" ];then
-	/jffs/softcenter/serverchan/serverchan_config stop >/dev/null 2>&1
+	/jffs/softcenter/serverchan/serverchan_config.sh stop >/dev/null 2>&1
 fi
 
 # 安装

@@ -201,10 +201,10 @@
             "version": "1.1"
         }, 
         {
-            "build_date": "2019-09-12_01:45:40", 
+            "build_date": "2019-09-29_00:07:55", 
             "description": "从路由器推送状态及通知的工具", 
             "home_url": "Module_serverchan.asp", 
-            "md5": "e238ba683a8b7494b5b0aaea0131bfb0", 
+            "md5": "a0f75aa3558fa41c549c499f93519ea6", 
             "name": "serverchan", 
             "tar_url": "serverchan/serverchan.tar.gz", 
             "title": "ServerChan微信推送", 
@@ -232,7 +232,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "f54638b441f23e71ba712d2dc5b7babc", 
+    "md5": "3530f530a2f0278c849fa5de0fa7fece", 
     "tar_url": "softcenter/softcenter.tar.gz", 
     "version": "1.2.1"
 }
