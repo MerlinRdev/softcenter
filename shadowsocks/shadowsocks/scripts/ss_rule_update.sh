@@ -5,8 +5,8 @@ source /jffs/softcenter/scripts/base.sh
 alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
 
 start_update(){
-	url_main="https://raw.githubusercontent.com/paldier/softcenter/master/rules"
-	url_back=""
+	url_main="https://raw.githubusercontent.com/hq450/fancyss/master/rules"
+	url_back="https://raw.githubusercontent.com/paldier/softcenter/master/rules"
 	# version dectet
 	version_gfwlist1=$(cat /jffs/softcenter/ss/rules/version | sed -n 1p | sed 's/ /\n/g'| sed -n 1p)
 	version_chnroute1=$(cat /jffs/softcenter/ss/rules/version | sed -n 2p | sed 's/ /\n/g'| sed -n 1p)
@@ -183,3 +183,4 @@ case $ss_basic_update_action in
 	dbus remove ss_basic_update_action
 	;;
 esac
+

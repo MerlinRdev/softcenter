@@ -19,7 +19,7 @@ cp /jffs/softcenter/scripts/ss_* $TARGET_FOLDER/scripts/
 cp /jffs/softcenter/bin/ss-local $TARGET_FOLDER/bin/
 cp /jffs/softcenter/bin/ss-redir $TARGET_FOLDER/bin/
 cp /jffs/softcenter/bin/ss-tunnel $TARGET_FOLDER/bin/
-cp /jffs/softcenter/bin/obfs-local $TARGET_FOLDER/bin/
+cp /jffs/softcenter/bin/v2ray-plugin $TARGET_FOLDER/bin/
 cp /jffs/softcenter/bin/rss-local $TARGET_FOLDER/bin/
 cp /jffs/softcenter/bin/rss-redir $TARGET_FOLDER/bin/
 cp /jffs/softcenter/bin/koolgame $TARGET_FOLDER/bin/
@@ -61,3 +61,4 @@ rm -rf $TARGET_FOLDER/ss/*.json
 tar -czv -f /tmp/shadowsocks.tar.gz shadowsocks/
 rm -rf $TARGET_FOLDER
 echo "打包完毕！"
+

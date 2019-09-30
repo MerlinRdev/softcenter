@@ -92,7 +92,7 @@ check_ip(){
 					sh /jffs/softcenter/ss/ssconfig.sh restart
 				else
 					logger 【科学上网插件触发重启功能】：重启dnsmasq，以应用新的ip
-					[ -L "/jffs/configs/dnsmasq.d/ss_host.conf" ] && rm -rf /jffs/configs/dnsmasq.d/ss_host.conf
+					[ -L "/tmp/etc/dnsmasq.user/ss_host.conf" ] && rm -rf /tmp/etc/dnsmasq.user/ss_host.conf
 					service restart_dnsmasq >/dev/null 2>&1
 				fi
 			fi
@@ -127,3 +127,4 @@ case "$1" in
 		fi
 	;;
 esac
+

@@ -71,10 +71,6 @@ perpare(){
 	[ "$ss_dns_china" == "12" ] && {
 		[ -n "$ss_dns_china_user" ] && CDN="$ss_dns_china_user" || CDN="114.114.114.114"
 	}
-	#[ -n "`cat /etc/dnsmasq.conf|grep no-resolv`" ] && sed -i '/no-resolv/d' /etc/dnsmasq.conf
-	#[ -n "`cat /etc/dnsmasq.conf|grep servers-file`" ] && sed -i '/servers-file/d' /etc/dnsmasq.conf
-	#[ -n "`cat /etc/dnsmasq.conf|grep resolv-file`" ] && sed -i '/resolv-file/d' /etc/dnsmasq.conf
-	#for router
 	sed -i '/google.com.tw/d' /etc/hosts
 	echo "172.217.4.131 www.google.com.tw" >> /etc/hosts
 }
@@ -84,17 +80,12 @@ use_chn_plan(){
 	pc_replace "cache-size=1500" "cache-size=9999" $CONFIG
 	if [ "$ss_dns_china" == "1" ];then
 		# 选择运营商DNS时候，如果有两个DNS，则都使用
-		#pc_insert "no-poll" "server=$CDN2#53" "/etc/dnsmasq.conf"
-		#pc_insert "no-poll" "server=$CDN1#53" "/etc/dnsmasq.conf"
-		#pc_insert "no-poll" "all-servers" "/etc/dnsmasq.conf"
-		echo "server=$CDN2" > /tmp/resolv.dnsmasq
-		echo "server=$CDN1" >> /tmp/resolv.dnsmasq
+		echo "server=$CDN2#53" > /tmp/resolv.dnsmasq
+		echo "server=$CDN1#53" >> /tmp/resolv.dnsmasq
 	else
 		# 选择其它国内DNS时候
-		#pc_insert "no-poll" "server=$CDN#53" "/etc/dnsmasq.conf"
-		echo "server=$CDN" > /tmp/resolv.dnsmasq
+		echo "server=$CDN#53" > /tmp/resolv.dnsmasq
 	fi
-	#pc_insert "no-poll" "no-resolv" "/etc/dnsmasq.conf"
 }
 
 use_for_plan(){
@@ -108,13 +99,9 @@ use_for_plan(){
 		[ -z "$ss_direct_user" ] && ss_direct_user="8.8.8.8#53"
 
 		pc_replace "cache-size=1500" "cache-size=9999" $CONFIG
-		#pc_insert "no-poll" "server=$ss_direct_user" "/etc/dnsmasq.conf"
-		#pc_insert "no-poll" "no-resolv" "/etc/dnsmasq.conf"
 		echo "server=$ss_direct_user" > /tmp/resolv.dnsmasq
 	else
-		#pc_replace "cache-size=1500" "cache-size=9999" $CONFIG
-		#pc_insert "no-poll" "server=127.0.0.1#7913" "/etc/dnsmasq.conf"
-		#pc_insert "no-poll" "no-resolv" "/etc/dnsmasq.conf"
+		pc_replace "cache-size=1500" "cache-size=9999" $CONFIG
 		echo "server=127.0.0.1#7913" > /tmp/resolv.dnsmasq
 	fi
 }
@@ -129,3 +116,4 @@ else
 	perpare
 	use_for_plan
 fi
+

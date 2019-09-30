@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# shadowsocks script for AM380 merlin firmware
-# by sadog (sadoneli@gmail.com) from jffs/softcenter.cn
-
 export KSROOT=/jffs/softcenter
 source $KSROOT/scripts/base.sh
 alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
@@ -27,8 +24,8 @@ SOCKS_FLAG=0
 # ssconf_basic_rss_protocol_
 # ssconf_basic_rss_protocol_param_
 # ssconf_basic_server_
-# ssconf_basic_ss_obfs_
-# ssconf_basic_ss_obfs_host_
+# ssconf_basic_ss_v2ray_plugin_
+# ssconf_basic_ss_v2ray_plugin_opts_
 # ssconf_basic_use_kcp_
 # ssconf_basic_use_lb_
 # ssconf_basic_lbmode_
@@ -92,8 +89,8 @@ prepare(){
 		[ -n "$(dbus get ssconf_basic_rss_protocol_$nu)" ] && echo dbus set ssconf_basic_rss_protocol_$q=$(dbus get ssconf_basic_rss_protocol_$nu) >> /tmp/ss_conf.sh
 		[ -n "$(dbus get ssconf_basic_rss_protocol_param_$nu)" ] && echo dbus set ssconf_basic_rss_protocol_param_$q=$(dbus get ssconf_basic_rss_protocol_param_$nu) >> /tmp/ss_conf.sh
 		[ -n "$(dbus get ssconf_basic_server_$nu)" ] && echo dbus set ssconf_basic_server_$q=$(dbus get ssconf_basic_server_$nu) >> /tmp/ss_conf.sh
-		[ -n "$(dbus get ssconf_basic_ss_obfs_$nu)" ] && echo dbus set ssconf_basic_ss_obfs_$q=$(dbus get ssconf_basic_ss_obfs_$nu) >> /tmp/ss_conf.sh
-		[ -n "$(dbus get ssconf_basic_ss_obfs_host_$nu)" ] && echo dbus set ssconf_basic_ss_obfs_host_$q=$(dbus get ssconf_basic_ss_obfs_host_$nu) >> /tmp/ss_conf.sh
+		[ -n "$(dbus get ssconf_basic_ss_v2ray_plugin_$nu)" ] && echo dbus set ssconf_basic_ss_v2ray_plugin_$q=$(dbus get ssconf_basic_ss_v2ray_plugin_$nu) >> /tmp/ss_conf.sh
+		[ -n "$(dbus get ssconf_basic_ss_v2ray_plugin_opts_$nu)" ] && echo dbus set ssconf_basic_ss_v2ray_plugin_opts_$q=$(dbus get ssconf_basic_ss_v2ray_plugin_opts_$nu) >> /tmp/ss_conf.sh
 		[ -n "$(dbus get ssconf_basic_use_kcp_$nu)" ] && echo dbus set ssconf_basic_use_kcp_$q=$(dbus get ssconf_basic_use_kcp_$nu) >> /tmp/ss_conf.sh
 		[ -n "$(dbus get ssconf_basic_use_lb_$nu)" ] && echo dbus set ssconf_basic_use_lb_$q=$(dbus get ssconf_basic_use_lb_$nu) >> /tmp/ss_conf.sh
 		[ -n "$(dbus get ssconf_basic_lbmode_$nu)" ] && echo dbus set ssconf_basic_lbmode_$q=$(dbus get ssconf_basic_lbmode_$nu) >> /tmp/ss_conf.sh
@@ -463,8 +460,8 @@ del_none_exist(){
 				dbus remove ssconf_basic_rss_protocol_param_$localindex
 				dbus remove ssconf_basic_server_$localindex
 				dbus remove ssconf_basic_server_ip_$localindex
-				dbus remove ssconf_basic_ss_obfs_$localindex
-				dbus remove ssconf_basic_ss_obfs_host_$localindex
+				dbus remove ssconf_basic_ss_v2ray_plugin_$localindex
+				dbus remove ssconf_basic_ss_v2ray_plugin_opts_$localindex
 				dbus remove ssconf_basic_use_kcp_$localindex
 				dbus remove ssconf_basic_use_lb_$localindex
 				dbus remove ssconf_basic_lbmode_$localindex
@@ -520,7 +517,7 @@ remove_node_gap(){
 				[ -n "$(dbus get ssconf_basic_rss_protocol_param_$nu)" ] && dbus set ssconf_basic_rss_protocol_param_"$y"="$(dbus get ssconf_basic_rss_protocol_param_$nu)" && dbus remove ssconf_basic_rss_protocol_param_$nu
 				[ -n "$(dbus get ssconf_basic_server_$nu)" ] && dbus set ssconf_basic_server_"$y"="$(dbus get ssconf_basic_server_$nu)" && dbus remove ssconf_basic_server_$nu
 				[ -n "$(dbus get ssconf_basic_server_ip_$nu)" ] && dbus set ssconf_basic_server_ip_"$y"="$(dbus get ssconf_basic_server_ip_$nu)" && dbus remove ssconf_basic_server_ip_$nu
-				[ -n "$(dbus get ssconf_basic_ss_obfs_host_$nu)" ] && dbus set ssconf_basic_ss_obfs_host_"$y"="$(dbus get ssconf_basic_ss_obfs_host_$nu)" && dbus remove ssconf_basic_ss_obfs_host_$nu
+				[ -n "$(dbus get ssconf_basic_ss_v2ray_plugin_opts_$nu)" ] && dbus set ssconf_basic_ss_v2ray_plugin_opts_"$y"="$(dbus get ssconf_basic_ss_v2ray_plugin_opts_$nu)" && dbus remove ssconf_basic_ss_v2ray_plugin_opts_$nu
 				[ -n "$(dbus get ssconf_basic_use_kcp_$nu)" ] && dbus set ssconf_basic_use_kcp_"$y"="$(dbus get ssconf_basic_use_kcp_$nu)" && dbus remove ssconf_basic_use_kcp_$nu
 				[ -n "$(dbus get ssconf_basic_use_lb_$nu)" ] && dbus set ssconf_basic_use_lb_"$y"="$(dbus get ssconf_basic_use_lb_$nu)" && dbus remove ssconf_basic_use_lb_$nu
 				[ -n "$(dbus get ssconf_basic_lbmode_$nu)" ] && dbus set ssconf_basic_lbmode_"$y"="$(dbus get ssconf_basic_lbmode_$nu)" && dbus remove ssconf_basic_lbmode_$nu
@@ -563,10 +560,10 @@ open_socks_23456(){
 		elif  [ "$ss_basic_type" == "0" ];then
 			SOCKS_FLAG=2
 			echo_date 开启ss-local，提供socks5代理端口：23456
-			if [ "$ss_basic_ss_obfs" == "0" ];then
+			if [ "$ss_basic_ss_v2ray_plugin" == "0" ];then
 				ss-local -l 23456 -c $CONFIG_FILE -u -f /var/run/sslocal1.pid >/dev/null 2>&1
 			else
-				ss-local -l 23456 -c $CONFIG_FILE $ARG_OBFS -u -f /var/run/sslocal1.pid >/dev/null 2>&1
+				ss-local -l 23456 -c $CONFIG_FILE $ARG_V2RAY_PLUGIN -u -f /var/run/sslocal1.pid >/dev/null 2>&1
 			fi
 		fi
 	fi
@@ -844,8 +841,8 @@ start_update(){
 						dbus remove ssconf_basic_rss_protocol_param_$conf_nu
 						dbus remove ssconf_basic_server_$conf_nu
 						dbus remove ssconf_basic_server_ip_$conf_nu
-						dbus remove ssconf_basic_ss_obfs_$conf_nu
-						dbus remove ssconf_basic_ss_obfs_host_$conf_nu
+						dbus remove ssconf_basic_ss_v2ray_plugin_$conf_nu
+						dbus remove ssconf_basic_ss_v2ray_plugin_opts_$conf_nu
 						dbus remove ssconf_basic_use_kcp_$conf_nu
 						dbus remove ssconf_basic_use_lb_$conf_nu
 						dbus remove ssconf_basic_lbmode_$conf_nu
@@ -1003,8 +1000,8 @@ remove_online(){
 		dbus remove ssconf_basic_rss_protocol_param_$remove_nu
 		dbus remove ssconf_basic_server_$remove_nu
 		dbus remove ssconf_basic_server_ip_$remove_nu
-		dbus remove ssconf_basic_ss_obfs_$remove_nu
-		dbus remove ssconf_basic_ss_obfs_host_$remove_nu
+		dbus remove ssconf_basic_ss_v2ray_plugin_$remove_nu
+		dbus remove ssconf_basic_ss_v2ray_plugin_opts_$remove_nu
 		dbus remove ssconf_basic_use_kcp_$remove_nu
 		dbus remove ssconf_basic_use_lb_$remove_nu
 		dbus remove ssconf_basic_lbmode_$remove_nu
@@ -1024,6 +1021,16 @@ remove_online(){
 		dbus remove ssconf_basic_v2ray_mux_concurrency_$remove_nu
 		dbus remove ssconf_basic_v2ray_json_$remove_nu
 		dbus remove ssconf_basic_type_$remove_nu
+	done
+}
+
+delete_current_node(){
+	echo_date 删除当前节点
+	confs=`dbus list ssconf_basic_ | grep deleting | cut -d "=" -f 1`
+	for conf in $confs
+	do
+		echo_date 移除$conf
+		dbus remove $conf
 	done
 }
 
@@ -1074,4 +1081,8 @@ case $ss_online_action in
 	add
 	unset_lock
 	;;
+5)
+	delete_current_node
+	;;
 esac
+

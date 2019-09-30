@@ -1,8 +1,5 @@
 #! /bin/sh
 
-# shadowsocks script for AM380 merlin firmware
-# by sadog (sadoneli@gmail.com) from jffs/softcenter.cn
-
 sh /jffs/softcenter/ss/ssconfig.sh stop
 sh /jffs/softcenter/scripts/ss_conf_remove.sh
 sleep 1
@@ -17,6 +14,7 @@ rm -rf /jffs/softcenter/bin/rss-redir
 rm -rf /jffs/softcenter/bin/rss-tunnel
 rm -rf /jffs/softcenter/bin/rss-local
 rm -rf /jffs/softcenter/bin/obfs-local
+rm -rf /jffs/softcenter/bin/v2ray-plugin
 rm -rf /jffs/softcenter/bin/koolgame
 rm -rf /jffs/softcenter/bin/pdu
 rm -rf /jffs/softcenter/bin/haproxy
@@ -37,7 +35,6 @@ rm -rf /jffs/softcenter/bin/jitterentropy-rngd
 rm -rf /jffs/softcenter/bin/haveged
 rm -rf /jffs/softcenter/bin/https_dns_proxy
 rm -rf /jffs/softcenter/bin/dnsmasq
-rm -rf /jffs/softcenter/res/layer
 rm -rf /jffs/softcenter/res/shadowsocks.css
 rm -rf /jffs/softcenter/res/icon-shadowsocks.png
 rm -rf /jffs/softcenter/res/ss-menu.js
@@ -59,3 +56,4 @@ dbus remove softcenter_module_shadowsocks_version
 dbus remove ss_basic_enable
 dbus remove ss_basic_version_local
 dbus remove ss_basic_version_web
+

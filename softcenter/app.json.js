@@ -11,14 +11,14 @@
             "version": "1.0.0"
         }, 
         {
-            "build_date": "2019-09-26_21:28:52", 
+            "build_date": "2019-09-30_21:37:00", 
             "description": "科学上网", 
             "home_url": "Main_Ss_Content.asp", 
-            "md5": "aee884235faf5ae2bae2205bdb3af9fa", 
+            "md5": "9a3cf7b194e4bf0a3f23c177dc2185b9", 
             "name": "shadowsocks", 
             "tar_url": "shadowsocks/shadowsocks.tar.gz", 
             "title": "科学上网", 
-            "version": "4.1.8"
+            "version": "4.2.0"
         }, 
         {
             "build_date": "2019-07-26_12:00:35", 
@@ -59,6 +59,16 @@
             "tar_url": "swap/swap.tar.gz", 
             "title": "虚拟内存", 
             "version": "2.3"
+        }, 
+        {
+            "build_date": "2019-09-26_21:28:34", 
+            "description": "去广告，没烦恼", 
+            "home_url": "Module_koolproxy.asp", 
+            "md5": "e7e38304e94944dfd2aff59ce3c31729", 
+            "name": "koolproxy", 
+            "tar_url": "koolproxy/koolproxy.tar.gz", 
+            "title": "koolproxy", 
+            "version": "3.8.4.1"
         }, 
         {
             "build_date": "2019-07-16_22:37:09", 
