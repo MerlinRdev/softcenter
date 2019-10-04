@@ -22,10 +22,10 @@ softcenter_install() {
 		# coping files
 		cp -rf /tmp/softcenter/webs/* /jffs/softcenter/webs/
 		cp -rf /tmp/softcenter/res/* /jffs/softcenter/res/
-		#if [ "`nvram get model`" == "GT-AC5300" ] || [ "`nvram get model`" == "GT-AX11000" ] || [ -n "`nvram get extendno | grep koolshare`" -a "`nvram get productid`" == "RT-AC86U" ];then
-			#cp -rf /tmp/softcenter/ROG/webs/* /koolshare/webs/
-			#cp -rf /tmp/softcenter/ROG/res/* /koolshare/res/
-		#fi
+		if [ "`nvram get model`" == "GT-AC5300" ] || [ "`nvram get model`" == "GT-AX11000" ] || [ "`nvram get model`" == "GT-AC2900" ];then
+			cp -rf /tmp/softcenter/ROG/webs/* /koolshare/webs/
+			cp -rf /tmp/softcenter/ROG/res/* /koolshare/res/
+		fi
 		#cp -rf /tmp/softcenter/init.d/* /jffs/softcenter/init.d/
 		cp -rf /tmp/softcenter/bin/* /jffs/softcenter/bin/
 		#for axhnd
@@ -77,8 +77,8 @@ softcenter_install() {
 			chmod +x /jffs/scripts/nat-start
 		else
 			STARTCOMAND2=`cat /jffs/scripts/nat-start | grep -c "/jffs/softcenter/bin/softcenter-net.sh start"`
-			[ "$STARTCOMAND2" -gt "1" ] && sed -i '/softcenter-net.sh/d' /jffs/scripts/nat-start && sed -i '1a /jffs/softcenter/bin/softcenter-net.sh start' /jffs/scripts/nat-start
-			[ "$STARTCOMAND2" == "0" ] && sed -i '1a /jffs/softcenter/bin/softcenter-net.sh start' /jffs/scripts/nat-start
+			[ "$STARTCOMAND2" -gt "1" ] && sed -i '/softcenter-net.sh/d' /jffs/scripts/nat-start && sed -i '1a /jffs/softcenter/bin/softcenter-net.sh start_nat' /jffs/scripts/nat-start
+			[ "$STARTCOMAND2" == "0" ] && sed -i '1a /jffs/softcenter/bin/softcenter-net.sh start_nat' /jffs/scripts/nat-start
 		fi
 		
 		if [ ! -f "/jffs/scripts/post-mount" ];then

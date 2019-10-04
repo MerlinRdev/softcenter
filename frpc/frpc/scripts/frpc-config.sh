@@ -129,6 +129,7 @@ fun_nat_start(){
 		rm -rf /jffs/softcenter/init.d/M99frpc.sh >/dev/null 2>&1
 	else
 		rm -rf /jffs/softcenter/init.d/N99frpc.sh >/dev/null 2>&1
+	fi
     fi
 }
 fun_crontab(){
