@@ -2,7 +2,7 @@
 
 
 MODULE=koolproxyR
-VERSION=1.0.0
+VERSION=1.0.1
 TITLE=koolproxyR
 DESCRIPTION="KPR更多规则更舒服！"
 HOME_URL=Module_koolproxyR.asp

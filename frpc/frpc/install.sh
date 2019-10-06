@@ -1,6 +1,7 @@
 #!/bin/sh
 
 source /jffs/softcenter/scripts/base.sh
+DIR=$(cd $(dirname $0); pwd)
 frpc_enable=`dbus get frpc_enable`
 
 if [ "$frpc_enable" == "1" ];then
@@ -18,7 +19,7 @@ chmod +x /jffs/softcenter/scripts/frpc*.sh
 chmod +x /jffs/softcenter/scripts/uninstall_frpc.sh
 
 # for offline install
-dbus set frpc_version="1.4"
+dbus set frpc_version="$(cat $DIR/version)"
 dbus set softcenter_module_frpc_install="1"
 dbus set softcenter_module_frpc_name="frpc"
 dbus set softcenter_module_frpc_title="frpc内网穿透"

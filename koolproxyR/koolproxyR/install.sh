@@ -4,26 +4,56 @@ eval `dbus export koolproxyR`
 alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
 DIR=$(cd $(dirname $0); pwd)
 touch /tmp/kp_log.txt
+firmware_version=`nvram get extendno|cut -d "_" -f2|cut -d "-" -f1|cut -c2-5`
 productid=`nvram get productid`
 if [ "$productid" == "BLUECAVE" ];then
-	[ -z "$(nvram get extendno|grep R7.1)" -a -z "$(nvram get extendno|grep B22.1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+	if [ "nvram get modelname" == "K3C" ];then
+	firmware_ver=`nvram get extendno|grep B`
+	if [ -n "firmware_ver" ];then
+		firmware_check=22.1
+	else
+		firmware_check=7.1
+	fi
+	else
+		firmware_check=16.1
+	fi
 elif [ "$productid" == "RT-AC68U" ];then
-	[ -z "$(nvram get extendno|grep R4.2)" -a -z "$(nvram get extendno|grep B4.2)" ] && echo_date 固件版本过低，无法安装 && exit 1
+	if [ "nvram get modelname" == "SBR-AC1900P" ];then
+		firmware_check=4.2
+	else
+		firmware_check=1
+	fi
 elif [ "$productid" == "RT-AC3200" ];then
-	[ -z "$(nvram get extendno|grep B4.2)" ] && echo_date 固件版本过低，无法安装 && exit 1
+	if [ "nvram get modelname" == "SBR-AC3200P" ];then
+		firmware_check=4.2
+	else
+		firmware_check=1
+	fi
 elif [ "$productid" == "RT-AC3100" ];then
-	[ -z "$(nvram get extendno|grep R4.1)" -a -z "$(nvram get extendno|grep B4.1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+	if [ "nvram get modelname" == "K3" ];then
+		firmware_check=4.1
+	else
+		firmware_check=1
+	fi
 elif [ "$productid" == "GT-AC5300" ];then
-	[ -z "$(nvram get extendno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+	if [ "nvram get modelname" == "R7900P" ];then
+		firmware_check=1
+	else
+		firmware_check=1
+	fi
 elif [ "$productid" == "GT-AC2900" ];then
-	[ -z "$(nvram get extendno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+	firmware_check=1
 elif [ "$productid" == "RT-AC86U" ];then
-	[ -z "$(nvram get extendno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+	firmware_check=1
 elif [ "$productid" == "RT-AC88U" ];then
-	[ -z "$(nvram get extendno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+	firmware_check=1
 elif [ "$productid" == "RT-ACRH17" ];then
-	[ -z "$(nvram get extendno|grep R1)" ] && echo_date 固件版本过低，无法安装 && exit 1
+	firmware_check=1
 else
+	firmware_check=100
+fi
+firmware_comp=`/jffs/softcenter/bin/versioncmp $firmware_version $firmware_check`
+if [ "$firmware_comp" == "1" ];then
 	echo_date 固件版本过低，无法安装
 	exit 1
 fi
