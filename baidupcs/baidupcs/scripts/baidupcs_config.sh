@@ -78,7 +78,8 @@ EOF
 			sed -i "s/ \"enable_https\": .*$/ \"enable_https\": $(get_function_switch $baidupcs_https),/" /jffs/softcenter/bin/pcs_config.json
 		fi
 	fi
-	cp -r /jffs/softcenter/bin/pcs_config.json /root/.config/BaiduPCS-Go/pcs_config.json
+	export BAIDUPCS_GO_CONFIG_DIR=/jffs/softcenter/bin
+	#cp -r /jffs/softcenter/bin/pcs_config.json /root/.config/BaiduPCS-Go/pcs_config.json
 }
 
 start_baidu() {

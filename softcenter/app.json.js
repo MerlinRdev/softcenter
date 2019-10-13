@@ -81,10 +81,10 @@
             "version": "2.5"
         }, 
         {
-            "build_date": "2019-10-04_22:28:44", 
+            "build_date": "2019-10-09_00:04:44", 
             "description": "内网穿透利器，谁用谁知道。", 
             "home_url": "Module_frpc.asp", 
-            "md5": "1360a743ab36a660a3eb635acc310e55", 
+            "md5": "c595298dc85ce86c858796ae318f7f1d", 
             "name": "frpc", 
             "tar_url": "frpc/frpc.tar.gz", 
             "title": "frpc穿透", 
@@ -201,14 +201,14 @@
             "version": "4.18.2"
         }, 
         {
-            "build_date": "2019-09-26_21:28:24", 
+            "build_date": "2019-10-10_23:45:22", 
             "description": "百度盘", 
             "home_url": "Module_baidupcs.asp", 
-            "md5": "12d85e091ff09a50f4e1d0bad6ce0554", 
+            "md5": "888ea4c893dff267cf579bff43387f8c", 
             "name": "baidupcs", 
             "tar_url": "baidupcs/baidupcs.tar.gz", 
             "title": "百度盘", 
-            "version": "1.1"
+            "version": "1.2"
         }, 
         {
             "build_date": "2019-09-29_00:07:55", 
@@ -242,7 +242,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "3530f530a2f0278c849fa5de0fa7fece", 
+    "md5": "42f7becbeaf2f73c1adb4fb80a89a2fe", 
     "tar_url": "softcenter/softcenter.tar.gz", 
     "version": "1.2.1"
 }

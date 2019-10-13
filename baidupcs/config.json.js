@@ -1,8 +1,8 @@
 {
-"version":"1.1",
-"md5":"12d85e091ff09a50f4e1d0bad6ce0554",
+"version":"1.2",
+"md5":"888ea4c893dff267cf579bff43387f8c",
 "home_url":"Module_baidupcs.asp",
 "title":"百度盘",
 "description":"百度盘",
-"build_date":"2019-09-26_21:28:24"
+"build_date":"2019-10-10_23:45:22"
 }
