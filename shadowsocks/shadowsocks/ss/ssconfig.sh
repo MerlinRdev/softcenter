@@ -371,7 +371,6 @@ get_type_name() {
 		1)
 			echo "shadowsocksR-libev"
 		;;
-		;;
 		2)
 			echo "v2ray"
 		;;
@@ -2070,7 +2069,7 @@ apply_ss(){
 	[ -z "$WAN_ACTION" ] && [ "$ss_basic_type" != "3" ] && create_ss_json
 	[ -z "$WAN_ACTION" ] && [ "$ss_basic_type" = "3" ] && create_v2ray_json
 	[ "$ss_basic_type" == "0" ] || [ "$ss_basic_type" == "1" ] && start_ss_redir
-	[ "$ss_basic_type" == "2" ] && start_v2ray
+	[ "$ss_basic_type" == "3" ] && start_v2ray
 	start_kcp
 	start_dns
 	#===load nat start===

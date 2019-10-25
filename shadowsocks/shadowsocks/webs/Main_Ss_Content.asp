@@ -1027,7 +1027,6 @@ function Add_profile() { //点击节点页面内添加节点动作
 	E("ss_node_table_v2ray_json").value = "";
 	E("ssTitle").style.display = "";
 	E("ssrTitle").style.display = "";
-	E("gamev2Title").style.display = "";
 	E("add_node").style.display = "";
 	E("edit_node").style.display = "none";
 	E("continue_add").style.display = "";
@@ -1102,35 +1101,6 @@ function tabclickhandler(_type) {
 		E('v2ray_mux_concurrency_tr').style.display = "none";
 		E('v2ray_json_tr').style.display = "none";
 	} else if (_type == 2) {
-		save_flag = "gameV2";
-		E("vpnc_type").value = "gameV2";
-		E('gamev2Title').className = "vpnClientTitle_td_click";
-		E('v2ray_use_json_tr').style.display = "none";
-		E('ss_name_support_tr').style.display = "";
-		E('ss_server_support_tr').style.display = "";
-		E('ss_port_support_tr').style.display = "";
-		E('ss_passwd_support_tr').style.display = "";
-		E('ss_method_support_tr').style.display = "";
-		E('ss_v2ray_plugin_support').style.display = "none";
-		E('ss_v2ray_plugin_opts_support').style.display = "none";
-		E('ssr_protocol_tr').style.display = "none";
-		E('ssr_protocol_param_tr').style.display = "none";
-		E('ssr_obfs_tr').style.display = "none";
-		E('ssr_obfs_param_tr').style.display = "none";
-		E('gameV2_udp_tr').style.display = "";
-		E('v2ray_uuid_tr').style.display = "none";
-		E('v2ray_alterid_tr').style.display = "none";
-		E('v2ray_security_tr').style.display = "none";
-		E('v2ray_network_tr').style.display = "none";
-		E('v2ray_headtype_tcp_tr').style.display = "none";
-		E('v2ray_headtype_kcp_tr').style.display = "none";
-		E('v2ray_network_path_tr').style.display = "none";
-		E('v2ray_network_host_tr').style.display = "none";
-		E('v2ray_network_security_tr').style.display = "none";
-		E('v2ray_mux_enable_tr').style.display = "none";
-		E('v2ray_mux_concurrency_tr').style.display = "none";
-		E('v2ray_json_tr').style.display = "none";
-	} else if (_type == 3) {
 		save_flag = "v2ray";
 		E("vpnc_type").value = "gameV2";
 		E('v2rayTitle').className = "vpnClientTitle_td_click";

@@ -11,10 +11,10 @@
             "version": "1.0.1"
         }, 
         {
-            "build_date": "2019-10-06_10:16:57", 
+            "build_date": "2019-10-24_13:16:59", 
             "description": "科学上网", 
             "home_url": "Main_Ss_Content.asp", 
-            "md5": "6699bb9ac7fa5908627c739658bfaa85", 
+            "md5": "162c4e162f3ea761458d680daf155c86", 
             "name": "shadowsocks", 
             "tar_url": "shadowsocks/shadowsocks.tar.gz", 
             "title": "科学上网", 
@@ -59,6 +59,16 @@
             "tar_url": "swap/swap.tar.gz", 
             "title": "虚拟内存", 
             "version": "2.3"
+        }, 
+        {
+            "build_date": "2019-10-20_11:02:06", 
+            "description": "解决重启Bug", 
+            "home_url": "Module_reboothelper.asp", 
+            "md5": "5905e3cf47c0187bb6ac4ce24c44bcca", 
+            "name": "reboothelper", 
+            "tar_url": "reboothelper/reboothelper.tar.gz", 
+            "title": "重启助手", 
+            "version": "0.3"
         }, 
         {
             "build_date": "2019-10-06_10:33:04", 
@@ -201,10 +211,10 @@
             "version": "4.18.2"
         }, 
         {
-            "build_date": "2019-10-10_23:45:22", 
+            "build_date": "2019-10-13_10:55:12", 
             "description": "百度盘", 
             "home_url": "Module_baidupcs.asp", 
-            "md5": "888ea4c893dff267cf579bff43387f8c", 
+            "md5": "3d73148835c70ba1659e2aebc1f49497", 
             "name": "baidupcs", 
             "tar_url": "baidupcs/baidupcs.tar.gz", 
             "title": "百度盘", 
@@ -242,7 +252,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "42f7becbeaf2f73c1adb4fb80a89a2fe", 
+    "md5": "fb87443fd9215f75cc246a3662e1bfa6", 
     "tar_url": "softcenter/softcenter.tar.gz", 
     "version": "1.2.1"
 }

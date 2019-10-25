@@ -89,17 +89,26 @@ init_param() {
 }
 
 download_url_init() {
+    local info=$(ip addr show br0)
+    if [ "$info" = "" ];then
+        info=$(ip addr show br-lan)
+    fi
+    local sn=$(echo "${info}" | grep "link/ether" | awk '{print $2}')
+
     case ${ROUTER} in
         ${ASUSWRT_MERLIN})
             asuswrt_download_url_init
+            DOWNLOAD_URL="${DOWNLOAD_URL}&sn=${sn}"
             return $?
             ;;
         ${XIAOMI})
             xiaomi_download_url_init
+            DOWNLOAD_URL="${DOWNLOAD_URL}&sn=${sn}"
             return $?
             ;;
         ${HIWIFI})
             hiwifi_download_url_init
+            DOWNLOAD_URL="${DOWNLOAD_URL}&sn=${sn}"
             return $?
             ;;
         *)
@@ -124,7 +133,7 @@ xiaomi_download_url_init() {
             DOWNLOAD_URL="${DOWNLOAD_URL}xiaomi-3d-openwrt-stock"
             return 0
             ;;
-        "r3p" | "r3g" | "r3c")
+        "r3p" | "r3g" | "r3c" | "r3gv2")
             DOWNLOAD_URL="${DOWNLOAD_URL}xiaomi-3p-openwrt-stock"
             return 0
             ;;
@@ -145,7 +154,7 @@ hiwifi_download_url_init() {
     UNINSTALL_DOWNLOAD_URL="${URL_PREFIX}${UNINSTALL_DOWNLOAD_URL}${HIWIFI}"
 
     case ${MODEL} in
-        "hc5661" | "hc5661a" | "c312a" | "c312b" | "hc5861" | "hc5962" | "hc5761" | "hc5761a" | "b70" | "r33" | "bbf" | "b50")
+        "hc5661" | "hc5661a" | "c312a" | "c312b" | "hc5861" | "hc5962" | "hc5761" | "hc5761a" | "b70" | "r33" | "bbf" | "b50" | "b51")
             DOWNLOAD_URL="${DOWNLOAD_URL}gee-mtmips-openwrt-stock"
             return 0
             ;;
