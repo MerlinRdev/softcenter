@@ -202,12 +202,12 @@
 			function get_dbus_data() {
 				$.ajax({
 				 type: "GET",
-					url: "/dbconf?p=aria2,ddnsto",
+					url: "dbconf?p=aria2",
 					dataType: "script",
 					async: false,
 					success: function(data) {
 						db_aria2_ = db_aria2;
-						db_ddnsto_ = db_ddnsto;
+						db_ddnsto_ = {};
 						conf2obj();
 						toggle_func();
 						update_visibility();
@@ -550,19 +550,15 @@
 				//var postData = {"id": id, "method": "aria2_config.sh", "params": ["restart"], "fields": dbus };
 				dbus["action_script"]="aria2_config.sh";
 				dbus["action_mode"] = "restart";
-				dbus["current_page"] = "Module_aria2.asp";
-				dbus["next_page"] = "Module_aria2.asp";
 				$.ajax({
 					url: "/applydb.cgi?p=aria2",
 					cache: false,
-					type: "POST",
-					contentType: "application/x-www-form-urlencoded",
+				 	type: "POST",
 					dataType: "text",
 					data: $.param(dbus),
 					success: function(response) {
 						//if (response.result == id){
-							//showLoading(5);
-							//refreshpage(10);
+							//refreshpage();
 							get_realtime_log();
 						//}
 					}
@@ -571,7 +567,10 @@
 			function get_log() {
 				$.ajax({
 					url: '/res/aria2_log.html',
+					type: 'GET',
 					dataType: 'html',
+					async: true,
+					cache:false,
 					success: function(response) {
 						var retArea = E("log_content1");
 						if (response.search("XU6J03M6") != -1) {
@@ -602,7 +601,7 @@
 				$.ajax({
 					url: '/res/aria2_log.html',
 					type: 'GET',
-					dataType: 'html',
+					dataType: 'text',
 					success: function(response) {
 						var retArea = E("log_content3");
 						if (response.search("XU6J03M6") != -1) {
@@ -622,7 +621,7 @@
 						} else {
 							setTimeout("get_realtime_log();", 100);
 						}
-						retArea.value = response;
+						retArea.value = response.replace("XU6J03M6", " ");
 						retArea.scrollTop = retArea.scrollHeight;
 						_responseLen = response.length;
 					},
@@ -723,16 +722,14 @@
 					dbus[params_all[i]] = "";
 				}
 				dbus["aria2_enable"] = "0";
-				//var id = parseInt(Math.random() * 100000000);
-				//var postData = {"id": id, "method": "aria2_config.sh", "params": ["clean"], "fields": dbus };
+				var id = parseInt(Math.random() * 100000000);
+				var postData = {"id": id, "method": "aria2_config.sh", "params": ["clean"], "fields": dbus };
 				dbus["action_script"]="aria2_config.sh";
 				dbus["action_mode"] = "clean";
-				dbus["current_page"] = "Module_aria2.asp";
-				dbus["next_page"] = "Module_aria2.asp";
 				$.ajax({
 					url: "/applydb.cgi?p=aria2",
 					cache: false,
-					type: "POST",
+				 	type: "POST",
 					dataType: "text",
 					data: $.param(dbus),
 					success: function(response) {
@@ -746,56 +743,21 @@
 			function get_run_status(){
 				//var id = parseInt(Math.random() * 100000000);
 				//var postData = {"id": id, "method": "aria2_status.sh", "params":[], "fields": ""};
-				var dbus = {};
-				dbus["action_script"]="aria2_status.sh";
-				dbus["action_mode"] = " Refresh ";
-				dbus["current_page"] = "Module_aria2.asp";
-				dbus["next_page"] = "Module_aria2.asp";
 				$.ajax({
 				 type: "POST",
 					cache:false,
-					url: "/applydb.cgi?p=aria2",
-					data: $.param(dbus),
-					dataType: "text",
+					url: "/logreaddb.cgi?p=aria2.log&script=aria2_status.sh",
+					//data: JSON.stringify(postData),
+					dataType: "html",
 					success: function(response){
-						//console.log(response)
-						//E("status").innerHTML = response;
+						console.log(response)
+						E("status").innerHTML = response;
 						setTimeout("get_run_status();", 10000);
-						setTimeout("check_aria2_status();", 10000);
 					},
 					error: function(){
 						setTimeout("get_run_status();", 5000);
 					}
 				});
-			}
-			function check_aria2_status() {
-			  $.ajax({
-			    url: '/res/aria2_check.html',
-			    dataType: 'html',
-			    error: function(xhr) {
-			      setTimeout("check_aria2_status();", 5000);
-			    },
-			    success: function(response) {
-			      if (response.search("XU6J03M6") != -1) {
-				aria2_status = response.replace("XU6J03M6", " ");
-				//alert(aria2_status);
-				E("status").innerHTML = aria2_status;
-				return true;
-			      }
-			      if (_responseLen == response.length) {
-				noChange_status++;
-			      } else {
-				noChange_status = 0;
-			      }
-			      if (noChange_status > 100) {
-				noChange_status = 0;
-				//refreshpage();
-			      } else {
-				//setTimeout("check_aria2_status();", 5000);
-			      }
-			      _responseLen = response.length;
-			    }
-			  });
 			}
 			function alert_custom() {
 				var s = E('aria2_custom').value;
@@ -987,8 +949,7 @@
 			function initial_dir_status(data) {
 				if (data != "" && data.length != 2) {
 					get_layer_items("0");
-					//eval("var default_dir=" + data);
-					var default_dir= data;
+					eval("var default_dir=" + data);
 				} else {
 					//E("EditExports").style.display = "none";
 					disk_flag = 1;
@@ -1329,11 +1290,10 @@
 			}
 			function generate_ariang_link() {
 				var link_ariang = window.btoa(db_aria2_["aria2_ddnsto_token"])
-				var link_ariang1 = window.btoa(db_aria2_["aria2_rpc_secret"])
 				if (E("aria2_ddnsto").checked) {
 					E("link4.1").href = "http://aria2.me/aria-ng/#!/settings/rpc/set/wss/www.ddnsto.com/443/jsonrpc/" + link_ariang;
 				} else {
-					E("link4.1").href = "http://aria2.me/aria-ng/#!/settings/rpc/set/http/" + '<% nvram_get("lan_ipaddr"); %>' + "/" + db_aria2_["aria2_rpc_listen_port"] + "/jsonrpc/" + link_ariang1;
+					E("link4.1").href = "http://aria2.me/aria-ng/#!/settings/rpc/set/http/" + '<% nvram_get("lan_ipaddr"); %>' + "/" + db_aria2_["aria2_rpc_listen_port"] + "/jsonrpc/" + link_ariang;
 				}
 			}
 			
@@ -1987,6 +1947,7 @@
 											<a href="http://www.koolshare.cn" target="_blank"><i><u>www.koolshare.cn</u></i></a>
 											<br/>后台技术支持：<i>Xiaobao</i>
 											<br/>Shell, Web by：<i>sadog</i>
+											<br/>修改： <i>paldier</i>
 											<br/>
 										</div>
 									</td>
@@ -2007,3 +1968,4 @@
 	</div>
 </body>
 </html>
+

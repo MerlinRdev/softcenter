@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# define variables
 eval `dbus export aria2`
 source /jffs/softcenter/scripts/base.sh
 export PERP_BASE=/jffs/softcenter/perp
@@ -27,8 +26,8 @@ perpare(){
 			echo_date 使用"$aria2_dir"作为aria2下载路径！
 		fi
 	else
-		echo_date aira2没有找到可用磁盘，关闭插件！
-		dbus set aria2_enable=0
+		echo_date aira2没有找到可用磁盘，设置默认下载路径为/tmp ！
+		dbus set aria2_dir="/tmp"
 	fi
 	# creat links
 	if [ "$(nvram get productid)" = "BLUECAVE" ];then
@@ -149,7 +148,6 @@ start)
 	fi
 	;;
 start_nat)
-	#dont do this before post-mount
 	if [ "$aria2_enable" == "1" -a -n "$(pidof aria2c)" ];then
 		close_port
 		open_port
@@ -175,6 +173,8 @@ restart)
 		echo_date ===================================================================== >> $LOG_FILE
 	fi
 	echo XU6J03M6 >> $LOG_FILE
+	sleep 2
+	echo " " > $LOG_FILE
 	;;
 clean)
 	# clean configure
@@ -188,5 +188,8 @@ clean)
 	echo_date 恢复完毕！ >> $LOG_FILE
 	echo_date ===================================================================== >> $LOG_FILE
 	echo XU6J03M6 >> $LOG_FILE
+	sleep 2
+	echo " " > $LOG_FILE
 	;;
 esac
+

@@ -1,20 +1,20 @@
 {
     "apps": [
         {
-            "build_date": "2019-10-06_10:12:43", 
+            "build_date": "2019-11-01_10:34:26", 
             "description": "KPR更多规则更舒服！", 
             "home_url": "Module_koolproxyR.asp", 
-            "md5": "44efb30b1fb3a47eaaecfa6788a80fbf", 
+            "md5": "dcb8b2e4e143f483a91b97b8d9c5627c", 
             "name": "koolproxyR", 
             "tar_url": "koolproxyR/koolproxyR.tar.gz", 
             "title": "koolproxyR", 
             "version": "1.0.1"
         }, 
         {
-            "build_date": "2019-10-24_13:16:59", 
+            "build_date": "2019-10-29_23:11:20", 
             "description": "科学上网", 
             "home_url": "Main_Ss_Content.asp", 
-            "md5": "162c4e162f3ea761458d680daf155c86", 
+            "md5": "2638e84af205e0e04f01f85995e73146", 
             "name": "shadowsocks", 
             "tar_url": "shadowsocks/shadowsocks.tar.gz", 
             "title": "科学上网", 
@@ -31,10 +31,10 @@
             "version": "2.1"
         }, 
         {
-            "build_date": "2019-07-24_10:24:49", 
+            "build_date": "2019-11-01_10:32:32", 
             "description": "Cloudflare解析自动更新IP", 
             "home_url": "Module_cfddns.asp", 
-            "md5": "1e0d29dca8729a7e50bb99b49b95331b", 
+            "md5": "cc0f31aabf3d4fae68e2ee28bb3af9ed", 
             "name": "cfddns", 
             "tar_url": "cfddns/cfddns.tar.gz", 
             "title": "Cloudflare DDNS", 
@@ -61,40 +61,40 @@
             "version": "2.3"
         }, 
         {
-            "build_date": "2019-10-20_11:02:06", 
+            "build_date": "2019-11-01_10:34:36", 
             "description": "解决重启Bug", 
             "home_url": "Module_reboothelper.asp", 
-            "md5": "5905e3cf47c0187bb6ac4ce24c44bcca", 
+            "md5": "28cb77c7fc1b9aa1765175df416839ab", 
             "name": "reboothelper", 
             "tar_url": "reboothelper/reboothelper.tar.gz", 
             "title": "重启助手", 
             "version": "0.3"
         }, 
         {
-            "build_date": "2019-10-06_10:33:04", 
+            "build_date": "2019-11-01_10:34:20", 
             "description": "去广告，没烦恼", 
             "home_url": "Module_koolproxy.asp", 
-            "md5": "3d399a00899cd532b4b400df903b48b8", 
+            "md5": "3c16b997fdc82c45476a8623d34aad63", 
             "name": "koolproxy", 
             "tar_url": "koolproxy/koolproxy.tar.gz", 
             "title": "koolproxy", 
             "version": "3.8.4.2"
         }, 
         {
-            "build_date": "2019-07-16_22:37:09", 
+            "build_date": "2019-11-01_10:32:17", 
             "description": "linux下载利器", 
             "home_url": "Module_aria2.asp", 
-            "md5": "311552da7b0a90a99406d39a64cdfe32", 
+            "md5": "ac8a09e00d59fe9f8a6ed0279490435c", 
             "name": "aria2", 
             "tar_url": "aria2/aria2.tar.gz", 
             "title": "Aria2", 
-            "version": "2.5"
+            "version": "2.6"
         }, 
         {
-            "build_date": "2019-10-09_00:04:44", 
+            "build_date": "2019-11-01_10:32:58", 
             "description": "内网穿透利器，谁用谁知道。", 
             "home_url": "Module_frpc.asp", 
-            "md5": "c595298dc85ce86c858796ae318f7f1d", 
+            "md5": "86087c1d421b051d9eed545fd96267eb", 
             "name": "frpc", 
             "tar_url": "frpc/frpc.tar.gz", 
             "title": "frpc穿透", 
@@ -121,10 +121,10 @@
             "version": "1.4"
         }, 
         {
-            "build_date": "2019-07-16_22:30:33", 
+            "build_date": "2019-11-01_10:32:48", 
             "description": "迅雷快鸟，为上网加速而生~", 
             "home_url": "Module_fastd1ck.asp", 
-            "md5": "e458a7462467280c5795803b9b6377f6", 
+            "md5": "c88e939de9f550773eb7bf98b449449a", 
             "name": "fastd1ck", 
             "tar_url": "fastd1ck/fastd1ck.tar.gz", 
             "title": "讯雷快鸟", 
@@ -151,10 +151,10 @@
             "version": "1.5"
         }, 
         {
-            "build_date": "2019-08-27_19:45:52", 
+            "build_date": "2019-11-01_10:32:11", 
             "description": "aliddns", 
             "home_url": "Module_aliddns.asp", 
-            "md5": "d8a0bdc981a53a02f5102afbb6d276e0", 
+            "md5": "52bf4691f9ab0d6bd406fb28ff1a4602", 
             "name": "aliddns", 
             "tar_url": "aliddns/aliddns.tar.gz", 
             "title": "阿里DDNS", 
@@ -191,10 +191,20 @@
             "version": "1.4"
         }, 
         {
-            "build_date": "2019-07-24_11:34:21", 
+            "build_date": "2019-11-01_10:29:54", 
+            "description": "自动部署SSL证书", 
+            "home_url": "Module_acme.asp", 
+            "md5": "c36d099de2cc9410ea81f0ddef1aaa0e", 
+            "name": "acme", 
+            "tar_url": "acme/acme.tar.gz", 
+            "title": "Let's Encrypt", 
+            "version": "3.0"
+        }, 
+        {
+            "build_date": "2019-11-01_10:32:42", 
             "description": "使用Dnspod的ddns服务", 
             "home_url": "Module_ddnspod.asp", 
-            "md5": "674bcf345be223ef3fa3bd7aaf2470c1", 
+            "md5": "7d8e1f419cbb680c39c9be06ca201375", 
             "name": "ddnspod", 
             "tar_url": "ddnspod/ddnspod.tar.gz", 
             "title": "DDnspod", 
@@ -211,10 +221,10 @@
             "version": "4.18.2"
         }, 
         {
-            "build_date": "2019-10-13_10:55:12", 
+            "build_date": "2019-11-01_10:32:25", 
             "description": "百度盘", 
             "home_url": "Module_baidupcs.asp", 
-            "md5": "3d73148835c70ba1659e2aebc1f49497", 
+            "md5": "9b0b6ab96435447eaa5a64f1a90a1c50", 
             "name": "baidupcs", 
             "tar_url": "baidupcs/baidupcs.tar.gz", 
             "title": "百度盘", 
@@ -231,10 +241,10 @@
             "version": "1.2"
         }, 
         {
-            "build_date": "2019-07-16_22:36:57", 
+            "build_date": "2019-11-01_10:32:06", 
             "description": "广告屏蔽大师", 
             "home_url": "Module_adbyby.asp", 
-            "md5": "9d5b63bf92fdf9041734d42d717cd06f", 
+            "md5": "22ee49ab291b97b0eddff6eb05e3972e", 
             "name": "adbyby", 
             "tar_url": "adbyby/adbyby.tar.gz", 
             "title": "adbyby", 
@@ -252,7 +262,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "fb87443fd9215f75cc246a3662e1bfa6", 
+    "md5": "cb69b8da386669a332cbc65ca9e00203", 
     "tar_url": "softcenter/softcenter.tar.gz", 
-    "version": "1.2.1"
+    "version": "1.2.2"
 }

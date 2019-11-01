@@ -7,9 +7,9 @@ touch /tmp/kp_log.txt
 firmware_version=`nvram get extendno|cut -d "_" -f2|cut -d "-" -f1|cut -c2-5`
 productid=`nvram get productid`
 if [ "$productid" == "BLUECAVE" ];then
-	if [ "nvram get modelname" == "K3C" ];then
+	if [ "$(nvram get modelname)" == "K3C" ];then
 	firmware_ver=`nvram get extendno|grep B`
-	if [ -n "firmware_ver" ];then
+	if [ -n "$firmware_ver" ];then
 		firmware_check=22.1
 	else
 		firmware_check=7.1
@@ -18,25 +18,25 @@ if [ "$productid" == "BLUECAVE" ];then
 		firmware_check=16.1
 	fi
 elif [ "$productid" == "RT-AC68U" ];then
-	if [ "nvram get modelname" == "SBR-AC1900P" ];then
+	if [ "$(nvram get modelname)" == "SBR-AC1900P" ];then
 		firmware_check=4.2
 	else
 		firmware_check=1
 	fi
 elif [ "$productid" == "RT-AC3200" ];then
-	if [ "nvram get modelname" == "SBR-AC3200P" ];then
+	if [ "$(nvram get modelname)" == "SBR-AC3200P" ];then
 		firmware_check=4.2
 	else
 		firmware_check=1
 	fi
 elif [ "$productid" == "RT-AC3100" ];then
-	if [ "nvram get modelname" == "K3" ];then
+	if [ "$(nvram get modelname)" == "K3" ];then
 		firmware_check=4.1
 	else
 		firmware_check=1
 	fi
 elif [ "$productid" == "GT-AC5300" ];then
-	if [ "nvram get modelname" == "R7900P" ];then
+	if [ "$(nvram get modelname)" == "R7900P" ];then
 		firmware_check=1
 	else
 		firmware_check=1
@@ -86,6 +86,9 @@ mkdir -p /jffs/softcenter/koolproxyR/data/rules
 cp -rf /tmp/koolproxyR/scripts/* /jffs/softcenter/scripts/
 cp -rf /tmp/koolproxyR/webs/* /jffs/softcenter/webs/
 cp -rf /tmp/koolproxyR/res/* /jffs/softcenter/res/
+if [ "`nvram get model`" == "GT-AC5300" ] || [ "`nvram get model`" == "GT-AC2900" ];then
+	cp -rf /tmp/koolproxyR/ROG/webs/* /jffs/softcenter/webs/
+fi
 if [ ! -f /jffs/softcenter/koolproxyR/data/rules/user.txt ];then
 	cp -rf /tmp/koolproxyR/koolproxyR /jffs/softcenter/
 else

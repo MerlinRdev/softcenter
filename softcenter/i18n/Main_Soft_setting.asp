@@ -25,11 +25,11 @@
 <script type="text/javascript" src="/dbconf?p=adm_&v=<% uptime(); %>"></script>
 <script type="text/javascript" src="/res/softcenter.js"></script>
 <script language="JavaScript" type="text/javascript" src="/client_function.js"></script>
-<script type="text/javascript" src="res/lang.js"></script>  
+<script type="text/javascript" src="res/lang.js">//load lang js file</script>
 <script>
 function init(menu_hook) {
 	show_menu();
-	sc_load_lang("Main_Soft_setting");
+	sc_load_lang("Main_Soft_setting");//dict name:/res/Main_Soft_settingCN.json
 }
 function onSubmitCtrl(o, s) {
 	document.form.action_mode.value = s;
@@ -165,6 +165,7 @@ function checkCmdRet(){
 								<tr>
 									<td bgcolor="#4D595D" colspan="3" valign="top">
 										<div>&nbsp;</div>
+										<!-- add sclang to enable it -->
 										<div sclang style="float:left;" class="formfonttitle">Software Center, Offline installation</div>
 										<div style="float:right; width:15px; height:25px;margin-top:10px"><img id="return_btn" onclick="reload_Soft_Center();" align="right" style="cursor:pointer;position:absolute;margin-left:-30px;margin-top:-25px;" title="返回软件中心" src="/images/backprev.png" onMouseOver="this.src='/images/backprevclick.png'" onMouseOut="this.src='/images/backprev.png'"></img></div>
 										<div style="margin-left:5px;margin-top:10px;margin-bottom:10px"><img src="/images/New_ui/export/line_export.png"></div>

@@ -1,6 +1,6 @@
 {
 "title":"<em>梅林固件&nbsp;-&nbsp;软件中心</em>",
-"content1":"<b>软件中心：新版1.2.1已经更新，低版本固件尽快更新,否则部分插件可能会无法运行</b>",
+"content1":"<b>软件中心：新版1.2.2已经更新，优化服务器分流</b>",
 "content2":"不兼容ks插件",
 "content3":"部分插件下载缓慢，5分钟后刷新查看",
 "content4":"<font color='#1E90FF'>交流反馈:&nbsp;&nbsp;</font>\
