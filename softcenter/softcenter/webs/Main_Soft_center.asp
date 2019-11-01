@@ -246,7 +246,7 @@ function appPostScript(moduleInfo, script) {
 	var data = {"action_script":script, "action_mode":" Refresh "};
 	//currState.name = moduleInfo.name;
 	//TODO auto choose for home_url
-
+	data["softcenter_home_url"] = db_softcenter_["softcenter_home_url"];
 	data["softcenter_installing_todo"] = moduleInfo.name;
 	if (script == "ks_app_install.sh") {
 		data["softcenter_installing_tar_url"] = moduleInfo.tar_url;
