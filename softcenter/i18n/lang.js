@@ -7,6 +7,9 @@ function sc_load_lang(path) {
     case "EN":
       setLanguage("EN",path);
       break
+    case "TW":
+      setLanguage("TW",path);
+      break
     case "CN":
       setLanguage("CN",path);
       break

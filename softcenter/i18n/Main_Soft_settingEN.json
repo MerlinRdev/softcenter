@@ -1,5 +1,5 @@
 {
-  "Software Center": "aabbcc",
+  "Software Center": "Software Center",
   "Software Center, Offline installation": "Software Center, Offline installation",
   "On this page, you can upload the plugin's offline installation package for manual installation;": "On this page, you can upload the plugin's offline installation package for manual installation;",
   "Offline installation will automatically decompress the tar.gz suffix archived package, then find out the install.sh file in the first level folder of the archived package and execute it;": "Offline installation will automatically decompress the tar.gz suffix archived package, then find out the install.sh file in the first level folder of the archived package and execute it;",
