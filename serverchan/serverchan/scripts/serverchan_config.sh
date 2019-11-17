@@ -12,22 +12,22 @@ remove_cron_job(){
 creat_cron_job(){
     echo 启动自动发送状态消息...
     if [[ "${serverchan_status_check}" == "1" ]]; then
-        cru a serverchan_check ${serverchan_check_time_min} ${serverchan_check_time_hour}" * * * /jffs/softcenter/scripts/serverchan_check_task.sh"
+        cru a serverchan_check ${serverchan_check_time_min} ${serverchan_check_time_hour}" * * * /bin/sh /jffs/softcenter/scripts/serverchan_check_task.sh"
     elif [[ "${serverchan_status_check}" == "2" ]]; then
-        cru a serverchan_check ${serverchan_check_time_min} ${serverchan_check_time_hour}" * * "${serverchan_check_week}" /jffs/softcenter/scripts/serverchan_check_task.sh"
+        cru a serverchan_check ${serverchan_check_time_min} ${serverchan_check_time_hour}" * * "${serverchan_check_week}" /bin/sh /jffs/softcenter/scripts/serverchan_check_task.sh"
     elif [[ "${serverchan_status_check}" == "3" ]]; then
-        cru a serverchan_check ${serverchan_check_time_min} ${serverchan_check_time_hour} ${serverchan_check_day}" * * /jffs/softcenter/scripts/serverchan_check_task.sh"
+        cru a serverchan_check ${serverchan_check_time_min} ${serverchan_check_time_hour} ${serverchan_check_day}" * * /bin/sh /jffs/softcenter/scripts/serverchan_check_task.sh"
     elif [[ "${serverchan_status_check}" == "4" ]]; then
         if [[ "${serverchan_check_inter_pre}" == "1" ]]; then
-            cru a serverchan_check "*/"${serverchan_check_inter_min}" * * * * /jffs/softcenter/scripts/serverchan_check_task.sh"
+            cru a serverchan_check "*/"${serverchan_check_inter_min}" * * * * /bin/sh /jffs/softcenter/scripts/serverchan_check_task.sh"
         elif [[ "${serverchan_check_inter_pre}" == "2" ]]; then
-            cru a serverchan_check "0 */"${serverchan_check_inter_hour}" * * * /jffs/softcenter/scripts/serverchan_check_task.sh"
+            cru a serverchan_check "0 */"${serverchan_check_inter_hour}" * * * /bin/sh /jffs/softcenter/scripts/serverchan_check_task.sh"
         elif [[ "${serverchan_check_inter_pre}" == "3" ]]; then
-            cru a serverchan_check ${serverchan_check_time_min} ${serverchan_check_time_hour}" */"${serverchan_check_inter_day} " * * /jffs/softcenter/scripts/serverchan_check_task.sh"
+            cru a serverchan_check ${serverchan_check_time_min} ${serverchan_check_time_hour}" */"${serverchan_check_inter_day} " * * /bin/sh /jffs/softcenter/scripts/serverchan_check_task.sh"
         fi
     elif [[ "${serverchan_status_check}" == "5" ]]; then
         check_custom_time=`dbus get serverchan_check_custom | base64_decode`
-        cru a serverchan_check ${serverchan_check_time_min} ${check_custom_time}" * * * /jffs/softcenter/scripts/serverchan_check_task.sh"
+        cru a serverchan_check ${serverchan_check_time_min} ${check_custom_time}" * * * /bin/sh /jffs/softcenter/scripts/serverchan_check_task.sh"
     else
         remove_cron_job
     fi
@@ -69,11 +69,6 @@ remove_trigger_ifup(){
 }
 
 onstart(){
-	if [ "`nvram get productid`" == "BLUECAVE" ];then
-		cp -r /jffs/softcenter/scripts/serverchan_config.sh /jffs/softcenter/init.d/M98serverchan.sh
-	else
-		ln -sf /jffs/softcenter/scripts/serverchan_config.sh /jffs/softcenter/init.d/S98serverchan.sh
-	fi
     creat_cron_job
     creat_trigger_ifup
     if [ "${serverchan_trigger_dhcp}" == "1" ]; then
@@ -98,7 +93,7 @@ stop)
     remove_cron_job
     logger "[软件中心]: 关闭ServerChan！"
     ;;
-restart)
+*)
     if [[ "${serverchan_enable}" == "1" ]]; then
         logger "[软件中心]: 启动ServerChan！"
         onstart
@@ -107,3 +102,4 @@ restart)
     fi
     ;;
 esac
+

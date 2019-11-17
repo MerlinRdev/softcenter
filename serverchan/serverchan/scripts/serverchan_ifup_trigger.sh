@@ -19,7 +19,7 @@ fi
 serverchan_ifup_text="/tmp/.serverchan_ifup.md"
 send_title=`dbus get serverchan_config_name | base64_decode` || "本次未获取到！"
 router_uptime=`cat /proc/uptime | awk '{print $1}' | awk '{print int($1/86400)"天 "int($1%86400/3600)"小时 "int(($1%3600)/60)"分钟 "int($1%60)"秒"}'`
-router_reboot_time=`echo $(date "+%Y年%m月%d日 %H点%M分%S秒")`
+router_reboot_time=`echo $(TZ=UTC-8 date "+%Y年%m月%d日 %H点%M分%S秒")`
 
 echo "#### ** 你的网络刚刚发生了重启，重启后WAN信息如下： **" > ${serverchan_ifup_text}
 echo "---" >> ${serverchan_ifup_text}
@@ -80,6 +80,7 @@ do
 done
 sleep 2
 rm -rf ${serverchan_ifup_text}
-if [[ "${serverchan_trigger_ifup_sendinfo}" == "1" ]]; then
-    sh /jffs/softcenter/scripts/serverchan_check_task.sh
+if [ "${serverchan_trigger_ifup_sendinfo}" == "1" ]; then
+	sh /koolshare/scripts/serverchan_check.sh restart
 fi
+

@@ -1,20 +1,20 @@
 {
     "apps": [
         {
-            "build_date": "2019-11-01_10:34:26", 
+            "build_date": "2019-11-17_21:44:25", 
             "description": "KPR更多规则更舒服！", 
             "home_url": "Module_koolproxyR.asp", 
-            "md5": "dcb8b2e4e143f483a91b97b8d9c5627c", 
+            "md5": "bb2c87aed6b7c3580dee839c40fbbd29", 
             "name": "koolproxyR", 
             "tar_url": "koolproxyR/koolproxyR.tar.gz", 
             "title": "koolproxyR", 
             "version": "1.0.1"
         }, 
         {
-            "build_date": "2019-11-01_10:41:49", 
+            "build_date": "2019-11-17_21:44:40", 
             "description": "科学上网", 
             "home_url": "Main_Ss_Content.asp", 
-            "md5": "b23f63a19e22eab447c361b34cddba65", 
+            "md5": "5cf48ecc7f8e056c8e632456e694f0cf", 
             "name": "shadowsocks", 
             "tar_url": "shadowsocks/shadowsocks.tar.gz", 
             "title": "科学上网", 
@@ -71,10 +71,10 @@
             "version": "0.3"
         }, 
         {
-            "build_date": "2019-11-01_10:34:20", 
+            "build_date": "2019-11-17_21:44:20", 
             "description": "去广告，没烦恼", 
             "home_url": "Module_koolproxy.asp", 
-            "md5": "3c16b997fdc82c45476a8623d34aad63", 
+            "md5": "4f05bac032ef532ea32a9b35094615df", 
             "name": "koolproxy", 
             "tar_url": "koolproxy/koolproxy.tar.gz", 
             "title": "koolproxy", 
@@ -141,16 +141,6 @@
             "version": "1.1"
         }, 
         {
-            "build_date": "2019-11-02_13:11:50", 
-            "description": "自己的私有云", 
-            "home_url": "Module_verysync.asp", 
-            "md5": "701d5dd14ac69c5a8654b2a376c2323f", 
-            "name": "verysync", 
-            "tar_url": "verysync/verysync.tar.gz", 
-            "title": "微力同步", 
-            "version": "1.0.0"
-        }, 
-        {
             "build_date": "2019-08-12_15:51:28", 
             "description": "这是一只自动帮你签到的dog", 
             "home_url": "Module_qiandao.asp", 
@@ -201,10 +191,10 @@
             "version": "1.4"
         }, 
         {
-            "build_date": "2019-11-01_10:29:54", 
+            "build_date": "2019-11-17_21:44:06", 
             "description": "自动部署SSL证书", 
             "home_url": "Module_acme.asp", 
-            "md5": "c36d099de2cc9410ea81f0ddef1aaa0e", 
+            "md5": "5931399229bac3bc52fba47c26849801", 
             "name": "acme", 
             "tar_url": "acme/acme.tar.gz", 
             "title": "Let's Encrypt", 
@@ -241,14 +231,14 @@
             "version": "1.2"
         }, 
         {
-            "build_date": "2019-09-29_00:07:55", 
+            "build_date": "2019-11-06_12:05:39", 
             "description": "从路由器推送状态及通知的工具", 
             "home_url": "Module_serverchan.asp", 
-            "md5": "a0f75aa3558fa41c549c499f93519ea6", 
+            "md5": "f453b7262be329f27481d89fdcf812a3", 
             "name": "serverchan", 
             "tar_url": "serverchan/serverchan.tar.gz", 
             "title": "ServerChan微信推送", 
-            "version": "1.2"
+            "version": "1.3"
         }, 
         {
             "build_date": "2019-11-01_10:32:06", 
@@ -272,7 +262,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "6d41b43714a8722f53f63cad2451bc46", 
+    "md5": "44a3f0f9cdb0225afc7f680dbf22c4c8", 
     "tar_url": "softcenter/softcenter.tar.gz", 
-    "version": "1.2.2"
+    "version": "1.2.3"
 }

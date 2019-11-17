@@ -560,10 +560,10 @@ $(function() {
 			        db_softcenter_["softcenter_home_url"] = "https://sc.paldier.com";
 			}
 			else if(db_softcenter_["softcenter_server_tcode"] == "CN1") {
-			        db_softcenter_["softcenter_home_url"] = "https://123.56.45.194";
+			        db_softcenter_["softcenter_home_url"] = "https://sc.softcenter.site";
 			}
 			else if(db_softcenter_["softcenter_server_tcode"] == "ALI") {
-			        db_softcenter_["softcenter_home_url"] = "https://121.40.153.145";
+			        db_softcenter_["softcenter_home_url"] = "https://wufan.softcenter.site";
 			}
 			else
 			        db_softcenter_["softcenter_home_url"] = "https://sc.paldier.com";

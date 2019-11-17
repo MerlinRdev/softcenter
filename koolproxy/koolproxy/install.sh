@@ -4,53 +4,10 @@ eval `dbus export koolproxy`
 alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
 DIR=$(cd $(dirname $0); pwd)
 touch /tmp/kp_log.txt
-firmware_version=`nvram get extendno|cut -d "_" -f2|cut -d "-" -f1|cut -c2-5`
-productid=`nvram get productid`
-if [ "$productid" == "BLUECAVE" ];then
-	if [ "$(nvram get modelname)" == "K3C" ];then
-	firmware_ver=`nvram get extendno|grep B`
-	if [ -n "$firmware_ver" ];then
-		firmware_check=22.1
-	else
-		firmware_check=7.1
-	fi
-	else
-		firmware_check=16.1
-	fi
-elif [ "$productid" == "RT-AC68U" ];then
-	if [ "$(nvram get modelname)" == "SBR-AC1900P" ];then
-		firmware_check=4.2
-	else
-		firmware_check=1
-	fi
-elif [ "$productid" == "RT-AC3200" ];then
-	if [ "$(nvram get modelname)" == "SBR-AC3200P" ];then
-		firmware_check=4.2
-	else
-		firmware_check=1
-	fi
-elif [ "$productid" == "RT-AC3100" ];then
-	if [ "$(nvram get modelname)" == "K3" ];then
-		firmware_check=4.1
-	else
-		firmware_check=1
-	fi
-elif [ "$productid" == "GT-AC5300" ];then
-	if [ "$(nvram get modelname)" == "R7900P" ];then
-		firmware_check=1
-	else
-		firmware_check=1
-	fi
-elif [ "$productid" == "GT-AC2900" ];then
-	firmware_check=1
-elif [ "$productid" == "RT-AC86U" ];then
-	firmware_check=1
-elif [ "$productid" == "RT-AC88U" ];then
-	firmware_check=1
-elif [ "$productid" == "RT-ACRH17" ];then
-	firmware_check=1
-else
-	firmware_check=100
+firmware_version=`nvram get extendno|cut -d "_" -f2|cut -d "-" -f1|cut -c2-6`
+firmware_check=5.0.1
+if [ ${#firmware_version} -lt 5 ];then
+	firmware_version=1.0.0
 fi
 firmware_comp=`/jffs/softcenter/bin/versioncmp $firmware_version $firmware_check`
 if [ "$firmware_comp" == "1" ];then

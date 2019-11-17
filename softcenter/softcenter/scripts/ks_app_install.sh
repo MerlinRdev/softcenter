@@ -106,9 +106,9 @@ install_module() {
 	if [ "$softcenter_server_tcode" == "CN" ]; then
 		HOME_URL="http://update.wifi.com.cn/$ARCH_SUFFIX"
 	elif [ "$softcenter_server_tcode" == "CN1" ]; then
-		HOME_URL="https://123.56.45.194/$ARCH_SUFFIX"
+		HOME_URL="https://sc.softcenter.site/$ARCH_SUFFIX"
 	elif [ "$softcenter_server_tcode" == "ALI" ]; then
-		HOME_URL="https://121.40.153.145/$ARCH_SUFFIX"
+		HOME_URL="https://wufan.softcenter.site/$ARCH_SUFFIX"
 	else
 		HOME_URL="https://sc.paldier.com/$ARCH_SUFFIX"
 	fi
