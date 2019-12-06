@@ -2,7 +2,7 @@
 
 
 MODULE=aria2
-VERSION=2.6
+VERSION=2.7
 TITLE=Aria2
 DESCRIPTION=linux下载利器
 HOME_URL=Module_aria2.asp
@@ -30,4 +30,3 @@ cd $DIR
 
 do_build_result
 
-sh backup.sh $MODULE

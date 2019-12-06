@@ -180,7 +180,7 @@ document.form.baidupcs_enable.value = 0;
 <tr id="baidupcs_savedir_tr">
 <th>设置下载目录</th>
 <td>
-<input name="baidupcs_savedir" style="background-color: #475A5F;color:#FFFFFF;" value="<% dbus_get_def("baidupcs_savedir", ""); %>">
+<input name="baidupcs_savedir" class="input_32_table" value="<% dbus_get_def("baidupcs_savedir", ""); %>">
 </td>
 </tr>
 <tr id="baidupcs_https_tr">
@@ -218,7 +218,7 @@ document.form.baidupcs_enable.value = 0;
 </tr>
 </thead>
 <tr><td colspan="2">
-<textarea cols="63" rows="25" wrap="off" readonly="readonly" id="textarea" style="width:99%;font-family:Courier New, Courier, mono; font-size:11px;background:#475A5F;color:#FFFFFF;">
+<textarea cols="63" rows="25" wrap="off" readonly="readonly" id="textarea"style="width:99%;font-family:Courier New, Courier, mono; font-size:11px;" class="textarea_ssh_table">
 <% nvram_dump("baidupcs.log",""); %>
 </textarea>
 </td></tr>

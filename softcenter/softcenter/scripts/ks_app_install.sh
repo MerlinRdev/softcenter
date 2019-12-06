@@ -94,9 +94,9 @@ install_module() {
 		modelname=`nvram get modelname`
 		if [ "$modelname" == "K3" ]; then
 			dbus set softcenter_server_tcode=CN
-		elif [ "$modelname" == "SBR-AC1900P" -o "$modelname" == "SBR-AC3200P" -o "$modelname" == "R7900P" ]; then
+		elif [ "$modelname" == "SBRAC1900P" -o "$modelname" == "SBR-AC1900P" -o "$modelname" == "SBRAC3200P" -o "$modelname" == "SBR-AC3200P" -o "$modelname" == "R7900P" -o "$modelname" == "R8000P" ]; then
 			dbus set softcenter_server_tcode=ALI
-		elif [ "$modelname" == "GT-AC2900" -o "$modelname" == "GT-AC5300" -o "$modelname" == "RT-AX58U" ]; then
+		elif [ "$modelname" == "GTAC2900" -o "$modelname" == "GTAC5300" -o "$modelname" == "RTAC86U" ]; then
 			dbus set softcenter_server_tcode=CN1
 		else
 			dbus set softcenter_server_tcode=`nvram get territory_code |cut -c 1-2`

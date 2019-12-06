@@ -1290,10 +1290,12 @@
 			}
 			function generate_ariang_link() {
 				var link_ariang = window.btoa(db_aria2_["aria2_ddnsto_token"])
+				var link_ariang1 = window.btoa(db_aria2_["aria2_rpc_secret"])
+
 				if (E("aria2_ddnsto").checked) {
 					E("link4.1").href = "http://aria2.me/aria-ng/#!/settings/rpc/set/wss/www.ddnsto.com/443/jsonrpc/" + link_ariang;
 				} else {
-					E("link4.1").href = "http://aria2.me/aria-ng/#!/settings/rpc/set/http/" + '<% nvram_get("lan_ipaddr"); %>' + "/" + db_aria2_["aria2_rpc_listen_port"] + "/jsonrpc/" + link_ariang;
+					E("link4.1").href = "http://aria2.me/aria-ng/#!/settings/rpc/set/http/" + '<% nvram_get("lan_ipaddr"); %>' + "/" + db_aria2_["aria2_rpc_listen_port"] + "/jsonrpc/" + link_ariang1;
 				}
 			}
 			
