@@ -141,14 +141,24 @@
             "version": "1.1"
         }, 
         {
-            "build_date": "2019-12-24_11:56:02", 
-            "description": "天翼云盘，为宽带提速而生！！！", 
+            "build_date": "2020-01-06_18:24:10", 
+            "description": "腾讯云ddns", 
             "home_url": "Module_tenddns.asp", 
-            "md5": "1c53204d93b8f608d81b54662098392d", 
+            "md5": "f229c8ea5ffe57d99364cba9b800d7f1", 
             "name": "tenddns", 
             "tar_url": "tenddns/tenddns.tar.gz", 
             "title": "腾讯云ddns", 
             "version": "0.0.1"
+        }, 
+        {
+            "build_date": "2020-01-06_18:21:51", 
+            "description": "自己的私有云", 
+            "home_url": "Module_verysync.asp", 
+            "md5": "c32ae5b6b37577ba63fb4cc6c81df6f0", 
+            "name": "verysync", 
+            "tar_url": "verysync/verysync.tar.gz", 
+            "title": "微力同步", 
+            "version": "1.0.0"
         }, 
         {
             "build_date": "2019-08-12_15:51:28", 
@@ -169,16 +179,6 @@
             "tar_url": "aliddns/aliddns.tar.gz", 
             "title": "阿里DDNS", 
             "version": "1.3"
-        }, 
-        {
-            "build_date": "2019-08-12_22:03:09", 
-            "description": "网易uu", 
-            "home_url": "Module_uu.asp", 
-            "md5": "81a38159ec791c65e428d78963714d27", 
-            "name": "uu", 
-            "tar_url": "uu/uu.tar.gz", 
-            "title": "网易uu", 
-            "version": "1.2.12"
         }, 
         {
             "build_date": "2019-08-16_00:18:09", 
@@ -272,7 +272,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "fa0b1d0ec36ac3107c534a04f2dea36d", 
+    "md5": "46c951ca08e18b2853449f0a16e6bae9", 
     "tar_url": "softcenter/softcenter.tar.gz", 
-    "version": "1.2.3"
+    "version": "1.2.4"
 }
