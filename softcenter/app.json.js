@@ -141,6 +141,16 @@
             "version": "1.1"
         }, 
         {
+            "build_date": "2019-12-24_11:56:02", 
+            "description": "天翼云盘，为宽带提速而生！！！", 
+            "home_url": "Module_tenddns.asp", 
+            "md5": "1c53204d93b8f608d81b54662098392d", 
+            "name": "tenddns", 
+            "tar_url": "tenddns/tenddns.tar.gz", 
+            "title": "腾讯云ddns", 
+            "version": "0.0.1"
+        }, 
+        {
             "build_date": "2019-08-12_15:51:28", 
             "description": "这是一只自动帮你签到的dog", 
             "home_url": "Module_qiandao.asp", 
@@ -201,14 +211,14 @@
             "version": "3.0"
         }, 
         {
-            "build_date": "2019-11-01_10:32:42", 
+            "build_date": "2020-01-06_18:15:41", 
             "description": "使用Dnspod的ddns服务", 
             "home_url": "Module_ddnspod.asp", 
-            "md5": "7d8e1f419cbb680c39c9be06ca201375", 
+            "md5": "d35740abc13fe6263ea3d7e910658c91", 
             "name": "ddnspod", 
             "tar_url": "ddnspod/ddnspod.tar.gz", 
             "title": "DDnspod", 
-            "version": "1.3"
+            "version": "1.4"
         }, 
         {
             "build_date": "2019-09-26_21:30:51", 
@@ -231,14 +241,14 @@
             "version": "1.3"
         }, 
         {
-            "build_date": "2019-11-06_12:05:39", 
+            "build_date": "2020-01-06_18:16:14", 
             "description": "从路由器推送状态及通知的工具", 
             "home_url": "Module_serverchan.asp", 
-            "md5": "f453b7262be329f27481d89fdcf812a3", 
+            "md5": "499f1db9ecb95b0a7e176703cc6bcfec", 
             "name": "serverchan", 
             "tar_url": "serverchan/serverchan.tar.gz", 
             "title": "ServerChan微信推送", 
-            "version": "1.3"
+            "version": "1.4"
         }, 
         {
             "build_date": "2019-11-01_10:32:06", 

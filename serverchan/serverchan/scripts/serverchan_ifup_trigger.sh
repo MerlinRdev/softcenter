@@ -81,6 +81,6 @@ done
 sleep 2
 rm -rf ${serverchan_ifup_text}
 if [ "${serverchan_trigger_ifup_sendinfo}" == "1" ]; then
-	sh /koolshare/scripts/serverchan_check.sh restart
+	sh /jffs/softcenter/scripts/serverchan_check.sh restart
 fi
 

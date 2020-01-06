@@ -1,4 +1,6 @@
 #!/bin/sh
+set -x
+while true; do
 source /jffs/softcenter/scripts/base.sh
 eval `dbus export serverchan_`
 if [ "${serverchan_config_ntp}" == "" ]; then
@@ -18,24 +20,21 @@ time_diff=`expr ${dhcp_lease_time} - ${client_lease_time}`
 
 if [ "${time_diff}" -gt "30" ]; then
     #logger "[ServerChan]: 未发现新上线设备，推送任务通道静默！"
-    exit
+    break
 fi
 [ "${serverchan_info_logger}" == "1" ] && logger "[ServerChan]: 启动设备上线通知任务！"
-dnsmasq_pid=`ps | grep "dnsmasq" | grep "nobody" | grep -v grep | awk '{print $1}'`
-kill -12 ${dnsmasq_pid}
-sleep 1
 if [[ "${serverchan_enable}" != "1" ]]; then
     [ "${serverchan_info_logger}" == "1" ] && logger "[ServerChan]: 程序未开启，自动退出！"
-    exit
+    break
 fi
 if [[ ${serverchan_trigger_dhcp} != "1" ]]; then
-    exit
+    break
 fi
 if [[ "${serverchan_silent_time}" == "1" ]]; then
     router_now_hour=`date "+%H"`
     if [[ "${router_now_hour}" -ge "${serverchan_silent_time_start_hour}" ]] || [[ "${router_now_hour}" -lt "${serverchan_silent_time_end_hour}" ]]; then
         [ "${serverchan_info_logger}" == "1" ] && logger "[ServerChan]: 推送时间在消息免打扰时间内，推送任务通道静默！"
-        exit
+        break
     fi
 fi
 send_title=`dbus get serverchan_config_name | base64_decode` || "本次未获取到！"
@@ -61,14 +60,14 @@ if [[ "${serverchan_dhcp_bwlist_en}" == "1" ]]; then
         trigger_dhcp_white_diff=`echo $(dbus get serverchan_trigger_dhcp_white | base64_decode | grep -i "${client_lease_mac}")`
         if [[ "${trigger_dhcp_white_diff}" != "" ]]; then
             [ "${serverchan_info_logger}" == "1" ] && logger "[ServerChan]: 新登录设备在设备上线提醒白名单列表内，推送任务通道静默！"
-            exit
+            break
         fi
     fi
     if [[ "${serverchan_dhcp_black_en}" == "1" ]]; then
         trigger_dhcp_black_diff=`echo $(dbus get serverchan_trigger_dhcp_white | base64_decode | grep -i "${client_lease_mac}")`
         if [[ "${trigger_dhcp_black_diff}" == "" ]]; then
             [ "${serverchan_info_logger}" == "1" ] && logger "[ServerChan]: 新登录设备不在设备上线提醒黑名单列表内，推送任务通道静默！"
-            exit
+            break
         fi
     fi
 fi
@@ -79,7 +78,7 @@ if [[ "${get_lease_send_mac}" == "${client_lease_mac}" ]]; then
     join_time_diff=`expr ${join_time_format} - ${get_lease_send_time}`
     if [ "${join_time_diff}" -lt "600" ]; then
         [ "${serverchan_info_logger}" == "1" ] && logger "[ServerChan]: 重复上线，推送任务通道静默！"
-        exit
+        break
     fi
 fi
 
@@ -153,3 +152,5 @@ do
 done
 sleep 2
 rm -rf ${serverchan_lease_text}
+break
+done

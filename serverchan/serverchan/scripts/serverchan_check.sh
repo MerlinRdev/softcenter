@@ -27,9 +27,9 @@ tcode=`dbus get softcenter_server_tcode`
 if [ "$tcode" == "CN" ]; then
 	scurl="http://update.wifi.com.cn"
 elif [ "$tcode" == "CN1" ]; then
-	scurl="http://123.56.45.194"
+	scurl="https://sc.softcenter.site"
 elif [ "$tcode" == "ALI" ]; then
-	scurl="http://121.40.153.145"
+	scurl="https://wufan.softcenter.site"
 else
 	scurl="https://sc.paldier.com"
 fi
@@ -67,18 +67,11 @@ restart)
 	echo "###### 本次信息推送：手动推送." > ${serverchan_info_text}
 	;;
 esac
-dnsmasq_pid=`ps | grep "dnsmasq" | grep "nobody" | grep -v grep | awk '{print $1}'`
-kill -12 ${dnsmasq_pid}
-sleep 1
-if [ "$productid" == "BLUECAVE" ];then
-	if [[ ! -f /jffs/softcenter/bin/base64_decode ]];then
-	    cp -rf /jffs/softcenter/bin/base64_encode /jffs/softcenter/bin/base64_decode
-	fi
-else
-	if [[ ! -L /jffs/softcenter/bin/base64_decode ]];then
-	    ln -s /jffs/softcenter/bin/base64_encode /jffs/softcenter/bin/base64_decode
-	fi
+
+if [[ ! -L /jffs/softcenter/bin/base64_decode ]];then
+    ln -s /jffs/softcenter/bin/base64_encode /jffs/softcenter/bin/base64_decode
 fi
+
 send_title=`dbus get serverchan_config_name| base64_decode`
 # 系统运行状态
 if [ "${serverchan_info_system}" == "1" ]; then
