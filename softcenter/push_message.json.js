@@ -1,7 +1,7 @@
 {
 "title":"<em>梅林固件&nbsp;-&nbsp;软件中心</em>",
-"content1":"<b>软件中心：新版1.2.3已经更新，优化服务器分流</b>",
-"content2":"固件最新版本：5.0.1",
+"content1":"<b>软件中心：新版1.2.4已经更新，优化服务器分流</b>",
+"content2":"固件最新版本：5.0.7:优化插件启动稳定性",
 "content3":"部分插件下载缓慢，5分钟后刷新查看",
 "content4":"<font color='#1E90FF'>交流反馈:&nbsp;&nbsp;</font>\
 <a href='https://github.com/paldier/softcenter' target='_blank'><em>1.软件中心GitHub项目</em></a>&nbsp;&nbsp;&nbsp;&nbsp;\
