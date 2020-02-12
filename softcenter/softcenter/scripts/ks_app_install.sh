@@ -54,8 +54,8 @@ KVER=`uname -r`
 if [ "$KVER" == "4.1.52" -o "$KVER" == "4.1.49" ];then
 	ARCH_SUFFIX="armng"
 fi
-if [ "$KVER" == "3.14.77" ];then
-	ARCH_SUFFIX="armqca"
+if [ "$KVER" == "3.10.14" ];then
+	ARCH_SUFFIX="mipsle"
 fi
 VER_SUFFIX=_version
 MD5_SUFFIX=_md5
