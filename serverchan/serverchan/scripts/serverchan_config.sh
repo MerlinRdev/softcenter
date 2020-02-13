@@ -54,11 +54,7 @@ remove_trigger_dhcp(){
 creat_trigger_ifup(){
     rm -f /jffs/softcenter/init.d/*serverchan.sh
     if [[ "${serverchan_trigger_ifup}" == "1" ]]; then
-	if [ "`nvram get productid`" == "BLUECAVE" ];then
-		cp -r /jffs/softcenter/scripts/serverchan_ifup_trigger.sh /jffs/softcenter/init.d/M99serverchan.sh
-	else
-		ln -sf /jffs/softcenter/scripts/serverchan_ifup_trigger.sh /jffs/softcenter/init.d/S99serverchan.sh
-	fi
+    	ln -sf /jffs/softcenter/scripts/serverchan_ifup_trigger.sh /jffs/softcenter/init.d/S99serverchan.sh
     else
         rm -f /jffs/softcenter/init.d/*serverchan.sh
     fi

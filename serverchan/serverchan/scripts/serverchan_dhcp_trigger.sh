@@ -13,7 +13,7 @@ ntpclient -h ${ntp_server} -i3 -l -s > /dev/null 2>&1
 dnsmasq_leases_file="/var/lib/misc/dnsmasq.leases"
 serverchan_lease_text="/tmp/.serverchan_dhcp.md"
 dhcp_lease_time=`nvram get dhcp_lease`
-client_join_time=`date "+%Y-%m-%d %H:%M:%S"`
+client_join_time=`TZ=UTC-8 date "+%Y-%m-%d %H:%M:%S"`
 client_lease_info=`cat ${dnsmasq_leases_file} | sort -rn | head -n1`
 client_lease_time=`echo ${client_lease_info} | awk '{print $1}'`
 time_diff=`expr ${dhcp_lease_time} - ${client_lease_time}`
@@ -38,9 +38,9 @@ if [[ "${serverchan_silent_time}" == "1" ]]; then
     fi
 fi
 send_title=`dbus get serverchan_config_name | base64_decode` || "本次未获取到！"
-client_join_time_format=`date -d "${client_join_time}" "+%Y年%m月%d日 %H点%M分%S秒"`
-client_lease_epired_time=`date -d @$(expr $(date -d "${client_join_time}" +%s) + ${dhcp_lease_time}) "+%Y-%m-%d %H:%M:%S"`
-client_lease_epired_time_format=`date -d "${client_lease_epired_time}" "+%Y年%m月%d日 %H点%M分%S秒"`
+client_join_time_format=`TZ=UTC-8 date -d "${client_join_time}" "+%Y年%m月%d日 %H点%M分%S秒"`
+client_lease_epired_time=`TZ=UTC-8 date -d @$(expr $(TZ=UTC-8 date -d "${client_join_time}" +%s) + ${dhcp_lease_time}) "+%Y-%m-%d %H:%M:%S"`
+client_lease_epired_time_format=`TZ=UTC-8 date -d "${client_lease_epired_time}" "+%Y年%m月%d日 %H点%M分%S秒"`
 total_lease_client=`cat ${dnsmasq_leases_file} | wc -l`
 client_lease_mac=`echo ${client_lease_info} | awk '{print $2}' | tr '[A-Z]' '[a-z]'`
 client_lease_ip=`echo ${client_lease_info} | awk '{print $3}'`
@@ -83,7 +83,7 @@ if [[ "${get_lease_send_mac}" == "${client_lease_mac}" ]]; then
 fi
 
 dbus set serverchan_lease_send_mac="${client_lease_mac}"
-dbus set serverchan_lease_send_time="`date -d "${client_join_time}" +%s`"
+dbus set serverchan_lease_send_time="`TZ=UTC-8 date -d "${client_join_time}" +%s`"
 echo "##### ** 刚刚有新的客户端加入了你的网络，信息如下： **" > ${serverchan_lease_text}
 echo "---" >> ${serverchan_lease_text}
 echo "##### 客户端名: ${client_lease_name}" >> ${serverchan_lease_text}
@@ -144,7 +144,7 @@ do
     serverchan_config_sckey=`dbus get serverchan_config_sckey_${nu}`
     url="https://sc.ftqq.com/${serverchan_config_sckey}.send"
     result=`wget --no-check-certificate --post-data "text=${serverchan_send_title}&desp=${serverchan_send_content}" -qO- ${url}`
-    if [ $(echo $result | grep "success") != "" ];then
+    if [ -n $(echo $result | grep "success") ];then
         [ "${serverchan_info_logger}" == "1" ] && logger "[ServerChan]: 设备上线信息推送到 SCKEY No.${nu} 成功！！"
     else
         [ "${serverchan_info_logger}" == "1" ] && logger "[ServerChan]: 设备上线信息推送到 SCKEY No.${nu} 失败，请检查网络及配置！"
@@ -154,3 +154,4 @@ sleep 2
 rm -rf ${serverchan_lease_text}
 break
 done
+

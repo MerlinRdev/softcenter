@@ -22,7 +22,13 @@ elif [ "$ARCH" == "mipsle" ]; then
 else
 	ARCH_SUFFIX="arm"
 fi
-
+KVER=`uname -r`
+if [ "$KVER" == "4.1.52" -o "$KVER" == "4.1.49" ];then
+	ARCH_SUFFIX="armng"
+fi
+if [ "$KVER" == "3.10.14" ];then
+	ARCH_SUFFIX="mipsle"
+fi
 tcode=`dbus get softcenter_server_tcode`
 if [ "$tcode" == "CN" ]; then
 	scurl="http://update.wifi.com.cn"
@@ -122,6 +128,20 @@ if [[ "${serverchan_info_temp}" == "1" ]]; then
 		interface_2_temperature=`iwpriv ${interface_2} gTemperature | awk '{print $3}'`
 		interface_5_temperature=`iwpriv ${interface_5} gTemperature | awk '{print $3}'`
 		router_cpu_temperature=`cat /sys/kernel/debug/ltq_tempsensor/allsensors | awk '{print $5}' | grep -Eo '[0-9]+' |cut -c1-2 |sed -n '2p'`
+	elif [ "$productid" == "RT-ACRH17" -o "$productid" == "RT-AC82U" ];then
+		interface_2_temperature=`thermaltool -i wifi0 -get |grep temperature | awk '{print $3}'`
+		interface_5_temperature=`thermaltool -i wifi1 -get |grep temperature | awk '{print $3}'`
+		router_cpu_temperature=0
+	elif [ "$productid" == "RT-AC85U" -o "$productid" == "RT-AC85P" ];then
+		interface_2_temperature=0
+		interface_5_temperature=0
+		router_cpu_temperature=0
+	elif [ "$productid" == "RT-AC86U" -o "$productid" == "RT-AC2900" -o "$productid" == "GT-AC2900" -o "$productid" == "GT-AC5300" -o "$productid" == "TUF-AX3000" -o "$productid" == "RT-AX58U" ];then
+		pu_temperature_origin=`cat /sys/class/thermal/thermal_zone0/temp`
+		router_cpu_temperature=`awk 'BEGIN{printf "%.1f\n",('$cpu_temperature_origin'/'1000')}'`
+		interface_2_temperature=`wl -i ${interface_2} phy_tempsense | awk '{print $1}'`
+		interface_5_temperature=`wl -i ${interface_5} phy_tempsense | awk '{print $1}'`
+		[ -n "$interface_52" ] && interface_52_temperature=`wl -i ${interface_52} phy_tempsense | awk '{print $1}'`
 	else
 		interface_2_temperature=`wl -i ${interface_2} phy_tempsense | awk '{print $1}'`
 		interface_5_temperature=`wl -i ${interface_5} phy_tempsense | awk '{print $1}'`
@@ -486,7 +506,7 @@ do
 	serverchan_config_sckey=`dbus get serverchan_config_sckey_${nu}`
 	url="https://sc.ftqq.com/${serverchan_config_sckey}.send"
 	result=`wget --no-check-certificate --post-data "text=${serverchan_send_title}&desp=${serverchan_send_content}" -qO- ${url}`
-    if [ "$(echo $result | grep "success")" != "" ];then
+    if [ -n $(echo $result | grep "success") ];then
         [ "${serverchan_info_logger}" == "1" ] && logger "[ServerChan]: 路由器状态信息推送到 SCKEY No.${nu} 成功！"
     else
 	result=`wget --no-check-certificate --post-data "text=${serverchan_send_title}&desp=${serverchan_send_content}" -qO- ${url}`

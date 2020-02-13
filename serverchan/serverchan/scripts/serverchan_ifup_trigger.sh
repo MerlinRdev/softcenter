@@ -72,7 +72,7 @@ do
     serverchan_config_sckey=`dbus get serverchan_config_sckey_${nu}`
     url="https://sc.ftqq.com/${serverchan_config_sckey}.send"
     result=`wget --no-check-certificate --post-data "text=${serverchan_send_title}&desp=${serverchan_send_content}" -qO- ${url}`
-    if [ $(echo $result | grep "success") != "" ];then
+    if [ -n $(echo $result | grep "success") ];then
         [ "${serverchan_info_logger}" == "1" ] && logger "[ServerChan]: 网络重启信息推送到 SCKEY No.${nu} 成功！！"
     else
         [ "${serverchan_info_logger}" == "1" ] && logger "[ServerChan]: 网络重启信息推送到 SCKEY No.${nu} 失败，请检查网络及配置！"
@@ -80,7 +80,7 @@ do
 done
 sleep 2
 rm -rf ${serverchan_ifup_text}
-if [ "${serverchan_trigger_ifup_sendinfo}" == "1" ]; then
+if [ $serverchan_trigger_ifup_sendinfo == 1 ];then
 	sh /jffs/softcenter/scripts/serverchan_check.sh restart
 fi
 
