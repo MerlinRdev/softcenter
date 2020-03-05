@@ -16,7 +16,7 @@ rm -rf /jffs/softcenter/init.d/*aliddns.sh
 cp -rf /tmp/aliddns/scripts/* /jffs/softcenter/scripts/
 cp -rf /tmp/aliddns/webs/* /jffs/softcenter/webs/
 cp -rf /tmp/aliddns/res/* /jffs/softcenter/res/
-cp -rf /tmp/aliddns/install.sh /jffs/softcenter/scripts/uninstall_aliddns.sh
+cp -rf /tmp/aliddns/uninstall.sh /jffs/softcenter/scripts/uninstall_aliddns.sh
 chmod +x /jffs/softcenter/scripts/aliddns*
 chmod +x /jffs/softcenter/init.d/*
 if [ "$(nvram get productid)" = "BLUECAVE" -o "$modelname" = "R7900P" -o "$modelname" = "R8000P" -o "$softcenter_usbmount" = "1" ];then

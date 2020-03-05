@@ -1,6 +1,16 @@
 {
     "apps": [
         {
+            "build_date": "2020-03-05_22:53:59", 
+            "description": "解锁网易云灰色歌曲", 
+            "home_url": "Module_unblockmusic.asp", 
+            "md5": "6ed9a845eb28fb0993fd838d7f94fff5", 
+            "name": "unblockmusic", 
+            "tar_url": "unblockmusic/unblockmusic.tar.gz", 
+            "title": "解锁网易云灰色歌曲", 
+            "version": "1.0.0"
+        }, 
+        {
             "build_date": "2019-11-17_21:44:25", 
             "description": "KPR更多规则更舒服！", 
             "home_url": "Module_koolproxyR.asp", 
@@ -272,7 +282,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "da0147c6503fbd2e1f6927524592b012", 
+    "md5": "a468fb13bddcf6713708faddc25fbd84", 
     "tar_url": "softcenter/softcenter.tar.gz", 
     "version": "1.2.5"
 }
