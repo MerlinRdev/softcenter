@@ -305,6 +305,7 @@ detect_cert(){
 		cd /jffs/softcenter/koolproxyR/data && sh gen_ca.sh
 		echo_date 证书生成完毕！！！
 	fi
+	ln -sf /jffs/softcenter/koolproxyR/data/certs/ca.crt /www/ext/kp.crt
 }
 
 case $1 in

@@ -185,7 +185,7 @@ function hook_event(){
 	});
 	$("#download_cert").click(
 	function() {
-		location.href = "http://110.110.110.110";
+		window.open("http://"+window.location.hostname+"/ext/kp.crt");
 	});
 	$("#koolproxy_github").click(
 		function() {
@@ -1641,8 +1641,7 @@ function openkpHint(itemNum) {
 										</div>
 										<div id="ACL_note" style="margin-top: 5px;">
 											<div><i>1&nbsp;&nbsp;过滤https站点需要为相应设备安装证书，并启用http + https过滤！</i></div>
-											<div><i>2&nbsp;&nbsp;在路由器下的设备，不管是电脑，还是移动设备，都可以在浏览器中输入<u><font color='#66FF00'>110.110.110.110</font></u>来下载证书。</i></div>
-											<div><i>3&nbsp;&nbsp;如果想在多台装有koolroxy的路由设备上使用一个证书，请用winscp软件备份/jffs/softcenter/koolproxyR/data文件夹，并上传到另一台路由。</i></div>
+											<div><i>2&nbsp;&nbsp;如果想在多台装有koolroxy的路由设备上使用一个证书，请用winscp软件备份/jffs/softcenter/koolproxyR/data文件夹，并上传到另一台路由。</i></div>
 										</div>
 										<div class="apply_gen">
 											<input type="button" id="cmdBtn" class="button_gen" onclick="save();" value="提交"/>

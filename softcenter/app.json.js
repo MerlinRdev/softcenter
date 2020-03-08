@@ -11,24 +11,24 @@
             "version": "1.0.0"
         }, 
         {
-            "build_date": "2019-11-17_21:44:25", 
+            "build_date": "2020-03-06_00:04:55", 
             "description": "KPR更多规则更舒服！", 
             "home_url": "Module_koolproxyR.asp", 
-            "md5": "bb2c87aed6b7c3580dee839c40fbbd29", 
+            "md5": "346d19d3be4d8d3b740d4926cac594e9", 
             "name": "koolproxyR", 
             "tar_url": "koolproxyR/koolproxyR.tar.gz", 
             "title": "koolproxyR", 
-            "version": "1.0.1"
+            "version": "1.0.2"
         }, 
         {
-            "build_date": "2019-11-17_21:44:40", 
+            "build_date": "2020-03-08_17:50:46", 
             "description": "科学上网", 
             "home_url": "Main_Ss_Content.asp", 
-            "md5": "5cf48ecc7f8e056c8e632456e694f0cf", 
+            "md5": "fc5e28eddc5260a2f043735a9aa3d112", 
             "name": "shadowsocks", 
             "tar_url": "shadowsocks/shadowsocks.tar.gz", 
             "title": "科学上网", 
-            "version": "4.2.0"
+            "version": "4.2.2"
         }, 
         {
             "build_date": "2019-07-26_12:00:35", 
@@ -282,7 +282,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "a468fb13bddcf6713708faddc25fbd84", 
+    "md5": "866285264f622321d7d457544010b170", 
     "tar_url": "softcenter/softcenter.tar.gz", 
     "version": "1.2.5"
 }

@@ -3,15 +3,15 @@ alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
 source /jffs/softcenter/scripts/base.sh
 eval `dbus export koolproxyR_`
 
-url_cjx="https://dev.tencent.com/u/shaoxia1991/p/cjxlist/git/raw/master/cjx-annoyance.txt"
-url_kp="https://dev.tencent.com/u/shaoxia1991/p/koolproxyR_rule_list/git/raw/master/kp.dat"
-url_kp_md5="https://dev.tencent.com/u/shaoxia1991/p/koolproxyR_rule_list/git/raw/master/kp.dat.md5"
+url_cjx="https://shaoxia1991.coding.net/p/cjxlist/d/cjxlist/git/raw/master/cjx-annoyance.txt"
+url_kp="https://houzi-.coding.net/p/my_dream/d/my_dream/git/raw/master/kp.dat"
+url_kp_md5="https://houzi-.coding.net/p/my_dream/d/my_dream/git/raw/master/kp.dat.md5"
 # url_koolproxyR="https://kprules.b0.upaiyun.com/koolproxyR.txt"
 # 原网址跳转到https://kprule.com/koolproxyR.txt跳转到又拍云，为了节省时间，还是直接去又拍云下载吧！避免某些时候跳转不过去
 url_easylist="https://easylist-downloads.adblockplus.org/easylistchina.txt"
-url_yhosts="https://dev.tencent.com/u/shaoxia1991/p/yhosts/git/raw/master/hosts"
-url_yhosts1="https://dev.tencent.com/u/shaoxia1991/p/yhosts/git/raw/master/data/tvbox.txt"
-kpr_our_rule="https://dev.tencent.com/u/shaoxia1991/p/koolproxyR_rule_list/git/raw/master/kpr_our_rule.txt"
+url_yhosts="https://shaoxia1991.coding.net/p/yhosts/d/yhosts/git/raw/master/hosts"
+url_yhosts1="https://shaoxia1991.coding.net/p/yhosts/d/yhosts/git/raw/master/data/tvbox.txt"
+kpr_our_rule="https://shaoxia1991.coding.net/p/koolproxyR_rule_list/d/koolproxyR_rule_list/git/raw/master/kpr_our_rule.txt"
 url_fanboy="https://secure.fanboy.co.nz/fanboy-annoyance.txt"
 
     
