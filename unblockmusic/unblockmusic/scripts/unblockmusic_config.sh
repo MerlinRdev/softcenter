@@ -24,6 +24,20 @@ add_rule()
 	echo_date 加载nat规则...
 	echo_date Load nat rules...
 	ipset -! -N music hash:ip
+	ipset add music 59.111.181.60
+	ipset add music 59.111.181.38
+	ipset add music 59.111.181.35
+	ipset add music 59.111.160.195
+	ipset add music 223.252.199.66
+	ipset add music 59.111.160.197
+	ipset add music 223.252.199.67
+	ipset add music 115.236.121.1
+	ipset add music 115.236.118.33
+	ipset add music 59.111.160.195
+	ipset add music 39.105.63.80
+	ipset add music 118.24.63.156
+	ipset add music 193.112.159.225
+	ipset add music 47.100.127.239
 	$ipt_n -N cloud_music
 	$ipt_n -A cloud_music -d 0.0.0.0/8 -j RETURN
 	$ipt_n -A cloud_music -d 10.0.0.0/8 -j RETURN
@@ -70,12 +84,12 @@ start_unblockmusic(){
 	echo_date Enable unblockmusic
 	endponintset="";
 	if [ -n "$unblockmusic_endpoint" ]; then
-		endponintset="-e $unblockmusic_endpoint"
+		endponintset="-e"
 	fi
 	if [ "$unblockmusic_musicapptype" = "default" ]; then
-		nohup /jffs/softcenter/bin/UnblockNeteaseMusic -p 5200 -sp 5300 -m 0 -c "${serverCrt}" -k "${serverKey}" >> /tmp/unblockmusic.log 2>&1 &
+		nohup /jffs/softcenter/bin/UnblockNeteaseMusic -p 5200 -sp 5300 -m 0 -c "${serverCrt}" -k "${serverKey}" "${endponintset}" >> /tmp/unblockmusic.log 2>&1 &
 	else
-		nohup /jffs/softcenter/bin/UnblockNeteaseMusic -p 5200 -sp 5300 -o "$unblockmusic_musicapptype" -m 0 -c "${serverCrt}" -k "${serverKey}" >> /tmp/unblockmusic.log 2>&1 &
+		nohup /jffs/softcenter/bin/UnblockNeteaseMusic -p 5200 -sp 5300 -o "$unblockmusic_musicapptype" -m 0 -c "${serverCrt}" -k "${serverKey}" "${endponintset}" >> /tmp/unblockmusic.log 2>&1 &
 	fi
 	mkdir -p /var/wwwext
 	cp -f /jffs/softcenter/bin/Music/ca.crt /www/ext
