@@ -23,7 +23,7 @@ else
 	ARCH_SUFFIX="arm"
 fi
 KVER=`uname -r`
-if [ "$KVER" == "4.1.52" -o "$KVER" == "4.1.49" ];then
+if [ "$KVER" == "4.1.52" -o "$KVER" == "3.14.77" ];then
 	ARCH_SUFFIX="armng"
 fi
 if [ "$KVER" == "3.10.14" ];then
