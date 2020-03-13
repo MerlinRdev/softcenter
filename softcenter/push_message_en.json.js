@@ -1,6 +1,6 @@
 {
 "title":"<em>MerlinR&nbsp;-&nbsp;Software Center</em>",
-"content1":"<b>Software Center: Latset version:1.2.5</b>,First update the firmware to 5.0.8 or later<font color='#1E90FF'>First update the firmware to 5.0.8 or later, then update the software center</font>",
+"content1":"<b>Software Center: Latset version:1.2.5</b>,First update the firmware to 5.0.8 or later,<font color='#1E90FF'> then update the software center</font>",
 "content2":"Latset firmware version：5.0.9",
 "content3":"Some plugins download slowly,Refresh the page after 5 minutes",
 "content4":"<font color='#1E90FF'>Feedback:&nbsp;&nbsp;</font>\
