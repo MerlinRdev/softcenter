@@ -2,7 +2,7 @@
 
 
 MODULE=shadowsocks
-VERSION=4.2.2
+VERSION=4.2.3
 TITLE=科学上网
 DESCRIPTION=科学上网
 HOME_URL=Main_Ss_Content.asp
