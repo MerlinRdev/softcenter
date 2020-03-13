@@ -2,7 +2,29 @@
 
 eval `dbus export ss`
 alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
-main_url="https://raw.githubusercontent.com/paldier/softcenter/master/shadowsocks"
+ARCH=`uname -m`
+KVER=`uname -r`
+if [ "$ARCH" == "armv7l" ]; then
+	if [ "$KVER" == "4.1.52" -o "$KVER" == "3.14.77" ];then
+		ARCH="armng"
+	fi
+else
+	if [ "$KVER" == "3.10.14" ];then
+		dbus set softcenter_arch="mipsle"
+	fi
+if
+if [ "$ARCH" == "armv7l" ]; then
+	scarch="softcenterarm"
+elif [ "$ARCH" == "armng" ]; then
+	scarch="softcenterarmng"
+elif [ "$ARCH" == "aarch64" ]; then
+	scarch="softcenterarm64"
+elif [ "$ARCH" == "mipsle" ]; then
+	scarch="softcentermipsle"
+elif [ "$ARCH" == "mips" ]; then
+	scarch="softcenter"
+fi
+main_url="https://raw.githubusercontent.com/paldier/$scarch/master/shadowsocks"
 backup_url=""
 
 install_ss(){
@@ -57,7 +79,7 @@ update_ss(){
 
 update_ss2(){
 	echo_date "目前还没有任何备用服务器！请尝试使用离线安装功能！"
-	echo_date "历史版本下载地址：https://github.com/paldier/softcenter/tree/master/shadowsocks/history"
+	echo_date "历史版本下载地址：https://github.com/paldier/$scarch/tree/master/shadowsocks/history"
 	echo_date "下载后请将下载包名字改为：shadowsocks.tar.gz，再使用离线安装进行安装"
 	sleep 1
 	exit
