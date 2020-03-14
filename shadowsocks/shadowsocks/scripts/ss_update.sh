@@ -12,7 +12,7 @@ else
 	if [ "$KVER" == "3.10.14" ];then
 		dbus set softcenter_arch="mipsle"
 	fi
-if
+fi
 if [ "$ARCH" == "armv7l" ]; then
 	scarch="softcenterarm"
 elif [ "$ARCH" == "armng" ]; then
