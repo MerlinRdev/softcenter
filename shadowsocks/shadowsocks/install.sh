@@ -4,7 +4,7 @@ eval `dbus export ss`
 alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
 mkdir -p /jffs/softcenter/ss
 mkdir -p /tmp/ss_backup
-
+MODEL=`nvram get productid`
 firmware_version=`nvram get extendno|cut -d "_" -f2|cut -d "-" -f1|cut -c2-6`
 firmware_check=5.0.1
 if [ ${#firmware_version} -lt 5 ];then
@@ -15,9 +15,16 @@ if [ "$firmware_comp" == "1" ];then
 	echo_date 固件版本过低，无法安装
 	exit 1
 fi
-
-
-
+#echo_date 检测jffs分区剩余空间...
+#SPACE_AVAL=$(df|grep jffs | awk '{print $4}')
+#SPACE_NEED=$(du -s /tmp/shadowsocks | awk '{print $1}')
+#if [ "$SPACE_AVAL" -gt "$SPACE_NEED" ];then
+#	echo_date 当前jffs分区剩余"$SPACE_AVAL" KB, 插件安装需要"$SPACE_NEED" KB，空间满足，继续安装！
+#else
+#	echo_date 当前jffs分区剩余"$SPACE_AVAL" KB, 插件安装需要"$SPACE_NEED" KB，空间不足！
+#	echo_date 退出安装！
+#	exit 1
+#fi
 if [ "$ss_basic_enable" == "1" ];then
 	echo_date 先关闭科学上网插件，保证文件更新成功!
 	sh /jffs/softcenter/ss/ssconfig.sh stop
@@ -90,9 +97,11 @@ cp -rf /tmp/shadowsocks/uninstall.sh /jffs/softcenter/scripts/uninstall_shadowso
 echo_date 复制相关的网页文件！
 cp -rf /tmp/shadowsocks/webs/* /jffs/softcenter/webs/
 cp -rf /tmp/shadowsocks/res/* /jffs/softcenter/res/
-
-echo_date 移除安装包！
-rm -rf /tmp/shadowsocks* >/dev/null 2>&1
+if [ "$MODEL" == "GT-AC5300" ] || [ "$MODEL" == "GT-AC2900" ];then
+	cp -rf /tmp/shadowsocks/rog/res/* /jffs/softcenter/res/
+elif [ "$MODEL" == "TUF-AX3000" ];then
+	cp -rf /tmp/shadowsocks/tuf/res/* /jffs/softcenter/res/
+fi
 
 echo_date 为新安装文件赋予执行权限...
 chmod 755 /jffs/softcenter/ss/cru/*
@@ -136,7 +145,7 @@ dbus set softcenter_module_shadowsocks_description="科学上网"
 dbus set softcenter_module_shadowsocks_home_url="Main_Ss_Content.asp"
 
 # 设置v2ray 版本号
-dbus set ss_basic_v2ray_version="4.20.0"
+dbus set ss_basic_v2ray_version="v4.21.3"
 dbus set ss_basic_v2ray_date="20190712"
 
 echo_date 一点点清理工作...
