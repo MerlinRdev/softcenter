@@ -149,10 +149,13 @@ if [[ "${serverchan_info_temp}" == "1" ]]; then
 		router_cpu_temperature=`cat /proc/dmu/temperature | awk '{print $4}' | grep -Eo '[0-9]+'`
 	fi
     if [ "${interface_2_temperature}" != "" ] || [ "${interface_5_temperature}" != "" ] || [ "${router_cpu_temperature}" != "" ]; then
-	if [ "$productid" != "BLUECAVE" ];then
+	if [ "$productid" != "BLUECAVE" -a "$productid" != "RT-ACRH17" -a "$productid" != "RT-AC85P" ];then
 		interface_2_temperature_c=`expr ${interface_2_temperature} / 2 + 20`
 		interface_5_temperature_c=`expr ${interface_5_temperature} / 2 + 20`
 		[ -n "$interface_52" ] && interface_52_temperature_c=`expr ${interface_52_temperature} / 2 + 20`
+	else
+		interface_2_temperature_c=${interface_2_temperature}
+		interface_5_temperature_c=${interface_5_temperature}
 	fi
 	if [ -n "$interface_52" ];then
 		router_temperature="2.4G: ${interface_2_temperature_c}°C | 5G_1: ${interface_5_temperature_c}°C | 5G_2: ${interface_52_temperature_c}°C | CPU: ${router_cpu_temperature}°C"

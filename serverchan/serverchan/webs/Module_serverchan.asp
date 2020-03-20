@@ -302,17 +302,9 @@ function manual_push(){
 	// post data
 	//var id = parseInt(Math.random() * 100000000);
 	//var postData = {"id": id, "method": "serverchan_check.sh", "params":[1], "fields": {}};
-	var db_new;
-	db_new["action_script"]="serverchan_check.sh";
-	db_new["action_mode"] = " Refresh ";
-	db_new["current_page"] = "Module_serverchan.asp";
-	db_new["next_page"] = "Module_serverchan.asp";
 	$.ajax({
-		url: "/applydb.cgi?p=serverchan",
-		cache:false,
-		type: "POST",
-		dataType: "text",
-		data: $.param(db_new),
+		url: "/logreaddb.cgi?script=serverchan_check.sh",
+		dataType: "html",
 		success: function(response){
 			alert("手动推送成功，请检查手机信息！");
 		}
