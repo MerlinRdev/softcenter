@@ -9,7 +9,7 @@ cru d serverchan_check
 # stop serverchan first
 enable=`dbus get serverchan_enable`
 if [ "$enable" == "1" ] && [ -f "/jffs/softcenter/scripts/serverchan_config.sh" ];then
-	/jffs/softcenter/serverchan/serverchan_config.sh stop >/dev/null 2>&1
+	/jffs/softcenter/scripts/serverchan_config.sh stop >/dev/null 2>&1
 fi
 
 # 安装
@@ -68,7 +68,7 @@ dbus set softcenter_module_serverchan_description="从路由器推送状态及�
 
 # re-enable serverchan
 if [ "$enable" == "1" ] && [ -f "/jffs/softcenter/scripts/serverchan_config.sh" ];then
-	/jffs/softcenter/serverchan/serverchan_config start >/dev/null 2>&1
+	/jffs/softcenter/scripts/serverchan_config start >/dev/null 2>&1
 fi
 
 # 完成

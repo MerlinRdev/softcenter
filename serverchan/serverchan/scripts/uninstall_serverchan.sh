@@ -4,7 +4,7 @@ source /jffs/softcenter/scripts/base.sh
 logger "[软件中心]: 正在卸载serverChan..."
 MODULE=serverchan
 cd /
-/jffs/softcenter/serverchan/serverchan_config.sh stop
+/jffs/softcenter/scripts/serverchan_config.sh stop
 rm -f /jffs/softcenter/scripts/serverchan_check.sh
 rm -f /jffs/softcenter/scripts/serverchan_check_task.sh
 rm -f /jffs/softcenter/scripts/serverchan_dhcp_trigger.sh
