@@ -181,14 +181,14 @@
             "version": "1.5"
         }, 
         {
-            "build_date": "2020-03-26_11:56:39", 
+            "build_date": "2020-03-28_19:04:43", 
             "description": "aliddns", 
             "home_url": "Module_aliddns.asp", 
-            "md5": "574ef4019dae60df70021c68263b86df", 
+            "md5": "fcfc962aaf66ca2948e1c6e7cd0a0bc7", 
             "name": "aliddns", 
             "tar_url": "aliddns/aliddns.tar.gz", 
             "title": "阿里DDNS", 
-            "version": "1.8"
+            "version": "1.9"
         }, 
         {
             "build_date": "2019-08-16_00:18:09", 
