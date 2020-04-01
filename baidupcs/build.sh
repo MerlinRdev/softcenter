@@ -2,7 +2,7 @@
 
 
 MODULE=baidupcs
-VERSION=1.3
+VERSION=1.4
 TITLE=百度盘
 DESCRIPTION=百度盘
 HOME_URL=Module_baidupcs.asp

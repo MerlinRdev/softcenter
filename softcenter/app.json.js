@@ -241,14 +241,14 @@
             "version": "4.18.2"
         }, 
         {
-            "build_date": "2019-12-06_23:04:13", 
+            "build_date": "2020-04-01_12:57:25", 
             "description": "百度盘", 
             "home_url": "Module_baidupcs.asp", 
-            "md5": "421bb6ad0864f13878ce066046e7c0ae", 
+            "md5": "9bda173f45b4edb131356355e87f2d04", 
             "name": "baidupcs", 
             "tar_url": "baidupcs/baidupcs.tar.gz", 
             "title": "百度盘", 
-            "version": "1.3"
+            "version": "1.4"
         }, 
         {
             "build_date": "2020-03-26_18:32:27", 
