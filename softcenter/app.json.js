@@ -21,14 +21,14 @@
             "version": "1.0.2"
         }, 
         {
-            "build_date": "2020-03-20_13:08:43", 
+            "build_date": "2020-04-03_13:01:13", 
             "description": "科学上网", 
             "home_url": "Main_Ss_Content.asp", 
-            "md5": "16093ceead63155d49e28deb31b93c02", 
+            "md5": "6a651e92a7d418ee1c28033ded971731", 
             "name": "shadowsocks", 
             "tar_url": "shadowsocks/shadowsocks.tar.gz", 
             "title": "科学上网", 
-            "version": "4.2.5"
+            "version": "4.2.6"
         }, 
         {
             "build_date": "2019-07-26_12:00:35", 
@@ -169,6 +169,11 @@
             "tar_url": "verysync/verysync.tar.gz", 
             "title": "微力同步", 
             "version": "1.0.0"
+        }, 
+        {
+            "name": "bypasshelper", 
+            "tar_url": "bypasshelper/bypasshelper.tar.gz", 
+            "title": "bypasshelper"
         }, 
         {
             "build_date": "2019-08-12_15:51:28", 
