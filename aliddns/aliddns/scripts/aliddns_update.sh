@@ -33,14 +33,14 @@ __valid_ip() {
 }
 
 __resolve_ip() {
-	local SERVER_IP=$(nslookup "$1" $aliddns_dns | sed '1,4d' | awk '{print $3}' | grep -v : | awk 'NR==1{print}' 2>/dev/null)
-	local SERVER_IP=$(__valid_ip $SERVER_IP)
-	if [ -n "$SERVER_IP" ]; then
-		# success resolved
-		echo "$SERVER_IP"
-		return 0
+	# nslookup get only ipv4 address
+	local SERVER_IP=$(nslookup "$1" ${aliddns_dns} | sed '1,4d' | awk '{print $3}' | grep -v : | awk 'NR==1{print}' 2>/dev/null)
+	local SERVER_IP=$(__valid_ip ${SERVER_IP})
+	if [ "$?" == "0" ]; then
+		# success resolved ipv4
+		echo "${SERVER_IP}"
 	else
-		# resolve failed
+		# resolve failed or ipv6
 		echo ""
 		return 1
 	fi
@@ -48,29 +48,29 @@ __resolve_ip() {
 
 start_update() {
 	#get resovled ip
-	case "$aliddns_name" in
+	case "${aliddns_name}" in
 		\*)
-			current_ip=$(__resolve_ip koolshare.$aliddns_domain)
+			current_ip=$(__resolve_ip "koolshare.${aliddns_domain}")
 		;;
 		\@)
-			current_ip=$(__resolve_ip $aliddns_domain)
+			current_ip=$(__resolve_ip "${aliddns_domain}")
 		;;
 		*)
-			current_ip=$(__resolve_ip $aliddns_name.$aliddns_domain)
+			current_ip=$(__resolve_ip "${aliddns_name}.${aliddns_domain}")
 		;;
 	esac
 	
 	# get public ip
 	case "$aliddns_comd" in
 		1)
-			ip=$(curl -s --interface ppp0 whatismyip.akamai.com 2>&1 | grep -Eo "([0-9]{1,3}[\.]){3}[0-9]{1,3}" | grep -v "Terminated")
+			ip=$(curl -s whatismyip.akamai.com 2>&1 | grep -Eo "([0-9]{1,3}[\.]){3}[0-9]{1,3}" | grep -v "Terminated")
 			# incase user modify
-			dbus set aliddns_curl="curl -s --interface ppp0 whatismyip.akamai.com"
+			dbus set aliddns_curl="curl -s whatismyip.akamai.com"
 		;;
 		2)
-			ip=$(curl -s --interface ppp0 ip.clang.cn 2>&1 | grep -Eo "([0-9]{1,3}[\.]){3}[0-9]{1,3}" | grep -v "Terminated")
+			ip=$(curl -s ip.clang.cn 2>&1 | grep -Eo "([0-9]{1,3}[\.]){3}[0-9]{1,3}" | grep -v "Terminated")
 			# incase user modify
-			dbus set aliddns_curl="curl -s --interface ppp0 ip.clang.cn"
+			dbus set aliddns_curl="curl -s ip.clang.cn"
 		;;
 		3)
 			ip=$(curl -s whatismyip.akamai.com 2>&1 | grep -Eo "([0-9]{1,3}[\.]){3}[0-9]{1,3}" | grep -v "Terminated")
@@ -151,7 +151,7 @@ start_update() {
 	}
 	
 	query_recordid() {
-		send_request "DescribeSubDomainRecords" "SignatureMethod=HMAC-SHA1&SignatureNonce=$timestamp&SignatureVersion=1.0&SubDomain=$aliddns_name1.$aliddns_domain&Timestamp=$timestamp"
+		send_request "DescribeSubDomainRecords" "SignatureMethod=HMAC-SHA1&SignatureNonce=$timestamp&SignatureVersion=1.0&SubDomain=$aliddns_name1.$aliddns_domain&Timestamp=$timestamp&Type=A"
 	}
 	
 	update_record() {
@@ -162,6 +162,9 @@ start_update() {
 		send_request "AddDomainRecord&DomainName=$aliddns_domain" "RR=$aliddns_name1&SignatureMethod=HMAC-SHA1&SignatureNonce=$timestamp&SignatureVersion=1.0&TTL=$aliddns_ttl&Timestamp=$timestamp&Type=A&Value=$ip"
 	}
 	
+	del_record(){
+		send_request "DeleteDomainRecord" "RecordId=$1&SignatureMethod=HMAC-SHA1&SignatureNonce=$timestamp&SignatureVersion=1.0&Timestamp=$timestamp"
+	}
 	#add support */%2A and @/%40 record
 	case "$aliddns_name" in
 		\*)
@@ -175,26 +178,31 @@ start_update() {
 		;;
 	esac
 	
-	if [ -z "$aliddns_record_id" ];then
-		aliddns_record_id=$(query_recordid | get_recordid)
-	fi
+
+	# get record id everytime
+	local record_id=$(query_recordid | get_recordid)
 	
-	if [ -z "$aliddns_record_id" ];then
-		aliddns_record_id=$(add_record | get_recordid)
-		echo_date "[aliddns_update.sh]：添加记录 $aliddns_record_id"
+	if [ -z "$record_id" ];then
+		record_id=$(add_record | get_recordid)
+		echo_date "[aliddns_update.sh]：添加记录 $record_id"
 	else
-		update_record "$aliddns_record_id" >/dev/null 2>&1
-		echo_date "[aliddns_update.sh]：更新记录 $aliddns_record_id"
+		update_record "$record_id" >/dev/null 2>&1
+		echo_date "[aliddns_update.sh]：更新记录 $record_id"
 	fi
 	
 	# result
-	if [ -z "$aliddns_record_id" ]; then
+	if [ -z "$record_id" ]; then
 		# failed
 		dbus set aliddns_last_act="$now: 失败，原因：无法获取域名record id ！"
 		echo_date "[aliddns_update.sh]：本次更新失败，原因：无法获取域名record id ！"
 	else
-		# success
-		dbus set aliddns_record_id="$aliddns_record_id"
+		# 检测record_id是否有变化，如果变了，那可能用户更改了二级域名，需要删除原来的record
+		if [ -n "$aliddns_record_id" -a "$record_id" != "$aliddns_record_id" ];then
+			echo_date "[aliddns_update.sh]：检测到你更改了记录，删除原来的记录：$aliddns_record_id"
+			del_record $aliddns_record_id
+		fi
+		# 将此次获得的record_id记录下，以便下次进行上面的判断
+		dbus set aliddns_record_id="$record_id"
 		dbus set aliddns_last_act="$now: success, ($ip)"
 		echo_date "[aliddns_update.sh]：更新成功，本次IP：$ip！"
 	fi

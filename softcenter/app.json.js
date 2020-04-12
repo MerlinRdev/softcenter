@@ -171,11 +171,6 @@
             "version": "1.0.0"
         }, 
         {
-            "name": "bypasshelper", 
-            "tar_url": "bypasshelper/bypasshelper.tar.gz", 
-            "title": "bypasshelper"
-        }, 
-        {
             "build_date": "2019-08-12_15:51:28", 
             "description": "这是一只自动帮你签到的dog", 
             "home_url": "Module_qiandao.asp", 
@@ -186,14 +181,14 @@
             "version": "1.5"
         }, 
         {
-            "build_date": "2020-03-28_19:04:43", 
+            "build_date": "2020-04-12_19:52:21", 
             "description": "aliddns", 
             "home_url": "Module_aliddns.asp", 
-            "md5": "fcfc962aaf66ca2948e1c6e7cd0a0bc7", 
+            "md5": "a7aca8c4454b7ef60c595a09cbf4faaf", 
             "name": "aliddns", 
             "tar_url": "aliddns/aliddns.tar.gz", 
             "title": "阿里DDNS", 
-            "version": "1.9"
+            "version": "2.0"
         }, 
         {
             "build_date": "2019-08-16_00:18:09", 

@@ -4,9 +4,27 @@ eval `dbus export ss`
 source /jffs/softcenter/scripts/base.sh
 alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
 V2RAY_CONFIG_FILE="/jffs/softcenter/ss/v2ray.json"
-url_main="https://raw.githubusercontent.com/paldier/softcenter/master/v2ray_binary"
+url_main="https://raw.githubusercontent.com/paldier/v2ray_sc/master"
 url_back=""
-
+ARCH=`uname -m`
+if [ "$ARCH" == "armv7l" ]; then
+	ARCH_SUFFIX="arm"
+elif [ "$ARCH" == "aarch64" ]; then
+	ARCH_SUFFIX="arm64"
+elif [ "$ARCH" == "mips" ]; then
+	ARCH_SUFFIX="mips"
+elif [ "$ARCH" == "mipsle" ]; then
+	ARCH_SUFFIX="mipsle"
+else
+	ARCH_SUFFIX="arm"
+fi
+KVER=`uname -r`
+if [ "$KVER" == "4.1.52" -o "$KVER" == "3.14.77" ];then
+	ARCH_SUFFIX="armng"
+fi
+if [ "$KVER" == "3.10.14" ];then
+	ARCH_SUFFIX="mipsle"
+fi
 get_latest_version(){
 	rm -rf /tmp/v2ray_latest_info.txt
 	echo_date "检测V2Ray最新版本..."
@@ -32,7 +50,7 @@ get_latest_version(){
 		COMP=`versioncmp $CUR_VER $V2VERSION`
 		if [ "$COMP" == "1" ];then
 			[ "$CUR_VER" != "0" ] && echo_date "V2Ray已安装版本号低于最新版本，开始更新程序..."
-			update_now v$V2VERSION
+			update_now $ARCH_SUFFIX
 		else
 			V2RAY_LOCAL_VER=`/jffs/softcenter/bin/v2ray -version 2>/dev/null | head -n 1 | cut -d " " -f2`
 			V2RAY_LOCAL_DATE=`/jffs/softcenter/bin/v2ray -version 2>/dev/null | head -n 1 | cut -d " " -f4`

@@ -20,12 +20,11 @@ cp -rf /tmp/aliddns/uninstall.sh /jffs/softcenter/scripts/uninstall_aliddns.sh
 chmod +x /jffs/softcenter/scripts/aliddns*
 chmod +x /jffs/softcenter/init.d/*
 if [ "$model" == "GT-AC5300" ] || [ "$model" == "GT-AX11000" ] || [ "$model" == "GT-AC2900" ];then
-	sed -i '/tufcss/d' /jffs/softcenter/webs/Module_aliddns.asp >/dev/null 2>&1
+	continue
 elif [ "$model" == "TUF-AX3000" ];then
-	sed -i '/rogcss/d' /jffs/softcenter/webs/Module_aliddns.asp >/dev/null 2>&1
+	sed -i 's/3e030d/3e2902/g;s/91071f/92650F/g;s/680516/D0982C/g;s/cf0a2c/c58813/g;s/700618/74500b/g;s/530412/92650F/g' /jffs/softcenter/webs/Module_aliddns.asp >/dev/null 2>&1
 else
 	sed -i '/rogcss/d' /jffs/softcenter/webs/Module_aliddns.asp >/dev/null 2>&1
-	sed -i '/tufcss/d' /jffs/softcenter/webs/Module_aliddns.asp >/dev/null 2>&1
 fi
 [ ! -L "/jffs/softcenter/init.d/S98Aliddns.sh" ] && ln -sf /jffs/softcenter/scripts/aliddns_config.sh /jffs/softcenter/init.d/S98Aliddns.sh
 
