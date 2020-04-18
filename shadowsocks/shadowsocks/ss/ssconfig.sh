@@ -2215,7 +2215,7 @@ apply_ss(){
 	create_ipset
 	create_dnsmasq_conf
 	# do not re generate json on router start, use old one
-	[ -z "$WAN_ACTION" ] && [ "$ss_basic_type" != "3" ] && create_ss_json
+	[ -z "$WAN_ACTION" ] && [ "$ss_basic_type" != "3" ] && [ "$ss_basic_type" != "4" ] && create_ss_json
 	[ -z "$WAN_ACTION" ] && [ "$ss_basic_type" = "3" ] && create_v2ray_json
 	[ -z "$WAN_ACTION" ] && [ "$ss_basic_type" = "4" ] && create_trojan_json
 	[ "$ss_basic_type" == "0" ] || [ "$ss_basic_type" == "1" ] && start_ss_redir
