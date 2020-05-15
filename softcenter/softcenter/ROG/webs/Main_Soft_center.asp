@@ -103,9 +103,7 @@ input[type=button]:focus {
 .install-status-0 .icon-desc .opt {
 	height: 100%;
 }
-.icon-desc .install-btn,
-.icon-desc .uninstall-btn,
-.icon-desc .update-btn{
+.icon-desc .install-btn, .icon-desc .uninstall-btn, .icon-desc .update-btn {
 	background: #fff;
 	color:#333;
 	cursor:pointer;
@@ -131,24 +129,6 @@ input[type=button]:focus {
 	border-radius: 0px 0px 0px 5px;
 	width:60%;
 	border-right: 1px solid #000;
-}
-.show-install-btn,
-.show-uninstall-btn{
-	border: 1px solid #91071f;
-	background: none;
-	color: #fff;
-	padding: 10px 20px;
-	border-radius: 5px 5px 0px 0px;
-	border: 1px solid #680516;
-}
-.active {
-	background: #91071f;
-	border: 1px solid #91071f;
-	background: linear-gradient(to bottom, #680516  0%, #680516 100%); /* W3C */
-	border: 1px solid #680516;
-}
-#IconContainer {
-	border:1px solid #680516;
 }
 .install-status-1 .uninstall-btn {
 	display: block;
@@ -211,18 +191,24 @@ input[type=button]:focus {
 }
 .cloud_main_radius h2 {
 	border-bottom:1px #AAA dashed;
+	height:32px;
+	margin-top:15px;
+	margin-bottom:15px;
 }
-.cloud_main_radius h3,
-.cloud_main_radius h4 {
+.cloud_main_radius h3, .cloud_main_radius h4 {
 	font-size:12px;
 	color:#FC0;
 	font-weight:normal;
 	font-style: normal;
+	margin-top:12px;
+	margin-bottom:12px;
 }
 .cloud_main_radius h5 {
 	color:#FFF;
 	font-weight:normal;
 	font-style: normal;
+	margin-top:9px;
+	margin-bottom:9x;
 }
 </style>
 <script>
@@ -251,18 +237,21 @@ function appPostScript(moduleInfo, script) {
 		return;
 	}
 	//Current page must has prefix of "Module_"
-	var data = {"action_script":script, "action_mode":" Refresh "};
+	var data = {};
 	//currState.name = moduleInfo.name;
 	//TODO auto choose for home_url
 	data["softcenter_home_url"] = db_softcenter_["softcenter_home_url"];
 	data["softcenter_installing_todo"] = moduleInfo.name;
+	data["action_script"] = script;
 	if (script == "ks_app_install.sh") {
 		data["softcenter_installing_tar_url"] = moduleInfo.tar_url;
 		data["softcenter_installing_md5"] = moduleInfo.md5;
 		data["softcenter_installing_version"] = moduleInfo.version;
 		//Update title for this module
 		data[moduleInfo.name + "_title"] = moduleInfo.title;
-
+		data["action_mode"] = "ks_app_install";
+	} else if (script == "ks_app_remove.sh") {
+		data["action_mode"] = "ks_app_remove";
 	}
 	$.ajax({
 		type: "POST",
@@ -348,7 +337,7 @@ function showInstallInfo(module, scode) {
 		var infos = [
 			"操作失败",
 			"已安装",
-			"将被安装到jffs分区...",
+			"插件将被安装到jffs分区...",
 			"正在下载中...请耐心等待...",
 			"正在安装中...",
 			"安装成功！请5秒后刷新本页面！...",
@@ -596,7 +585,7 @@ $(function() {
 			$("#spnCurrVersion").html("<em>" + db_softcenter_["softcenter_version"] + "</em>");
 			var jff2_scripts="<% nvram_get("jffs2_scripts"); %>";
 			if(jff2_scripts != 1){
-				$('#software_center_message').html('<h2><font color="#FF9900">错误！</font></h2><h2>软件中心不可用！因为你没有开启Enable JFFS custom scripts and configs选项！</h2><h2>请前往【系统管理】-<a href="Advanced_System_Content.asp"><u><em>【系统设置】</em></u></a>开启此选项再使用软件中心！！</h2>')
+				$('#software_center_message').html('<h1><font color="#FF9900">错误！</font></h1><h2>软件中心不可用！因为你没有开启Enable JFFS custom scripts and configs选项！</h2><h2>请前往【系统管理】-<a href="Advanced_System_Content.asp"><u><em>【系统设置】</em></u></a>开启此选项再使用软件中心！！</h2>')
 			}else{
 				init(function() {
 					toggleAppPanel(1);
@@ -692,41 +681,38 @@ function notice_show(){
 				<div id="tabMenu" class="submenuBlock"></div>
 					<table width="98%" border="0" align="left" cellpadding="0" cellspacing="0">
 						<tr>
-							<td bgcolor="#4D595D" align="left" valign="top">
+							<td align="left" valign="top">
 								<div>
 									<table width="760px" border="0" cellpadding="5" cellspacing="0" bordercolor="#6b8fa3" class="FormTitle" id="FormTitle">
 										<tr>
-											<td colspan="3" valign="top">
+											<td bgcolor="#4D595D" colspan="3" valign="top">
 												<div>&nbsp;</div>
 												<div id="modelid" class="formfonttitle"></div>
 												<div style="margin:10px 0 10px 5px;" class="splitLine"></div>
 													<table width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bordercolor="#6b8fa3" class="FormTable">
 													</table>
 													<table width="100%" height="150px" style="border-collapse:collapse;">
-														<tr>
-															<td colspan="5" class="cloud_main_radius">
-																<div style="padding:10px;width:95%;font-style:italic;font-size:14px;">
-																	<br/><br/>
+														<tr bgcolor="#444f53">
+															<td colspan="5" bgcolor="#444f53" class="cloud_main_radius">
+																<div style="width:95%;font-style:italic;font-size:14px;">
 																	<table width="100%">
 																		<tr>
 																			<td>
-																				<ul style="margin-top:-50px;padding-left:15px;">
-																					<li style="margin-top:-5px;">
-																						<h2 id="push_titile"><em>软件中心</em></h2>
-																					</li>
-																					<li style="margin-top:-5px;">
+																				<ul style="padding-left:25px;">
+																					<h2 id="push_titile"><em>软件中心&nbsp;-&nbsp;by&nbsp;MerlinR</em></h2>
+																					<li>
 																						<h4 id="push_content1" ><font color='#1E90FF'>交流反馈:&nbsp;&nbsp;</font><a href='https://github.com/paldier/softcenter' target='_blank'><em>1.软件中心GitHub项目</em></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='https://t.me/merlinchat' target='_blank'><em>2.加入telegram群</em></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='https://www.right.com.cn/forum/forum-173-1.html' target='_blank'><em>3.恩山论坛插件版块</em></a></h4>
 																					</li>
-																					<li id="push_content2_li" style="margin-top:-5px;">
+																					<li id="push_content2_li">
                                                                                     <h4 id="push_content2">如果你看到这个页面说明主服务器连接不上,如果获取不到在线版本说明节点服务器连接不上！</h4>
 																					</li>
-																					<li id="push_content3_li" style="margin-top:-5px;display: none;">
+																					<li id="push_content3_li" style="display: none;">
 																						<h4 id="push_content3"></h4>
 																					</li>
-																					<li id="push_content4_li" style="margin-top:-5px;display: none;">
+																					<li id="push_content4_li" style="display: none;">
 																						<h4 id="push_content4"></h4>
 																					</li>
-																					<li style="margin-top:-5px;">
+																					<li>
 																						<h5><font color='#1E90FF' sclang>Current version:</font><span id="spnCurrVersion"></span>&nbsp;&nbsp;<font color='#1E90FF' sclang>Latest version:</font><span id="spnOnlineVersion"></span>
 																						<input sclang type="button" id="updateBtn" value="Update" style="display:none" /></h5>
 																					</li>
@@ -740,7 +726,7 @@ function notice_show(){
 														<tr height="10px">
 															<td colspan="3"></td>
 														</tr>
-														<tr id="install_status" style="display: none;" width="235px">
+														<tr bgcolor="#444f53" id="install_status" style="display: none;" width="235px">
 															<td>
 																<div style="padding:10px;width:95%;font-size:14px;" id="appInstallInfo">
 																</div>
@@ -757,7 +743,7 @@ function notice_show(){
 																<input sclang class="show-uninstall-btn" type="button" value="Online"/>
 															</td>
 														</tr>
-														<tr width="100%">
+														<tr bgcolor="#444f53" width="235px">
 															<td colspan="4" id="IconContainer">
 																<div id="software_center_message" style="text-align:center; line-height: 4em;" sclang>loading...</div>
 															</td>

@@ -92,7 +92,6 @@ echo_date 复制相关的脚本文件！
 cp -rf /tmp/shadowsocks/ss/* /jffs/softcenter/ss/
 cp -rf /tmp/shadowsocks/scripts/* /jffs/softcenter/scripts/
 cp -rf /tmp/shadowsocks/install.sh /jffs/softcenter/scripts/ss_install.sh
-cp -rf /tmp/shadowsocks/uninstall.sh /jffs/softcenter/scripts/uninstall_shadowsocks.sh
 
 echo_date 复制相关的网页文件！
 cp -rf /tmp/shadowsocks/webs/* /jffs/softcenter/webs/

@@ -59,6 +59,15 @@ if [ "$KVER" == "3.10.14" ];then
 	ARCH_SUFFIX="mipsle"
 fi
 
+MODEL=$(nvram get productid)
+if [ "$MODEL" == "GT-AC5300" ] || [ "$MODEL" == "GT-AX11000" ] || [ "$(nvram get merlinr_rog)" == "1" ];then
+	ROG=1
+fi
+
+if [ "$(nvram get productid)" == "TUF-AX3000" -o "$(nvram get merlinr_tuf)" == "1" ];then
+	TUF=1
+fi
+
 LOGGER() {
 #	echo $1
 	logger $1
@@ -127,7 +136,7 @@ install_module() {
 	fi
 
 	CMP=`versioncmp $softcenter_installing_version $OLD_VERSION`
-	if [ -f /jffs/softcenter/webs/Module_$softcenter_installing_module.sh -o "$softcenter_installing_todo" = "softcenter" ]; then
+	if [ -f "/jffs/softcenter/webs/Module_$softcenter_installing_module.sh" -o "$softcenter_installing_todo" = "softcenter" ]; then
 		CMP="-1"
 	fi
 	if [ "$CMP" = "-1" ]; then
@@ -168,7 +177,7 @@ install_module() {
 		tar -zxf $FNAME
 		dbus set softcenter_installing_status="4"
 
-		if [ ! -f /tmp/$softcenter_installing_module/install.sh ]; then
+		if [ ! -f "/tmp/$softcenter_installing_module/install.sh" ]; then
 			dbus set softcenter_installing_status="0"
 			dbus set softcenter_installing_module=""
 			dbus set softcenter_installing_todo=""
@@ -180,11 +189,21 @@ install_module() {
 			exit 5
 		fi
 
-		if [ -f /tmp/$softcenter_installing_module/uninstall.sh ]; then
+		if [ -f "/tmp/$softcenter_installing_module/uninstall.sh" ]; then
 			chmod 755 /tmp/$softcenter_installing_module/uninstall.sh
-			mv /tmp/$softcenter_installing_module/uninstall.sh /jffs/softcenter/scripts/uninstall_$softcenter_installing_todo.sh
+			#mv /tmp/$softcenter_installing_module/uninstall.sh /jffs/softcenter/scripts/uninstall_$softcenter_installing_todo.sh
 		fi
 
+		if [ -d /tmp/${softcenter_installing_module}/ROG -a "$ROG" == "1" ]; then
+			cp -rf /tmp/${softcenter_installing_module}/ROG/* /tmp/${softcenter_installing_module}/
+		fi
+
+		if [ -d /tmp/${softcenter_installing_module}/ROG -a "$TUF" == "1" ]; then
+			# 骚红变橙色
+			find /tmp/${softcenter_installing_module}/ROG/ -name "*.asp" | xargs sed -i 's/3e030d/3e2902/g;s/91071f/92650F/g;s/680516/D0982C/g;s/cf0a2c/c58813/g;s/700618/74500b/g;s/530412/92650F/g'
+			find /tmp/${softcenter_installing_module}/ROG/ -name "*.css" | xargs sed -i 's/3e030d/3e2902/g;s/91071f/92650F/g;s/680516/D0982C/g;s/cf0a2c/c58813/g;s/700618/74500b/g;s/530412/92650F/g'
+			cp -rf /tmp/${softcenter_installing_module}/ROG/* /tmp/${softcenter_installing_module}/
+		fi
 		chmod a+x /tmp/$softcenter_installing_module/install.sh
 		sh /tmp/$softcenter_installing_module/install.sh
 		sleep 3

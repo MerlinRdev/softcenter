@@ -193,9 +193,8 @@ function checkCmdRet(){
 											</tr>
                                     	</table>
                                     	<div id="log_content" style="margin-top:10px;display: block;">
-											<textarea cols="63" rows="15" wrap="off" readonly="readonly" id="log_content1" style="width:99%; font-family:'Courier New', Courier, mono; font-size:11px;background:#475A5F;color:#FFFFFF;"></textarea>
+											<textarea cols="63" rows="40" wrap="off" readonly="readonly" id="log_content1"></textarea>
 										</div>
-										<div style="margin:30px 0 10px 5px;" class="splitLine"></div>
 										<div class="KoolshareBottom">
 											<br/>论坛技术支持： <a href="http://www.koolshare.cn" target="_blank"> <i><u>www.koolshare.cn</u></i> </a> <br/>
 											后台技术支持： <i>Xiaobao</i> <br/>

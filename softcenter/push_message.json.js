@@ -6,5 +6,5 @@
 <a href='https://github.com/paldier/softcenter' target='_blank'><em>1.软件中心GitHub项目</em></a>&nbsp;&nbsp;&nbsp;&nbsp;\
 <a href='https://t.me/merlinchat' target='_blank'><em>2.加入telegram群</em></a>&nbsp;&nbsp;&nbsp;&nbsp;\
 <a href='https://www.right.com.cn/forum/forum-173-1.html' target='_blank'><em>3.恩山论坛插件版块</em></a>",
-"content4":"<font color='#1E90FF'>当前固件版本:</font><b>"+db_softcenter_["softcenter_firmware_version"]+"</b>&nbsp;&nbsp;<font color='#1E90FF'>最新固件版本:</font><b>5.0.9</b>"
+"content4":"<font color='#1E90FF'>当前固件版本:</font><b>"+db_softcenter_["softcenter_firmware_version"]+"</b>&nbsp;&nbsp;<font color='#1E90FF'>最新固件版本:</font><b>5.1.0</b>"
 }

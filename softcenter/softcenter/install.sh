@@ -22,22 +22,25 @@ softcenter_install() {
 		# coping files
 		cp -rf /tmp/softcenter/webs/* /jffs/softcenter/webs/
 		cp -rf /tmp/softcenter/res/* /jffs/softcenter/res/
-		if [ "$MODEL" == "GT-AC5300" ] || [ "$MODEL" == "GT-AX11000" ] || [ "$MODEL" == "GT-AC2900" ];then
-			cp -rf /tmp/softcenter/ROG/webs/* /jffs/softcenter/webs/
-			cp -rf /tmp/softcenter/ROG/res/* /jffs/softcenter/res/
-		elif [ "$MODEL" == "TUF-AX3000" ] ;then
-			cp -rf /tmp/softcenter/TUF/webs/* /jffs/softcenter/webs/
-			cp -rf /tmp/softcenter/TUF/res/* /jffs/softcenter/res/
+		if [ "$MODEL" == "GT-AC5300" ] || [ "$MODEL" == "GT-AX11000" ] || [ "$MODEL" == "GT-AC2900" ] || [ "$(nvram get merlinr_rog)" == "1" ];then
+			ROG=1
+		elif [ "$MODEL" == "TUF-AX3000" -o "$(nvram get merlinr_tuf)" == "1" ] ;then
+			TUF=1
 		fi
 		#cp -rf /tmp/softcenter/init.d/* /jffs/softcenter/init.d/
 		cp -rf /tmp/softcenter/bin/* /jffs/softcenter/bin/
-		#for axhnd
-		#if [ "`nvram get model`" == "RT-AX88U" ] || [ "`nvram get model`" == "GT-AX11000" ];then
-			#cp -rf /tmp/softcenter/axbin/* /jffs/softcenter/bin/
-		#fi
 		cp -rf /tmp/softcenter/perp /jffs/softcenter/
 		cp -rf /tmp/softcenter/scripts/* /jffs/softcenter/scripts
 		cp -rf /tmp/softcenter/.soft_ver /jffs/softcenter/
+		if [ "$ROG" == "1" ]; then
+			cp -rf /tmp/softcenter/ROG/res/* /jffs/softcenter/res/
+			cp -rf /tmp/softcenter/ROG/webs/* /jffs/softcenter/webs/
+		fi
+		if [ "$TUF" == "1" ]; then
+			sed -i 's/3e030d/3e2902/g;s/91071f/92650F/g;s/680516/D0982C/g;s/cf0a2c/c58813/g;s/700618/74500b/g;s/530412/92650F/g' /tmp/softcenter/ROG/res/*.css >/dev/null 2>&1
+			cp -rf /tmp/softcenter/ROG/res/* /jffs/softcenter/res/
+			cp -rf /tmp/softcenter/ROG/webs/* /jffs/softcenter/webs/
+		fi
 		dbus set softcenter_version=`cat /jffs/softcenter/.soft_ver`
 		dbus set softcenter_firmware_version=`nvram get extendno|cut -d "_" -f2|cut -d "-" -f1|cut -c2-6`
 		ARCH=`uname -m`

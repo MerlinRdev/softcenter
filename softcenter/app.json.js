@@ -61,10 +61,10 @@
             "version": "1.0"
         }, 
         {
-            "build_date": "2019-07-17_13:13:21", 
+            "build_date": "2020-05-15_20:20:00", 
             "description": "老板，来一斤虚拟内存~", 
             "home_url": "Module_swap.asp", 
-            "md5": "ba1be0bab3d26753a6b897dd6c58919d", 
+            "md5": "660fd3be4f46c55c4f88b57bd9941cce", 
             "name": "swap", 
             "tar_url": "swap/swap.tar.gz", 
             "title": "虚拟内存", 
@@ -282,7 +282,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "18268db13c320550fa5f8b4f3087f0d8", 
+    "md5": "0f651d4bac5c019656eb22ec479ff58c", 
     "tar_url": "softcenter/softcenter.tar.gz", 
-    "version": "1.2.6"
+    "version": "1.2.7"
 }

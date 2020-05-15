@@ -167,7 +167,7 @@ function checkCmdRet(){
 										<div>&nbsp;</div>
 										<div sclang style="float:left;" class="formfonttitle">Software Center, Offline installation</div>
 										<div style="float:right; width:15px; height:25px;margin-top:10px"><img id="return_btn" onclick="reload_Soft_Center();" align="right" style="cursor:pointer;position:absolute;margin-left:-30px;margin-top:-25px;" title="返回软件中心" src="/images/backprev.png" onMouseOver="this.src='/images/backprevclick.png'" onMouseOut="this.src='/images/backprev.png'"></img></div>
-										<div style="margin-left:5px;margin-top:10px;margin-bottom:10px"><img src="/images/New_ui/export/line_export.png"></div>
+										<div style="margin:30px 0 10px 5px;" class="splitLine"></div>
 										<div class="formfontdesc" style="padding-top:5px;margin-top:0px;float: left;" id="cmdDesc"></div>
 										<div style="padding-top:5px;margin-top:0px;float: left;" id="NoteBox" >
 											<li sclang>On this page, you can upload the plugin's offline installation package for manual installation;</li>
@@ -193,9 +193,8 @@ function checkCmdRet(){
 											</tr>
                                     	</table>
                                     	<div id="log_content" style="margin-top:10px;display: block;">
-											<textarea cols="63" rows="15" wrap="off" readonly="readonly" id="log_content1" style="width:99%; font-family:'Courier New', Courier, mono; font-size:11px;background:#475A5F;color:#FFFFFF;"></textarea>
+											<textarea cols="63" rows="40" wrap="off" readonly="readonly" id="log_content1"></textarea>
 										</div>
-										<div style="margin-left:5px;margin-top:10px;margin-bottom:10px"><img src="/images/New_ui/export/line_export.png"></div>
 										<div class="KoolshareBottom">
 											<br/>论坛技术支持： <a href="http://www.koolshare.cn" target="_blank"> <i><u>www.koolshare.cn</u></i> </a> <br/>
 											后台技术支持： <i>Xiaobao</i> <br/>
