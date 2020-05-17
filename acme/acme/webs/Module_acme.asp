@@ -223,7 +223,7 @@ function push_data(obj, arg) {
 	else
 		obj["action_mode"] = "restart";
 	$.ajax({
-		url: "/applydb?p=acme",
+		url: "/applydb.cgi?p=acme",
 		cache: false,
 		type: "POST",
 		dataType: "text",
