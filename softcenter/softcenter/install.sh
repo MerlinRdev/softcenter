@@ -58,13 +58,8 @@ softcenter_install() {
 		fi
 		dbus set softcenter_api=`cat /jffs/softcenter/.soft_ver`
 		# make some link
-		if [ "$MODEL" == "BLUECAVE" ];then
-			cp -r /jffs/softcenter/bin/base64_encode /jffs/softcenter/bin/base64_decode
-			cp -r /jffs/softcenter/scripts/ks_app_install.sh /jffs/softcenter/scripts/ks_app_remove.sh
-		else
-			[ ! -L "/jffs/softcenter/bin/base64_decode" ] && ln -sf /jffs/softcenter/bin/base64_encode /jffs/softcenter/bin/base64_decode
-			[ ! -L "/jffs/softcenter/scripts/ks_app_remove.sh" ] && ln -sf /jffs/softcenter/scripts/ks_app_install.sh /jffs/softcenter/scripts/ks_app_remove.sh
-		fi
+		[ ! -L "/jffs/softcenter/bin/base64_decode" ] && cd /jffs/softcenter/bin && ln -sf base64_encode base64_decode
+		[ ! -L "/jffs/softcenter/scripts/ks_app_remove.sh" ] && cd /jffs/softcenter/scripts && ln -sf ks_app_install.sh ks_app_remove.sh
 		chmod 755 /jffs/softcenter/bin/*
 		#chmod 755 /jffs/softcenter/init.d/*
 		chmod 755 /jffs/softcenter/perp/*
