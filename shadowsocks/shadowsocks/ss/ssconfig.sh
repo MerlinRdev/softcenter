@@ -196,10 +196,10 @@ kill_process(){
 		echo_date 关闭pdu进程...
 		kill -9 $pdu >/dev/null 2>&1
 	fi
-	client_linux_mips_process=`pidof client_linux_mips`
-	if [ -n "$client_linux_mips_process" ];then 
+	client_linux_process=`pidof client_linux`
+	if [ -n "$client_linux_process" ];then 
 		echo_date 关闭kcp协议进程...
-		killall client_linux_mips >/dev/null 2>&1
+		killall client_linux >/dev/null 2>&1
 	fi
 	haproxy_process=`pidof haproxy`
 	if [ -n "$haproxy_process" ];then 
@@ -841,14 +841,14 @@ start_kcp(){
 
 			start-stop-daemon -S -q -b -m \
 			-p /tmp/var/kcp.pid \
-			-x /jffs/softcenter/bin/client_linux_mips \
+			-x /jffs/softcenter/bin/client_linux \
 			-- -l 127.0.0.1:1091 \
 			-r $ss_basic_kcp_server:$ss_basic_kcp_port \
 			$KCP_CRYPT $KCP_KEY $KCP_SNDWND $KCP_RNDWND $KCP_MTU $KCP_CONN $COMP $KCP_MODE $ss_basic_kcp_extra
 		else
 			start-stop-daemon -S -q -b -m \
 			-p /tmp/var/kcp.pid \
-			-x /jffs/softcenter/bin/client_linux_mips \
+			-x /jffs/softcenter/bin/client_linux \
 			-- -l 127.0.0.1:1091 \
 			-r $ss_basic_kcp_server:$ss_basic_kcp_port \
 			$ss_basic_kcp_parameter

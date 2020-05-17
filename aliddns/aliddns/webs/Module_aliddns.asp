@@ -69,7 +69,6 @@
 		width:14%;
 		background: linear-gradient(to bottom, #003333  0%, #000000 100%);
 		background: linear-gradient(to bottom, #91071f  0%, #700618 100%); /* W3C rogcss */
-
 	}
 	.ks_btn:hover, {
 		border: 1px solid #222;
@@ -80,7 +79,6 @@
 		width:14%;
 		background: linear-gradient(to bottom, #27c9c9  0%, #279fd9 100%);
 		background: linear-gradient(to bottom, #cf0a2c  0%, #91071f 100%); /* W3C rogcss */
-
 	}
 	#aliddns_switch, #tablet_1, #tablet_2, #aliddns_log, #tablet_3 { border:1px solid #91071f; } /* W3C rogcss */
 	.input_option{
@@ -98,14 +96,12 @@ var noChange = 0;
 var x = 5;
 var params_inp = ['aliddns_ak', 'aliddns_sk', 'aliddns_name', 'aliddns_domain', 'aliddns_interval', 'aliddns_dns', 'aliddns_curl', 'aliddns_ttl', 'aliddns_comd'];
 var params_chk = ['aliddns_enable', 'aliddns_show'];
-
 function init() {
 	show_menu(menu_hook);
 	generate_options();
 	get_dbus_data();
 	get_run_status();
 }
-
 function conf2obj(){
 	for (var i = 0; i < params_inp.length; i++) {
 		if(dbus[params_inp[i]]){
@@ -120,7 +116,6 @@ function conf2obj(){
 	if(dbus["aliddns_version"])
 		E("aliddns_version").innerHTML = "当前版本：" + dbus["aliddns_version"]
 }
-
 function get_dbus_data() {
 	$.ajax({
 		type: "GET",
@@ -142,7 +137,6 @@ function get_dbus_data() {
 		}
 	});
 }
-
 function change_url() {
 	var misc_http_x = '<% nvram_get("misc_http_x"); %>';
 	var ddns_enable_x = '<% nvram_get("ddns_enable_x"); %>';
@@ -159,7 +153,6 @@ function change_url() {
 		E("wan_access_url").innerHTML = "&nbsp;Aliddns远程访问地址：<a href=\"https://" + ddns_hostname_x_t + ":" + misc_httpsport_x + "\" target=\"_blank\" style=\"color:#00ffe4;text-decoration: underline; font-family:Lucida Console;\"><em>https://" + ddns_hostname_x_t + ":" + misc_httpsport_x + "</em></a></em>";
 	}
 }
-
 function get_run_status(){
 	$.ajax({
 		type: "GET",
@@ -220,14 +213,12 @@ function save(flag) {
 		}
 	});
 }
-
 function generate_options(){
 	for(var i = 2; i < 60; i++) {
 		$("#aliddns_interval").append("<option value='"  + i + "'>" + i + "</option>");
 		$("#aliddns_interval").val(3);
 	}
 }
-
 function hook_event(){
 	$("#aliddns_enable").click(
 		function(){
@@ -243,7 +234,6 @@ function hook_event(){
 			E("tablet_3").style.display = "none";
 			E("apply_button-1").style.display = "";
 			E("apply_button-2").style.display = "none";
-
 		}else{
 			dbus["aliddns_enable"] = "0";
 			$('.show-btn1').removeClass('active');
@@ -267,8 +257,6 @@ function hook_event(){
 		}
 	});
 }
-
-
 function get_log(){
 	$.ajax({
 		url: '/res/aliddns_log.html',
@@ -298,7 +286,6 @@ function get_log(){
 		}
 	});
 }
-
 function toggle_func(){
 	$('.show-btn1').addClass('active');
 	$(".show-btn1").click(
@@ -336,7 +323,6 @@ function toggle_func(){
 			E("apply_button-2").style.display = "none";
 		});
 }
-
 function update_visibility(){
 	// pannel
 	if(E("aliddns_enable").checked == true){
@@ -375,7 +361,6 @@ function update_visibility(){
 			break;
 	}
 }
-
 function menu_hook(title, tab) {
 	tabtitle[tabtitle.length -1] = new Array("", "软件中心", "离线安装", "Aliddns");
 	tablink[tablink.length -1] = new Array("", "Main_Soft_center.asp", "Main_Soft_setting.asp", "Module_aliddns.asp");

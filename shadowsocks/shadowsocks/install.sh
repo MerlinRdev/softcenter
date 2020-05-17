@@ -15,19 +15,27 @@ if [ "$firmware_comp" == "1" ];then
 	echo_date 固件版本过低，无法安装
 	exit 1
 fi
-#echo_date 检测jffs分区剩余空间...
-#SPACE_AVAL=$(df|grep jffs | awk '{print $4}')
-#SPACE_NEED=$(du -s /tmp/shadowsocks | awk '{print $1}')
-#if [ "$SPACE_AVAL" -gt "$SPACE_NEED" ];then
-#	echo_date 当前jffs分区剩余"$SPACE_AVAL" KB, 插件安装需要"$SPACE_NEED" KB，空间满足，继续安装！
-#else
-#	echo_date 当前jffs分区剩余"$SPACE_AVAL" KB, 插件安装需要"$SPACE_NEED" KB，空间不足！
-#	echo_date 退出安装！
-#	exit 1
-#fi
+echo_date 检测jffs分区剩余空间...
+SPACE_AVAL=$(df|grep jffs | awk '{print $4}')
+SPACE_NEED=$(du -s /tmp/shadowsocks | awk '{print $1}')
+if [ "$SPACE_AVAL" -gt "$SPACE_NEED" ];then
+	echo_date 当前jffs分区剩余"$SPACE_AVAL" KB, 插件安装需要"$SPACE_NEED" KB，空间满足，继续安装！
+else
+	echo_date 当前jffs分区剩余"$SPACE_AVAL" KB, 插件安装需要"$SPACE_NEED" KB，空间不足！
+	echo_date 退出安装！
+	exit 1
+fi
 if [ "$ss_basic_enable" == "1" ];then
 	echo_date 先关闭科学上网插件，保证文件更新成功!
 	sh /jffs/softcenter/ss/ssconfig.sh stop
+fi
+
+if [ "$MODEL" == "GT-AC5300" ] || [ "$MODEL" == "GT-AC2900" ] || [ "$(nvram get merlinr_rog)" == "1" ];then
+	ROG=1
+fi
+
+if [ "$MODEL" == "TUF-AX3000" -o "$(nvram get merlinr_tuf)" == "1" ];then
+	TUF=1
 fi
 
 if [ -n "`ls /jffs/softcenter/ss/postscripts/P*.sh 2>/dev/null`" ];then
@@ -55,7 +63,7 @@ rm -rf /jffs/softcenter/bin/Pcap_DNSProxy
 rm -rf /jffs/softcenter/bin/dnscrypt-proxy
 rm -rf /jffs/softcenter/bin/dns2socks
 rm -rf /jffs/softcenter/bin/cdns
-rm -rf /jffs/softcenter/bin/client_linux_mips
+rm -rf /jffs/softcenter/bin/client_linux
 rm -rf /jffs/softcenter/bin/chinadns
 rm -rf /jffs/softcenter/bin/chinadns1
 rm -rf /jffs/softcenter/bin/resolveip
@@ -96,10 +104,11 @@ cp -rf /tmp/shadowsocks/install.sh /jffs/softcenter/scripts/ss_install.sh
 echo_date 复制相关的网页文件！
 cp -rf /tmp/shadowsocks/webs/* /jffs/softcenter/webs/
 cp -rf /tmp/shadowsocks/res/* /jffs/softcenter/res/
-if [ "$MODEL" == "GT-AC5300" ] || [ "$MODEL" == "GT-AC2900" ];then
+if [ "$ROG" == "1" ];then
 	cp -rf /tmp/shadowsocks/rog/res/* /jffs/softcenter/res/
-elif [ "$MODEL" == "TUF-AX3000" ];then
-	cp -rf /tmp/shadowsocks/tuf/res/* /jffs/softcenter/res/
+elif [ "$TUF" == "1" ];then
+	sed -i 's/3e030d/3e2902/g;s/91071f/92650F/g;s/680516/D0982C/g;s/cf0a2c/c58813/g;s/700618/74500b/g;s/530412/92650F/g' /tmp/shadowsocks/rog/res/shadowsocks.css >/dev/null 2>&1
+	cp -rf /tmp/shadowsocks/rog/res/* /jffs/softcenter/res/
 fi
 
 echo_date 为新安装文件赋予执行权限...
@@ -117,7 +126,6 @@ fi
 
 echo_date 创建一些二进制文件的软链接！
 [ ! -e "/jffs/softcenter/bin/rss-tunnel" ] && cp -rf /jffs/softcenter/bin/rss-local /jffs/softcenter/bin/rss-tunnel
-[ ! -e "/jffs/softcenter/bin/netstat" ] && cp -rf /jffs/softcenter/bin/koolbox /jffs/softcenter/bin/netstat
 [ ! -e "/jffs/softcenter/init.d/S99shadowsocks.sh" ] && cp -rf /jffs/softcenter/ss/ssconfig.sh /jffs/softcenter/init.d/S99shadowsocks.sh
 [ ! -e "/jffs/softcenter/init.d/N99shadowsocks.sh" ] && cp -rf /jffs/softcenter/ss/ssconfig.sh /jffs/softcenter/init.d/N99shadowsocks.sh
 [ ! -e "/jffs/softcenter/init.d/S99socks5.sh" ] && cp -rf /jffs/softcenter/scripts/ss_socks5.sh /jffs/softcenter/init.d/S99socks5.sh

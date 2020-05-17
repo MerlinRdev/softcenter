@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <!-- version: 1.8 -->
@@ -48,7 +48,6 @@
 	border: 1px solid #222;
 	background: linear-gradient(to bottom, #003333 0%, #000000 100%);
 	background: linear-gradient(to bottom, #91071f  0%, #700618 100%); /* W3C rogcss */
-	/* W3C */
 	font-size:10pt;
 	color: #fff;
 	padding: 5px 5px;
@@ -59,7 +58,6 @@
 	border: 1px solid #222;
 	background: linear-gradient(to bottom, #27c9c9 0%, #279fd9 100%);
 	background: linear-gradient(to bottom, #cf0a2c  0%, #91071f 100%); /* W3C rogcss */
-	/* W3C */
 	font-size:10pt;
 	color: #fff;
 	padding: 5px 5px;
@@ -79,7 +77,6 @@ var httpd_cert_info = [ <% httpd_cert_info(); %> ][0];
 var db_acme = {}
 var params_input = ["acme_subdomain", "acme_domain", "acme_provider", "acme_ali_arg1", "acme_ali_arg2", "acme_dp_arg1", "acme_dp_arg2", "acme_xns_arg1", "acme_xns_arg2", "acme_cf_arg1", "acme_cf_arg2", "acme_gd_arg1", "acme_gd_arg2"];
 var params_check = ["acme_enable"];
-
 function init() {
 	show_menu(menu_hook);
 	get_dbus_data();
@@ -87,14 +84,12 @@ function init() {
 	get_cert_info();
 	hook_event();
 }
-
 function hook_event(){
 	$("#log_content2").click(
 	function() {
 		x = -1;
 	});
 }
-
 function get_dbus_data() {
 	$.ajax({
 		type: "GET",
@@ -107,7 +102,6 @@ function get_dbus_data() {
 		}
 	});
 }
-
 function get_cert_info() {
 	$.ajax({
 		url: '/ajax_certinfo.asp',
@@ -120,7 +114,6 @@ function get_cert_info() {
 		}
 	});
 }
-
 function show_cert_details() {
 	if(httpd_cert_info.issueTo){
 		E("cert_details").style.display = "";
@@ -136,7 +129,6 @@ function show_cert_details() {
 		E("expireOn").innerHTML = httpd_cert_info.expire;
 	}
 }
-
 function update_visibility(r) {
 	trs= ["", "ali", "dp", "xns", "cf", "gd"];
 	pvd= E("acme_provider").value;
@@ -150,22 +142,18 @@ function update_visibility(r) {
 		}
 	}
 }
-
 function conf_to_obj() {
-	// data from input
 	for (var i = 0; i < params_input.length; i++) {
 		if(db_acme[params_input[i]]){
 			E(params_input[i]).value = db_acme[params_input[i]];
 		}
 	}
-	// data from checkbox
 	for (var i = 0; i < params_check.length; i++) {
 		if(db_acme[params_check[i]]){
 			E(params_check[i]).checked = db_acme[params_check[i]] == "1";
 		}
 	}
 }
-
 function save(){
 	if(!E("acme_subdomain").value){
 		alert("字域名不能为空！");
@@ -201,26 +189,22 @@ function save(){
 			return false;
 		}	
 	}
-	// data from input
 	for (var i = 0; i < params_input.length; i++) {
 		if(E(params_input[i])){
 			db_acme[params_input[i]] = E(params_input[i]).value
 		}
 	}
-	// data from checkbox
 	for (var i = 0; i < params_check.length; i++) {
 		db_acme[params_check[i]] = E(params_check[i]).checked ? '1' : '0';
 	}
 	push_data(db_acme, 1);
 }
-
 function renew_cert(){
 	if (confirm("你确定需要强制更新吗?????\n你确定需要强制更新吗?????\n你确定需要强制更新吗?????\n1.请注意勿频繁使用此功能，以免超出api次数限制！\n2.强制更新后会重启路由器web服务，导致日志窗口出现网页代码，请自行刷新页面并重新登录！")) {
 		var dbus = {}
 		push_data(dbus, 2);
 	}
 }
-
 function delete_cert(){
 	if (confirm("你确定删除吗？")) {
 		var dbus = {}
@@ -269,7 +253,6 @@ function get_realtime_log(w) {
 					E("ok_button").style.display = "";
 					count_down_close();
 				}else{
-					//查看日志
 					E("close_button").style.display = "";
 					E("ok_button").style.display = "none";
 				}
@@ -295,48 +278,36 @@ function get_realtime_log(w) {
 		}
 	});
 }
-
 function showKPLoadingBar(seconds) {
 	if (window.scrollTo)
 		window.scrollTo(0, 0);
-
 	disableCheckChangedStatus();
-
 	htmlbodyforIE = document.getElementsByTagName("html"); //this both for IE&FF, use "html" but not "body" because <!DOCTYPE html PUBLIC.......>
 	htmlbodyforIE[0].style.overflow = "hidden"; //hidden the Y-scrollbar for preventing from user scroll it.
-
 	winW_H();
-
 	var blockmarginTop;
 	var blockmarginLeft;
 	if (window.innerWidth)
 		winWidth = window.innerWidth;
 	else if ((document.body) && (document.body.clientWidth))
 		winWidth = document.body.clientWidth;
-
 	if (window.innerHeight)
 		winHeight = window.innerHeight;
 	else if ((document.body) && (document.body.clientHeight))
 		winHeight = document.body.clientHeight;
-
 	if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth) {
 		winHeight = document.documentElement.clientHeight;
 		winWidth = document.documentElement.clientWidth;
 	}
-
 	if (winWidth > 1050) {
-
 		winPadding = (winWidth - 1050) / 2;
 		winWidth = 1105;
 		blockmarginLeft = (winWidth * 0.3) + winPadding - 150;
 	} else if (winWidth <= 1050) {
 		blockmarginLeft = (winWidth) * 0.3 + document.body.scrollLeft - 160;
-
 	}
-
 	if (winHeight > 660)
 		winHeight = 660;
-
 	blockmarginTop = winHeight * 0.3 - 140
 	E("loadingBarBlock").style.marginTop = blockmarginTop + "px";
 	E("loadingBarBlock").style.marginLeft = blockmarginLeft + "px";
@@ -348,7 +319,6 @@ function showKPLoadingBar(seconds) {
 	y = 0;
 	LoadingACMEProgress(seconds);
 }
-
 function LoadingACMEProgress(seconds) {
 	E("LoadingBar").style.visibility = "visible";
 	if (E("acme_enable").value == 0) {
@@ -359,17 +329,14 @@ function LoadingACMEProgress(seconds) {
 		E("loading_block3").innerHTML = "Let's Encrypt 插件运行日志:"
 	}
 }
-
 function hideLoadingBar() {
 	x = -1;
 	document.getElementById("LoadingBar").style.visibility = "hidden";
 	refreshpage();
 }
-
 function close_log() {
 	document.getElementById("LoadingBar").style.visibility = "hidden";
 }
-
 function count_down_close() {
 	if (x == "0") {
 		refreshpage();
@@ -382,19 +349,16 @@ function count_down_close() {
 		--x;
 	setTimeout("count_down_close();", 1000);
 }
-
 function menu_hook(title, tab) {
 	tabtitle[tabtitle.length - 1] = new Array("", "Let's Encrypt");
 	tablink[tablink.length - 1] = new Array("", "Module_acme.asp");
 }
-
 function show_log(){
 	showKPLoadingBar();
 	noChange = 0;
 	get_realtime_log(1);
 	E("close_button").style.display = "";
 }
-
 </script>
 </head>
 <body onload="init();">

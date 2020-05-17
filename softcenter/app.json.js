@@ -21,14 +21,14 @@
             "version": "1.0.2"
         }, 
         {
-            "build_date": "2020-04-18_08:00:58", 
+            "build_date": "2020-05-16_13:46:07", 
             "description": "科学上网", 
             "home_url": "Main_Ss_Content.asp", 
-            "md5": "2094a0991283b833c0ab1659ae887a69", 
+            "md5": "687abb5b6bf6e6441772d9a504135b05", 
             "name": "shadowsocks", 
             "tar_url": "shadowsocks/shadowsocks.tar.gz", 
             "title": "科学上网", 
-            "version": "4.2.7"
+            "version": "4.2.8"
         }, 
         {
             "build_date": "2019-07-26_12:00:35", 
@@ -181,14 +181,14 @@
             "version": "1.5"
         }, 
         {
-            "build_date": "2020-04-12_19:52:21", 
+            "build_date": "2020-05-17_13:26:58", 
             "description": "aliddns", 
             "home_url": "Module_aliddns.asp", 
-            "md5": "a7aca8c4454b7ef60c595a09cbf4faaf", 
+            "md5": "78ad4e40ea454108c53622eb133fc442", 
             "name": "aliddns", 
             "tar_url": "aliddns/aliddns.tar.gz", 
             "title": "阿里DDNS", 
-            "version": "2.0"
+            "version": "2.1"
         }, 
         {
             "build_date": "2019-08-16_00:18:09", 
@@ -211,14 +211,14 @@
             "version": "1.4"
         }, 
         {
-            "build_date": "2019-11-17_21:44:06", 
+            "build_date": "2020-05-17_10:55:24", 
             "description": "自动部署SSL证书", 
             "home_url": "Module_acme.asp", 
-            "md5": "5931399229bac3bc52fba47c26849801", 
+            "md5": "b36b0f8b95577d20fab5f6cd8abcdf25", 
             "name": "acme", 
             "tar_url": "acme/acme.tar.gz", 
             "title": "Let's Encrypt", 
-            "version": "3.0"
+            "version": "3.1"
         }, 
         {
             "build_date": "2020-01-06_18:15:41", 
@@ -282,7 +282,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "0f651d4bac5c019656eb22ec479ff58c", 
+    "md5": "b18b55a13b0211ba0afcebc780b29a98", 
     "tar_url": "softcenter/softcenter.tar.gz", 
     "version": "1.2.7"
 }

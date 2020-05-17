@@ -210,6 +210,7 @@ input[type=button]:focus {
 <script>
 var db_softcenter_ = {};
 var scarch = "mips";
+var giturl;
 var model = '<% nvram_get("model"); %>';
 var modelname = '<% nvram_get("modelname"); %>';
 var TIMEOUT_SECONDS = 18;
@@ -561,24 +562,30 @@ $(function() {
 			}
 			else
 			        db_softcenter_["softcenter_home_url"] = "https://sc.paldier.com";
-			if(db_softcenter_["softcenter_arch"] == "mips")//for grx500
+			if(db_softcenter_["softcenter_arch"] == "mips"){//for grx500
 				scarch="mips";
-			else if (db_softcenter_["softcenter_arch"] == "armv7l")//for bcm4709
+				giturl="softcenter";
+			} else if (db_softcenter_["softcenter_arch"] == "armv7l"){//for bcm4709
 				scarch="arm";
-			else if (db_softcenter_["softcenter_arch"] == "armng")//for bcm6750/ipq4019
+				giturl="softcenterarm";
+			} else if (db_softcenter_["softcenter_arch"] == "armng"){//for bcm6750/ipq4019
 				scarch="armng";
-			else if (db_softcenter_["softcenter_arch"] == "aarch64")//for bcm4908/bcm6710
+				giturl="softcenterarmng";
+			} else if (db_softcenter_["softcenter_arch"] == "aarch64"){//for bcm4908/bcm6710
 				scarch="arm64";
-			else if (db_softcenter_["softcenter_arch"] == "mipsle")//for mtk7621
+				giturl="softcenterarm64";
+			} else if (db_softcenter_["softcenter_arch"] == "mipsle"){//for mtk7621
 				scarch="mipsle";
-			else if (db_softcenter_["softcenter_arch"] == "x86")//for grx750
-				scarch="x86";
-			else
+				giturl="softcentermipsle";
+			} else {
 				scarch="mips";
+				giturl="softcenter";
+			}
 			if (!db_softcenter_["softcenter_version"]) {
 				db_softcenter_["softcenter_version"] = "0.0";
 			}
 			$("#spnCurrVersion").html("<em>" + db_softcenter_["softcenter_version"] + "</em>");
+			$('#github').html('论坛技术支持： <a href="https://www.right.com.cn" target="_blank"> <i><u>right.com.cn</u></i> </a><br/>Github项目： <a href ="https://github.com/paldier/' + giturl +'" target="_blank"> <i><u>https://github.com/paldier</u></i> </a><br/>Shell & Web by： <i>sadoneli</i>, <i>Xiaobao</i>, <i>paldier</i>')
 			var jff2_scripts="<% nvram_get("jffs2_scripts"); %>";
 			if(jff2_scripts != 1){
 				$('#software_center_message').html('<h1><font color="#FF9900">错误！</font></h1><h2>软件中心不可用！因为你没有开启Enable JFFS custom scripts and configs选项！</h2><h2>请前往【系统管理】-<a href="Advanced_System_Content.asp"><u><em>【系统设置】</em></u></a>开启此选项再使用软件中心！！</h2>')
@@ -748,11 +755,7 @@ function notice_show(){
 															<td colspan="3"></td>
 														</tr>
 													</table>
-												<div class="KoolshareBottom">论坛技术支持： <a href="http://www.koolshare.cn" target="_blank"> <i><u>koolshare.cn</u></i> </a>
-													<br/>Github项目： <a href="https://github.com/koolshare/armsoft" target="_blank"> <i><u>github.com/koolshare</u></i> </a>
-													<br/>Shell & Web by： <a href="mailto:sadoneli@gmail.com"> <i>sadoneli</i> </a>, <i>Xiaobao</i>
-													<br/>修改版 by： <i>paldier</i>
-													<br/>Github项目： <a href="https://github.com/paldier/softcenter" target="_blank"> <i><u>https://github.com/paldier</u></i> </a>
+												<div class="KoolshareBottom" id="github">
 												</div>
 											</td>
 										</tr>
