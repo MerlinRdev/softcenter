@@ -549,7 +549,7 @@ $(function() {
 		success: function(response) {
 			db_softcenter_ = db_softcenter;
 			if(db_softcenter_["softcenter_server_tcode"] == "CN") {
-			        db_softcenter_["softcenter_home_url"] = "http://update.wifi.com.cn";
+			        db_softcenter_["softcenter_home_url"] = "https://sc.softcenter.site";
 			}
 			else if(db_softcenter_["softcenter_server_tcode"] == "GB") {
 			        db_softcenter_["softcenter_home_url"] = "https://sc.paldier.com";

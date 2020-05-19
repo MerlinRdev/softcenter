@@ -106,21 +106,17 @@ install_module() {
 	OLD_VERSION=`dbus get softcenter_module_${softcenter_installing_module}_version`
 	if [ -z "$(dbus get softcenter_server_tcode)" ]; then
 		modelname=`nvram get modelname`
-		if [ "$modelname" == "K3" ]; then
+		if [ "$modelname" == "K3" ] || [ "$modelname" == "GTAC2900" ] || [ "$modelname" == "GTAC5300"  ] || [ "$modelname" == "RTAC86U" ] || [ "$modelname" == "RTAX86U" ] || [ "$modelname" == "RTAX68U" ] || [ "$modelname" == "RTAX82U" ] || [ "$modelname" == "TUFAX3000" ] || [ "$modelname" == "RTACRH17" ] || [ "$modelname" == "XWR3100" ]; then
 			dbus set softcenter_server_tcode=CN
 		elif [ "$modelname" == "SBRAC1900P"  ] || [ "$modelname" == "SBR-AC1900P" ] || [ "$modelname" == "SBRAC3200P" ] || [ "$modelname" == "SBR-AC3200P" ] || [ "$modelname" == "R7900P" ] || [ "$modelname" == "R8000P" ] || [ "$modelname" == "R7000P" ]; then
 			dbus set softcenter_server_tcode=ALI
-		elif [ "$modelname" == "GTAC2900" ] || [ "$modelname" == "GTAC5300"  ] || [ "$modelname" == "RTAC86U" ] || [ "$modelname" == "RTAX86U" ] || [ "$modelname" == "RTAX68U" ] || [ "$modelname" == "RTAX82U" ] || [ "$modelname" == "TUFAX3000" ] || [ "$modelname" == "RTACRH17" ]; then
-			dbus set softcenter_server_tcode=CN1
 		else
 			dbus set softcenter_server_tcode=`nvram get territory_code |cut -c 1-2`
 			[ -z "$(dbus get softcenter_server_tcode)" ] && dbus set softcenter_server_tcode=GB
 		fi
 	fi
 	eval `dbus export softcenter_server_tcode`
-	if [ "$softcenter_server_tcode" == "CN" ]; then
-		HOME_URL="http://update.wifi.com.cn/$ARCH_SUFFIX"
-	elif [ "$softcenter_server_tcode" == "CN1" ]; then
+	if [ "$softcenter_server_tcode" == "CN" ] || [ "$softcenter_server_tcode" == "CN1" ]; then
 		HOME_URL="https://sc.softcenter.site/$ARCH_SUFFIX"
 	elif [ "$softcenter_server_tcode" == "ALI" ]; then
 		HOME_URL="https://wufan.softcenter.site/$ARCH_SUFFIX"
