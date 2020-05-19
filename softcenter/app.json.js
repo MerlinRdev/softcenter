@@ -131,24 +131,14 @@
             "version": "1.4"
         }, 
         {
-            "build_date": "2019-11-01_10:32:48", 
+            "build_date": "2020-05-19_10:42:47", 
             "description": "迅雷快鸟，为上网加速而生~", 
             "home_url": "Module_fastd1ck.asp", 
-            "md5": "c88e939de9f550773eb7bf98b449449a", 
+            "md5": "b4ad36f9a776442a5518c6bff24f69ba", 
             "name": "fastd1ck", 
             "tar_url": "fastd1ck/fastd1ck.tar.gz", 
             "title": "讯雷快鸟", 
-            "version": "1.6"
-        }, 
-        {
-            "build_date": "2019-07-24_11:01:53", 
-            "description": "dc1服务器", 
-            "home_url": "Module_dc1svr.asp", 
-            "md5": "7635fc44e5575ade4bc616ac4293e194", 
-            "name": "dc1svr", 
-            "tar_url": "dc1svr/dc1svr.tar.gz", 
-            "title": "dc1服务器", 
-            "version": "1.1"
+            "version": "1.7"
         }, 
         {
             "build_date": "2020-01-06_18:24:10", 

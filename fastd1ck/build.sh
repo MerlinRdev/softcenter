@@ -1,7 +1,7 @@
 #!/bin/sh
 
 MODULE=fastd1ck
-VERSION=1.6
+VERSION=1.7
 TITLE=讯雷快鸟
 DESCRIPTION="迅雷快鸟，为上网加速而生~"
 HOME_URL=Module_fastd1ck.asp
