@@ -57,8 +57,6 @@ function save() {
 	//var postData = {"id": id, "method": "kms_config.sh", "params": [1], "fields": db_kms };
 	db_kms["action_script"]="kms_config.sh";
 	db_kms["action_mode"] = "restart";
-	db_kms["current_page"] = "Module_kms.asp";
-	db_kms["next_page"] = "Module_kms.asp";
 	$.ajax({
 		url: "/applydb.cgi?p=kms",
 		cache: false,
@@ -179,3 +177,4 @@ function menu_hook(title, tab) {
 	<div id="footer"></div>
 </body>
 </html>
+
