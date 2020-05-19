@@ -1,8 +1,8 @@
 {
-"version":"1.3",
-"md5":"cc0f31aabf3d4fae68e2ee28bb3af9ed",
+"version":"1.4",
+"md5":"ca4bdb8749e2032215889505ab6a827f",
 "home_url":"Module_cfddns.asp",
 "title":"Cloudflare DDNS",
 "description":"Cloudflare解析自动更新IP",
-"build_date":"2019-11-01_10:32:32"
+"build_date":"2020-05-19_08:45:54"
 }

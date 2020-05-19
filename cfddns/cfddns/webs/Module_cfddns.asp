@@ -30,23 +30,19 @@
 		padding: 10px 3.75px;
 		border-radius: 5px 5px 0px 0px;
 		width:8.42%;
-		/*--------rog--------*/
-		/*border: 1px solid #91071f;*/
-		/*background: none;*/
-		/*--------non rog--------*/
 		border-left: 1px solid #67767d;
 		border-top: 1px solid #67767d;
 		border-right: 1px solid #67767d;
 		border-bottom: none;
 		background: #67767d;
+		border: 1px solid #91071f;  /* W3C rogcss */
+		background: none;  /* W3C rogcss */
 	}
 	.active {
-		/*--------rog--------*/
-		/*border: 1px solid #91071f;*/
-		/*background: #91071f;*/
-		/*--------non rog--------*/
 		border: 1px solid #2f3a3e;
 		background: #2f3a3e;
+		border: 1px solid #91071f; /* W3C rogcss */
+		background: #91071f; /* W3C rogcss */
 	}
 	.ss_btn {
 		border: 1px solid #222;
@@ -55,10 +51,8 @@
 		padding: 5px 5px 5px 5px;
 		border-radius: 5px 5px 5px 5px;
 		width:14%;
-		/*--------rog--------*/
-		/*background: linear-gradient(to bottom, #91071f  0%, #700618 100%);*/
-		/*--------non rog--------*/
 		background: linear-gradient(to bottom, #003333  0%, #000000 100%);
+		background: linear-gradient(to bottom, #91071f  0%, #700618 100%); /* W3C rogcss */
 	}
 	.ss_btn:hover, .active3 {
 		border: 1px solid #222;
@@ -67,10 +61,8 @@
 		padding: 5px 5px 5px 5px;
 		border-radius: 5px 5px 5px 5px;
 		width:14%;
-		/*--------rog--------*/
-		/*background: linear-gradient(to bottom, #cf0a2c  0%, #91071f 100%);*/
-		/*--------non rog--------*/
 		background: linear-gradient(to bottom, #27c9c9  0%, #279fd9 100%);
+		background: linear-gradient(to bottom, #cf0a2c  0%, #91071f 100%); /* W3C rogcss */
 	}
 	#log_content1{
 		width:97%;
@@ -83,18 +75,11 @@
 		outline:none;
 		overflow-x:hidden;
 		border:0px solid #222;
-		/*--------rog--------*/
-		/*background:transparent;*/
-		/*--------non rog--------*/
 		background:#475A5F;
+		background:transparent; /* W3C rogcss */
 	}
-	/*#cfddns_switch, #cfddns_status, #cfddns_settings, #cfddns_log, #cfddns_help {
-		border:1px solid #91071f;
-	}*/
-	#log_content{
-		outline: 1px solid #222;
-		width:748px;
-	}
+	#cfddns_switch, #cfddns_status, #cfddns_settings, #cfddns_log, #cfddns_help { border:1px solid #91071f; } /* W3C rogcss */
+	#log_content{ outline: 1px solid #222;width:748px; }
 	input[type=button]:focus {
 		outline: none;
 	}
@@ -160,8 +145,6 @@ function save(){
 	var postData = {"id": id, "method": "cfddns_config.sh", "params": [1], "fields": dbus_new };
 	dbus_new["action_script"]="cfddns_config.sh";
 	dbus_new["action_mode"] = "restart";
-	dbus_new["current_page"] = "Module_cfddns.asp";
-	dbus_new["next_page"] = "Module_cfddns.asp";
 	$.ajax({
 		url: "/applydb.cgi?p=cfddns",
 		cache: false,
@@ -451,3 +434,4 @@ function menu_hook(){
 <div id="footer"></div>
 </body>
 </html>
+
