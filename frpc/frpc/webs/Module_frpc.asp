@@ -30,14 +30,19 @@
 .show-btn1, .show-btn2 {
     border: 1px solid #222;
     background: #576d73;
+    background: linear-gradient(to bottom, #91071f  0%, #700618 100%); /* W3C rogcss*/
     font-size:10pt;
     color: #fff;
     padding: 10px 3.75px;
     border-radius: 5px 5px 0px 0px;
     width:15%;
+    border: 1px solid #91071f; /* W3C rogcss*/
+    background: none; /* W3C rogcss*/
     }
 .active {
     background: #2f3a3e;
+    background: linear-gradient(to bottom, #cf0a2c  0%, #91071f 100%); /* W3C rogcss*/
+    border: 1px solid #91071f; /* W3C rogcss*/
 }
 .close {
     background: red;
@@ -82,6 +87,7 @@
 .frpc_btn {
     border: 1px solid #222;
     background: linear-gradient(to bottom, #003333  0%, #000000 100%); /* W3C */
+	background: linear-gradient(to bottom, #91071f  0%, #700618 100%); /* W3C rogcss*/
     font-size:10pt;
     color: #fff;
     padding: 5px 5px;
@@ -91,11 +97,23 @@
 .frpc_btn:hover {
     border: 1px solid #222;
     background: linear-gradient(to bottom, #27c9c9  0%, #279fd9 100%); /* W3C */
+	background: linear-gradient(to bottom, #cf0a2c  0%, #91071f 100%); /* W3C rogcss*/
     font-size:10pt;
     color: #fff;
     padding: 5px 5px;
     border-radius: 5px 5px 5px 5px;
     width:16%;
+}
+#frpc_config {
+	width:99%;
+	font-family:'Lucida Console';
+	font-size:12px; background:#475A5F;
+	color:#FFFFFF;
+	text-transform:none;
+	margin-top:5px;
+	overflow:scroll;
+	background:transparent; /* W3C rogcss*/
+	border:1px solid #91071f; /* W3C rogcss*/
 }
 .formbottomdesc {
     margin-top:10px;
@@ -167,8 +185,6 @@ function get_status() {
 		var dbus = {};
 		dbus["action_script"]="frpc_status.sh";
 		dbus["action_mode"] = " Refresh ";
-		dbus["current_page"] = "Module_frpc.asp";
-		dbus["next_page"] = "Module_frpc.asp";
 		$.ajax({
 			type: "POST",
 			cache: false,
@@ -267,8 +283,6 @@ function save() {
 	//var postData = {"id": uid, "method": "frpc_config.sh", "params": [1], "fields": db_frpc_ };
 	db_frpc_["action_script"]="frpc_config.sh";
 	db_frpc_["action_mode"] = "restart";
-	db_frpc_["current_page"] = "Module_frpc.asp";
-	db_frpc_["next_page"] = "Module_frpc.asp";
 	$.ajax({
 		url: "/applydb.cgi?p=frpc",
 		cache: false,
@@ -320,8 +334,6 @@ function addTr(o) {
 	//var postData = {"id": parseInt(Math.random() * 100000000), "method": "dummy_script.sh", "params":[], "fields": ns };
 	ns["action_script"]="frpc_config.sh";
 	ns["action_mode"] = "clean";
-	ns["current_page"] = "Module_frpc.asp";
-	ns["next_page"] = "Module_frpc.asp";
 	$.ajax({
 		type: "POST",
 		cache:false,
@@ -363,8 +375,6 @@ function delTr(o) { //删除配置行功能
 		//var postData = {"id": parseInt(Math.random() * 100000000), "method": "dummy_script.sh", "params":[], "fields": ns };
 		ns["action_script"]="frpc_config.sh";
 		ns["action_mode"] = "clean";
-		ns["current_page"] = "Module_frpc.asp";
-		ns["next_page"] = "Module_frpc.asp";
 		$.ajax({
 			type: "POST",
 			cache:false,
@@ -1083,7 +1093,7 @@ function openssHint(itemNum) {
                                                     <label><input type="checkbox" id="frpc_customize_conf" name="frpc_customize_conf"><i>自定义配置</i>
                                                 </th>
                                                 <td>
-                                                    <textarea cols="50" rows="40" id="frpc_config" name="frpc_config" style="width:99%; font-family:'Lucida Console'; font-size:12px; background:#475A5F; color:#FFFFFF; text-transform:none; margin-top:5px; overflow:scroll;" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="[common]&#13;&#10;server_addr = 127.0.0.1&#13;&#10;server_port = 7000&#10;&#10;[ssh]&#10;type = tcp&#10;local_ip = 127.0.0.1&#10;local_port = 22&#10;remote_port = 6000" ></textarea>
+                                                    <textarea cols="50" rows="40" id="frpc_config" name="frpc_config" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="[common]&#13;&#10;server_addr = 127.0.0.1&#13;&#10;server_port = 7000&#10;&#10;[ssh]&#10;type = tcp&#10;local_ip = 127.0.0.1&#10;local_port = 22&#10;remote_port = 6000" ></textarea>
                                                 </td>
                                             </tr>
                                     </table>
@@ -1142,3 +1152,4 @@ function openssHint(itemNum) {
 <div id="footer"></div>
 </body>
 </html>
+
