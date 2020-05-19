@@ -91,14 +91,14 @@
             "version": "3.8.4.2"
         }, 
         {
-            "build_date": "2019-11-20_13:46:11", 
+            "build_date": "2020-05-19_08:28:43", 
             "description": "linux下载利器", 
             "home_url": "Module_aria2.asp", 
-            "md5": "746406a8ce519ed5c4b3a0a954220300", 
+            "md5": "10f81d06d9f4427e6848576687d6a344", 
             "name": "aria2", 
             "tar_url": "aria2/aria2.tar.gz", 
             "title": "Aria2", 
-            "version": "2.7"
+            "version": "2.8"
         }, 
         {
             "build_date": "2019-11-01_10:45:29", 
@@ -241,10 +241,10 @@
             "version": "4.18.2"
         }, 
         {
-            "build_date": "2020-04-01_12:57:25", 
+            "build_date": "2020-05-19_08:31:37", 
             "description": "百度盘", 
             "home_url": "Module_baidupcs.asp", 
-            "md5": "9bda173f45b4edb131356355e87f2d04", 
+            "md5": "fd60e5e00e102d7d492b6e26b5ac15b0", 
             "name": "baidupcs", 
             "tar_url": "baidupcs/baidupcs.tar.gz", 
             "title": "百度盘", 
