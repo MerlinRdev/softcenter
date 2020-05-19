@@ -49,24 +49,15 @@ write_sourcelist(){
 }
 
 detect_start_up(){
-	if [ "$(nvram get productid)" = "BLUECAVE" ];then
-		[ ! -f "/jffs/softcenter/init.d/M98koolproxy.sh" ] && cp -r /jffs/softcenter/koolproxy/kp_config.sh /jffs/softcenter/init.d/M98koolproxy.sh
-		[ ! -f "/jffs/softcenter/init.d/N98koolproxy.sh" ] && cp -r /jffs/softcenter/koolproxy/kp_config.sh /jffs/softcenter/init.d/N98koolproxy.sh
-	else
-		[ ! -L "/jffs/softcenter/init.d/S98koolproxy.sh" ] && ln -sf /jffs/softcenter/koolproxy/kp_config.sh /jffs/softcenter/init.d/S98koolproxy.sh
-		[ ! -L "/jffs/softcenter/init.d/N98koolproxy.sh" ] && ln -sf /jffs/softcenter/koolproxy/kp_config.sh /jffs/softcenter/init.d/N98koolproxy.sh
-	fi
+	[ ! -L "/jffs/softcenter/init.d/S98koolproxy.sh" ] && ln -sf /jffs/softcenter/koolproxy/kp_config.sh /jffs/softcenter/init.d/S98koolproxy.sh
+	[ ! -L "/jffs/softcenter/init.d/N98koolproxy.sh" ] && ln -sf /jffs/softcenter/koolproxy/kp_config.sh /jffs/softcenter/init.d/N98koolproxy.sh
 }
 
 start_koolproxy(){
 	write_sourcelist
 	echo_date 开启koolproxy主进程！
-	if [ "$(nvram get productid)" = "BLUECAVE" ];then
-		[ ! -f "/jffs/softcenter/bin/koolproxy" ] && cp -r /jffs/softcenter/koolproxy/koolproxy /jffs/softcenter/bin/koolproxy
-	else
-		[ ! -L "/jffs/softcenter/bin/koolproxy" ] && ln -sf /jffs/softcenter/koolproxy/koolproxy /jffs/softcenter/bin/koolproxy
-	fi
-	/jffs/softcenter/koolproxy/koolproxy --mark -d
+	[ ! -L "/jffs/softcenter/bin/koolproxy" ] && ln -sf /jffs/softcenter/koolproxy/koolproxy /jffs/softcenter/bin/koolproxy
+	cd /jffs/softcenter/koolproxy && koolproxy --mark -d
 	[ "$?" != "0" ] && dbus set koolproxy_enable=0 && exit 1
 }
 
@@ -302,6 +293,7 @@ detect_cert(){
 		cd /jffs/softcenter/koolproxy/data && sh gen_ca.sh
 		echo_date 证书生成完毕！！！
 	fi
+	ln -sf /jffs/softcenter/koolproxy/data/certs/ca.crt /www/ext/kp.crt
 }
 
 case $1 in

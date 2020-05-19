@@ -2,20 +2,16 @@
 source /jffs/softcenter/scripts/base.sh
 eval `dbus export koolproxy`
 alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
+MODEL=$(nvram get productid)
 DIR=$(cd $(dirname $0); pwd)
 touch /tmp/kp_log.txt
-firmware_version=`nvram get extendno|cut -d "_" -f2|cut -d "-" -f1|cut -c2-6`
-firmware_check=5.0.1
-if [ ${#firmware_version} -lt 5 ];then
-	firmware_version=1.0.0
-fi
-firmware_comp=`/jffs/softcenter/bin/versioncmp $firmware_version $firmware_check`
-if [ "$firmware_comp" == "1" ];then
-	echo_date 固件版本过低，无法安装
-	exit 1
+if [ "$MODEL" == "GT-AC5300" ] || [ "$MODEL" == "GT-AX11000" ] || [ "$MODEL" == "GT-AC2900" ] || [ "$(nvram get merlinr_rog)" == "1" ];then
+	ROG=1
+elif [ "$MODEL" == "TUF-AX3000" ] || [ "$(nvram get merlinr_tuf)" == "1" ] ;then
+	TUF=1
 fi
 # stop first
-[ "$(dbus get koolproxyR_enable)" == "1" ] && dbus set koolproxyR_enable=0
+[ "$(dbus get koolproxyR_enable)" == "1" ] && dbus set koolproxyR_enable=0 && sh /jffs/softcenter/koolproxyR/kp_config.sh stop
 [ "$koolproxy_enable" == "1" ] && [ -f "/jffs/softcenter/koolproxy/kp_config.sh" ] && sh /jffs/softcenter/koolproxy/kp_config.sh stop
 
 # remove old files, do not remove user.txt incase of upgrade
@@ -43,8 +39,12 @@ mkdir -p /jffs/softcenter/koolproxy/data/rules
 cp -rf /tmp/koolproxy/scripts/* /jffs/softcenter/scripts/
 cp -rf /tmp/koolproxy/webs/* /jffs/softcenter/webs/
 cp -rf /tmp/koolproxy/res/* /jffs/softcenter/res/
-if [ "`nvram get model`" == "GT-AC5300" ] || [ "`nvram get model`" == "GT-AC2900" ];then
-	cp -rf /tmp/koolproxy/ROG/webs/* /jffs/softcenter/webs/
+if [ "$ROG" == "1" ];then
+	continue
+elif [ "$TUF" == "1" ];then
+		sed -i 's/3e030d/3e2902/g;s/91071f/92650F/g;s/680516/D0982C/g;s/cf0a2c/c58813/g;s/700618/74500b/g;s/530412/92650F/g' /jffs/softcenter/webs/Module_koolproxy.asp >/dev/null 2>&1
+else
+	sed -i '/rogcss/d' /jffs/softcenter/webs/Module_koolproxy.asp >/dev/null 2>&1
 fi
 if [ ! -f /jffs/softcenter/koolproxy/data/rules/user.txt ];then
 	cp -rf /tmp/koolproxy/koolproxy /jffs/softcenter/
@@ -54,33 +54,25 @@ else
 	mv /tmp/user.txt.tmp /jffs/softcenter/koolproxy/data/rules/user.txt
 fi
 cp -f /tmp/koolproxy/uninstall.sh /jffs/softcenter/scripts/uninstall_koolproxy.sh
-#[ ! -L "/jffs/softcenter/bin/koolproxy" ] && ln -sf /jffs/softcenter/koolproxy/koolproxy /jffs/softcenter/bin/koolproxy
 chmod 755 /jffs/softcenter/koolproxy/*
 chmod 755 /jffs/softcenter/koolproxy/data/*
 chmod 755 /jffs/softcenter/scripts/*
 
-# 创建开机启动文件
 find /jffs/softcenter/init.d/ -name "*koolproxy*" | xargs rm -rf
-if [ "$productid" = "BLUECAVE" ];then
-	[ ! -f "/jffs/softcenter/init.d/M98koolproxy.sh" ] && cp -r /jffs/softcenter/koolproxy/kp_config.sh /jffs/softcenter/init.d/M98koolproxy.sh
-	[ ! -f "/jffs/softcenter/init.d/N98koolproxy.sh" ] && cp -r /jffs/softcenter/koolproxy/kp_config.sh /jffs/softcenter/init.d/N98koolproxy.sh
-else
-	[ ! -L "/jffs/softcenter/init.d/S98koolproxy.sh" ] && ln -sf /jffs/softcenter/koolproxy/kp_config.sh /jffs/softcenter/init.d/S98koolproxy.sh
-	[ ! -L "/jffs/softcenter/init.d/N98koolproxy.sh" ] && ln -sf /jffs/softcenter/koolproxy/kp_config.sh /jffs/softcenter/init.d/N98koolproxy.sh
-fi
+[ ! -L "/jffs/softcenter/init.d/S98koolproxy.sh" ] && ln -sf /jffs/softcenter/koolproxy/kp_config.sh /jffs/softcenter/init.d/S98koolproxy.sh
+[ ! -L "/jffs/softcenter/init.d/N98koolproxy.sh" ] && ln -sf /jffs/softcenter/koolproxy/kp_config.sh /jffs/softcenter/init.d/N98koolproxy.sh
 
 [ -z "$koolproxy_mode" ] && dbus set koolproxy_mode=1
 [ -z "$koolproxy_acl_default" ] && dbus set koolproxy_acl_default=1
-
-dbus set softcenter_module_koolproxy_install=1
+dbus set koolproxy_version="$(cat $DIR/version)"
 dbus set softcenter_module_koolproxy_version="$(cat $DIR/version)"
-dbus set koolproxy_version=3.8.4
+dbus set softcenter_module_koolproxy_install=1
 dbus set softcenter_module_koolproxy_name="koolproxy"
 dbus set softcenter_module_koolproxy_title="koolproxy"
-# 删除安装包
-rm -rf /tmp/koolproxy* >/dev/null 2>&1
-# restart
-[ "$koolproxy_enable" == "1" ] && [ -f "/jffs/softcenter/koolproxy/kp_config.sh" ] && sh /jffs/softcenter/koolproxy/kp_config.sh restart
+dbus set softcenter_module_koolproxy_description="koolproxy~"
 
+[ "$koolproxy_enable" == "1" ] && [ -f "/jffs/softcenter/koolproxy/kp_config.sh" ] && sh /jffs/softcenter/koolproxy/kp_config.sh restart
+echo_date "koolproxy插件安装完毕！"
+rm -rf /tmp/koolproxy* >/dev/null 2>&1
 exit 0
 
