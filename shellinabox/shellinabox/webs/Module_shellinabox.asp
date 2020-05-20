@@ -15,6 +15,7 @@
 <link rel="stylesheet" type="text/css" href="usp_style.css">
 <link rel="stylesheet" type="text/css" href="/calendar/fullcalendar.css">
 <link rel="stylesheet" type="text/css" href="/device-map/device-map.css">
+<link rel="stylesheet" type="text/css" href="res/softcenter.css">
 <script type="text/javascript" src="/state.js"></script>
 <script type="text/javascript" src="/popup.js"></script>
 <script type="text/javascript" src="/help.js"></script>
@@ -25,6 +26,24 @@
 <script type="text/javascript" src="/calendar/jquery-ui.js"></script>
 <script type="text/javascript" src="/switcherplugin/jquery.iphone-switch.js"></script>
 <style>
+	#log_content{
+		outline: 1px solid #222;
+		width:748px;
+	}
+	#log_content_text{
+		width:97%;
+		padding-left:4px;
+		padding-right:37px;
+		font-family:'Lucida Console';
+		font-size:11px;
+		line-height:1.5;
+		color:#FFFFFF;
+		outline:none;
+		overflow-x:hidden;
+		border:0px solid #222;
+		background:#475A5F;
+		background:transparent; /* W3C rogcss */
+	}
 </style>
 <script>
 function initial(){
@@ -38,8 +57,9 @@ function applyRule(){
 showLoading(2);
 document.form.submit();
 }
-function reload_Soft_Center() {
-	location.href = "/Main_Soft_center.asp";
+function menu_hook(title, tab) {
+	tabtitle[tabtitle.length -1] = new Array("", "软件中心", "离线安装", "webshell");
+	tablink[tablink.length -1] = new Array("", "Main_Soft_center.asp", "Main_Soft_setting.asp", "Module_shellinabox.asp");
 }
 </script></head>
 <body onload="initial();" onunload="unload_body();" onselectstart="return false;">
@@ -85,7 +105,6 @@ function reload_Soft_Center() {
 </td>
 </tr>
 </table>
-<div style="margin:0px 0px 10px 5px;"><img src="/images/New_ui/export/line_export.png"></div>
 </div>
 <div id="PC_desc">
 <table width="700px" style="margin-left:25px;">
@@ -137,13 +156,16 @@ document.form.webshell_enable.value = 0;
 <input class="button_gen" onclick="reactive();" type="button" value="打开窗口"/>
 </td>
 </tr>
-<td colspan="2">日志信息</td>
-</tr>
 </thead>
+<thead><tr>
+<td colspan="2">日志信息</td>
+</tr></thead>
 <tr><td colspan="2">
-<textarea cols="63" rows="20" wrap="off" readonly="readonly" id="textarea" style="width:99%;font-family:Courier New, Courier, mono; font-size:11px;background:#475A5F;color:#FFFFFF;">
+<div id="log_content" style="margin-top:-1px;display:block;overflow:hidden;">
+<textarea id="log_content_text" cols="63" rows="20" wrap="on" readonly="readonly">
 <% nvram_dump("webshell.log",""); %>
 </textarea>
+</div>
 </td></tr>
 </table>
 <div class="apply_gen">
@@ -164,3 +186,4 @@ document.form.webshell_enable.value = 0;
 </form>
 </body>
 </html>
+
