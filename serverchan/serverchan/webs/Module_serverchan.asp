@@ -113,6 +113,7 @@
 .serverchan_btn {
     border: 1px solid #222;
     background: linear-gradient(to bottom, #003333  0%, #000000 100%); /* W3C */
+	background: linear-gradient(to bottom, #91071f  0%, #700618 100%); /* W3C rog */
     font-size:10pt;
     color: #fff;
     padding: 5px 5px;
@@ -122,11 +123,23 @@
 .serverchan_btn:hover {
     border: 1px solid #222;
     background: linear-gradient(to bottom, #27c9c9  0%, #279fd9 100%); /* W3C */
+	background: linear-gradient(to bottom, #cf0a2c  0%, #91071f 100%); /* W3C rog */
     font-size:10pt;
     color: #fff;
     padding: 5px 5px;
     border-radius: 5px 5px 5px 5px;
     width:16%;
+}
+#serverchan_trigger_dhcp_white {
+	width:99%;
+	font-family:'Lucida Console';
+	font-size:12px;
+	text-transform: none;
+	margin-top:5px;
+	color:#FFFFFF;
+	background:#475A5F;
+	background:transparent; /* W3C rog */
+	border:1px solid #91071f; /* W3C rog */
 }
 input[type=button]:focus {
     outline: none;
@@ -260,7 +273,7 @@ function onSubmitCtrl(){
 	showLoading(5);
 	refreshpage(5);
 	var params_input = ["serverchan_silent_time_start_hour", "serverchan_silent_time_end_hour", "serverchan_config_ntp", "serverchan_config_name", "serverchan_status_check", "serverchan_check_week", "serverchan_check_day", "serverchan_check_inter_min", "serverchan_check_inter_hour", "serverchan_check_inter_day", "serverchan_check_inter_pre", "serverchan_check_custom", "serverchan_check_time_hour", "serverchan_check_time_min", "serverchan_trigger_dhcp_white"];
-	var params_check = ["serverchan_enable", "serverchan_silent_time", "serverchan_info_logger", "serverchan_info_silent_send", "serverchan_info_system", "serverchan_info_temp", "serverchan_info_wan", "serverchan_info_usb", "serverchan_info_lan", "serverchan_info_dhcp", "serverchan_info_softcenter", "serverchan_trigger_ifup", "serverchan_trigger_dhcp", "serverchan_dhcp_bwlist_en", "serverchan_dhcp_white_en", "serverchan_dhcp_black_en", "serverchan_info_lan_macoff", "serverchan_info_dhcp_macoff", "serverchan_trigger_dhcp_macoff" , "serverchan_trigger_ifup_sendinfo" ];
+	var params_check = ["serverchan_enable", "serverchan_silent_time", "serverchan_info_logger", "serverchan_info_silent_send", "serverchan_info_system", "serverchan_info_temp", "serverchan_info_wan", "serverchan_info_usb", "serverchan_info_lan", "serverchan_info_dhcp", "serverchan_info_softcenter", "serverchan_trigger_ifup", "serverchan_trigger_ifup_sendinfo","serverchan_trigger_dhcp", "serverchan_trigger_dhcp_leases","serverchan_dhcp_bwlist_en", "serverchan_dhcp_white_en", "serverchan_dhcp_black_en", "serverchan_info_lan_macoff", "serverchan_info_dhcp_macoff", "serverchan_trigger_dhcp_macoff" ];
 	var params_base64 = ["serverchan_config_name", "serverchan_check_custom", "serverchan_trigger_dhcp_white"];
 	// collect data from input
 	for (var i = 0; i < params_input.length; i++) {
@@ -285,8 +298,6 @@ function onSubmitCtrl(){
 	//var postData = {"id": id, "method": "serverchan_config.sh", "params":[1], "fields": db_serverchan};
 	db_serverchan["action_script"]="serverchan_config.sh";
 	db_serverchan["action_mode"] = "restart";
-	db_serverchan["current_page"] = "Module_serverchan.asp";
-	db_serverchan["next_page"] = "Module_serverchan.asp";
 	$.ajax({
 		url: "/applydb.cgi?p=serverchan",
 		cache:false,
@@ -339,8 +350,6 @@ function addTr(o) { //添加配置行操作
 	//var postData = {"id": id, "method": "dummy_script.sh", "params":[2], "fields": ns};
 	ns["action_script"]="serverchan_config.sh";
 	ns["action_mode"] = " Refresh ";
-	ns["current_page"] = "Module_serverchan.asp";
-	ns["next_page"] = "Module_serverchan.asp";
 	$.ajax({
 		type: "POST",
 		cache:false,
@@ -377,8 +386,6 @@ function delTr(o) { //删除配置行功能
 		//var postData = {"id": id, "method": "dummy_script.sh", "params":[2], "fields": ns};
 		ns["action_script"]="serverchan_config.sh";
 		ns["action_mode"] = " Refresh ";
-		ns["current_page"] = "Module_serverchan.asp";
-		ns["next_page"] = "Module_serverchan.asp";
 		$.ajax({
 			type: "POST",
 			cache:false,
@@ -563,7 +570,7 @@ function oncheckclick(obj) {
                                         <th style="width:20%;">版本信息</th>
                                         <td>
                                             <div id="serverchan_version_show" style="padding-top:5px;margin-left:0px;margin-top:0px;float: left;"></div>
-                                            <span style="padding-top:5px;margin-right: 15px;margin-left:0px;margin-top:0px;float: right;"><a href="http://koolshare.cn/thread-123937-1-1.html" target="_blank">[ 反馈地址 ]</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://raw.githubusercontent.com/koolshare/armsoft/master/serverchan/Changelog.txt" target="_blank"><em><u>[ 更新日志 ]</u></em></a></span>
+                                            <span style="padding-top:5px;margin-right: 15px;margin-left:0px;margin-top:0px;float: right;"><a href="http://koolshare.cn/thread-123937-1-1.html" target="_blank">[ 反馈地址 ]</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://raw.githubusercontent.com/koolshare/rogsoft/master/serverchan/Changelog.txt" target="_blank"><em><u>[ 更新日志 ]</u></em></a></span>
                                         </td>
                                         <tr>
                                             <th width="20%">消息免打扰时间</th>
@@ -933,7 +940,7 @@ function oncheckclick(obj) {
                                                 <textarea placeholder="# 填入设备MAC地址，一行一个，格式如下：
                                                 aa:bb:cc:dd:ee:ff
                                                 aa:bb:cc:dd:ee:ff #我的电脑
-                                                a1:b2:c3:d4:e5:f6 #我的手机" cols="50" rows="7" id="serverchan_trigger_dhcp_white" name="serverchan_trigger_dhcp_white" style="width:99%; font-family:'Lucida Console'; font-size:12px;background:#475A5F;color:#FFFFFF;text-transform:none;margin-top:5px;" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                                                a1:b2:c3:d4:e5:f6 #我的手机" cols="50" rows="7" id="serverchan_trigger_dhcp_white" name="serverchan_trigger_dhcp_white" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
                                             </td>
                                         </tr>
                                     </table>

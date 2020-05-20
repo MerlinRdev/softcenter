@@ -84,7 +84,7 @@ do
 done
 sleep 2
 rm -rf ${serverchan_ifup_text}
-if [ $serverchan_trigger_ifup_sendinfo == 1 ];then
-	sh /jffs/softcenter/scripts/serverchan_check.sh restart
+if [ "$serverchan_trigger_ifup_sendinfo" == 1 ];then
+	sh /jffs/softcenter/scripts/serverchan_check_task.sh
 fi
 

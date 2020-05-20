@@ -31,7 +31,7 @@ if [ "$KVER" == "3.10.14" ];then
 fi
 tcode=`dbus get softcenter_server_tcode`
 if [ "$tcode" == "CN" ]; then
-	scurl="http://update.wifi.com.cn"
+	scurl="https://sc.softcenter.site"
 elif [ "$tcode" == "CN1" ]; then
 	scurl="https://sc.softcenter.site"
 elif [ "$tcode" == "ALI" ]; then
@@ -524,4 +524,3 @@ do
 	fi
     fi
 done
-
