@@ -7,14 +7,8 @@ cp -rf /tmp/verysync/bin/* /jffs/softcenter/bin/
 cp -rf /tmp/verysync/scripts/* /jffs/softcenter/scripts/
 cp -rf /tmp/verysync/webs/* /jffs/softcenter/webs/
 cp -rf /tmp/verysync/res/* /jffs/softcenter/res/
-
-if [ "$(nvram get productid)" = "BLUECAVE" ];then
-	[ ! -f "/jffs/softcenter/init.d/M99verysync.sh" ] && cp -r /jffs/softcenter/scripts/verysync_config.sh /jffs/softcenter/init.d/M99verysync.sh
-	[ ! -f "/jffs/softcenter/init.d/N99verysync.sh" ] && cp -r /jffs/softcenter/scripts/verysync_config.sh /jffs/softcenter/init.d/N99verysync.sh
-else
-	[ ! -L "/jffs/softcenter/init.d/M99verysync.sh" ] && ln -sf /jffs/softcenter/scripts/verysync_config.sh /jffs/softcenter/init.d/M99verysync.sh
-	[ ! -L "/jffs/softcenter/init.d/N99verysync.sh" ] && ln -sf /jffs/softcenter/scripts/verysync_config.sh /jffs/softcenter/init.d/N99verysync.sh
-fi
+[ ! -L "/jffs/softcenter/init.d/M99verysync.sh" ] && ln -sf /jffs/softcenter/scripts/verysync_config.sh /jffs/softcenter/init.d/M99verysync.sh
+[ ! -L "/jffs/softcenter/init.d/N99verysync.sh" ] && ln -sf /jffs/softcenter/scripts/verysync_config.sh /jffs/softcenter/init.d/N99verysync.sh
 
 chmod +x /jffs/softcenter/bin/verysync
 chmod +x /jffs/softcenter/scripts/*

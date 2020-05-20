@@ -2,6 +2,12 @@
 source /jffs/softcenter/scripts/base.sh
 alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
 DIR=$(cd $(dirname $0); pwd)
+MODEL=$(nvram get productid)
+if [ "$MODEL" == "GT-AC5300" ] || [ "$MODEL" == "GT-AX11000" ] || [ "$MODEL" == "GT-AC2900" ] || [ "$(nvram get merlinr_rog)" == "1" ];then
+	ROG=1
+elif [ "$MODEL" == "TUF-AX3000" ] || [ "$(nvram get merlinr_tuf)" == "1" ] ;then
+	TUF=1
+fi
 
 # stop ssserver first
 enable=`dbus get ssserver_enable`
@@ -15,27 +21,10 @@ cp -rf /tmp/ssserver/bin/* /jffs/softcenter/bin/
 cp -rf /tmp/ssserver/webs/* /jffs/softcenter/webs/
 cp -rf /tmp/ssserver/res/* /jffs/softcenter/res/
 cp -rf /tmp/ssserver/uninstall.sh /jffs/softcenter/scripts/uninstall_ssserver.sh
-	# creat start_up file
-	if [ "$(nvram get productid)" = "BLUECAVE" ];then
-		if [ ! -f "/jffs/softcenter/init.d/N98ssserver.sh" ]; then 
-			cp -r /jffs/softcenter/scripts/ssserver_config.sh /jffs/softcenter/init.d/N97ssserver.sh
-		fi
-	else
-		if [ ! -L "/jffs/softcenter/init.d/N98ssserver.sh" ]; then 
-			ln -sf /jffs/softcenter/scripts/ssserver_config.sh /jffs/softcenter/init.d/N97ssserver.sh
-		fi
-	fi
+# creat start_up file
+[ ! -L "/jffs/softcenter/init.d/N98ssserver.sh" ] && ln -sf /jffs/softcenter/scripts/ssserver_config.sh /jffs/softcenter/init.d/N97ssserver.sh
+[ ! -L "/jffs/softcenter/init.d/S98ssserver.sh" ] && ln -sf /jffs/softcenter/scripts/ssserver_config.sh /jffs/softcenter/init.d/S97ssserver.sh
 
-	# creat start_up file
-	if [ "$(nvram get productid)" = "BLUECAVE" ];then
-		if [ ! -f "/jffs/softcenter/init.d/M98ssserver.sh" ]; then 
-			cp -r /jffs/softcenter/scripts/ssserver_config.sh /jffs/softcenter/init.d/M97ssserver.sh
-		fi
-	else
-		if [ ! -L "/jffs/softcenter/init.d/S98ssserver.sh" ]; then 
-			ln -sf /jffs/softcenter/scripts/ssserver_config.sh /jffs/softcenter/init.d/S97ssserver.sh
-		fi
-	fi
 chmod +x /jffs/softcenter/scripts/ssserver*
 chmod +x /jffs/softcenter/bin/ss-server
 chmod +x /jffs/softcenter/bin/obfs-server

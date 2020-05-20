@@ -61,10 +61,10 @@
             "version": "1.0"
         }, 
         {
-            "build_date": "2020-05-15_20:20:00", 
+            "build_date": "2020-05-20_22:25:20", 
             "description": "老板，来一斤虚拟内存~", 
             "home_url": "Module_swap.asp", 
-            "md5": "660fd3be4f46c55c4f88b57bd9941cce", 
+            "md5": "140a89149d3cffb469e2fdc1ba60100e", 
             "name": "swap", 
             "tar_url": "swap/swap.tar.gz", 
             "title": "虚拟内存", 
@@ -151,10 +151,10 @@
             "version": "0.0.1"
         }, 
         {
-            "build_date": "2020-01-06_18:21:51", 
+            "build_date": "2020-05-20_22:52:51", 
             "description": "自己的私有云", 
             "home_url": "Module_verysync.asp", 
-            "md5": "c32ae5b6b37577ba63fb4cc6c81df6f0", 
+            "md5": "78fe435c67156b14d96978b60f534349", 
             "name": "verysync", 
             "tar_url": "verysync/verysync.tar.gz", 
             "title": "微力同步", 

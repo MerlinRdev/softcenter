@@ -165,7 +165,6 @@ function verifyFields(focused, quiet){
 										<div>&nbsp;</div>
 										<div style="float:left;" class="formfonttitle">微力同步</div>
 										<div style="float:right; width:15px; height:25px;margin-top:10px"><img id="return_btn" onclick="reload_Soft_Center();" align="right" style="cursor:pointer;position:absolute;margin-left:-30px;margin-top:-25px;" title="返回软件中心" src="/images/backprev.png" onMouseOver="this.src='/images/backprevclick.png'" onMouseOut="this.src='/images/backprev.png'"></div>
-										<div style="margin-left:5px;margin-top:10px;margin-bottom:10px"><img src="/images/New_ui/export/line_export.png"></div>
 										<div class="formfontdesc" id="cmdDesc">开启微力同步后，你就拥有了私有的云盘，可以和您的任何设备进行高效的传输，目前支持所有主流的平台，下载其它客户端请到<a href="http://verysync.com/download?s=merlin" target="_blank">官网下载</a></div>
                                         <table style="margin:10px 0px 0px 0px;" width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bordercolor="#6b8fa3" class="FormTable" id="verysync_detail">
                                             <tr>
