@@ -1,7 +1,14 @@
 #! /bin/sh
 source /jffs/softcenter/scripts/base.sh
 alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
+MODEL=$(nvram get productid)
 DIR=$(cd $(dirname $0); pwd)
+touch /tmp/kp_log.txt
+if [ "$MODEL" == "GT-AC5300" ] || [ "$MODEL" == "GT-AX11000" ] || [ "$MODEL" == "GT-AC2900" ] || [ "$(nvram get merlinr_rog)" == "1" ];then
+	ROG=1
+elif [ "$MODEL" == "TUF-AX3000" ] || [ "$(nvram get merlinr_tuf)" == "1" ] ;then
+	TUF=1
+fi
 
 # stop softether first
 enable=`dbus get softether_enable`
@@ -16,16 +23,11 @@ cp -rf /tmp/softether/bin/* /jffs/softcenter/bin/
 cp -rf /tmp/softether/scripts/* /jffs/softcenter/scripts/
 cp -rf /tmp/softether/webs/* /jffs/softcenter/webs/
 cp -rf /tmp/softether/res/* /jffs/softcenter/res/
-rm -rf /tmp/softether* >/dev/null 2>&1
+
 chmod 755 /jffs/softcenter/bin/*
 chmod 755 /jffs/softcenter/scripts/*
-if [ "`nvram get productid`" == "BLUECAVE" ];then
-	cp -r /jffs/softcenter/scripts/softether.sh /jffs/softcenter/init.d/S98SoftEther.sh
-	cp -r /jffs/softcenter/scripts/softether.sh /jffs/softcenter/init.d/N98SoftEther.sh
-else
-	ln -sf /jffs/softcenter/scripts/softether.sh /jffs/softcenter/init.d/S98SoftEther.sh
-	ln -sf /jffs/softcenter/scripts/softether.sh /jffs/softcenter/init.d/N98SoftEther.sh
-fi
+ln -sf /jffs/softcenter/scripts/softether.sh /jffs/softcenter/init.d/S98SoftEther.sh
+ln -sf /jffs/softcenter/scripts/softether.sh /jffs/softcenter/init.d/N98SoftEther.sh
 
 # 离线安装用
 dbus set softether_version="$(cat $DIR/version)"
