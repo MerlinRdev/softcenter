@@ -27,20 +27,20 @@
 	.show-btn1, .show-btn2, .show-btn3 {
 		border: 1px solid #222;
 		background: linear-gradient(to bottom, #919fa4  0%, #67767d 100%); /* W3C */
-		/*background: linear-gradient(to bottom, #91071f  0%, #700618 100%);*/ /* W3C */
+		background: linear-gradient(to bottom, #91071f  0%, #700618 100%); /* W3C rogcss*/
 		font-size:10pt;
 		color: #fff;
 		padding: 10px 3.75px;
 		border-radius: 5px 5px 0px 0px;
 		width:8.45601%;
-		/*border: 1px solid #91071f;*/
-		/*background: none;*/
+		border: 1px solid #91071f; /* W3C rogcss*/
+		background: none; /* W3C rogcss*/
 	}
 	.active {
 		background: #2f3a3e;
 		background: linear-gradient(to bottom, #61b5de  0%, #279fd9 100%); /* W3C */
-		/*background: linear-gradient(to bottom, #cf0a2c  0%, #91071f 100%);*/ /* W3C */
-		/*border: 1px solid #91071f;*/
+		background: linear-gradient(to bottom, #cf0a2c  0%, #91071f 100%); /* W3C rogcss*/
+		border: 1px solid #91071f; /* W3C rogcss*/
 	}
 	.popup_bar_bg_ks{
 		position:fixed;	
@@ -56,15 +56,15 @@
 		overflow:hidden;
 		background-color: #444F53;*/
 		background:rgba(68, 79, 83, 0.9) none repeat scroll 0 0 !important;
-		/*background: url(/images/New_ui/login_bg.png);
-		background-position: 0 0;
-		background-size: cover;
-		opacity: .94;*/
+		background: url(/images/New_ui/login_bg.png); /* W3C rogcss*/
+		background-position: 0 0; /* W3C rogcss*/
+		background-size: cover; /* W3C rogcss*/
+		opacity: .94; /* W3C rogcss*/
 	}
 	.ss_btn {
 		border: 1px solid #222;
 		background: linear-gradient(to bottom, #003333  0%, #000000 100%); /* W3C */
-		/*background: linear-gradient(to bottom, #91071f  0%, #700618 100%);*/ /* W3C */
+		background: linear-gradient(to bottom, #91071f  0%, #700618 100%); /* W3C rogcss*/
 		font-size:10pt;
 		color: #fff;
 		padding: 5px 5px;
@@ -74,7 +74,7 @@
 	.ss_btn:hover {
 		border: 1px solid #222;
 		background: linear-gradient(to bottom, #27c9c9  0%, #279fd9 100%); /* W3C */
-		/*background: linear-gradient(to bottom, #cf0a2c  0%, #91071f 100%);*/ /* W3C */
+		background: linear-gradient(to bottom, #cf0a2c  0%, #91071f 100%); /* W3C rogcss*/
 		font-size:10pt;
 		color: #fff;
 		padding: 5px 5px;
@@ -87,9 +87,10 @@
 		font-size:12px;
 		color:#FFFFFF;
 		background:#475A5F;
-		/*background:transparent;*/
-		/*border:1px solid #91071f;*/
+		background:transparent; /* W3C rogcss*/
+		border:1px solid #91071f; /* W3C rogcss*/
 	}
+	#mdial_switch, #mdial_status, #mdial_settings, #mdial_log, #mdial_help {border:1px solid #91071f;} /* W3C rogcss*/
 	input[type=button]:focus {
 		outline: none;
 	}
@@ -206,8 +207,6 @@ function save() {
 	//var postData = {"id": id, "method": "mdial_config.sh", "params": [1], "fields": dbus_new };
 	dbus_new["action_script"]="mdial_config.sh";
 	dbus_new["action_mode"] = "restart";
-	dbus_new["current_page"] = "Module_mdial.asp";
-	dbus_new["next_page"] = "Module_mdial.asp";
 	$.ajax({
 		url: "/applydb.cgi?p=mdial",
 		cache: false,
@@ -228,8 +227,6 @@ function clean_log() {
 	var cleanlog = {}
 	cleanlog["action_script"]="mdial_config.sh";
 	cleanlog["action_mode"] = "clean";
-	cleanlog["current_page"] = "Module_mdial.asp";
-	cleanlog["next_page"] = "Module_mdial.asp";
 	$.ajax({
 		url: '/applydb.cgi?p=mdial',
 		type: "POST",
@@ -490,7 +487,7 @@ function menu_hook(title, tab) {
 															</label>
 														</div>
 														<div style="display:table-cell;float: left;margin-left:270px;margin-top:-32px;position: absolute;padding: 5.5px 0px;">
-															<a type="button" class="ss_btn" target="_blank" href="https://github.com/koolshare/armsoft/blob/master/mdial/Changelog.txt">更新日志</a>
+															<a type="button" class="ss_btn" target="_blank" href="https://github.com/koolshare/rogsoft/blob/master/mdial/Changelog.txt">更新日志</a>
 														</div>
 													</td>
 												</tr>
@@ -550,10 +547,10 @@ function menu_hook(title, tab) {
 												<tr>
 												<td>
 													<ul>
-														<li>注意：本插件仅适用于蓝洞固件和K3C固件！</li>
+														<li>注意：本插件仅适用MerlinR固件！</li>
 														<li>多拨插件需要光猫桥接，由路由器来进行pppoe拨号。</li>
 														<li>不是所有运营商都能多拨！也不是所有多拨都能叠加!</li>
-														<li>本插件的维护地址在<a href="https://github.com/koolshare/armsoft" target="_blank" ><i><u>https://github.com/koolshare/armsoft</u></i></a>，欢迎到此反馈问题！</li>
+														<li>本插件的维护地址在<a href="https://github.com/koolshare/rogsoft" target="_blank" ><i><u>https://github.com/koolshare/rogsoft</u></i></a>，欢迎到此反馈问题！</li>
 													</ul>
 												</td>
 												</tr>
@@ -565,7 +562,7 @@ function menu_hook(title, tab) {
 										</div>
 										<div class="KoolshareBottom">
 											论坛技术支持： <a href="http://www.koolshare.cn" target="_blank"> <i><u>www.koolshare.cn</u></i> </a> <br/>
-											Github项目： <a href="https://github.com/koolshare/armsoft" target="_blank"> <i><u>github.com/koolshare/armsoft</u></i> </a> <br/>
+											Github项目： <a href="https://github.com/koolshare/rogsoft" target="_blank"> <i><u>github.com/koolshare/rogsoft</u></i> </a> <br/>
 											Shell&Web by： <i>sadog</i>
 										</div>
 									</td>
@@ -581,3 +578,4 @@ function menu_hook(title, tab) {
 <div id="footer"></div>
 </body>
 </html>
+
