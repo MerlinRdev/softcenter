@@ -3,23 +3,12 @@
 source /jffs/softcenter/scripts/base.sh
 alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
 DIR=$(cd $(dirname $0); pwd)
-
-plugin_need=5000
-JFFS_FREE=`df |grep jffs |awk '{printf $4}'`
-if [ $JFFS_FREE -gt $plugin_need ];then
-	if [ -n "$(pidof node)" ];then
-		killall node
-	fi
-elif [ "$(nvram get sc_mount)" == "1" ];then
-	if [ -n "$(pidof node)" ];then
-		killall node
-	fi
-else
-	echo_date "jffs空间不足,jffs扩展挂载未开启,退出安装..."
-	echo_date "Not enough free space for JFFS and jffs extended is disabled ,exit..."
-	exit 1
+MODEL=$(nvram get productid)
+if [ "$MODEL" == "GT-AC5300" ] || [ "$MODEL" == "GT-AX11000" ] || [ "$MODEL" == "GT-AC2900" ] || [ "$(nvram get merlinr_rog)" == "1" ];then
+	ROG=1
+elif [ "$MODEL" == "TUF-AX3000" ] || [ "$(nvram get merlinr_tuf)" == "1" ] ;then
+	TUF=1
 fi
-
 enable=`dbus get unblockmusic_enable`
 if [ "$enable" == "1" ] && [ -f "/jffs/softcenter/scripts/unblockmusic_config.sh" ];then
 	/jffs/softcenter/scripts/unblockmusic_config.sh stop >/dev/null 2>&1
@@ -34,8 +23,12 @@ cp -rf /tmp/unblockmusic/scripts/* /jffs/softcenter/scripts/
 cp -rf /tmp/unblockmusic/webs/* /jffs/softcenter/webs/
 cp -rf /tmp/unblockmusic/res/* /jffs/softcenter/res/
 cp -rf /tmp/unblockmusic/uninstall.sh /jffs/softcenter/scripts/uninstall_unblockmusic.sh
-if [ "`nvram get model`" == "GT-AC5300" ] || [ "`nvram get model`" == "GT-AC2900" ];then
-	cp -rf /tmp/unblockmusic/ROG/Module_unblockmusic.asp /jffs/softcenter/webs/
+if [ "$ROG" == "1" ];then
+	continue
+elif [ "$TUF" == "1" ];then
+	sed -i 's/3e030d/3e2902/g;s/91071f/92650F/g;s/680516/D0982C/g;s/cf0a2c/c58813/g;s/700618/74500b/g;s/530412/92650F/g' /jffs/softcenter/webs/Module_unblockmusic.asp >/dev/null 2>&1
+else
+	sed -i '/rogcss/d' /jffs/softcenter/webs/Module_unblockmusic.asp >/dev/null 2>&1
 fi
 
 chmod +x /jffs/softcenter/scripts/*

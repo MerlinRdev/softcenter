@@ -220,7 +220,7 @@ function menu_hook(title, tab) {
 										<div class="apply_gen">
 											<input sclang id="cmdBtn" type="button" class="button_gen" onclick="save()" value="Apply"/>
 										</div>
-										<div class="KoolshareBottom" style="float:right; width:180px; height:25px">
+										<div class="KoolshareBottom" style="float:right; width:180px; height:70px">
 											Shell&Web by： <i>paldier</i>
 										</div>
 									</td>
