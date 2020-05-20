@@ -27,6 +27,7 @@
 .kp_btn {
 	border: 1px solid #222;
 	background: linear-gradient(to bottom, #003333  0%, #000000 100%); /* W3C */
+	background: linear-gradient(to bottom, #91071f  0%, #700618 100%); /* W3C rogcss */
 	font-size:10pt;
 	color: #fff;
 	padding: 5px 5px;
@@ -36,6 +37,7 @@
 .kp_btn:hover {
 	border: 1px solid #222;
 	background: linear-gradient(to bottom, #27c9c9  0%, #279fd9 100%); /* W3C */
+	background: linear-gradient(to bottom, #cf0a2c  0%, #91071f 100%); /* W3C rogcss */
 	font-size:10pt;
 	color: #fff;
 	padding: 5px 5px;
@@ -59,6 +61,7 @@
 	border-radius:10px;
 	z-index: 10;
 	background-color:#2B373B;
+	background-color:none; /* W3C rogcss */
 	margin-left: -215px;
 	top: 240px;
 	width:980px;
@@ -81,16 +84,20 @@
 	color:#FFFFFF;
 	font-family: Lucida Console;
 	font-size:12px;
+	border:1px solid #91071f; /* W3C rogcss */
+	background-color: #3e030d; /* W3C rogcss */
 }
 .FormTable1{
 	font-size:12px;
 	font-family:Arial, Helvetica, sans-serif;
 	border: 1px solid #000000;
+	border: none; /* W3C rogcss */
 	border-collapse: collapse;
 }
 .FormTable1 th{
 	font-family:Arial, Helvetica, sans-serif;
 	background-color:#1F2D35;
+	background-color:none; /* W3C rogcss */
 	color:#FFFFFF;	/*Viz add*/
 	/*font-weight:normal;*/
 	line-height:15px;
@@ -100,8 +107,8 @@
 	width:35%;	/*Viz add*/
 	padding-left: 10px;
 	border-collapse: collapse;
-	background:#2F3A3E;
-	border: 1px solid #000000;
+	background:#2F3A3E; /* W3C rogcss */
+	border: 1px solid #000000; /* W3C rogcss */
 }
 .FormTable1 thead td{
 	color: #FFF;
@@ -109,7 +116,6 @@
 	background-color:#4D595D;
 	text-align:left;
 	font-weight:bolder;
-	border: 1px solid #222;
 	padding: 3px;
 	padding-left: 10px;
 	border-collapse: collapse;
@@ -120,13 +126,19 @@
 	background: -o-linear-gradient(top,  #92A0A5 0%, #66757C 100%); /* Opera 11.10+ */
 	background: -ms-linear-gradient(top,  #92A0A5  0%, #66757C 100%); /* IE10+ */
 	background: linear-gradient(to bottom, #92A0A5  0%, #66757C 100%); /* W3C */
+	border: 1px solid #222;
+	background: none;
+	background: #91071f; /* W3C rogcss */
 }
 .FormTable1 td{
 	/*padding-left: 10px;*/
 	background-color:#475A5F;
+	background-color:none; /* W3C rogcss */
 	border: 1px solid #000000;
+	border: 1px solid #91071f; /* W3C rogcss */
 	border-collapse: collapse;
 	word-break: break-word;
+	background:transparent; /* W3C rogcss */
 }
 .input_ss_table {
 	font-size: 12px;
@@ -134,6 +146,10 @@
 }
 input[type=button]:focus {
 	outline: none;
+}
+#basic_settings, #rule_table_div, #ACL_table_div{
+	border:none;
+	border:1px solid #91071f; /* W3C rogcss */
 }
 textarea{
 	width:97%;
@@ -145,6 +161,8 @@ textarea{
 	outline: none;
 	background:#475A5F;
 	border:1px solid #222;
+	background:transparent; /* W3C rogcss */
+	border:1px solid #91071f; /* W3C rogcss */
 }
 </style>
 <script>
@@ -173,7 +191,7 @@ function get_dbus_data(){
 			update_visibility();
 			get_user_rule();
 			hook_event();
-			get_kp_status();
+			get_run_status();
 			showDropdownClientList('setClientIP', 'ip', 'all', 'ClientList_Block', 'pull_arrow', 'online');
 		}
 	});
@@ -236,8 +254,7 @@ function generate_options(){
 		$("#koolproxyR_reboot_inter_min").val(0);
 	}
 }
-
-function get_kp_status(){
+function get_run_status(){
 	var maxid = parseInt($("#rule_table > tbody > tr:eq(-2) > td:nth-child(1) > input").attr("id").split("_")[3]);
 	//var id = parseInt(Math.random() * 100000000);
 	//var postData = {"id": id, "method": "koolproxyR_status.sh", "params":[2], "fields": ""};
@@ -360,9 +377,6 @@ function start_update() {
 	
 	dbus["action_script"] = "kp_update.sh";
 	dbus["action_mode"] = " Refresh ";
-	dbus["current_page"] = "Module_koolproxyR.asp";
-
-
 	if(dbus["koolproxyR_enable"] == "1"){
 		dbus["koolproxyR_basic_action"] = "5";
 	}else{
@@ -582,7 +596,6 @@ function delTr(o) {
 	//var postData = {"id": id, "method": "dummy_script.sh", "params":[2], "fields": acls};
 	acls["action_script"] = "koolproxyR_config.sh";
 	acls["action_mode"] = "clean";
-	acls["current_page"] = "Module_koolproxyR.asp";
 	$.ajax({
 		url: '/applydb.cgi?use_rm=1&p=koolproxyR_acl',
 		contentType: "application/x-www-form-urlencoded",
@@ -714,7 +727,6 @@ function add_rule_Tr() {
 	//var postData = {"id": id, "method": "dummy_script.sh", "params":[2], "fields": rules};
 	rules["action_script"] = "koolproxyR_config.sh";
 	rules["action_mode"] = "clean";
-	rules["current_page"] = "Module_koolproxyR.asp";
 	$.ajax({
 		url: '/applydb.cgi?p=koolproxyR_rule',
 		contentType: "application/x-www-form-urlencoded",
@@ -746,7 +758,6 @@ function del_rule_Tr(o) {
 	//var postData = {"id": id, "method": "dummy_script.sh", "params":[2], "fields": rules};
 	rules["action_script"] = "koolproxyR_config.sh";
 	rules["action_mode"] = "clean";
-	rules["current_page"] = "Module_koolproxyR.asp";
 	$.ajax({
 		url: '/applydb.cgi?use_rm=1&p=koolproxyR_rule',
 		contentType: "application/x-www-form-urlencoded",
@@ -1087,7 +1098,6 @@ function save(){
 	//var postData3 = {"id": id, "method": "koolproxyR_config.sh", "params":[1], "fields": dbus};
 	dbus["action_script"] = "koolproxyR_config.sh";
 	dbus["action_mode"] = "restart";
-	dbus["current_page"] = "Module_koolproxyR.asp";
 	$.ajax({
 		type: "POST",
 		url: '/applydb.cgi?p=koolproxyR',
@@ -1659,3 +1669,4 @@ function openkpHint(itemNum) {
 	<div id="footer"></div>
 </body>
 </html>
+

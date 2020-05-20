@@ -49,24 +49,15 @@ write_sourcelist(){
 }
 
 detect_start_up(){
-	if [ "$(nvram get productid)" = "BLUECAVE" ];then
-		[ ! -f "/jffs/softcenter/init.d/M98koolproxyR.sh" ] && cp -r /jffs/softcenter/koolproxyR/kp_config.sh /jffs/softcenter/init.d/M98koolproxyR.sh
-		[ ! -f "/jffs/softcenter/init.d/N98koolproxyR.sh" ] && cp -r /jffs/softcenter/koolproxyR/kp_config.sh /jffs/softcenter/init.d/N98koolproxyR.sh
-	else
-		[ ! -L "/jffs/softcenter/init.d/S98koolproxyR.sh" ] && ln -sf /jffs/softcenter/koolproxyR/kp_config.sh /jffs/softcenter/init.d/S98koolproxyR.sh
-		[ ! -L "/jffs/softcenter/init.d/N98koolproxyR.sh" ] && ln -sf /jffs/softcenter/koolproxyR/kp_config.sh /jffs/softcenter/init.d/N98koolproxyR.sh
-	fi
+	[ ! -L "/jffs/softcenter/init.d/S98koolproxyR.sh" ] && ln -sf /jffs/softcenter/koolproxyR/kp_config.sh /jffs/softcenter/init.d/S98koolproxyR.sh
+	[ ! -L "/jffs/softcenter/init.d/N98koolproxyR.sh" ] && ln -sf /jffs/softcenter/koolproxyR/kp_config.sh /jffs/softcenter/init.d/N98koolproxyR.sh
 }
 
 start_koolproxyR(){
 	write_sourcelist
 	echo_date 开启koolproxyR主进程！
-	if [ "$(nvram get productid)" = "BLUECAVE" ];then
-		[ ! -f "/jffs/softcenter/bin/koolproxy" ] && cp -r /jffs/softcenter/koolproxyR/koolproxy /jffs/softcenter/bin/koolproxy
-	else
-		[ ! -L "/jffs/softcenter/bin/koolproxy" ] && ln -sf /jffs/softcenter/koolproxyR/koolproxy /jffs/softcenter/bin/koolproxy
-	fi
-	/jffs/softcenter/koolproxyR/koolproxy --mark -d
+	[ ! -L "/jffs/softcenter/bin/koolproxy" ] && ln -sf /jffs/softcenter/koolproxyR/koolproxy /jffs/softcenter/bin/koolproxy
+	cd /jffs/softcenter/koolproxyR && koolproxy --mark -d
 	[ "$?" != "0" ] && dbus set koolproxyR_enable=0 && exit 1
 }
 
@@ -360,7 +351,6 @@ stop)
 	set_lock
 	echo_date ================================ 关闭 ===============================
 	remove_reboot_job
-	add_ipset_conf && restart_dnsmasq
 	flush_nat
 	stop_koolproxyR
 	remove_ipset_conf && restart_dnsmasq
@@ -390,3 +380,4 @@ start_nat)
 	unset_lock
 	;;
 esac
+
