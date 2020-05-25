@@ -1,6 +1,6 @@
 #! /bin/sh
 
-source /koolshare/scripts/base.sh
+source /jffs/softcenter/scripts/base.sh
 alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
 MODEL=$(nvram get productid)
 DIR=$(cd $(dirname $0); pwd)

@@ -237,8 +237,6 @@ kill_process(){
 		echo_date 关闭trojan进程...
 		killall trojan >/dev/null 2>&1
 	fi
-	echo 1 > /proc/sys/net/ipv4/tcp_fastopen
-	
 }
 
 # ================================= ss prestart ===========================

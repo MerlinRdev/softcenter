@@ -34,8 +34,7 @@ softcenter_install() {
 		cp -rf /tmp/softcenter/.soft_ver /jffs/softcenter/
 		if [ "$ROG" == "1" ]; then
 			cp -rf /tmp/softcenter/ROG/res/* /jffs/softcenter/res/
-		fi
-		if [ "$TUF" == "1" ]; then
+		elif [ "$TUF" == "1" ]; then
 			sed -i 's/3e030d/3e2902/g;s/91071f/92650F/g;s/680516/D0982C/g;s/cf0a2c/c58813/g;s/700618/74500b/g;s/530412/92650F/g' /tmp/softcenter/ROG/res/*.css >/dev/null 2>&1
 			cp -rf /tmp/softcenter/ROG/res/* /jffs/softcenter/res/
 		fi
