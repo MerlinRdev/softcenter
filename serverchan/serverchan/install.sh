@@ -36,7 +36,7 @@ else
 	sed -i '/rogcss/d' /jffs/softcenter/webs/Module_serverchan.asp >/dev/null 2>&1
 fi
 chmod +x /jffs/softcenter/scripts/*
-
+[ ! -L "/jffs/softcenter/init.d/S99CRUserverchan.sh" ] && ln -sf /jffs/softcenter/scripts/serverchan_config.sh /jffs/softcenter/init.d/S99CRUserverchan.sh
 # 设置默认值
 router_name=`echo $(nvram get model) | base64_encode`
 router_name_get=`dbus get serverchan_config_name`
