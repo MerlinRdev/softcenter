@@ -95,7 +95,7 @@ var _responseLen;
 var noChange = 0;
 var x = 5;
 var params_inp = ['aliddns_ak', 'aliddns_sk', 'aliddns_name', 'aliddns_domain', 'aliddns_interval', 'aliddns_dns', 'aliddns_curl', 'aliddns_ttl', 'aliddns_comd'];
-var params_chk = ['aliddns_enable', 'aliddns_show'];
+var params_chk = ['aliddns_enable'];
 function init() {
 	show_menu(menu_hook);
 	generate_options();
@@ -148,8 +148,8 @@ function change_url() {
 		var ddns_hostname_x_t = E("aliddns_name").value + "." + E("aliddns_domain").value;
 	}
 	if (misc_http_x == "0"){
-		E("wan_access_url").innerHTML = "检测到【<#1735#>】未启用，请前往<a href=" + "/Advanced_System_Content.asp" + "><em><u>系统管理 -系统设置</u></em></a>页面设置！";
-	}else if (ddns_enable_x == "1" && ddns_hostname_x_t.length != 0 && dbus["aliddns_enable"] == "1"){
+		E("wan_access_url").innerHTML = "【从互联网设置 <% nvram_get("modelname"); %>】未启用，请前往<a href=" + "/Advanced_System_Content.asp" + "><em><u>系统管理 -系统设置</u></em></a>页面设置！";
+	}else if (ddns_hostname_x_t.length != 0 && E("aliddns_enable").checked == true){
 		E("wan_access_url").innerHTML = "&nbsp;Aliddns远程访问地址：<a href=\"https://" + ddns_hostname_x_t + ":" + misc_httpsport_x + "\" target=\"_blank\" style=\"color:#00ffe4;text-decoration: underline; font-family:Lucida Console;\"><em>https://" + ddns_hostname_x_t + ":" + misc_httpsport_x + "</em></a></em>";
 	}
 }
@@ -246,14 +246,6 @@ function hook_event(){
 			E("tablet_3").style.display = "none";
 			E("apply_button-1").style.display = "";
 			E("apply_button-2").style.display = "none";
-		}
-	});
-	$("#aliddns_show").click(
-		function(){
-		if(E('aliddns_show').checked){
-			if(!confirm('注意：如果你正在使用固件内置的DDNS服务，启用该功能会禁用固件内置的DDNS服务，例如ASUSDDNS！\n\n确定启用吗？')){
-				E('aliddns_show').checked = false;
-			}
 		}
 	});
 }
@@ -491,12 +483,6 @@ function menu_hook(title, tab) {
 												<tr id="ttl_tr">
 													<th title="设置解析TTL，默认10分钟，免费版的范围是600-86400">TTL(?)</th>
 													<td><input id="aliddns_ttl" style="width: 4.5em" class="input_ss_table" value="600">s (1~86400)</td>
-												</tr>
-												<tr id="show_tr">
-													<th>【网络地图】首页显示Aliddns域名</th>
-													<td>
-														<input type="checkbox" id="aliddns_show" name="aliddns_show" checked="checked" onchange="update_visibility();">
-													</td>
 												</tr>
 												<tr id="url_tr">
 													<th>远程访问地址</th>
