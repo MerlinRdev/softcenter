@@ -64,7 +64,7 @@ if [ "$MODEL" == "GT-AC5300" ] || [ "$MODEL" == "GT-AC2900" ] || [ "$MODEL" == "
 	ROG=1
 fi
 
-if [ "$(nvram get productid)" == "TUF-AX3000" ] || [ "$(nvram get merlinr_tuf)" == "1" ];then
+if [ "$MODEL" == "TUF-AX3000" ] || [ "$(nvram get merlinr_tuf)" == "1" ];then
 	TUF=1
 fi
 
@@ -106,7 +106,7 @@ install_module() {
 	OLD_VERSION=`dbus get softcenter_module_${softcenter_installing_module}_version`
 	if [ -z "$(dbus get softcenter_server_tcode)" ]; then
 		modelname=`nvram get modelname`
-		if [ "$modelname" == "K3" ] || [ "$modelname" == "GTAC2900" ] || [ "$modelname" == "GTAC5300"  ] || [ "$modelname" == "RTAC86U" ] || [ "$modelname" == "RTAX86U" ] || [ "$modelname" == "RTAX68U" ] || [ "$modelname" == "RTAX82U" ] || [ "$modelname" == "TUFAX3000" ] || [ "$modelname" == "RTACRH17" ] || [ "$modelname" == "XWR3100" ]; then
+		if [ "$modelname" == "K3" ] || [ "$modelname" == "XWR3100" ]; then
 			dbus set softcenter_server_tcode=CN
 		elif [ "$modelname" == "SBRAC1900P"  ] || [ "$modelname" == "SBR-AC1900P" ] || [ "$modelname" == "SBRAC3200P" ] || [ "$modelname" == "SBR-AC3200P" ] || [ "$modelname" == "R7900P" ] || [ "$modelname" == "R8000P" ] || [ "$modelname" == "R7000P" ]; then
 			dbus set softcenter_server_tcode=ALI

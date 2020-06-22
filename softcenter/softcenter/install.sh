@@ -56,6 +56,9 @@ softcenter_install() {
 			fi
 		fi
 		dbus set softcenter_api=`cat /jffs/softcenter/.soft_ver`
+		if [ -f "/jffs/softcenter/scripts/ks_tar_intall.sh" ];then
+			rm -rf /jffs/softcenter/scripts/ks_tar_intall.sh
+		fi
 		# make some link
 		[ ! -L "/jffs/softcenter/bin/base64_decode" ] && cd /jffs/softcenter/bin && ln -sf base64_encode base64_decode
 		[ ! -L "/jffs/softcenter/scripts/ks_app_remove.sh" ] && cd /jffs/softcenter/scripts && ln -sf ks_app_install.sh ks_app_remove.sh
