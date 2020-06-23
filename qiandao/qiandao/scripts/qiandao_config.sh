@@ -61,6 +61,9 @@ start)
 		logger "自动签到插件未开启，跳过！"
 	fi
 	;;
+unmount)
+	#usb unmount
+	;;
 *)
 	# web提交
 	echo "------------------------------ MrelinR 自动签到程序 -------------------------------" > $LOGFILE

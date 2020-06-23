@@ -13,6 +13,10 @@ start)
 clean)
 	#do nothing
 	;;
+unmount)
+	#usb unmount
+	killall koolproxy >/dev/null 2>&1
+	;;
 restart)
 	if [[ "$koolproxyR_enable" == "1" ]]; then
 		sh /jffs/softcenter/koolproxyR/kp_config.sh restart >> /tmp/kpr_log.txt 2>&1

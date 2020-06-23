@@ -127,4 +127,7 @@ restart)
 		stop_ddnspod
 	fi
 	;;
+unmount)
+	#usb unmount
+	;;
 esac

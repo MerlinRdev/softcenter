@@ -195,4 +195,8 @@ restart)
 	fun_crontab
 	fun_ddns_start
 	;;
+unmount)
+	#usb unmount
+	killall frpc >/dev/null 2>&1
+	;;
 esac

@@ -182,4 +182,7 @@ restart)
 clean)
 	echo " " > $LOG_FILE
 	;;
+unmount)
+	#usb unmount
+	;;
 esac

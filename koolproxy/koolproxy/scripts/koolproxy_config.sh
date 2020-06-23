@@ -10,6 +10,10 @@ start)
 clean)
 	#do nothing
 	;;
+unmount)
+	#usb unmount
+	killall koolproxy >/dev/null 2>&1
+	;;
 *)
 	if [ "$koolproxy_enable" == "1" ];then
 		sh /jffs/softcenter/koolproxy/kp_config.sh restart  > /tmp/koolproxy_run.log

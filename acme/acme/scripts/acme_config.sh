@@ -255,4 +255,7 @@ clean)
 	sleep 2
 	echo "" > $LOGFILE
 	;;
+unmount)
+	#usb unmount
+	;;
 esac

@@ -55,4 +55,8 @@ restart)
 clean)
 	echo " " > $LOG_FILE
 	;;
+unmount)
+	#usb unmount
+	stop_fastd1ck
+	;;
 esac

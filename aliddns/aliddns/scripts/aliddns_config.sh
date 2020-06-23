@@ -150,5 +150,8 @@ clean)
 	# clean log
 	echo "" > $LOG_FILE
 	;;
+unmount)
+	#usb unmount
+	;;
 esac
 

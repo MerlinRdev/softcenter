@@ -70,11 +70,11 @@ start_aria2(){
 }
 
 stop_aria2(){
-	if [ "$(pidof aria2c)" ];then
+	if [ -n "$(pidof aria2c)" ];then
 		echo_date 关闭aria2c进程！
 		kill -9 $(pidof aria2c) >/dev/null 2>&1
 	fi
-	if [ "$(pidof cpulimit)" ];then
+	if [ -n "$(pidof cpulimit)" ];then
 		echo_date 关闭cpulimit进程！
 		kill -9 $(pidof cpulimit) >/dev/null 2>&1
 	fi
@@ -190,6 +190,10 @@ clean)
 	echo XU6J03M6 >> $LOG_FILE
 	sleep 2
 	echo " " > $LOG_FILE
+	;;
+unmount)
+	#usb unmount
+	stop_aria2
 	;;
 esac
 

@@ -171,4 +171,7 @@ restart)
 	fi
 	echo XU6J03M6 >> $LOG_FILE
 	;;
+unmount)
+	#usb unmount
+	;;
 esac

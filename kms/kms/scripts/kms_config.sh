@@ -11,24 +11,15 @@ start_kms(){
 	nvram commit
 	service restart_dnsmasq
 	# creat start_up file
-	if [ "$(nvram get productid)" = "BLUECAVE" ];then
-		[ ! -f "/jffs/softcenter/init.d/N97Kms.sh" ] && cp -r /jffs/softcenter/scripts/kms_config.sh /jffs/softcenter/init.d/N97Kms.sh
-		[ ! -f "/jffs/softcenter/init.d/M97Kms.sh" ] && cp -r /jffs/softcenter/scripts/kms_config.sh /jffs/softcenter/init.d/M97Kms.sh
-	else
-		[ ! -L "/jffs/softcenter/init.d/N97Kms.sh" ] && ln -sf /jffs/softcenter/scripts/kms_config.sh /jffs/softcenter/init.d/N97Kms.sh
-		[ ! -L "/jffs/softcenter/init.d/S97Kms.sh" ] && ln -sf /jffs/softcenter/scripts/kms_config.sh /jffs/softcenter/init.d/S97Kms.sh
-	fi
+	[ ! -L "/jffs/softcenter/init.d/N97Kms.sh" ] && ln -sf /jffs/softcenter/scripts/kms_config.sh /jffs/softcenter/init.d/N97Kms.sh
+	[ ! -L "/jffs/softcenter/init.d/S97Kms.sh" ] && ln -sf /jffs/softcenter/scripts/kms_config.sh /jffs/softcenter/init.d/S97Kms.sh
 }
 
 stop_kms(){
 	killall vlmcsd
 	rm $CONFIG_FILE
 	rm -rf /jffs/softcenter/init.d/N97Kms.sh
-	if [ "$(nvram get productid)" = "BLUECAVE" ];then
-		rm -rf /jffs/softcenter/init.d/M97Kms.sh
-	else
-		rm -rf /jffs/softcenter/init.d/S97Kms.sh
-	fi
+	rm -rf /jffs/softcenter/init.d/S97Kms.sh
 	service restart_dnsmasq
 }
 
@@ -61,6 +52,10 @@ start_nat)
 		close_port >/dev/null 2>&1
 		[ "$kms_wan_port" == "1" ] && open_port
 	fi
+	;;
+unmount)
+	#usb unmount
+	killall vlmcsd  >/dev/null 2>&1
 	;;
 *)
 	if [ "$kms_enable" == "1" ]; then

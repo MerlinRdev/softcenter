@@ -107,6 +107,10 @@ stop)
 	stop_baidu
 	baidu_nat_start
 	;;
+unmount)
+	#usb unmount
+	stop_baidu
+	;;
 *)
 	restart_baidu
 	baidu_nat_start

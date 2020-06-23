@@ -5,11 +5,7 @@ source /jffs/softcenter/scripts/base.sh
 alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
 create_Cron(){
 	cru a reboothelper_schedule "$reboothelper_minute $reboothelper_hour $reboothelper_day * $reboothelper_week reboot"
-	if [ "$(nvram get productid)" = "BLUECAVE" ];then
-		[ ! -f "/jffs/softcenter/init.d/M99Reboothelper.sh" ] && cp -r /jffs/softcenter/scripts/reboothelper_config.sh /jffs/softcenter/init.d/M99Reboothelper.sh
-	else
-		[ ! -L "/jffs/softcenter/init.d/S99Reboothelper.sh" ] && ln -sf /jffs/softcenter/scripts/reboothelper_config.sh /jffs/softcenter/init.d/S99Reboothelper.sh
-	fi
+	[ ! -L "/jffs/softcenter/init.d/S99Reboothelper.sh" ] && ln -sf /jffs/softcenter/scripts/reboothelper_config.sh /jffs/softcenter/init.d/S99Reboothelper.sh
 }
 
 delete_Cron(){
@@ -27,6 +23,9 @@ start)
 	;;
 stop)
 	delete_Cron
+	;;
+unmount)
+	#usb unmount
 	;;
 *)
 	if [ "$reboothelper_enable" == "1" ];then

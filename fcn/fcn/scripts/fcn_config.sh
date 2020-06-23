@@ -79,4 +79,8 @@ restart)
 		del_start_up
 	fi
 	;;
+unmount)
+	#usb unmount
+	stop_fcn
+	;;
 esac

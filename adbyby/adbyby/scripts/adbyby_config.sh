@@ -6,6 +6,10 @@ case $1 in
 start)
 	sh /jffs/softcenter/adbyby/adbyby.sh start
 	;;
+unmount)
+	#usb unmount
+	sh /jffs/softcenter/adbyby/adbyby.sh stop
+	;;
 *)
 	if [ "$adbyby_enable" == "1" ];then
 		/jffs/softcenter/adbyby/adbyby.sh restart > /tmp/adbyby_run.log
