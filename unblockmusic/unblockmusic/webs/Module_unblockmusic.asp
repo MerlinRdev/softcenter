@@ -47,9 +47,8 @@ function get_dbus_data() {
 		success: function(data) {
 			db_unblockmusic = db_unblockmusic_;
 			E("unblockmusic_enable").checked = db_unblockmusic["unblockmusic_enable"] == "1";
-			E("unblockmusic_autoupdate").checked = db_unblockmusic["unblockmusic_autoupdate"] == "1";
-			if(db_unblockmusic["unblockmusic_endpoint"]){
-				E("unblockmusic_endpoint").value = db_unblockmusic["unblockmusic_endpoint"];
+			if(db_unblockmusic["unblockmusic_aclip"]){
+				E("unblockmusic_aclip").value = Base64.decode(db_unblockmusic["unblockmusic_aclip"]);
 			}
 			if(db_unblockmusic["unblockmusic_musicapptype"]){
 				E("unblockmusic_musicapptype").value = db_unblockmusic["unblockmusic_musicapptype"];
@@ -61,8 +60,7 @@ function save() {
 	showLoading(3);
 	refreshpage(3);
 	db_unblockmusic["unblockmusic_enable"] = E("unblockmusic_enable").checked ? '1' : '0';
-	db_unblockmusic["unblockmusic_autoupdate"] = E("unblockmusic_autoupdate").checked ? '1' : '0';
-	db_unblockmusic["unblockmusic_endpoint"] = E("unblockmusic_endpoint").value;
+	db_unblockmusic["unblockmusic_aclip"] = Base64.encode(E("unblockmusic_aclip").value);
 	db_unblockmusic["unblockmusic_musicapptype"] = E("unblockmusic_musicapptype").value;
 	db_unblockmusic["action_script"]="unblockmusic_config.sh";
 	db_unblockmusic["action_mode"] = "restart";
@@ -77,8 +75,8 @@ function save() {
 function check_status(){
 
 	$.ajax({
-        url: '/logreaddb.cgi?p=unblockmusic_status.log&script=unblockmusic_status.sh',
-  		dataType: 'html',
+		url: '/logreaddb.cgi?p=unblockmusic_status.log&script=unblockmusic_status.sh',
+		dataType: 'html',
 		success: function (response) {
 			//console.log(response)
 			E("unblockmusic_status").innerHTML = response;
@@ -136,7 +134,7 @@ function menu_hook(title, tab) {
 										<div style="margin:30px 0 10px 5px;" class="splitLine"></div>
 										<div class="SimpleNote" id="head_illustrate"><i></i><em>采用 [QQ/虾米/百度/酷狗/酷我/咕咪/JOOX]等音源，替换网易云变灰歌曲链接<br>启用后，路由器自动分流解锁，大部分设备无需设置代理。<br>苹果系列设备需要设置 WIFI/有线代理方式为 自动 ,并安装 CA根证书并信任。<br>HTTP代理IP:<% nvram_get("lan_ipaddr"); %>,端口:5200<br>HTTPS代理IP:<% nvram_get("lan_ipaddr"); %>,端口:5300</em></div>
 										<div id="cpufreq_switch" style="margin:0px 0px 0px 0px;">
-                							<table style="margin:-1px 0px 0px 0px;" width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bordercolor="#6b8fa3" class="FormTable">
+											<table style="margin:-1px 0px 0px 0px;" width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bordercolor="#6b8fa3" class="FormTable">
 												<thead>
 												<tr>
 													<td colspan="2">设置</td>
@@ -178,17 +176,17 @@ function menu_hook(title, tab) {
 																<option value="kugou" sclang>Kugou</option>
 																<option value="kuwo" sclang>Kuwo</option>
 																<option value="migu" sclang>Migu</option>
-																<option value="joox" sclang>Joox</option>
+																<!--option value="joox" sclang>Joox</option-->
 															</select>
 														</div>
 													</td>
 												</tr>
-												<tr id="unblockmusic_endpoint_tr">
+												<tr id="unblockmusic_aclip_tr">
 													<th>
-														<label sclang>Endpoint</label>
+														<label sclang>IOS/MAC IP</label>
 													</th>
 													<td>
-														<input type="text" id="unblockmusic_endpoint" name="unblockmusic_endpoint" class="input_ss_table" style="width:200px;" placeholder="" />
+														<input lang-input type="text" id="unblockmusic_aclip" name="unblockmusic_aclip" class="input_ss_table" style="width:200px;" placeholder="Separated by spaces" />
 													</td>
 												</tr>
 												<tr id="cert_download_tr">
@@ -199,29 +197,13 @@ function menu_hook(title, tab) {
 														<input sclang type="button" id="download_cert" class="button_gen" onclick="download();" value="Download cert" />&nbsp;&nbsp;<span>iOS 13 系统需要在“设置 -> 通用 -> 关于本机 -> 证书信任设置” 中，信任 UnblockNeteaseMusic Root CA</span>
 													</td>
 												</tr>
-												<tr>
-													<th sclang>Autoupdate</th>
-													<td colspan="2">
-														<div class="switch_field" style="display:table-cell;float: left;">
-															<label for="unblockmusic_autoupdate">
-																<input id="unblockmusic_autoupdate" class="switch" type="checkbox" style="display: none;">
-																<div class="switch_container">
-																	<div class="switch_bar"></div>
-																	<div class="switch_circle transition_style">
-																		<div></div>
-																	</div>
-																</div>
-															</label>
-														</div>
-													</td>
-												</tr>
 											</table>
 										</div>
 										<div class="apply_gen">
 											<input sclang id="cmdBtn" type="button" class="button_gen" onclick="save()" value="Apply"/>
 										</div>
 										<div class="KoolshareBottom" style="float:right; width:180px; height:70px">
-											Shell&Web by： <i>paldier</i>
+											Shell&Web by： <i>paldier & lean</i>
 										</div>
 									</td>
 								</tr>
