@@ -38,15 +38,13 @@ chmod +x /jffs/softcenter/bin/*
 
 cp -rf /jffs/softcenter/scripts/unblockmusic_config.sh /jffs/softcenter/init.d/S99unblockmusic.sh
 
-dbus set unblockmusic_version="1.0.0"
-dbus set softcenter_module_unblockmusic_version="1.0.0"
+dbus set unblockmusic_version="$(cat $DIR/version)"
+dbus set softcenter_module_unblockmusic_version="$(cat $DIR/version)"
 dbus set softcenter_module_unblockmusic_description="解锁网易云灰色歌曲"
 dbus set softcenter_module_unblockmusic_install=1
 dbus set softcenter_module_unblockmusic_name=unblockmusic
 dbus set softcenter_module_unblockmusic_title="解锁网易云灰色歌曲"
 [ -z "$unblockmusic_musicapptype" ] && dbus set unblockmusic_musicapptype='default'
-[ -z "$unblockmusic_endpoint" ] && dbus set unblockmusic_endpoint='https://music.163.com'
-[ -z "$unblockmusic_autoupdate" ] && dbus set unblockmusic_autoupdate=1
 dbus set unblockmusic_bin_version=`/jffs/softcenter/bin/UnblockNeteaseMusic -v |grep Version|awk '{print $2}'`
 if [ "$enable" == "1" ] && [ -f "/jffs/softcenter/scripts/unblockmusic_config.sh" ];then
 	/jffs/softcenter/scripts/unblockmusic_config start >/dev/null 2>&1

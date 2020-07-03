@@ -47,9 +47,6 @@ function get_dbus_data() {
 		success: function(data) {
 			db_unblockmusic = db_unblockmusic_;
 			E("unblockmusic_enable").checked = db_unblockmusic["unblockmusic_enable"] == "1";
-			if(db_unblockmusic["unblockmusic_aclip"]){
-				E("unblockmusic_aclip").value = Base64.decode(db_unblockmusic["unblockmusic_aclip"]);
-			}
 			if(db_unblockmusic["unblockmusic_musicapptype"]){
 				E("unblockmusic_musicapptype").value = db_unblockmusic["unblockmusic_musicapptype"];
 			}
@@ -60,7 +57,6 @@ function save() {
 	showLoading(3);
 	refreshpage(3);
 	db_unblockmusic["unblockmusic_enable"] = E("unblockmusic_enable").checked ? '1' : '0';
-	db_unblockmusic["unblockmusic_aclip"] = Base64.encode(E("unblockmusic_aclip").value);
 	db_unblockmusic["unblockmusic_musicapptype"] = E("unblockmusic_musicapptype").value;
 	db_unblockmusic["action_script"]="unblockmusic_config.sh";
 	db_unblockmusic["action_mode"] = "restart";
@@ -179,14 +175,6 @@ function menu_hook(title, tab) {
 																<!--option value="joox" sclang>Joox</option-->
 															</select>
 														</div>
-													</td>
-												</tr>
-												<tr id="unblockmusic_aclip_tr">
-													<th>
-														<label sclang>IOS/MAC IP</label>
-													</th>
-													<td>
-														<input lang-input type="text" id="unblockmusic_aclip" name="unblockmusic_aclip" class="input_ss_table" style="width:200px;" placeholder="Separated by spaces" />
 													</td>
 												</tr>
 												<tr id="cert_download_tr">

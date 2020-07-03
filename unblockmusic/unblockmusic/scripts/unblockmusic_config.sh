@@ -19,23 +19,11 @@ remove_autostart(){
 	rm -f /jffs/softcenter/init.d/*unblockmusic.sh
 }
 
-ios_rule(){
-	if [ -n "$unblockmusic_aclip" ];then
-		local ip=$(echo "$unblockmusic_aclip" |base64 -d)
-		for i in $ip
-		do
-			ipset -! add music_http $i
-		done
-	fi
-}
-
 add_rule()
 {
 	echo_date 加载nat规则...
 	echo_date Load nat rules...
 	ipset -! -N music hash:ip
-	ipset -! -N music_http hash:ip
-	ios_rule
 	ipset add music 59.111.181.60
 	ipset add music 59.111.181.38
 	ipset add music 59.111.181.35
@@ -77,10 +65,8 @@ add_rule()
 	$ipt_n -A cloud_music -d 192.168.0.0/16 -j RETURN
 	$ipt_n -A cloud_music -d 224.0.0.0/4 -j RETURN
 	$ipt_n -A cloud_music -d 240.0.0.0/4 -j RETURN
-	$ipt_n -A cloud_music -p tcp -m set ! --match-set music_http src --dport 80 -j REDIRECT --to-ports 5200
-	$ipt_n -A cloud_music -p tcp -m set --match-set music_http src --dport 80 -j REDIRECT --to-ports 5201
-	$ipt_n -A cloud_music -p tcp -m set ! --match-set music_http src --dport 443 -j REDIRECT --to-ports 5300
-	$ipt_n -A cloud_music -p tcp -m set --match-set music_http src --dport 443 -j REDIRECT --to-ports 5301
+	$ipt_n -A cloud_music -p tcp --dport 80 -j REDIRECT --to-ports 5200
+	$ipt_n -A cloud_music -p tcp --dport 443 -j REDIRECT --to-ports 5300
 	$ipt_n -I PREROUTING -p tcp -m set --match-set music dst -j cloud_music
 }
 
@@ -91,7 +77,6 @@ del_rule(){
 	$ipt_n -F cloud_music  2>/dev/null
 	$ipt_n -X cloud_music  2>/dev/null
 	ipset flush music 2>/dev/null
-	ipset -X music_http 2>/dev/null
 	rm -f /tmp/etc/dnsmasq.user/dnsmasq-music.conf
 	service restart_dnsmasq
 }
@@ -116,11 +101,9 @@ start_unblockmusic(){
 	echo_date 开启unblockmusic
 	echo_date Enable unblockmusic
 	if [ "$unblockmusic_musicapptype" = "default" ]; then
-		nohup /jffs/softcenter/bin/UnblockNeteaseMusic -p 5200 -sp 5300 -m 0 -c "${serverCrt}" -k "${serverKey}" >> /tmp/unblockmusic.log 2>&1 &
-		nohup /jffs/softcenter/bin/UnblockNeteaseMusic -p 5201 -sp 5301 -m 0 -c "${serverCrt}" -k "${serverKey}" -e >> /tmp/unblockmusic2.log 2>&1 &
+		nohup /jffs/softcenter/bin/UnblockNeteaseMusic -p 5200 -sp 5300 -m 0 -c "${serverCrt}" -k "${serverKey}" -e >> /tmp/unblockmusic2.log 2>&1 &
 	else
-		nohup /jffs/softcenter/bin/UnblockNeteaseMusic -p 5200 -sp 5300 -o "$unblockmusic_musicapptype" -m 0 -c "${serverCrt}" -k "${serverKey}" >> /tmp/unblockmusic.log 2>&1 &
-		nohup /jffs/softcenter/bin/UnblockNeteaseMusic -p 5201 -sp 5301 -o "$unblockmusic_musicapptype" -m 0 -c "${serverCrt}" -k "${serverKey}" -e >> /tmp/unblockmusic2.log 2>&1 &
+		nohup /jffs/softcenter/bin/UnblockNeteaseMusic -p 5200 -sp 5300 -o "$unblockmusic_musicapptype" -m 0 -c "${serverCrt}" -k "${serverKey}" -e >> /tmp/unblockmusic2.log 2>&1 &
 	fi
 	mkdir -p /var/wwwext
 	cp -f /jffs/softcenter/bin/Music/ca.crt /www/ext
