@@ -55,13 +55,21 @@ softcenter_install() {
 				dbus set softcenter_arch="$ARCH"
 			fi
 		fi
-		dbus set softcenter_api=`cat /jffs/softcenter/.soft_ver`
 		if [ -f "/jffs/softcenter/scripts/ks_tar_intall.sh" ];then
 			rm -rf /jffs/softcenter/scripts/ks_tar_intall.sh
 		fi
 		# make some link
-		[ ! -L "/jffs/softcenter/bin/base64_decode" ] && cd /jffs/softcenter/bin && ln -sf base64_encode base64_decode
-		[ ! -L "/jffs/softcenter/scripts/ks_app_remove.sh" ] && cd /jffs/softcenter/scripts && ln -sf ks_app_install.sh ks_app_remove.sh
+		if [ -f "/usr/sbin/base64_encode" ];then
+			dbus set softcenter_api="1.5"
+			cd /jffs/softcenter/bin && rm -rf base64_encode &&ln -sf /usr/sbin/base64_encode base64_encode
+			cd /jffs/softcenter/bin && ln -sf /usr/sbin/base64_encode base64_decode
+			cd /jffs/softcenter/bin && rm -rf versioncmp && ln -sf /usr/sbin/versioncmp versioncmp
+			cd /jffs/softcenter/bin && rm -rf resolveip && ln -sf /usr/sbin/resolveip resolveip
+		else
+			dbus set softcenter_api="1.1"
+			[ ! -L "/jffs/softcenter/bin/base64_decode" ] && cd /jffs/softcenter/bin && ln -sf base64_encode base64_decode
+		fi
+		cd /jffs/softcenter/scripts && ln -sf ks_app_install.sh ks_app_remove.sh
 		chmod 755 /jffs/softcenter/bin/*
 		#chmod 755 /jffs/softcenter/init.d/*
 		chmod 755 /jffs/softcenter/perp/*

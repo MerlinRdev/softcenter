@@ -2,7 +2,7 @@
 
 
 MODULE=qiandao
-VERSION=1.6
+VERSION=1.7
 TITLE=签到dog
 DESCRIPTION=这是一只自动帮你签到的dog
 HOME_URL=Module_qiandao.asp
@@ -29,4 +29,3 @@ cd $DIR
 
 do_build_result
 
-sh backup.sh $MODULE

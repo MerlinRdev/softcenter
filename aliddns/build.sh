@@ -1,7 +1,7 @@
 #!/bin/sh
 
 MODULE="aliddns"
-VERSION="2.2"
+VERSION="2.3"
 TITLE="阿里DDNS"
 DESCRIPTION="aliddns"
 HOME_URL="Module_aliddns.asp"

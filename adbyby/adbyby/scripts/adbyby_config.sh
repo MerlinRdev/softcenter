@@ -2,13 +2,9 @@
 eval `dbus export adbyby`
 source /jffs/softcenter/scripts/base.sh
 
-case $1 in
+case $ACTION in
 start)
 	sh /jffs/softcenter/adbyby/adbyby.sh start
-	;;
-unmount)
-	#usb unmount
-	sh /jffs/softcenter/adbyby/adbyby.sh stop
 	;;
 *)
 	if [ "$adbyby_enable" == "1" ];then

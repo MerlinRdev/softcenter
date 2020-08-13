@@ -77,7 +77,7 @@ onstart(){
     fi
 }
 # used by httpdb
-case $1 in
+case $ACTION in
 stop)
     remove_trigger_dhcp
     remove_trigger_ifup

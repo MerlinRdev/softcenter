@@ -3,16 +3,12 @@ alias echo_date1='echo $(date +%Y年%m月%d日\ %X)'
 eval `dbus export koolproxy`
 source /jffs/softcenter/scripts/base.sh
 
-case $1 in
+case $ACTION in
 start)
 	sh /jffs/softcenter/koolproxy/kp_config.sh start
 	;;
 clean)
 	#do nothing
-	;;
-unmount)
-	#usb unmount
-	killall koolproxy >/dev/null 2>&1
 	;;
 *)
 	if [ "$koolproxy_enable" == "1" ];then

@@ -34,7 +34,7 @@ close_port(){
 	fi
 }
 
-case $1 in
+case $ACTION in
 start)
 	if [ "$softether_enable" == "1" ]; then
 		logger "[软件中心]: 启动softetherVPN！"

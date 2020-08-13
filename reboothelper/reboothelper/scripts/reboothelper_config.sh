@@ -14,7 +14,7 @@ delete_Cron(){
 	[ -n "$jobexist" ] && cru d reboothelper_schedule
 }
 
-case $1 in
+case $ACTION in
 start)
 	if [ "$reboothelper_enable" == "1" ];then
 		logger "[软件中心]: 添加自动重启任务"
@@ -23,9 +23,6 @@ start)
 	;;
 stop)
 	delete_Cron
-	;;
-unmount)
-	#usb unmount
 	;;
 *)
 	if [ "$reboothelper_enable" == "1" ];then

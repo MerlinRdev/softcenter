@@ -132,7 +132,7 @@ close_port(){
 
 # ==========================================================
 # this part for start up by post-mount
-case $1 in
+case $ACTION in
 start)
 	# startup by post-mount
 	if [ "$aria2_enable" == "1" ];then
@@ -190,10 +190,6 @@ clean)
 	echo XU6J03M6 >> $LOG_FILE
 	sleep 2
 	echo " " > $LOG_FILE
-	;;
-unmount)
-	#usb unmount
-	stop_aria2
 	;;
 esac
 

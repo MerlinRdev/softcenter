@@ -154,7 +154,7 @@ stop(){
 }
 
 
-case $1 in
+case $ACTION in
 start)
 	if [ "$mdial_enable" == "1" ];then
 		logger "[软件中心]: 启动单线多拨！"
@@ -181,8 +181,5 @@ restart)
 	;;
 clean)
 	echo " " > $LOG_FILE
-	;;
-unmount)
-	#usb unmount
 	;;
 esac

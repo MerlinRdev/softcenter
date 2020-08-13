@@ -51,7 +51,7 @@ del_cron(){
 	sed -i '/qiandao/d' /var/spool/cron/crontabs/* >/dev/null 2>&1
 }
 
-case $1 in
+case $ACTION in
 start)
 	# 开机启动
 	if [ "$qiandao_enable" == "1" ];then
@@ -60,9 +60,6 @@ start)
 	else
 		logger "自动签到插件未开启，跳过！"
 	fi
-	;;
-unmount)
-	#usb unmount
 	;;
 *)
 	# web提交

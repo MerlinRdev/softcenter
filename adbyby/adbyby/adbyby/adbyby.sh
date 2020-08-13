@@ -129,17 +129,9 @@ flush_nat(){
 }
 
 creat_start_up(){
-	if [ "$(nvram get productid)" = "BLUECAVE" ];then
-		[ ! -f "/jffs/softcenter/init.d/M93Adbyby.sh" ] && cp -r /jffs/softcenter/adbyby/adbyby.sh /jffs/softcenter/init.d/M93Adbyby.sh
-	else
-		[ ! -L "/jffs/softcenter/init.d/S93Adbyby.sh" ] && ln -sf /jffs/softcenter/adbyby/adbyby.sh /jffs/softcenter/init.d/S93Adbyby.sh
-	fi
+	[ ! -L "/jffs/softcenter/init.d/S93Adbyby.sh" ] && ln -sf /jffs/softcenter/adbyby/adbyby.sh /jffs/softcenter/init.d/S93Adbyby.sh
 	if [ "$adbyby_enable" == "0" ];then
-		if [ "$(nvram get productid)" = "BLUECAVE" ];then
-			rm -rf /jffs/softcenter/init.d/M93Adbyby.sh
-		else
-			rm -rf /jffs/softcenter/init.d/S93Adbyby.sh
-		fi
+		rm -rf /jffs/softcenter/init.d/S93Adbyby.sh
 	fi
 }
 

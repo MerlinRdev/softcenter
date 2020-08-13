@@ -79,7 +79,7 @@
 	background: #680516;
 	border: 1px solid #680516;
 }
-#log_content1 {
+#log_content1, #soft_log {
 	width:99%;
 	font-family:'Lucida Console';
 	font-size:12px;

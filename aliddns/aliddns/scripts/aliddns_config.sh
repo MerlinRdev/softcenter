@@ -123,7 +123,7 @@ stop_aliddns(){
 	dbus remove aliddns_last_act
 }
 
-case $1 in
+case $ACTION in
 start)
 	if [ "$aliddns_enable" == "1" ]; then
 		logger "[软件中心]: 启动阿里DDNS！"
@@ -149,9 +149,6 @@ restart)
 clean)
 	# clean log
 	echo "" > $LOG_FILE
-	;;
-unmount)
-	#usb unmount
 	;;
 esac
 

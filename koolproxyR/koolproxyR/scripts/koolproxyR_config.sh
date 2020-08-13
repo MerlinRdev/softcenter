@@ -6,16 +6,12 @@ eval `dbus export koolproxyR_`
 
 echo "" > /tmp/kpr_log.txt
 sleep 1
-case $1 in
+case $ACTION in
 start)
 	sh /jffs/softcenter/koolproxyR/kp_config.sh start
 	;;
 clean)
 	#do nothing
-	;;
-unmount)
-	#usb unmount
-	killall koolproxy >/dev/null 2>&1
 	;;
 restart)
 	if [[ "$koolproxyR_enable" == "1" ]]; then

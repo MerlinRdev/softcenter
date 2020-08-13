@@ -1,7 +1,7 @@
 #!/bin/sh
 
 MODULE=fastd1ck
-VERSION=1.7
+VERSION=1.8
 TITLE=讯雷快鸟
 DESCRIPTION="迅雷快鸟，为上网加速而生~"
 HOME_URL=Module_fastd1ck.asp
@@ -18,5 +18,3 @@ cd $DIR
 # do something here
 do_build_result
 
-# now backup
-sh backup.sh $MODULE

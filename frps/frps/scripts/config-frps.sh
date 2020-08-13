@@ -108,8 +108,4 @@ start_nat)
 		onstart
 	fi
 	;;
-unmount)
-	#usb unmount
-	stop
-	;;
 esac

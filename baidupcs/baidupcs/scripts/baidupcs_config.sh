@@ -102,14 +102,10 @@ restart_baidu() {
 	fi
 }
 
-case $1 in
+case $ACTION in
 stop)
 	stop_baidu
 	baidu_nat_start
-	;;
-unmount)
-	#usb unmount
-	stop_baidu
 	;;
 *)
 	restart_baidu

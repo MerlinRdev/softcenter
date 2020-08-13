@@ -100,7 +100,7 @@ start_del(){
 	echo XU6J03M6
 }
 
-case $1 in
+case $ACTION in
 start)
 	sleep 1
 	start_make >> /tmp/swap_log.log

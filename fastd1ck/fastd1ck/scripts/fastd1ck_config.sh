@@ -29,7 +29,7 @@ stop_fastd1ck(){
 	fi
 }
 
-case $1 in
+case $ACTION in
 start)
 	if [ "$fastd1ck_enable" == "1" ];then
 		logger "[软件中心]: 启动迅雷快鸟！"
@@ -54,9 +54,5 @@ restart)
 	;;
 clean)
 	echo " " > $LOG_FILE
-	;;
-unmount)
-	#usb unmount
-	stop_fastd1ck
 	;;
 esac

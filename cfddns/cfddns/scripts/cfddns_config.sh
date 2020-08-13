@@ -132,7 +132,7 @@ check_update(){
 # }
 
 # ====================================used by init or cru====================================
-case $1 in
+case $ACTION in
 start)
 	#此处为开机自启，wan重启动设计
 	if [ "$cfddns_enable" == "1" ];then
@@ -170,8 +170,5 @@ restart)
 		stop_cfddns
 	fi
 	echo XU6J03M6 >> $LOG_FILE
-	;;
-unmount)
-	#usb unmount
 	;;
 esac

@@ -135,7 +135,7 @@ apply_now(){
 }
 
 # start by init
-case $1 in
+case $ACTION in
 start)
 	if [ "$acme_enable" == "1" ];then
 		# detect domain folder first
@@ -254,8 +254,5 @@ clean)
 	echo XU6J03M6 >> $LOGFILE
 	sleep 2
 	echo "" > $LOGFILE
-	;;
-unmount)
-	#usb unmount
 	;;
 esac

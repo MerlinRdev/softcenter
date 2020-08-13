@@ -33,7 +33,7 @@ close_port(){
 	[ -n "$ifopen" ] && iptables -t filter -D INPUT -p tcp --dport 1688 -j ACCEPT
 }
 
-case $1 in
+case $ACTION in
 start)
 	if [ "$kms_enable" == "1" ]; then
 		logger "[软件中心]: 启动KMS！"
@@ -52,10 +52,6 @@ start_nat)
 		close_port >/dev/null 2>&1
 		[ "$kms_wan_port" == "1" ] && open_port
 	fi
-	;;
-unmount)
-	#usb unmount
-	killall vlmcsd  >/dev/null 2>&1
 	;;
 *)
 	if [ "$kms_enable" == "1" ]; then

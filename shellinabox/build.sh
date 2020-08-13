@@ -19,5 +19,3 @@ cd $DIR
 # do something here
 do_build_result
 
-# now backup
-sh backup.sh $MODULE

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 MODULE=tenddns
-VERSION=0.0.1
+VERSION=0.0.2
 TITLE="腾讯云ddns"
 DESCRIPTION="腾讯云ddns"
 HOME_URL=Module_tenddns.asp

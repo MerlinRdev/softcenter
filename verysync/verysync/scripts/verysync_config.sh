@@ -105,7 +105,7 @@ update_disklist() {
     '|openssl base64`
 }
 
-case $1 in
+case $ACTION in
 start)
 	update_disklist
     if [ "$verysync_home" = "" ]; then
