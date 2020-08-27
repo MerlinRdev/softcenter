@@ -4,8 +4,8 @@ source /jffs/softcenter/scripts/base.sh
 eval `dbus export koolproxyR_`
 
 url_cjx="https://shaoxia1991.coding.net/p/cjxlist/d/cjxlist/git/raw/master/cjx-annoyance.txt"
-url_kp="https://houzi-.coding.net/p/my_dream/d/my_dream/git/raw/master/kp.dat"
-url_kp_md5="https://houzi-.coding.net/p/my_dream/d/my_dream/git/raw/master/kp.dat.md5"
+url_kp="http://bobohome.f3322.net:8880/files/KoolProxyRules/kp.dat"
+url_kp_md5="http://bobohome.f3322.net:8880/files/KoolProxyRules/kp.dat.md5"
 # url_koolproxyR="https://kprules.b0.upaiyun.com/koolproxyR.txt"
 # 原网址跳转到https://kprule.com/koolproxyR.txt跳转到又拍云，为了节省时间，还是直接去又拍云下载吧！避免某些时候跳转不过去
 url_easylist="https://easylist-downloads.adblockplus.org/easylistchina.txt"
