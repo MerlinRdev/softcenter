@@ -211,6 +211,11 @@
             "version": "1.6"
         }, 
         {
+            "name": "funjsq", 
+            "tar_url": "funjsq/funjsq.tar.gz", 
+            "title": "funjsq"
+        }, 
+        {
             "build_date": "2020-08-12_14:41:40", 
             "description": "百度盘", 
             "home_url": "Module_baidupcs.asp", 
@@ -252,7 +257,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "3616a63d864152809629c2e5f61868ba", 
+    "md5": "f47f5d463e26721c98910cbb399b542f", 
     "tar_url": "softcenter/softcenter.tar.gz", 
     "version": "1.3.0"
 }
