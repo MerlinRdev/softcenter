@@ -9,4 +9,7 @@ Changelog
 1.0.2
 	- update	update UnblockNeteaseMusic to 0.2.0
 
+1.0.7
+	- update	update UnblockNeteaseMusic to 0.2.5
+
 

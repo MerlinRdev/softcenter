@@ -93,9 +93,9 @@ start_unblockmusic(){
 	echo_date 开启unblockmusic
 	echo_date Enable unblockmusic
 	if [ "$unblockmusic_musicapptype" = "default" ]; then
-		nohup /jffs/softcenter/bin/UnblockNeteaseMusic -p 5200 -sp 5300 -m 0 -c "${serverCrt}" -k "${serverKey}" -e >> /tmp/unblockmusic2.log 2>&1 &
+		nohup /jffs/softcenter/bin/UnblockNeteaseMusic -p 5200 -sp 5300 -m 0 -c "${serverCrt}" -k "${serverKey}" -e -l /tmp/unblockmusic.log -sl 2 2>&1 &
 	else
-		nohup /jffs/softcenter/bin/UnblockNeteaseMusic -p 5200 -sp 5300 -o "$unblockmusic_musicapptype" -m 0 -c "${serverCrt}" -k "${serverKey}" -e >> /tmp/unblockmusic2.log 2>&1 &
+		nohup /jffs/softcenter/bin/UnblockNeteaseMusic -p 5200 -sp 5300 -o "$unblockmusic_musicapptype" -m 0 -c "${serverCrt}" -k "${serverKey}" -e -l /tmp/unblockmusic.log -sl 2 2>&1 &
 	fi
 	mkdir -p /var/wwwext
 	cp -f /jffs/softcenter/bin/Music/ca.crt /www/ext
