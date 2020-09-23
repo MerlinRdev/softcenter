@@ -34,9 +34,9 @@ write_sourcelist(){
 		echo $koolproxy_sourcelist|sed 's/>/\n/g' > /jffs/softcenter/koolproxy/data/source.list
 	else
 		cat > /jffs/softcenter/koolproxy/data/source.list <<-EOF
-			1|koolproxy.txt|https://kprule.com/koolproxy.txt|
-			1|daily.txt|https://kprule.com/daily.txt|
-			1|kp.dat|https://kprule.com/kp.dat|
+			1|koolproxy.txt|http://bobohome.f3322.net:8880/files/KoolProxyRules/koolproxy.txt|
+			1|daily.txt|http://bobohome.f3322.net:8880/files/KoolProxyRules/daily.txt|
+			1|kp.dat|http://bobohome.f3322.net:8880/files/KoolProxyRules/kp.dat|
 			1|user.txt||
 			
 		EOF
@@ -293,7 +293,6 @@ detect_cert(){
 		cd /jffs/softcenter/koolproxy/data && sh gen_ca.sh
 		echo_date 证书生成完毕！！！
 	fi
-	mkdir -p /var/wwwext
 	ln -sf /jffs/softcenter/koolproxy/data/certs/ca.crt /www/ext/kp.crt
 }
 

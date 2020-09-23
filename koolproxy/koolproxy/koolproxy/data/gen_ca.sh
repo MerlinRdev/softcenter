@@ -5,7 +5,7 @@ if [ ! -f openssl.cnf ]; then
 	echo_date "Cannot found openssl.cnf"
 	exit 1
 fi
-if [ -f /jffs/softcenter/koolproxy/data/private/ca.key.pem ]; then
+if [ -f /jffs/koolshare/koolproxy/data/private/ca.key.pem ]; then
 	echo_date "已经又证书了！"
 else
 	echo_date "生成证书中..."
@@ -27,4 +27,3 @@ else
 	openssl genrsa -aes256 -passout pass:koolshare -out private/base.key.pem 2048
 	echo_date "证书生成完毕..."
 fi
-

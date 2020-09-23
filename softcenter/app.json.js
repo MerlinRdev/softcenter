@@ -61,14 +61,14 @@
             "version": "0.4"
         }, 
         {
-            "build_date": "2020-08-13_09:30:25", 
+            "build_date": "2020-09-23_13:18:10", 
             "description": "去广告，没烦恼", 
             "home_url": "Module_koolproxy.asp", 
-            "md5": "2bcf8605d101df2a89e50ee16eb07c96", 
+            "md5": "b829457d2fff06f41d9c205252159f97", 
             "name": "koolproxy", 
             "tar_url": "koolproxy/koolproxy.tar.gz", 
             "title": "koolproxy", 
-            "version": "3.8.4.4"
+            "version": "3.8.5.0"
         }, 
         {
             "build_date": "2020-08-12_14:39:46", 
@@ -234,6 +234,16 @@
             "tar_url": "serverchan/serverchan.tar.gz", 
             "title": "ServerChan微信推送", 
             "version": "2.0"
+        }, 
+        {
+            "build_date": "2020-09-15_16:34:27", 
+            "description": "花生壳内网版3.0 （phddns） 动态域名 内网穿透", 
+            "home_url": "Module_phddns.asp", 
+            "md5": "9e0a0c7920ddcfeea33e0d763aaf523d", 
+            "name": "phddns", 
+            "tar_url": "phddns/phddns.tar.gz", 
+            "title": "花生壳3.0", 
+            "version": "3.0.2"
         }, 
         {
             "build_date": "2020-08-12_14:31:04", 

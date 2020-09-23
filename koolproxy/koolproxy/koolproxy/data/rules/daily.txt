@@ -18,11 +18,20 @@
 !|http://*/moviets.tc.qq.com/
 !|http://puui.qpic.cn/video_caps/
 @@|http://ykugc.cp31.ott.cibntv.net/*.mp4?ccode=
+|https://js.tv.itc.cn/base/core/gg_
+||https://ggxt.net/
+|https://www.baidu.com/s?$s@<div id="????_im0"*</a></div>@@
+|https://www.baidu.com/s?$s@id="m??????????_canvas"@id="Fuck Ad" style="display:none"@
+|https://www.baidu.com/s?$s@id="m????????"@id="Fuck Ad" style="display:none"@
+|https://www.baidu.com/s?$s@id="ecomScript">*</script>@id="Fuck Ad"></script>@
+|https://www.baidu.com/s?$s@id="?00?"@id="Fuck Ad" style="display:none"@
+|https://m.baidu.com/$s@class="ec_r_????????????????"@id="ec_r_????????????????" style="display:none"@
+|https://www.baidu.com/$s@class="ec_r_????????????????"@id="ec_r_????????????????" style="display:none"@
+|https://m.baidu.com/$s@</head>@<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/houzi-/CDN/KP/hide.js"></script><script src="https://cdn.jsdelivr.net/gh/houzi-/CDN/KP/sizzle_mini"></script><script>fuckcss('#header > div:nth-child(7):not([id])')</script>@
+|https://www.baidu.com/$s@</head>@<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/houzi-/CDN/KP/hide.js"></script><script src="https://cdn.jsdelivr.net/gh/houzi-/CDN/KP/sizzle_mini"></script><script>fuckcss('#header > div:nth-child(7):not([id])')</script>@
 ! ---- test rules ----
 !x  -----------------------------------------------------------------------------------------------------------------
 @@@@|https://pic.yefu365.com
-@@@@|https://www.douyu.com
-@@@@|https://www.bilibili.com
 @@@@|https://crash.163.com
 @@|http://static.ws.126.net
 @@|http://img3.126.net
@@ -268,7 +277,6 @@
 !|https://pan.baidu.com/feproxy/ad/list?
 !x  -----------------------------------------------------------------------------------------------------------------
 !|https://pan.baidu.com,yun.baidu.com##[id^="share-ad-"],A#share_ad_info_panl,div[id^="cpro_"],img.share-center,.ad-platform-tips,.banner-active
-|https://www.baidu.com/s?$s@</head>@<script src=https://dev.tencent.com/u/houzi-/p/hide_js/git/raw/master/Remove_AD.js></script></head>@
 @@@@|https://mobads.baidu.com
 !x  -----------------------------------------------------------------------------------------------------------------
 

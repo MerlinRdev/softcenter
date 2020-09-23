@@ -1008,19 +1008,19 @@ function save(){
 	//acllist += data2[ i ].join( '<' ) + '>';
 	var sourceList="";
 	if(E("koolproxy_rule_enable_d1").checked == true){
-		sourceList += "1|koolproxy.txt|https://kprule.com/koolproxy.txt|静态规则>"
+		sourceList += "1|koolproxy.txt|http://bobohome.f3322.net:8880/files/KoolProxyRules/koolproxy.txt|静态规则>"
 	}else{
-		sourceList += "0|koolproxy.txt|https://kprule.com/koolproxy.txt|静态规则>"
+		sourceList += "0|koolproxy.txt|http://bobohome.f3322.net:8880/files/KoolProxyRules/koolproxy.txt|静态规则>"
 	}
 	if(E("koolproxy_rule_enable_d2").checked == true){
-		sourceList += "1|daily.txt|https://kprule.com/daily.txt|每日规则>"
+		sourceList += "1|daily.txt|http://bobohome.f3322.net:8880/files/KoolProxyRules/daily.txt|每日规则>"
 	}else{
-		sourceList += "0|daily.txt|https://kprule.com/daily.txt|每日规则>"
+		sourceList += "0|daily.txt|http://bobohome.f3322.net:8880/files/KoolProxyRules/daily.txt|每日规则>"
 	}
 	if(E("koolproxy_rule_enable_d3").checked == true){
-		sourceList += "1|kp.dat|https://kprule.com/kp.dat|视频规则>"
+		sourceList += "1|kp.dat|http://bobohome.f3322.net:8880/files/KoolProxyRules/kp.dat|视频规则>"
 	}else{
-		sourceList += "0|kp.dat|https://kprule.com/kp.dat|视频规则>"
+		sourceList += "0|kp.dat|http://bobohome.f3322.net:8880/files/KoolProxyRules/kp.dat|视频规则>"
 	}
 	if(E("koolproxy_rule_enable_d4").checked == true){
 		sourceList += "1|user.txt||自定规则>"
@@ -1295,7 +1295,7 @@ function openkpHint(itemNum) {
 														koolproxy.txt
 													</td>
 													<td>
-														https://kprule.com/koolproxy.txt
+														https://cdn.jsdelivr.net/gh/houzi-/CDN/koolproxy.txt
 													</td>
 													<td style="text-align:center;">
 														静态规则
@@ -1316,7 +1316,7 @@ function openkpHint(itemNum) {
 														daily.txt
 													</td>
 													<td>
-														https://kprule.com/daily.txt
+														https://cdn.jsdelivr.net/gh/houzi-/CDN/daily.txt
 													</td>
 													<td style="text-align:center;">
 														每日规则
@@ -1337,7 +1337,7 @@ function openkpHint(itemNum) {
 														kp.dat
 													</td>
 													<td>
-														https://kprule.com/kp.dat
+														https://cdn.jsdelivr.net/gh/houzi-/CDN/kp.dat
 													</td>
 													<td style="text-align:center;">
 														视频规则
@@ -1358,7 +1358,7 @@ function openkpHint(itemNum) {
 														user.txt
 													</td>
 													<td>
-														https://kprule.com/user.txt
+														https://cdn.jsdelivr.net/gh/houzi-/CDN/user.txt
 													</td>
 													<td style="text-align:center;">
 														自定规则
