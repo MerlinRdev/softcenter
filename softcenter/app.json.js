@@ -11,16 +11,6 @@
             "version": "1.0.7"
         }, 
         {
-            "build_date": "2020-08-27_17:46:42", 
-            "description": "KPR更多规则更舒服！", 
-            "home_url": "Module_koolproxyR.asp", 
-            "md5": "c7b0a6364eada904cac0b9ba633d12ed", 
-            "name": "koolproxyR", 
-            "tar_url": "koolproxyR/koolproxyR.tar.gz", 
-            "title": "koolproxyR", 
-            "version": "1.0.5"
-        }, 
-        {
             "build_date": "2020-05-20_19:44:23", 
             "description": "超强的SSH网页客户端~", 
             "home_url": "Module_shellinabox.asp", 
@@ -29,6 +19,16 @@
             "tar_url": "shellinabox/shellinabox.tar.gz", 
             "title": "shellinabox", 
             "version": "2.2"
+        }, 
+        {
+            "build_date": "2020-09-30_15:28:35", 
+            "description": "FileBrowser：您的可视化路由文件管理系统", 
+            "home_url": "Module_filebrowser.asp", 
+            "md5": "8ba95def86f52b57268c01e97e0c1c42", 
+            "name": "filebrowser", 
+            "tar_url": "filebrowser/filebrowser.tar.gz", 
+            "title": "filebrowser", 
+            "version": "1.0.2"
         }, 
         {
             "build_date": "2020-08-12_14:44:22", 
@@ -234,16 +234,6 @@
             "tar_url": "serverchan/serverchan.tar.gz", 
             "title": "ServerChan微信推送", 
             "version": "2.0"
-        }, 
-        {
-            "build_date": "2020-09-15_16:34:27", 
-            "description": "花生壳内网版3.0 （phddns） 动态域名 内网穿透", 
-            "home_url": "Module_phddns.asp", 
-            "md5": "9e0a0c7920ddcfeea33e0d763aaf523d", 
-            "name": "phddns", 
-            "tar_url": "phddns/phddns.tar.gz", 
-            "title": "花生壳3.0", 
-            "version": "3.0.2"
         }, 
         {
             "build_date": "2020-08-12_14:31:04", 
