@@ -12,9 +12,11 @@ fi
 frps_enable=`dbus get frps_enable`
 
 if [ "$frps_enable" == "1" ];then
-	killall frps
+	echo_date "先关闭frps插件..."
+	sh /jffs/softcenter/scripts/frps_config.sh stop
 fi
 
+echo_date "安装frps插件..."
 cp -rf /tmp/frps/bin/* /jffs/softcenter/bin/
 cp -rf /tmp/frps/scripts/* /jffs/softcenter/scripts/
 cp -rf /tmp/frps/webs/* /jffs/softcenter/webs/
@@ -33,19 +35,22 @@ chmod +x /jffs/softcenter/scripts/frps*.sh
 chmod +x /jffs/softcenter/scripts/uninstall_frps.sh
 
 # for offline install
+VERSION=$(cat $DIR/version)
 dbus set frps_client_version=`/jffs/softcenter/bin/frps --version`
 dbus set frps_common_cron_hour_min="hour"
 dbus set frps_common_cron_time="12"
-dbus set frps_version="$(cat $DIR/version)"
-dbus set softcenter_module_frps_version="$(cat $DIR/version)"
+dbus set frps_version="${VERSION}"
+dbus set softcenter_module_frps_version="${VERSION}"
 dbus set softcenter_module_frps_install="1"
 dbus set softcenter_module_frps_name="frps"
 dbus set softcenter_module_frps_title="frps内网穿透"
-dbus set softcenter_module_frps_description="支持多种协议的内网穿透软件"
+dbus set softcenter_module_frps_description="Frps路由器服务端，内网穿透利器。"
 
+echo_date "frps-${VERSION}安装完毕！"
 if [ "$frps_enable" == "1" ];then
-	[ -f "/jffs/softcenter/scripts/frps_config.sh" ] && sh /jffs/softcenter/scripts/frps_config.sh start
+	echo_date "重新开启frps插件..."
+	[ -f "/jffs/softcenter/scripts/frps_config.sh" ] && sh /jffs/softcenter/scripts/frps_config.sh restart
 fi
-echo_date "frps内网穿透插件安装完毕！"
 rm -fr /tmp/frps* >/dev/null 2>&1
 exit 0
+
