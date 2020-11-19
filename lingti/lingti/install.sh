@@ -43,7 +43,7 @@ dbus set softcenter_module_lingti_description="灵缇游戏加速插件"
 dbus set softcenter_module_lingti_install=1
 dbus set softcenter_module_lingti_name=lingti
 dbus set softcenter_module_lingti_title="灵缇游戏加速插件"
-dbus set lingti_bin_version="1.1.1"
+dbus set lingti_bin_version="1.3.0"
 if [ "$enable" == "1" ] && [ -f "/jffs/softcenter/scripts/lingti_config.sh" ];then
 	/jffs/softcenter/scripts/lingti_config start >/dev/null 2>&1
 fi
