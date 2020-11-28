@@ -1,6 +1,5 @@
 #! /bin/sh
 
-# shadowsocks script for HND/AXHND router with kernel 4.1.27/4.1.51 merlin firmware
 
 source /jffs/softcenter/scripts/base.sh
 eval $(dbus export filebrowser_)
@@ -32,7 +31,7 @@ find /jffs/softcenter/init.d/ -name "*filebrowser.sh" | xargs rm -rf
 echo_date 开始复制文件！
 cd /tmp
 echo_date 复制相关二进制文件！此步时间可能较长！
-cp -rf /tmp/filebrowser/bin/filebrowser /jffs/softcenter/bin/
+cp -rf /tmp/filebrowser/bin/* /jffs/softcenter/bin/
 echo_date 复制相关的脚本文件！
 cp -rf /tmp/filebrowser/scripts/* /jffs/softcenter/scripts/
 cp -rf /tmp/filebrowser/install.sh /jffs/softcenter/scripts/filebrowser_install.sh
@@ -50,7 +49,7 @@ else
 fi
 echo_date 为新安装文件赋予执行权限...
 chmod 755 /jffs/softcenter/scripts/filebrowser*
-chmod 755 /jffs/softcenter/bin/filebrowser
+chmod 755 /jffs/softcenter/bin/filebrow*
 echo_date 创建一些二进制文件的软链接！
 [ ! -L "/jffs/softcenter/init.d/S99filebrowser.sh" ] && ln -sf /jffs/softcenter/scripts/filebrowser_start.sh /jffs/softcenter/init.d/S99filebrowser.sh
 	

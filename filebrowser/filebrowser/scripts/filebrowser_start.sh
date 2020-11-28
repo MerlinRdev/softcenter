@@ -3,10 +3,10 @@
 source /jffs/softcenter/scripts/base.sh
 #eval `dbus export filebrowser_`
 alias echo_date='echo 【$(date +%Y年%m月%d日\ %X)】:'
-LOG_FILE="/tmp/filebrowser.log"
+LOG_FILE="/tmp/filebrowser/filebrowser.log"
 lan_ipaddr=$(nvram get lan_ipaddr)
 dbpath=/jffs/softcenter/bin/filebrowser.db
-dbpath_tmp=/tmp/filebrowser.db
+dbpath_tmp=/tmp/filebrowser/filebrowser.db
 
 port=$(dbus list filebrowser_port | grep -o "filebrowser_port.*"|awk -F\= '{print $2}')
 #enable=$(dbus list filebrowser_enable | grep -o "filebrowser_enable.*"|awk -F\= '{print $2}')
@@ -15,10 +15,9 @@ watchdog_delay_time=$(dbus list filebrowser_delay_time | grep -o "filebrowser_de
 publicswitch=$(dbus list filebrowser_publicswitch | grep -o "filebrowser_publicswitch.*"|awk -F\= '{print $2}')
 uploaddatabase=$(dbus list filebrowser_uploaddatabase | grep -o "filebrowser_uploaddatabase.*"|awk -F\= '{print $2}')
 #echo_date "TEST" >> $LOG_FILE
-filebrowser_process=$(pidof filebrowser)
 
 #http_response $1
- mkdir -p /tmp/bin
+# mkdir -p /tmp/bin
 
 auto_start() {
 	#echo "创建开机重启任务"
@@ -66,7 +65,7 @@ upload_db(){
 		#先停止filebrowser
 		close_fb
 		rm -rf /tmp/$uploaddatabase
-		cp -rf /tmp/upload/$uploaddatabase /tmp/bin/$uploaddatabase
+		cp -rf /tmp/upload/$uploaddatabase /tmp/filebrowser/$uploaddatabase
 		rm -rf /tmp/upload/$uploaddatabase
 	else
 		echo_date "没找到数据库文件" >> $LOG_FILE
@@ -75,6 +74,7 @@ upload_db(){
 	fi	
 }
 close_fb(){
+	filebrowser_process=$(pidof filebrowser);
 	if [ -n "$filebrowser_process" ]; then
 		killall filebrowser >/dev/null 2>&1
 		kill_cron_job
@@ -90,18 +90,19 @@ start_fb(){
 		kill_cron_job
 		public_access
 	fi
-	if [ ! -f "$dbpath" ] && [ ! -f "$dbpath_tmp" ]; then
-		echo_date "初次启动" >> $LOG_FILE
-    elif [ -f "$dbpath" ] && [ ! -f "$dbpath_tmp" ]; then
-		echo_date "路由重开机启动，将备份数据库还原" >> $LOG_FILE
+	#if [ ! -f "$dbpath" ] && [ ! -f "$dbpath_tmp" ]; then
+	#	echo_date "初次启动" >> $LOG_FILE
+    	  if [ -f "$dbpath" ] && [ ! -f "$dbpath_tmp" ]; then
+		echo_date "初次/开机启动，迁移数据库至/tmp/filebrowser目录" >> $LOG_FILE
 		cp -rf $dbpath $dbpath_tmp
 	else
 		echo_date "无需对数据库进行操作" >> $LOG_FILE
 	fi
 
-	[ ! -L "/tmp/bin/filebrowser" ] && ln -sf /jffs/softcenter/bin/filebrowser /tmp/bin/filebrowser
-	cd /tmp/bin
-    ./filebrowser -a "$lan_ipaddr" -p $port -r / >/dev/null 2>&1 &
+	[ ! -L "/tmp/filebrowser/filebrowser" ] && ln -sf /jffs/softcenter/bin/filebrowser /tmp/filebrowser/filebrowser
+	cd /tmp/filebrowser
+    ./filebrowser -a "$lan_ipaddr" -p $port -r // >/dev/null 2>&1 &
+	sleep 5s
 	filebrowser_process=$(pidof filebrowser);
 	if [ -n "$filebrowser_process" ]; then
 		echo_date "启动完成，pid：$filebrowser_process" >> $LOG_FILE

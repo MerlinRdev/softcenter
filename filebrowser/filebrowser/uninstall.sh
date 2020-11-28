@@ -2,11 +2,9 @@
 eval `dbus export filebrowser_`
 source /jffs/softcenter/scripts/base.sh
 
-
 if [ "$filebrowser_enable" == "1" ];then
 	echo_date 关闭filebrowser插件！
 	sh /jffs/softcenter/scripts/filebrowser_start.sh stop
-    sleep 1
 fi
 
 
@@ -14,8 +12,8 @@ find /jffs/softcenter/init.d/ -name "*filebrowser*" | xargs rm -rf
 
 rm -rf /jffs/softcenter/bin/filebrowser
 rm -rf /jffs/softcenter/bin/filebrowser.db
-rm -rf /tmp/bin/filebrowser
-rm -rf /tmp/bin/filebrowser.db
+rm -rf /tmp/filebrowser/filebrowser
+rm -rf /tmp/filebrowser/filebrowser.db
 rm -rf /tmp/filebrowser.log
 rm -rf /jffs/softcenter/res/icon-filebrowser.png
 rm -rf /jffs/softcenter/scripts/filebrowser*.sh
@@ -33,3 +31,4 @@ rm -rf /jffs/softcenter/scripts/uninstall_filebrowser.sh
 	dbus remove softcenter_module_filebrowser_version
 	dbus remove softcenter_module_filebrowser_title
 	dbus remove softcenter_module_filebrowser_description
+

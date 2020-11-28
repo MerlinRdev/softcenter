@@ -21,14 +21,14 @@
             "version": "2.2"
         }, 
         {
-            "build_date": "2020-09-30_15:28:35", 
+            "build_date": "2020-11-28_20:31:00", 
             "description": "FileBrowser：您的可视化路由文件管理系统", 
             "home_url": "Module_filebrowser.asp", 
-            "md5": "8ba95def86f52b57268c01e97e0c1c42", 
+            "md5": "3cea98a78792d532f196beff84c922c6", 
             "name": "filebrowser", 
             "tar_url": "filebrowser/filebrowser.tar.gz", 
             "title": "filebrowser", 
-            "version": "1.0.2"
+            "version": "1.0.4"
         }, 
         {
             "build_date": "2020-08-12_14:44:22", 
@@ -209,11 +209,6 @@
             "tar_url": "ddnspod/ddnspod.tar.gz", 
             "title": "DDnspod", 
             "version": "1.7"
-        }, 
-        {
-            "name": "funjsq", 
-            "tar_url": "funjsq/funjsq.tar.gz", 
-            "title": "funjsq"
         }, 
         {
             "build_date": "2020-08-12_14:41:40", 
