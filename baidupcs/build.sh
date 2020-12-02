@@ -2,7 +2,7 @@
 
 
 MODULE=baidupcs
-VERSION=1.5
+VERSION=1.6
 TITLE=百度盘
 DESCRIPTION=百度盘
 HOME_URL=Module_baidupcs.asp
@@ -29,4 +29,4 @@ cd $DIR
 
 do_build_result
 
-sh backup.sh $MODULE
+#sh backup.sh $MODULE
