@@ -61,14 +61,14 @@
             "version": "0.4"
         }, 
         {
-            "build_date": "2020-09-23_13:18:10", 
+            "build_date": "2020-12-17_08:55:26", 
             "description": "去广告，没烦恼", 
             "home_url": "Module_koolproxy.asp", 
-            "md5": "b829457d2fff06f41d9c205252159f97", 
+            "md5": "151ba57fcb35d7bc6a3912054f1e983e", 
             "name": "koolproxy", 
             "tar_url": "koolproxy/koolproxy.tar.gz", 
             "title": "koolproxy", 
-            "version": "3.8.5.0"
+            "version": "3.8.5.1"
         }, 
         {
             "build_date": "2020-08-12_14:39:46", 
@@ -199,6 +199,11 @@
             "tar_url": "acme/acme.tar.gz", 
             "title": "Let's Encrypt", 
             "version": "3.3"
+        }, 
+        {
+            "name": "node", 
+            "tar_url": "node/node.tar.gz", 
+            "title": "node"
         }, 
         {
             "build_date": "2020-11-19_18:44:08", 
