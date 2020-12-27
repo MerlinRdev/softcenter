@@ -201,11 +201,6 @@
             "version": "3.3"
         }, 
         {
-            "name": "node", 
-            "tar_url": "node/node.tar.gz", 
-            "title": "node"
-        }, 
-        {
             "build_date": "2020-11-19_18:44:08", 
             "description": "使用Dnspod的ddns服务", 
             "home_url": "Module_ddnspod.asp", 
