@@ -232,13 +232,13 @@ function menu_hook(title, tab) {
 												<tr>
 													<th>主帐号cookie</th>
 													<td style="width:25%;">
-													<input type="text" class="input_ss_table" style="width:auto;" name="node_jd_cookie" value="" maxlength="100" size="50" id="node_jd_cookie" />
+													<input type="text" class="input_ss_table" style="width:auto;" name="node_jd_cookie" value="" maxlength="300" size="50" id="node_jd_cookie" />
 													</td>
 												</tr>
 												<tr>
 													<th>第二账号cookie</th>
 													<td style="width:25%;">
-													<input type="text" class="input_ss_table" style="width:auto;" name="node_jd_cookie2" value="" maxlength="100" size="50" id="node_jd_cookie2" />
+													<input type="text" class="input_ss_table" style="width:auto;" name="node_jd_cookie2" value="" maxlength="300" size="50" id="node_jd_cookie2" />
 													</td>
 												</tr>
 												<tr>
