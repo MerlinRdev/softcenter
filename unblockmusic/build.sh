@@ -1,7 +1,7 @@
 #!/bin/sh
 
 MODULE="unblockmusic"
-VERSION="1.0.7"
+VERSION="1.0.8"
 TITLE="解锁网易云灰色歌曲"
 DESCRIPTION="解锁网易云灰色歌曲"
 HOME_URL="Module_unblockmusic.asp"

@@ -24,30 +24,9 @@ add_rule()
 	echo_date 加载nat规则...
 	echo_date Load nat rules...
 	ipset -! -N music hash:ip
-	ipset add music 39.105.63.80
-	ipset add music 42.186.120.199
-	ipset add music 45.254.48.1
-	ipset add music 47.100.127.239
-	ipset add music 59.111.21.14
-	ipset add music 59.111.160.195
-	ipset add music 59.111.160.197
-	ipset add music 59.111.179.214
-	ipset add music 59.111.181.60
-	ipset add music 59.111.181.38
-	ipset add music 59.111.181.35
-	ipset add music 59.111.238.29
-	ipset add music 101.71.154.241
-	ipset add music 103.126.92.133
-	ipset add music 103.126.92.132
-	ipset add music 112.13.122.1
-	ipset add music 112.13.119.17
-	ipset add music 115.236.121.1
-	ipset add music 115.236.118.33
-	ipset add music 118.24.63.156
-	ipset add music 193.112.159.225
-	ipset add music 223.252.199.66
-	ipset add music 223.252.199.67
-
+	wget -q -t 99 -T 10 "https://httpdns.n.netease.com/httpdns/v2/d?session_id=1609320571828_26796&domain=clientlog.music.163.com,interface.music.163.com,m7.music.126.net,m701.music.126.net,m8.music.126.net,m801.music.126.net,m9.music.126.net,music.163.com,p1.music.126.net,p2.music.126.net,p3.music.126.net,p4.music.126.net,p5.music.126.net,p6.music.126.net,vodkgeyttp8.vod.126.net,vodkgeyttp9.vod.126.net"
+ | grep -Eo '[0-9]+?\.[0-9]+?\.[0-9]+?\.[0-9]+?' | sort | uniq | awk '{print "ipset -! add music "$1}' | sh
+	rm -rf /tmp/163.txt
 	$ipt_n -N cloud_music
 	$ipt_n -A cloud_music -d 0.0.0.0/8 -j RETURN
 	$ipt_n -A cloud_music -d 10.0.0.0/8 -j RETURN
@@ -76,13 +55,17 @@ del_rule(){
 set_firewall(){
 
 	rm -f /tmp/etc/dnsmasq.user/dnsmasq-music.conf
-	echo "ipset=/music.163.com/music" >> /tmp/etc/dnsmasq.user/dnsmasq-music.conf
+	echo "ipset=/.music.163.com/music" >> /tmp/etc/dnsmasq.user/dnsmasq-music.conf
 	echo "ipset=/interface.music.163.com/music" >> /tmp/etc/dnsmasq.user/dnsmasq-music.conf
 	echo "ipset=/interface3.music.163.com/music" >> /tmp/etc/dnsmasq.user/dnsmasq-music.conf
 	echo "ipset=/apm.music.163.com/music" >> /tmp/etc/dnsmasq.user/dnsmasq-music.conf
 	echo "ipset=/apm3.music.163.com/music" >> /tmp/etc/dnsmasq.user/dnsmasq-music.conf
 	echo "ipset=/clientlog.music.163.com/music" >> /tmp/etc/dnsmasq.user/dnsmasq-music.conf
 	echo "ipset=/clientlog3.music.163.com/music" >> /tmp/etc/dnsmasq.user/dnsmasq-music.conf
+	echo "ipset=/.music.126.net/music" >> /tmp/etc/dnsmasq.user/dnsmasq-music.conf
+	echo "ipset=/.dun.163yun.com/music" >> /tmp/etc/dnsmasq.user/dnsmasq-music.conf
+	echo "ipset=/.acstatic-dun.126.net/music" >> /tmp/etc/dnsmasq.user/dnsmasq-music.conf
+	echo "ipset=/.vod.126.net/music" >> /tmp/etc/dnsmasq.user/dnsmasq-music.conf
 	service restart_dnsmasq
 	add_rule
 }
@@ -90,6 +73,7 @@ set_firewall(){
 start_unblockmusic(){
 	stop_unblockmusic
 	[ $unblockmusic_enable -eq 0 ] && exit 0
+	
 	echo_date 开启unblockmusic
 	echo_date Enable unblockmusic
 	if [ "$unblockmusic_musicapptype" = "default" ]; then
