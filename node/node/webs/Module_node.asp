@@ -7,7 +7,7 @@
 <meta HTTP-EQUIV="Expires" CONTENT="-1"/>
 <link rel="shortcut icon" href="images/favicon.png"/>
 <link rel="icon" href="images/favicon.png"/>
-<title sclang>node</title>
+<title>node</title>
 <link rel="stylesheet" type="text/css" href="index_style.css"/>
 <link rel="stylesheet" type="text/css" href="form_style.css"/>
 <link rel="stylesheet" type="text/css" href="usp_style.css"/>
@@ -36,6 +36,7 @@ function E(e) {
 }
 function init() {
 	show_menu(menu_hook);
+	sc_load_lang("node");
 	get_dbus_data();
 }
 
@@ -70,7 +71,7 @@ function conf2obj() {
 	// check for true and false
 	for (var i = 0; i < jd_check.length; i++) {
 		if(db_node_[jd_check[i]]){
-			E(jd_check[i]).checked = db_node_[jd_check[i]] == "true" ? true : false
+			E(jd_check[i]).checked = db_node_[jd_check[i]] == 1 ? true : false
 		}
 	}
 }
@@ -100,7 +101,7 @@ function save() {
 	}
 	// check for true and false
 	for (var i = 0; i < jd_check.length; i++) {
-		db_node[jd_check[i]] = E(jd_check[i]).checked ? 'true' : 'false';
+		db_node[jd_check[i]] = E(jd_check[i]).checked ? '1' : '0';
 	}
 	db_node["action_script"]="node_config.sh";
 	db_node["action_mode"] = "restart";
@@ -129,7 +130,7 @@ function check_status(){
 }
 
 function menu_hook(title, tab) {
-	tabtitle[tabtitle.length -1] = new Array("", "软件中心", "离线下载", "node");
+	tabtitle[tabtitle.length -1] = new Array("", dict["Software Center"], dict["Offline installation"], "node");
 	tablink[tablink.length -1] = new Array("", "Main_Soft_center.asp", "Main_Soft_setting.asp", "Module_node.asp");
 }
 </script>
@@ -172,11 +173,11 @@ function menu_hook(title, tab) {
 											<table style="margin:-1px 0px 0px 0px;" width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bordercolor="#6b8fa3" class="FormTable">
 												<thead>
 												<tr>
-													<td colspan="2">全局设置</td>
+													<td colspan="2" sclang>Setting</td>
 												</tr>
 												</thead>
 												<tr>
-													<th>启用node</th>
+													<th sclang>Enable node</th>
 													<td colspan="2">
 														<div class="switch_field" style="display:table-cell;float: left;">
 															<label for="node_enable">
@@ -192,12 +193,12 @@ function menu_hook(title, tab) {
 													</td>
 												</tr>
 												<tr>
-													<th>运行状态</th>
+													<th sclang>Status</th>
 													<td colspan="2"  id="node_status">
 													</td>
 												</tr>
 												<tr>
-													<th>启用京东签到</th>
+													<th sclang>Enable JD DailyBonus</th>
 													<td>
 														<div class="switch_field" style="display:table-cell;float: left;">
 															<label for="node_jd_enable">
@@ -218,11 +219,11 @@ function menu_hook(title, tab) {
 											<table style="margin:-1px 0px 0px 0px;" width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bordercolor="#6b8fa3" class="FormTable">
 												<thead>
 												<tr>
-													<td colspan="2">京东签到</td>
+													<td colspan="2" sclang>JD DailyBonus</td>
 												</tr>
 												</thead>
 												<tr>
-													<th>说明</th>
+													<th sclang>Note</th>
 													<td colspan="2"  id="node_jd_note">
 													<div><input type="button" class="button_gen" value="安装chrmoe Cookie插件" onclick="javascript:window.open('/_temp/JDCookie.crx','target');" /><input type="button" class="button_gen" value="下载JDCookie.zip" onclick="javascript:window.open('https://raw.githubusercontent.com/jerrykuku/luci-app-jd-dailybonus/master/root/www/jd-dailybonus/JDCookie.zip','target');" /></br>点击上面的安装Cookie工具，然后点击下面的<i>京东链接</i>。如果浏览器禁止安装crx扩展，请下载第二个 JDCookie.zip，解压后在[<i>chrome://extensions/</i>]中使用加载已解压的扩展程序进行安装。<i>仅支持chrome浏览器。</i></br><input type="button" class="button_gen" value="bean.m.jd.com" onclick="javascript:window.open('https://bean.m.jd.com','target');" /></br>登录后点击JDCookie 扩展工具复制cookie，然后粘贴到下面输入框中。</div>
 
@@ -230,19 +231,19 @@ function menu_hook(title, tab) {
 													</td>
 												</tr>
 												<tr>
-													<th>主帐号cookie</th>
+													<th sclang>First account cookie</th>
 													<td style="width:25%;">
 													<input type="text" class="input_ss_table" style="width:auto;" name="node_jd_cookie" value="" maxlength="300" size="50" id="node_jd_cookie" />
 													</td>
 												</tr>
 												<tr>
-													<th>第二账号cookie</th>
+													<th sclang>Second account cookie</th>
 													<td style="width:25%;">
 													<input type="text" class="input_ss_table" style="width:auto;" name="node_jd_cookie2" value="" maxlength="300" size="50" id="node_jd_cookie2" />
 													</td>
 												</tr>
 												<tr>
-													<th>启用自动签到</th>
+													<th sclang>Auto run</th>
 													<td>
 														<div class="switch_field" style="display:table-cell;float: left;">
 															<label for="node_jd_auto_run">
@@ -258,13 +259,13 @@ function menu_hook(title, tab) {
 													</td>
 												</tr>
 												<tr>
-													<th>延迟签到(单位毫秒)</th>
+													<th sclang>Delay(In milliseconds)</th>
 													<td style="width:25%;">
 													<input type="text" class="input_ss_table" style="width:auto;" name="node_jd_stop" value="" maxlength="100" size="50" id="node_jd_stop" />
 													</td>
 												</tr>
 												<tr>
-													<th>自动签到时间段</th>
+													<th sclang>Time period</th>
 													<td>
 														<select class="input_ss_table" style="width:100px;height:25px;" name="node_jd_auto_run_time" id="node_jd_auto_run_time">
 															<option value="0" selected="">0:00</option>
@@ -295,7 +296,7 @@ function menu_hook(title, tab) {
 													</td>
 												</tr>
 												<tr>
-													<th>启用自动更新</th>
+													<th sclang>Autoupdate</th>
 													<td>
 														<div class="switch_field" style="display:table-cell;float: left;">
 															<label for="node_jd_auto_update">
@@ -311,7 +312,7 @@ function menu_hook(title, tab) {
 													</td>
 												</tr>
 												<tr>
-													<th>自动更新源</th>
+													<th sclang>Autoupdate url</th>
 													<td>
 														<select class="input_ss_table" style="width:100px;height:25px;" name="node_jd_serverurl" id="node_jd_serverurl">
 															<option value="https://cdn.jsdelivr.net/gh/NobyDa/Script/JD-DailyBonus/JD_DailyBonus.js" selected="">github</option>
@@ -320,7 +321,7 @@ function menu_hook(title, tab) {
 													</td>
 												</tr>
 												<tr>
-													<th>自动更新时间段</th>
+													<th sclang>Autoupdate time</th>
 													<td>
 														<select class="input_ss_table" style="width:100px;height:25px;" name="node_jd_auto_update_time" id="node_jd_auto_update_time">
 															<option value="0" selected="">0:00</option>
@@ -351,7 +352,7 @@ function menu_hook(title, tab) {
 													</td>
 												</tr>
 												<tr>
-													<th>启用Server酱</th>
+													<th sclang>Enable Serverchan</th>
 													<td>
 														<div class="switch_field" style="display:table-cell;float: left;">
 															<label for="node_jd_serverchan_enable">
@@ -367,7 +368,7 @@ function menu_hook(title, tab) {
 													</td>
 												</tr>
 												<tr>
-													<th>Server酱推送接口</th>
+													<th sclang>Serverchan api</th>
 													<td>
 														<select class="input_ss_table" style="width:100px;height:25px;" name="node_jd_serverurl" id="node_jd_serverurl">
 															<option value="scu" selected="">scu</option>
@@ -382,7 +383,7 @@ function menu_hook(title, tab) {
 													</td>
 												</tr>
 												<tr>
-													<th>仅当cookie失效时推送</th>
+													<th sclang>Notify only on failure</th>
 													<td>
 														<div class="switch_field" style="display:table-cell;float: left;">
 															<label for="node_jd_failed">
@@ -400,7 +401,7 @@ function menu_hook(title, tab) {
 											</table>
 										</div>
 										<div class="apply_gen">
-											<input id="cmdBtn" type="button" class="button_gen" onclick="save()" value="应用"/>
+											<input sclang id="cmdBtn" type="button" class="button_gen" onclick="save()" value="Apply"/>
 										</div>
 										<div class="KoolshareBottom" style="float:right; width:180px; height:70px">
 											Shell&Web by： <i>paldier</i>
