@@ -11,6 +11,9 @@ start_instance() {
 	port="$zerotier_port"
 	args=""
 	secret="$zerotier_secret"
+	if [ "$(lsmod |grep tun |grep -wc tun)" == "0" ]; then
+		insmod tun
+	fi
 	if [ ! -d "$config_path" ]; then
 		mkdir -p $config_path
 	fi
