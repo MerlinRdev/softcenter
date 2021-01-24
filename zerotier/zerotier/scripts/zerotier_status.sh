@@ -1,7 +1,7 @@
 #!/bin/sh
 
 source /jffs/softcenter/scripts/base.sh
-zerotier_pid=`which zerotier`
+zerotier_pid=`pidof zerotier-one`
 if [ -n "$zerotier_pid" ];then
 	zerotier_log="zerotier is running"
 else

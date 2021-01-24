@@ -29,7 +29,7 @@
 </style>
 <script>
 var params_check = ["zerotier_enable", "zerotier_nat"];
-var zerotier_input = ["zerotier_id", "zerotier_port"];
+var zerotier_input = ["zerotier_id"];
 function E(e) {
 	return (typeof(e) == 'string') ? document.getElementById(e) : e;
 }

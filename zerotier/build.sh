@@ -2,7 +2,7 @@
 
 
 MODULE=zerotier
-VERSION=0.2
+VERSION=0.3
 TITLE=zerotier
 DESCRIPTION=分布式的虚拟以太网
 HOME_URL=Module_zerotier.asp
