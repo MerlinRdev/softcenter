@@ -100,13 +100,17 @@ zero_route(){
 }
 
 start_zero() {
-	echo_date "正在启动zerotier" >> /tmp/zerotier.log
-	kill_z
-	start_instance 'zerotier'
+	if [ "$zerotier_enable" == "1" ];then
+		kill_z
+		echo_date "正在启动zerotier" >> /tmp/zerotier.log
+		start_instance 'zerotier'
+	else
+		stop_zero
+	fi
 
 }
 kill_z() {
-	killall -9 zerotier-one
+	killall -9 zerotier-one >/dev/null 2>&1 &
 }
 stop_zero() {
 	echo_date "关闭zerotier" >> /tmp/zerotier.log
