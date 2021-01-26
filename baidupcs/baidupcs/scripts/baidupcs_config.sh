@@ -33,8 +33,8 @@ creat_baidu_json(){
 	#rm -rf /root/.config/BaiduPCS-Go/pcs_config.json
 	[ -z "$baidupcs_savedir" ] && dbus set baidupcs_savedir="/tmp/mnt/${baidupcs_disk}" && eval `dbus export baidupcs_savedir`
 	[ -z "$baidupcs_max_download" ] && dbus set baidupcs_max_download=2 && eval `dbus export baidupcs_max_download`
-	if [ ! -e "/jffs/softcenter/bin/pcs_config.json" ]; then
 	echo_date 生成配置文件 >> /tmp/baidupcs.log
+	rm -rf /jffs/softcenter/bin/pcs_config.json
 	cat >> /jffs/softcenter/bin/pcs_config.json <<-EOF
 {
  "baidu_active_uid": 0,
@@ -64,22 +64,7 @@ creat_baidu_json(){
  }
 }
 EOF
-	else
-		savedir=`cat /jffs/softcenter/bin/pcs_config.json |grep savedir |grep ${baidupcs_savedir}`
-		if [ -z "$savedir" ]; then
-			sed -i "s/ \"savedir\": .*$/ \"savedir\": \"$baidupcs_savedir\",/" /jffs/softcenter/bin/pcs_config.json
-		fi
-		maxdown=`cat /jffs/softcenter/bin/pcs_config.json |grep max_download_load |grep ${baidupcs_max_download}`
-		if [ -z "$maxdown" ]; then
-			sed -i "s/ \"max_download_load\": .*$/ \"max_download_load\": $baidupcs_max_download,/" /jffs/softcenter/bin/pcs_config.json
-		fi
-		https=`cat /jffs/softcenter/bin/pcs_config.json |grep enable_https |grep $(get_function_switch $baidupcs_https)`
-		if [ -z "$https" ]; then
-			sed -i "s/ \"enable_https\": .*$/ \"enable_https\": $(get_function_switch $baidupcs_https),/" /jffs/softcenter/bin/pcs_config.json
-		fi
-	fi
 	export BAIDUPCS_GO_CONFIG_DIR=/jffs/softcenter/bin
-	#cp -r /jffs/softcenter/bin/pcs_config.json /root/.config/BaiduPCS-Go/pcs_config.json
 }
 
 start_baidu() {

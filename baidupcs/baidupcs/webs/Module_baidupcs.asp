@@ -135,6 +135,7 @@ window.open("http://"+window.location.hostname+":5299");
 <li>百度网盘可以满速下载你的网盘文件</li>
 <li>你需要插入U盘或移动硬盘才能启动此功能</li>
 <li>保存设置后，点击打开链接按钮开启百度盘界面</li>
+<li>仅支持BDUSS登录</li>
 </ol>
 <span id="desc_note" style="color:#FC0;">提示：</span>
 <ol style="color:#FC0;margin:-5px 0px 3px -18px;*margin-left:18px;">
