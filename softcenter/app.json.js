@@ -231,10 +231,10 @@
             "version": "0.4"
         }, 
         {
-            "build_date": "2021-01-26_08:32:39", 
+            "build_date": "2021-01-27_13:17:37", 
             "description": "百度盘", 
             "home_url": "Module_baidupcs.asp", 
-            "md5": "721abb0ba8787d364bbaa3c0f408758d", 
+            "md5": "0a804881612a758a2c96af0ea72d6510", 
             "name": "baidupcs", 
             "tar_url": "baidupcs/baidupcs.tar.gz", 
             "title": "百度盘", 
@@ -272,7 +272,7 @@
         }
     ], 
     "home_url": "https://raw.githubusercontent.com/paldier/softcenter/master", 
-    "md5": "f47f5d463e26721c98910cbb399b542f", 
+    "md5": "84a8ab96bd5b335a4f33a724bb04792e", 
     "tar_url": "softcenter/softcenter.tar.gz", 
-    "version": "1.3.0"
+    "version": "1.3.1"
 }

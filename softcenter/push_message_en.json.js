@@ -1,6 +1,6 @@
 {
 "title":"<em>Software Center&nbsp;for&nbsp;mips&nbsp;platform</em>",
-"content1":"<b>Software Center: </b>1.3.0,<font color='#1E90FF'> Support api version 1.1 and 1.5</font>",
+"content1":"<b>Software Center: </b>1.3.1,<font color='#1E90FF'> Support api version 1.1 and 1.5</font>",
 "content2":"New firmware 5.1.2 has been released",
 "content3":"<font color='#1E90FF'>Feedback:&nbsp;&nbsp;</font>\
 <a href='https://github.com/paldier/softcenter' target='_blank'><em>1.GitHub</em></a>&nbsp;&nbsp;&nbsp;&nbsp;\

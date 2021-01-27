@@ -195,7 +195,7 @@ function checkCmdRet(){
                                     	<div id="log_content" style="margin-top:10px;display: block;">
 											<textarea cols="63" rows="40" wrap="off" readonly="readonly" id="log_content1"></textarea>
 										</div>
-										<div class="KoolshareBottom">
+										<div class="SCBottom">
 											<br/>论坛技术支持： <a href="http://www.koolshare.cn" target="_blank"> <i><u>www.koolshare.cn</u></i> </a> <br/>
 											后台技术支持： <i>Xiaobao</i> <br/>
 											Shell, Web by： <i>Sadoneli</i><br/>
