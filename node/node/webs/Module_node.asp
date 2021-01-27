@@ -51,6 +51,7 @@ function get_dbus_data() {
 			conf2obj();
 			buildswitch();
 			check_status();
+			checkswitch();
 		}
 	});
 }
@@ -73,6 +74,18 @@ function conf2obj() {
 		if(db_node_[jd_check[i]]){
 			E(jd_check[i]).checked = db_node_[jd_check[i]] == 1 ? true : false
 		}
+	}
+}
+
+function checkswitch() {
+	if (E('node_enable').checked == false) {
+		E('node_jd_enable').checked = false;
+		E('node_jd_table').style.display = "none";
+	}
+	if (E('node_jd_enable').checked) {
+		E('node_jd_table').style.display = "";
+	}else{
+		E('node_jd_table').style.display = "none";
 	}
 }
 
