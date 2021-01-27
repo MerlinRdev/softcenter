@@ -266,7 +266,7 @@ function get_dbus_data() {
 												<input class="button_gen" id="cmdBtn" onClick="save();" type="button" value="提交" />
 											</div>
 											<div style="margin:30px 0 10px 5px;" class="splitLine"></div>
-											<div class="KoolshareBottom">
+											<div class="SCBottom">
 												论坛技术支持：<a href="http://www.koolshare.cn" target="_blank"> <i><u>www.koolshare.cn</u></i></a>
 												<br/>后台技术支持：<i>Xiaobao</i> 
 												<br/>Shell, Web by：<i>freexiaoyao & sadog</i>

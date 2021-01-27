@@ -411,7 +411,7 @@ function makeswap(action){
 											</tr>
 										</table>
 										<div style="margin:10px 0 10px 5px;" class="splitLine"></div>
-										<div class="KoolshareBottom">论坛技术支持： <a href="http://www.koolshare.cn" target="_blank"> <i><u>koolshare.cn</u></i> </a>
+										<div class="SCBottom">论坛技术支持： <a href="http://www.koolshare.cn" target="_blank"> <i><u>koolshare.cn</u></i> </a>
 											<br/>Github项目： <a href="https://github.com/koolshare/rogsoft" target="_blank"> <i><u>github.com/koolshare</u></i> </a>
 											<br/>Shell & Web by： <a href="mailto:sadoneli@gmail.com"> <i>sadog</i> </a>, <i>Xiaobao</i>
 											<br/>修改版 by： <i>paldier</i>

@@ -258,7 +258,7 @@ function menu_hook(title, tab) {
 										<div class="apply_gen">
 											<input id="cmdBtn" type="button" class="button_gen" onclick="save()" value="应用"/>
 										</div>
-										<div class="KoolshareBottom" style="float:right; width:180px; height:70px">
+										<div class="SCBottom" style="float:right; width:180px; height:70px">
 											Shell&Web by： <i>paldier & chongshengB</i><br>
 											Web api ver : <i>v1.1</i>
 										</div>

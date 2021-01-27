@@ -142,7 +142,7 @@ function onSubmitCtrl() {
 											<span><input class="button_gen" id="cmdBtn" onclick="onSubmitCtrl();" type="button" value="提交"/></span>
 										</div>
 										<div style="margin:10px 0 10px 5px;" class="splitLine"></div>
-										<div class="KoolshareBottom">
+										<div class="SCBottom">
 											<br/>论坛技术支持： <a href="http://www.koolshare.cn" target="_blank"> <i><u>www.koolshare.cn</u></i></a><br/>
 											后台技术支持： <i>Xiaobao</i> <br/>
 											Shell, Web by： <i>sadoneli</i><br/>

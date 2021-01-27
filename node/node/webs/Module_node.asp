@@ -314,7 +314,7 @@ function menu_hook(title, tab) {
 												<tr>
 													<th sclang>Autoupdate url</th>
 													<td>
-														<select class="input_ss_table" style="width:100px;height:25px;" name="node_jd_serverurl" id="node_jd_serverurl">
+														<select class="input_ss_table" style="width:100px;height:25px;" name="node_jd_remote_url" id="node_jd_remote_url">
 															<option value="https://cdn.jsdelivr.net/gh/NobyDa/Script/JD-DailyBonus/JD_DailyBonus.js" selected="">github</option>
 															<option value="https://gitee.com/jerrykuku/staff/raw/master/JD_DailyBonus.js">gitee</option>
 														</select>
@@ -403,7 +403,7 @@ function menu_hook(title, tab) {
 										<div class="apply_gen">
 											<input sclang id="cmdBtn" type="button" class="button_gen" onclick="save()" value="Apply"/>
 										</div>
-										<div class="KoolshareBottom" style="float:right; width:180px; height:70px">
+										<div class="SCBottom" style="float:right; width:180px; height:70px">
 											Shell&Web by： <i>paldier</i>
 										</div>
 									</td>
