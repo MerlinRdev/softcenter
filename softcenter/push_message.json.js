@@ -1,6 +1,6 @@
 {
 "title":"<em>软件中心&nbsp;for&nbsp;mips&nbsp;platform</em>",
-"content1":"<b>软件中心：1.3.1已发布，同时支持api版本1.1和1.5</b>",
+"content1":"<b>软件中心：1.3.2已发布，同时支持api版本1.1和1.5</b>",
 "content2":"固件5.1.2:已发布,<font color='#1E90FF'>同时支持api版本1.1和1.5</font>",
 "content3":"<font color='#1E90FF'>交流反馈:&nbsp;&nbsp;</font>\
 <a href='https://github.com/paldier/softcenter' target='_blank'><em>1.软件中心GitHub项目</em></a>&nbsp;&nbsp;&nbsp;&nbsp;\

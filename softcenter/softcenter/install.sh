@@ -1,9 +1,9 @@
 #!/bin/sh
 
 MODEL=`nvram get productid`
-if [ "$MODEL" == "GT-AC5300" ] || [ "$MODEL" == "GT-AX11000" ] || [ "$MODEL" == "GT-AC2900" ] || [ "$(nvram get merlinr_rog)" == "1" ];then
+if [ "${MODEL:0:3}" == "GT-" ] || [ "$(nvram get merlinr_rog)" == "1" ];then
 	ROG=1
-elif [ "$MODEL" == "TUF-AX3000" ] || [ "$(nvram get merlinr_tuf)" == "1" ] ;then
+elif [ "${MODEL:0:3}" == "TUF" ] || [ "$(nvram get merlinr_tuf)" == "1" ];then
 	TUF=1
 fi
 softcenter_install() {
@@ -39,21 +39,22 @@ softcenter_install() {
 			cp -rf /tmp/softcenter/ROG/res/* /jffs/softcenter/res/
 		fi
 		dbus set softcenter_version=`cat /jffs/softcenter/.soft_ver`
-		dbus set softcenter_firmware_version=`nvram get extendno|cut -d "_" -f2|cut -d "-" -f1|cut -c2-6`
 		ARCH=`uname -m`
 		KVER=`uname -r`
 		if [ "$ARCH" == "armv7l" ]; then
-			if [ "$KVER" == "4.1.52" -o "$KVER" == "3.14.77" ];then
+			if [ "$KVER" != "2.6.36" ];then
 				dbus set softcenter_arch="armng"
 			else
 				dbus set softcenter_arch="$ARCH"
 			fi
-		else
+		elif [ "$ARCH" == "mips" ]; then
 			if [ "$KVER" == "3.10.14" ];then
 				dbus set softcenter_arch="mipsle"
 			else
 				dbus set softcenter_arch="$ARCH"
 			fi
+		else
+			dbus set softcenter_arch="$ARCH"
 		fi
 		if [ -f "/jffs/softcenter/scripts/ks_tar_intall.sh" ];then
 			rm -rf /jffs/softcenter/scripts/ks_tar_intall.sh
