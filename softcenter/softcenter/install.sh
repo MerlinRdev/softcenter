@@ -29,7 +29,6 @@ softcenter_install() {
 
 		#cp -rf /tmp/softcenter/init.d/* /jffs/softcenter/init.d/
 		cp -rf /tmp/softcenter/bin/* /jffs/softcenter/bin/
-		cp -rf /tmp/softcenter/perp /jffs/softcenter/
 		cp -rf /tmp/softcenter/scripts/* /jffs/softcenter/scripts
 		cp -rf /tmp/softcenter/.soft_ver /jffs/softcenter/
 		if [ "$ROG" == "1" ]; then
