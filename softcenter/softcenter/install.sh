@@ -41,7 +41,7 @@ softcenter_install() {
 		ARCH=`uname -m`
 		KVER=`uname -r`
 		if [ "$ARCH" == "armv7l" ]; then
-			if [ "$KVER" != "2.6.36" ];then
+			if [ "$KVER" != "2.6.36.4brcmarm" ];then
 				dbus set softcenter_arch="armng"
 			else
 				dbus set softcenter_arch="$ARCH"
