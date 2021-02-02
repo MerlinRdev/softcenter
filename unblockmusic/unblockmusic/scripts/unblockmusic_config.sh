@@ -24,8 +24,7 @@ add_rule()
 	echo_date 加载nat规则...
 	echo_date Load nat rules...
 	ipset -! -N music hash:ip
-	wget -q -t 99 -T 10 "https://httpdns.n.netease.com/httpdns/v2/d?session_id=1609320571828_26796&domain=clientlog.music.163.com,interface.music.163.com,m7.music.126.net,m701.music.126.net,m8.music.126.net,m801.music.126.net,m9.music.126.net,music.163.com,p1.music.126.net,p2.music.126.net,p3.music.126.net,p4.music.126.net,p5.music.126.net,p6.music.126.net,vodkgeyttp8.vod.126.net,vodkgeyttp9.vod.126.net"
- | grep -Eo '[0-9]+?\.[0-9]+?\.[0-9]+?\.[0-9]+?' | sort | uniq | awk '{print "ipset -! add music "$1}' | sh
+	wget -q -t 99 -T 10 "https://httpdns.n.netease.com/httpdns/v2/d?session_id=1609320571828_26796&domain=clientlog.music.163.com,interface.music.163.com,m7.music.126.net,m701.music.126.net,m8.music.126.net,m801.music.126.net,m9.music.126.net,music.163.com,p1.music.126.net,p2.music.126.net,p3.music.126.net,p4.music.126.net,p5.music.126.net,p6.music.126.net,vodkgeyttp8.vod.126.net,vodkgeyttp9.vod.126.net" | grep -Eo '[0-9]+?\.[0-9]+?\.[0-9]+?\.[0-9]+?' | sort | uniq | awk '{print "ipset -! add music "$1}' | sh
 	rm -rf /tmp/163.txt
 	$ipt_n -N cloud_music
 	$ipt_n -A cloud_music -d 0.0.0.0/8 -j RETURN
