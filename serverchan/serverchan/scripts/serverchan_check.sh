@@ -10,29 +10,35 @@ fi
 ntpclient -h ${ntp_server} -i3 -l -s > /dev/null 2>&1
 serverchan_info_text=/tmp/.serverchan_info.md
 
-ARCH=`uname -m`
+ARCH=$(uname -m)
+KVER=$(uname -r)
 if [ "$ARCH" == "armv7l" ]; then
-	ARCH_SUFFIX="arm"
+	if [ "$KVER" != "2.6.36.4brcmarm" ];then
+#bcm675x/ipq4/5/6/80xx/mt7622
+		ARCH_SUFFIX="armng"
+	else
+#bcm470x
+		ARCH_SUFFIX="arm"
+	fi
 elif [ "$ARCH" == "aarch64" ]; then
+#bcm490x
 	ARCH_SUFFIX="arm64"
 elif [ "$ARCH" == "mips" ]; then
-	ARCH_SUFFIX="mips"
+	if [ "$KVER" == "3.10.14" ];then
+#mtk6721
+		ARCH_SUFFIX="mipsle"
+	else
+#grx500
+		ARCH_SUFFIX="mips"
+	fi
 elif [ "$ARCH" == "mipsle" ]; then
 	ARCH_SUFFIX="mipsle"
 else
 	ARCH_SUFFIX="arm"
 fi
-KVER=`uname -r`
-if [ "$KVER" == "4.1.52" -o "$KVER" == "3.14.77" ];then
-	ARCH_SUFFIX="armng"
-fi
-if [ "$KVER" == "3.10.14" ];then
-	ARCH_SUFFIX="mipsle"
-fi
+
 tcode=`dbus get softcenter_server_tcode`
 if [ "$tcode" == "CN" ]; then
-	scurl="https://sc.softcenter.site"
-elif [ "$tcode" == "CN1" ]; then
 	scurl="https://sc.softcenter.site"
 elif [ "$tcode" == "ALI" ]; then
 	scurl="https://wufan.softcenter.site"
@@ -88,11 +94,15 @@ if [ "${serverchan_info_system}" == "1" ]; then
 	if [[ "${router_get_mode}" == "1" ]]; then
 		router_mode="无线路由器"
 	elif [[ "${router_get_mode}" == "2" ]]; then
-		router_mode="无线桥接模式"
+		if [[ -n "$(pidof cfg_client)" ]]; then
+			router_mode="Aimesh节点模式"
+		else
+			router_mode="无线中继模式"
+		fi
 	elif [[ "${router_get_mode}" == "3" ]]; then
 		router_mode="无线访问点 (Access Point)"
 	elif [[ "${router_get_mode}" == "4" ]]; then
-		router_mode="Media Bridge"
+		router_mode="无线桥接模式 (Media Bridge)"
 	else
 		router_mode="本次未获取到"
 	fi
@@ -124,44 +134,64 @@ if [[ "${serverchan_info_temp}" == "1" ]]; then
     interface_2=`nvram get wl0_ifname`
     interface_5=`nvram get wl1_ifname`
     interface_52=`nvram get wl2_ifname`
-	if [ "$productid" == "BLUECAVE" ];then
+	case $productid in
+	BLUECAVE)
 		interface_2_temperature=`iwpriv ${interface_2} gTemperature | awk '{print $3}'`
 		interface_5_temperature=`iwpriv ${interface_5} gTemperature | awk '{print $3}'`
 		router_cpu_temperature=`cat /sys/kernel/debug/ltq_tempsensor/allsensors | awk '{print $5}' | grep -Eo '[0-9]+' |cut -c1-2 |sed -n '2p'`
-	elif [ "$productid" == "RT-ACRH17" -o "$productid" == "RT-AC82U" ];then
+		;;
+	RT-ACRH17|RT-AC82U|RT-AC2200)
 		interface_2_temperature=`thermaltool -i wifi0 -get |grep temperature | awk '{print $3}'`
 		interface_5_temperature=`thermaltool -i wifi1 -get |grep temperature | awk '{print $3}'`
 		router_cpu_temperature=0
-	elif [ "$productid" == "RT-AC85U" -o "$productid" == "RT-AC85P" ];then
-		interface_2_temperature=0
-		interface_5_temperature=0
+		;;
+	RT-AC95U)
+		interface_2_temperature=`thermaltool -i wifi0 -get |grep temperature | awk '{print $3}'`
+		interface_5_temperature=`thermaltool -i wifi1 -get |grep temperature | awk '{print $3}'`
+		interface_52_temperature=`thermaltool -i wifi2 -get |grep temperature | awk '{print $3}'`
 		router_cpu_temperature=0
-	elif [ "$productid" == "RT-AC86U" -o "$productid" == "RT-AC2900" -o "$productid" == "GT-AC2900" -o "$productid" == "GT-AC5300" -o "$productid" == "TUF-AX3000" -o "$productid" == "RT-AX58U" ];then
+		;;
+	RT-AX89X)
+		interface_2_temperature=`thermaltool -i wifi0 -get |grep temperature | awk '{print $3}'`
+		interface_5_temperature=`thermaltool -i wifi1 -get |grep temperature | awk '{print $3}'`
+		router_cpu_temperature=`cat /sys/class/thermal/thermal_zone0/temp`
+		;;
+	RT-AC86U|GT-AC*|TUF-AX*|RT-AX5*|RT-AX68U|RT-AX82U|RT-AX86U)
 		pu_temperature_origin=`cat /sys/class/thermal/thermal_zone0/temp`
 		router_cpu_temperature=`awk 'BEGIN{printf "%.1f\n",('$cpu_temperature_origin'/'1000')}'`
 		interface_2_temperature=`wl -i ${interface_2} phy_tempsense | awk '{print $1}'`
 		interface_5_temperature=`wl -i ${interface_5} phy_tempsense | awk '{print $1}'`
 		[ -n "$interface_52" ] && interface_52_temperature=`wl -i ${interface_52} phy_tempsense | awk '{print $1}'`
-	else
+		;;
+	RT-AC68*|RT-AC3100|RT-AC88U|RT-AC3200|RT-AC5300)
 		interface_2_temperature=`wl -i ${interface_2} phy_tempsense | awk '{print $1}'`
 		interface_5_temperature=`wl -i ${interface_5} phy_tempsense | awk '{print $1}'`
 		[ -n "$interface_52" ] && interface_52_temperature=`wl -i ${interface_52} phy_tempsense | awk '{print $1}'`
 		router_cpu_temperature=`cat /proc/dmu/temperature | awk '{print $4}' | grep -Eo '[0-9]+'`
-	fi
+		;;
+	RT-AC85*|RM-AC*)
+		interface_2_temperature=0
+		interface_5_temperature=0
+		router_cpu_temperature=0
+		;;
+	esac
     if [ "${interface_2_temperature}" != "" ] || [ "${interface_5_temperature}" != "" ] || [ "${router_cpu_temperature}" != "" ]; then
-	if [ "$productid" != "BLUECAVE" -a "$productid" != "RT-ACRH17" -a "$productid" != "RT-AC85P" ];then
-		interface_2_temperature_c=`expr ${interface_2_temperature} / 2 + 20`
-		interface_5_temperature_c=`expr ${interface_5_temperature} / 2 + 20`
-		[ -n "$interface_52" ] && interface_52_temperature_c=`expr ${interface_52_temperature} / 2 + 20`
-	else
-		interface_2_temperature_c=${interface_2_temperature}
-		interface_5_temperature_c=${interface_5_temperature}
-	fi
-	if [ -n "$interface_52" ];then
-		router_temperature="2.4G: ${interface_2_temperature_c}°C | 5G_1: ${interface_5_temperature_c}°C | 5G_2: ${interface_52_temperature_c}°C | CPU: ${router_cpu_temperature}°C"
-	else
-		router_temperature="2.4GHz: ${interface_2_temperature_c}°C | 5GHz: ${interface_5_temperature_c}°C | CPU: ${router_cpu_temperature}°C"
-	fi
+		case $productid in
+		RT-AC68*|RT-AC3100|RT-AC88U|RT-AC3200|RT-AC5300|RT-AC86U|GT-AC*|TUF-AX*|RT-AX5*|RT-AX68U|RT-AX82U|RT-AX86U)
+			interface_2_temperature_c=`expr ${interface_2_temperature} / 2 + 20`
+			interface_5_temperature_c=`expr ${interface_5_temperature} / 2 + 20`
+			[ -n "$interface_52" ] && interface_52_temperature_c=`expr ${interface_52_temperature} / 2 + 20`
+			;;
+		*)
+			interface_2_temperature_c=${interface_2_temperature}
+			interface_5_temperature_c=${interface_5_temperature}
+			;;
+		esac
+		if [ -n "$interface_52" ];then
+			router_temperature="2.4G: ${interface_2_temperature_c}°C | 5G_1: ${interface_5_temperature_c}°C | 5G_2: ${interface_52_temperature_c}°C | CPU: ${router_cpu_temperature}°C"
+		else
+			router_temperature="2.4GHz: ${interface_2_temperature_c}°C | 5GHz: ${interface_5_temperature_c}°C | CPU: ${router_cpu_temperature}°C"
+		fi
     else
         router_temperature="找不到或不支持当前温度传感器"
     fi
