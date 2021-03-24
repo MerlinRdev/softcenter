@@ -128,7 +128,7 @@ function menu_hook(title, tab) {
                 						<div id="unblockmusic_title" style="float:left;" class="formfonttitle" style="padding-top: 12px" sclang>UnblockNeteaseMusic</div>
 										<div style="float:right; width:15px; height:25px;margin-top:10px"><img id="return_btn" onclick="reload_Soft_Center();" align="right" style="cursor:pointer;position:absolute;margin-left:-30px;margin-top:-25px;" title="返回软件中心" src="/images/backprev.png" onMouseOver="this.src='/images/backprevclick.png'" onMouseOut="this.src='/images/backprev.png'"></img></div>
 										<div style="margin:30px 0 10px 5px;" class="splitLine"></div>
-										<div class="SimpleNote" id="head_illustrate"><i></i><em>采用 [QQ/虾米/百度/酷狗/酷我/咕咪/JOOX]等音源，替换网易云变灰歌曲链接<br>启用后，路由器自动分流解锁，大部分设备无需设置代理。<br>苹果系列设备需要设置 WIFI/有线代理方式为 自动 ,并安装 CA根证书并信任。<br>HTTP代理IP:<% nvram_get("lan_ipaddr"); %>,端口:5200<br>HTTPS代理IP:<% nvram_get("lan_ipaddr"); %>,端口:5300</em></div>
+										<div class="SimpleNote" id="head_illustrate"><i></i><em>采用 [QQ/百度/酷狗/酷我/咕咪/JOOX]等音源，替换网易云变灰歌曲链接<br>启用后，路由器自动分流解锁，大部分设备无需设置代理。<br>苹果系列设备需要设置 WIFI/有线代理方式为 自动 ,并安装 CA根证书并信任。<br>HTTP代理IP:<% nvram_get("lan_ipaddr"); %>,端口:5200<br>HTTPS代理IP:<% nvram_get("lan_ipaddr"); %>,端口:5300</em></div>
 										<div id="cpufreq_switch" style="margin:0px 0px 0px 0px;">
 											<table style="margin:-1px 0px 0px 0px;" width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bordercolor="#6b8fa3" class="FormTable">
 												<thead>
@@ -167,7 +167,6 @@ function menu_hook(title, tab) {
 																<option value="default" sclang>Default</option>
 																<option value="netease" sclang>Netease</option>
 																<option value="qq" sclang>QQ</option>
-																<option value="xiami" sclang>Xiami</option>
 																<option value="baidu" sclang>Baidu</option>
 																<option value="kugou" sclang>Kugou</option>
 																<option value="kuwo" sclang>Kuwo</option>

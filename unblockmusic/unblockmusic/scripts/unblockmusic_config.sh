@@ -62,7 +62,6 @@ set_firewall(){
 	echo "ipset=/clientlog.music.163.com/music" >> /tmp/etc/dnsmasq.user/dnsmasq-music.conf
 	echo "ipset=/clientlog3.music.163.com/music" >> /tmp/etc/dnsmasq.user/dnsmasq-music.conf
 	echo "ipset=/.music.126.net/music" >> /tmp/etc/dnsmasq.user/dnsmasq-music.conf
-	echo "ipset=/.dun.163yun.com/music" >> /tmp/etc/dnsmasq.user/dnsmasq-music.conf
 	echo "ipset=/.acstatic-dun.126.net/music" >> /tmp/etc/dnsmasq.user/dnsmasq-music.conf
 	echo "ipset=/.vod.126.net/music" >> /tmp/etc/dnsmasq.user/dnsmasq-music.conf
 	service restart_dnsmasq
