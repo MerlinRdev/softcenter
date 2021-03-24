@@ -30,7 +30,7 @@
 <script>
 var params_check = ["node_enable", "node_jd_enable"];
 var jd_check = ["node_jd_auto_run", "node_jd_auto_run", "node_jd_auto_update", "node_jd_failed"];
-var jd_input = ["node_jd_cookie", "node_jd_cookie2", "node_jd_stop", "node_jd_auto_run_time", "node_jd_auto_update_time", "node_jd_remote_url", "node_jd_serverurl", "node_jd_serverchan"];
+var jd_input = ["node_jd_cookie", "node_jd_cookie2", "node_jd_stop", "node_jd_auto_run_time", "node_jd_auto_update_time", "node_jd_remote_url", "node_jd_serverchan"];
 function E(e) {
 	return (typeof(e) == 'string') ? document.getElementById(e) : e;
 }
@@ -378,15 +378,6 @@ function menu_hook(title, tab) {
 																</div>
 															</label>
 														</div>
-													</td>
-												</tr>
-												<tr>
-													<th sclang>Serverchan api</th>
-													<td>
-														<select class="input_ss_table" style="width:100px;height:25px;" name="node_jd_serverurl" id="node_jd_serverurl">
-															<option value="scu" selected="">scu</option>
-															<option value="sct">sct</option>
-														</select>
 													</td>
 												</tr>
 												<tr>

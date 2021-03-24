@@ -80,14 +80,12 @@ add_cron() {
 
 serverchan() {
 	[ "$node_jd_serverchan_enable" == "0" ] && exit
-    sckey=$node_jd_serverchan
+    sckey=${node_jd_serverchan}
     failed=$node_jd_failed
     desc=$(cat $LOG_HTM | grep -E '签到号|签到概览|签到奖励|其他奖励|账号总计|其他总计' | sed 's/$/&\n/g')
     serverurlflag=$node_jd_serverurl
-    serverurl=https://sc.ftqq.com/
-    if [ "$serverurlflag" = "sct" ]; then
-        serverurl=https://sctapi.ftqq.com/
-    fi
+    serverurl="https://sc.ftqq.com/"
+
     if [ $failed -eq 1 ]; then
         grep "Cookie失效" $LOG_HTM > /dev/null
         if [ $? -eq 0 ]; then
