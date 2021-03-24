@@ -1,7 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<!-- version: 1.8 -->
 <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta HTTP-EQUIV="Pragma" CONTENT="no-cache"/>
@@ -93,11 +92,11 @@ function hook_event(){
 function get_dbus_data() {
 	$.ajax({
 		type: "GET",
-		url: "/dbconf?p=acme_",
-		dataType: "script",
+		url: "/_api/acme",
+		dataType: "json",
 		async: false,
 		success: function(data) {
-			db_acme = db_acme_;
+			db_acme = data.result[0];
 			conf_to_obj();
 		}
 	});
@@ -212,37 +211,37 @@ function delete_cert(){
 	}
 }
 
+function install_cert(){
+	var dbus = {}
+	push_data(dbus, 4);
+}
+
 function push_data(obj, arg) {
-	//var id = parseInt(Math.random() * 100000000);
-	//var postData = {"id": id, "method": "acme_config.sh", "params": [arg], "fields": obj };
-	obj["action_script"]="acme_config.sh";
-	if(arg == 2)
-		obj["action_mode"] = "toolscript";
-	else if(arg == 3)
-		obj["action_mode"] = "clean";
-	else
-		obj["action_mode"] = "restart";
+	var id = parseInt(Math.random() * 100000000);
+	var postData = {"id": id, "method": "acme_config.sh", "params": [arg], "fields": obj };
 	$.ajax({
-		url: "/applydb.cgi?p=acme",
+		url: "/_api/",
 		cache: false,
 		type: "POST",
-		dataType: "text",
-		data: $.param(obj),
+		dataType: "json",
+		data: JSON.stringify(postData),
 		success: function(response) {
-			//if (response.result == id){
+			if (response.result == id){
 				showKPLoadingBar();
 				noChange = 0;
 				get_realtime_log();
-			//}
+			}
 		}
 	});
 }
 
 function get_realtime_log(w) {
 	$.ajax({
-		url: '/res/acme_log.html',
+		url: '/_temp/acme_log.txt',
 		type: 'GET',
-		dataType: 'html',
+		async: true,
+		cache:false,
+		dataType: 'text',
 		success: function(response) {
 			var retArea = E("log_content3");
 			if (response.search("XU6J03M6") != -1) {
@@ -563,7 +562,6 @@ function show_log(){
 											</div>
 											<div style="margin:30px 0 10px 5px;" class="splitLine"></div>
 											<div class="SimpleNote">
-												<li>Let's Encrypt的免费证书在2018年3月已经支持泛域名*解析，要使用泛解析请在子域名处填写 *。</li>
 												<li>Let's Encrypt的免费证书只有90天有效期，到期可以自动续期，或者使用手动更新来续期。</li>
 												<li>目前大部分的运营商已经关闭家用宽带80，443端口，如果需要在外网访问请设置端口转发。</li>
 												<li>申请到的证书储存在/jffs/softcenter/acme/，且安装在/tmp/etc目录，可自行备份。</li>
