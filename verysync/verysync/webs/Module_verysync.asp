@@ -39,7 +39,10 @@ function get_dbus_data() {
 			db_verysync = db_verysync_;
 			db_softcenter_module_verysync_version = db_softcenter_module_verysync_;
 			E("verysync_enable").checked = db_verysync["verysync_enable"] == "1";
-			var params = ["port", "wan_enable", "home", "swap_enable"];
+			E("verysync_swap_enable").checked = db_verysync["verysync_swap_enable"] == "1";
+			E("verysync_monitor_enable").checked = db_verysync["verysync_monitor_enable"] == "1";
+
+			var params = ["port", "wan_enable", "home"];
 			for (var i = 0; i < params.length; i++) {
 				if (params[i] == 'port') {
 					if (db_verysync["verysync_port"] === (void 0) || db_verysync["verysync_port"] == "") {
@@ -55,14 +58,15 @@ function get_dbus_data() {
 			}catch (e) {
 			}
 
-			var verysync_version = db_verysync['verysync_version'] || '-';
+			var verysync_version = db_verysync['verysync_version'] || '';
 			var lan_ipaddr_rt = "<% nvram_get("lan_ipaddr_rt");%>";
 			var verysync_port = db_verysync['verysync_port'];
 			var verysync_url  = "http://"+lan_ipaddr_rt+":"+verysync_port;
+			if (verysync_version == "") {
+				verysync_version="将在第一次设置提交后自动下载对应版本，提交后请等待几分钟后手工刷新该页面查看，如果一直无法下载请手动下载微力<a href='http://www.verysync.com/download.php?platform=linux-arm' target='_blank'>ARM版</a> 或 <a href='http://www.verysync.com/download.php?platform=linux-arm64' target='_blank'>ARM64版</a> ，手动上传到 /tmp/filetransfer/ 再回到当前页面点击提交即可。";
+			} 
 			$('#verysync_version').html('微力版本: ' + verysync_version);
 			$('#verysync_manual_url').html('<a href="'+verysync_url+'" target="_blank">'+verysync_url+'</a>');
-
-			$('#swap_enable').attr("checked", db_verysync["verysync_swap_enable"] == "1");
 
 			try{
 				var verysync_disklist = JSON.parse(atob(db_verysync['verysync_disklist']));
@@ -96,7 +100,9 @@ function save() {
 	//refreshpage(2);
 	// collect data from checkbox
 	db_verysync["verysync_enable"] = E("verysync_enable").checked ? '1' : '0';
-	var params = ["port", "wan_enable", "home", "swap_enable"];
+	db_verysync["verysync_swap_enable"] = E("verysync_swap_enable").checked ? '1' : '0';
+	db_verysync["verysync_monitor_enable"] = E("verysync_monitor_enable").checked ? '1' : '0';
+	var params = ["port", "wan_enable", "home"];
 	for (var i = 0; i < params.length; i++) {
     	db_verysync["verysync_" + params[i]] = E("verysync_" + params[i]).value;
 	}
@@ -146,7 +152,6 @@ function verifyFields(focused, quiet){
 	<input type="hidden" name="first_time" value=""/>
 	<input type="hidden" name="preferred_lang" id="preferred_lang" value="<% nvram_get("preferred_lang"); %>"/>
 	<input type="hidden" name="firmver" value="<% nvram_get("firmver"); %>"/>
-	<input type="hidden" id="verysync_swap_enable" name="verysync_swap_enable" />
 	<table class="content" align="center" cellpadding="0" cellspacing="0">
 		<tr>
 			<td width="17">&nbsp;</td>
@@ -251,9 +256,17 @@ function verifyFields(focused, quiet){
 											<tr>
 												<th>启用虚拟内存</th>
 												<td>
-													<input id="swap_enable" type="checkbox" />
+													<input id="verysync_swap_enable" type="checkbox" />
 													<br />
 													<span style="float: left;">第一次启用初始化需要花费较多的时间，如果没有挂载虚拟内存,微力会自动创建512M的SWAP空间，第一次请多等待些许时间</span>
+												</td>
+											</tr>
+											<tr>
+												<th>进程守护</th>
+												<td>
+													<input id="verysync_monitor_enable" type="checkbox" />
+													<br />
+													<span style="float: left;">小内存不要启用此功能</span>
 												</td>
 											</tr>
 										</table>
@@ -276,3 +289,4 @@ function verifyFields(focused, quiet){
 	<div id="footer"></div>
 </body>
 </html>
+

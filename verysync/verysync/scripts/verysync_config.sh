@@ -5,6 +5,24 @@ eval `dbus export verysync_`
 alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
 export HOME=/root
 
+ARCH=$(uname -m)
+KVER=$(uname -r)
+if [ "$ARCH" == "armv7l" ]; then
+		ARCH_SUFFIX="arm"
+elif [ "$ARCH" == "aarch64" ]; then
+	ARCH_SUFFIX="arm64"
+elif [ "$ARCH" == "mips" ]; then
+	if [ "$KVER" == "3.10.14" ];then
+		ARCH_SUFFIX="mipsle"
+	else
+		ARCH_SUFFIX="mips"
+	fi
+elif [ "$ARCH" == "mipsle" ]; then
+	ARCH_SUFFIX="mipsle"
+else
+	ARCH_SUFFIX="arm"
+fi
+
 create_conf(){
     if [ ! -d $verysync_home ];then
         /jffs/softcenter/bin/verysync -generate="$verysync_home/.verysync" >>/tmp/verysync.log
@@ -36,7 +54,6 @@ setup_iptables() {
 
 setup_optimize() {
     echo 204800 > /proc/sys/fs/inotify/max_user_watches
-
     setup_swap
 }
 
@@ -62,11 +79,20 @@ start_verysync(){
     setup_iptables
     setup_optimize
 
+    [ ! -f "/jffs/softcenter/bin/verysync" ] && {
+        get_bin
+    }
+    chmod +x "/jffs/softcenter/bin/verysync"
+
+    dbus set verysync_version=`"/jffs/softcenter/bin/verysync" -version|awk '{print $2}'`
+
     VSNORESTART=""
     if [[ "$verysync_swap_enable" != "1" ]]; then
         VSNORESTART=" -no-restart"
     fi
     /jffs/softcenter/bin/verysync -home="$verysync_home/.verysync" -gui-address $ipaddr $VSNORESTART >/dev/null 2>&1 &
+    #cru d verysync
+    cru a verysync "*/10 * * * * /jffs/softcenter/scripts/verysync_config.sh start"
 
     sleep 1
 
@@ -103,6 +129,39 @@ update_disklist() {
         }
         END { print " ] " }
     '|openssl base64`
+}
+
+get_bin() {
+    mkdir -p /tmp/filetransfer/ && cd /tmp/filetransfer;
+
+    local version=`wget http://www.verysync.com/shell/latest -O-`
+    if [ ! $? ]; then
+        logger "[软件中心]: 微力同步 无法获取微力版本"
+        exit 1
+    fi
+    local file=verysync-linux-"$ARCH_SUFFIX"-"$version".tar.gz
+    local down_url=http://dl.verysync.com/releases/"$version"/$file
+
+    rm -rf "/tmp/filetransfer/$file"
+
+    local a=0
+    while [ ! -f verysync-linux-"$ARCH_SUFFIX"-*.tar.gz ]; do
+        [ $a = 4 ] && exit
+        /usr/sbin/wget -T60 $down_url
+        sleep 2
+        let "a = a + 1"
+        killall -9 pidof openssl
+    done
+
+    file=`find /tmp/filetransfer -name verysync-linux-"$ARCH_SUFFIX"-*.tar.gz`
+    tar -zxvf "$file"
+    rm "$file"
+
+    rm -rf "/jffs/softcenter/bin/verysync"
+    mv verysync-linux-"$ARCH_SUFFIX"-$version/verysync "/jffs/softcenter/bin/verysync"
+    rm -rf verysync-linux-"$ARCH_SUFFIX"-*
+
+    chmod +x "/jffs/softcenter/bin/verysync"
 }
 
 case $ACTION in
