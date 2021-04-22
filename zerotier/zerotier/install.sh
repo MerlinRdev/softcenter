@@ -22,6 +22,7 @@ cp -rf /tmp/zerotier/init.d/* /jffs/softcenter/init.d/
 cp -rf /tmp/zerotier/webs/* /jffs/softcenter/webs/
 cp -rf /tmp/zerotier/res/* /jffs/softcenter/res/
 cp /tmp/zerotier/uninstall.sh /jffs/softcenter/scripts/uninstall_zerotier.sh
+ln -sf /jffs/softcenter/scripts/zerotier_config.sh /jffs/softcenter/init.d/S99zerotier.sh
 cd /jffs/softcenter/bin/
 ln -sf zerotier-one zerotier-cli
 ln -sf zerotier-one zerotier-idtool
