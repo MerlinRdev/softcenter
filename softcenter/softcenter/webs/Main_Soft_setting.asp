@@ -196,10 +196,8 @@ function checkCmdRet(){
 											<textarea cols="63" rows="40" wrap="off" readonly="readonly" id="log_content1"></textarea>
 										</div>
 										<div class="SCBottom">
-											<br/>论坛技术支持： <a href="http://www.koolshare.cn" target="_blank"> <i><u>www.koolshare.cn</u></i> </a> <br/>
-											后台技术支持： <i>Xiaobao</i> <br/>
-											Shell, Web by： <i>Sadoneli</i><br/>
-											<br/>修改版 by： <i>paldier</i>
+											<br/>论坛技术支持： <a href="https://www.right.com.cn" target="_blank"> <i><u>www.right.com.cn</u></i> </a> <br/>
+											Copyright：  <a href="https://github.com/MerlinRdev" target="_blank"><i>MerlinRdev</i></a>
 										</div>
 									</td>
 								</tr>

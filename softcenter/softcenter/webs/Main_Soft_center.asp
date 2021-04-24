@@ -582,7 +582,7 @@ $(function() {
 				db_softcenter_["softcenter_version"] = "0.0";
 			}
 			$("#spnCurrVersion").html("<em>" + db_softcenter_["softcenter_version"] + "</em>");
-			$('#github').html('论坛技术支持： <a href="https://www.right.com.cn" target="_blank"> <i><u>right.com.cn</u></i> </a><br/>Github项目： <a href ="https://github.com/paldier/' + giturl +'" target="_blank"> <i><u>https://github.com/paldier</u></i> </a><br/>Shell & Web by： <i>sadoneli</i>, <i>Xiaobao</i>, <i>paldier</i>')
+			$('#github').html('论坛技术支持： <a href="https://www.right.com.cn" target="_blank"> <i><u>right.com.cn</u></i> </a><br/>Github项目： <a href ="https://github.com/MerlinRdev/' + giturl +'" target="_blank"> <i><u>https://github.com/MerlinRdev</u></i> </a><br/>Copyright： <a href="https://github.com/MerlinRdev" target="_blank"><i>MerlinRdev</i></a>')
 			var jff2_scripts="<% nvram_get("jffs2_scripts"); %>";
 			if(jff2_scripts != 1){
 				$('#software_center_message').html('<h1><font color="#FF9900">错误！</font></h1><h2>软件中心不可用！因为你没有开启Enable JFFS custom scripts and configs选项！</h2><h2>请前往【系统管理】-<a href="Advanced_System_Content.asp"><u><em>【系统设置】</em></u></a>开启此选项再使用软件中心！！</h2>')

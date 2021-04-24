@@ -1,6 +1,7 @@
 #!/bin/sh
 
-#From dbus to local variable
+# Copyright (C) 2021 MerlinRdev
+
 eval $(dbus export softcenter_installing_)
 source /jffs/softcenter/scripts/base.sh
 
@@ -66,10 +67,6 @@ else
 fi
 
 MODEL=$(nvram get productid)
-ODMPID=$(nvram get odmpid)
-if [ -n "${ODMPID}" ];then
-	MODEL="${ODMPID}"
-fi
 if [ "${MODEL:0:3}" == "GT-" ] || [ "$(nvram get merlinr_rog)" == "1" ];then
 	ROG=1
 elif [ "${MODEL:0:3}" == "TUF" ] || [ "$(nvram get merlinr_tuf)" == "1" ];then

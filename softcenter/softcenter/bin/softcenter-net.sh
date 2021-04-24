@@ -1,11 +1,8 @@
 #!/bin/sh
 
+# Copyright (C) 2021 MerlinRdev
+
 ACTION=$1
-
-echo start `date` > /tmp/softcenter_nat_log.txt
-
-softcenter_nat=`nvram get softcenter_nat`
-[ "$softcenter_nat" == "1" ] && echo exit `date` >> /tmp/softcenter_nat_log.txt && exit
 
 for i in $(find /jffs/softcenter/init.d/ -name 'N*' | sort) ;
 do
@@ -27,4 +24,3 @@ do
     esac
 done
 
-echo finish `date` >> /tmp/softcenter_nat_log.txt
