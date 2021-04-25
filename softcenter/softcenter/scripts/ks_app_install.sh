@@ -78,10 +78,23 @@ LOGGER() {
 	logger $1
 }
 
+clean(){
+	local RET=$1
+	[ -n "${softcenter_installing_todo}" ] && rm -rf /tmp/${softcenter_installing_todo}*
+	dbus set softcenter_installing_todo=""
+	dbus set softcenter_installing_title=""
+	dbus set softcenter_installing_module=""
+	dbus set softcenter_installing_tar_url=""
+	dbus set softcenter_installing_version=""
+	dbus set softcenter_installing_md5=""
+	dbus set softcenter_installing_tick=""
+	exit ${RET}
+}
+
 install_module() {
 	if [ "${softcenter_home_url}" = "" -o "${softcenter_installing_md5}" = "" -o "${softcenter_installing_version}" = "" ]; then
 		LOGGER "【软件中心】input error, something not found"
-		exit 1
+		clean 1
 	fi
 
 	if [ "${softcenter_installing_tick}" = "" ]; then
@@ -90,13 +103,13 @@ install_module() {
 	LAST_TICK=$(expr ${softcenter_installing_tick} + 20)
 	if [ "${LAST_TICK}" -ge "${CURR_TICK}" -a "${softcenter_installing_module}" != "" ]; then
 		LOGGER "【软件中心】module ${softcenter_installing_module} is installing"
-		exit 2
+		clean 2
 	fi
 
 	if [ "${softcenter_installing_todo}" = "" ]; then
 		#curr module name not found
 		LOGGER "【软件中心】module name not found"
-		exit 3
+		clean 3
 	fi
 
 	# Just ignore the old installing_module
@@ -162,7 +175,7 @@ install_module() {
 		dbus set softcenter_installing_module=""
 		dbus set softcenter_installing_todo=""
 		LOGGER "【软件中心】wget ${TAR_URL} error, ${RETURN_CODE}"
-		exit ${RETURN_CODE}
+		clean ${RETURN_CODE}
 	fi
 
 	md5sum_gz=$(md5sum /tmp/${FNAME} | sed 's/ /\n/g'| sed -n 1p)
@@ -178,7 +191,7 @@ install_module() {
 
 		rm -f ${FNAME}
 		rm -rf "/tmp/$softcenter_installing_module"
-		exit
+		clean 3
 	else
 		tar -zxf ${FNAME}
 		dbus set softcenter_installing_status="4"
@@ -192,7 +205,7 @@ install_module() {
 			#rm -rf "/tmp/${softcenter_installing_module}"
 
 			LOGGER "【软件中心】package hasn't install.sh"
-			exit 5
+			clean 5
 		fi
 
 		if [ -f /tmp/${softcenter_installing_module}/uninstall.sh ]; then
@@ -241,6 +254,7 @@ install_module() {
 		dbus set softcenter_installing_module=""
 		dbus set softcenter_installing_todo=""
 	fi
+	clean 0
 }
 
 uninstall_module() {
@@ -250,13 +264,13 @@ uninstall_module() {
 	LAST_TICK=$(expr ${softcenter_installing_tick} + 20)
 	if [ "${LAST_TICK}" -ge "${CURR_TICK}" -a "${softcenter_installing_module}" != "" ]; then
 		LOGGER "【软件中心】module ${softcenter_installing_module} is installing"
-		exit 2
+		clean 2
 	fi
 
 	if [ "${softcenter_installing_todo}" = "" -o "${softcenter_installing_todo}" = "softcenter" ]; then
 		#curr module name not found
 		LOGGER "【软件中心】module name not found"
-		exit 3
+		clean 3
 	fi
 
 	local ENABLED=$(dbus get ${softcenter_installing_todo}_enable)
@@ -265,7 +279,7 @@ uninstall_module() {
 		dbus set softcenter_installing_status="17"
 		sleep 3
 		dbus set softcenter_installing_status="0"
-		exit 4
+		clean 4
 	fi
 
 	# Just ignore the old installing_module
@@ -310,6 +324,7 @@ uninstall_module() {
 			rm -rf /jffs/softcenter/webs/Module_${softcenter_installing_todo}.asp
 		fi
 	fi
+	clean 0
 }
 
 #LOGGER $BIN_NAME

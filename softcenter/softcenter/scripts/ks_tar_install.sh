@@ -71,33 +71,37 @@ jffs_space(){
 	local MODULE_NEEDED=$(du -s /tmp/${MODULE_NAME}*.tar.gz | awk '{print $1}')
 	local JFFS_FREE=$((${JFFS_AVAIL} - ${MODULE_NEEDED}))
 	local MODULE_UPGRADE=$(dbus get softcenter_module_${MODULE_NAME}_install)
-	if [ -z "${MODULE_UPGRADE}" ];then
-		if [ "${JFFS_AVAIL}" -lt "2048" ];then
-			echo_date "======================================================="
-			echo_date "当前jffs分区剩余：${JFFS_AVAIL}KB, 剩余可用空间已经小于2MB！"
-			echo_date "JFFS分区可用空间过低，软件中心将不会安装此插件！！！"
-			echo_date "删除相关文件并退出..."
-			echo_date "======================================================="
-			clean 1
-		elif [ "${JFFS_FREE}" -lt "2048" ];then
-			echo_date "======================================================="
-			echo_date "当前jffs分区剩余：${JFFS_AVAIL}KB, 插件安装大致需要${MODULE_NEEDED}KB"
-			echo_date "JFFS分区剩余可用空间不足！，软件中心将不会安装此插件！！！"
-			echo_date "删除相关文件并退出..."
-			echo_date "======================================================="
-			clean 1
+	if [ "$(nvram get sc_mount)" == "0" ];then
+		if [ -z "${MODULE_UPGRADE}" ];then
+			if [ "${JFFS_AVAIL}" -lt "2048" ];then
+				echo_date "======================================================="
+				echo_date "当前jffs分区剩余：${JFFS_AVAIL}KB, 剩余可用空间已经小于2MB！"
+				echo_date "JFFS分区可用空间过低，软件中心将不会安装此插件！！！"
+				echo_date "删除相关文件并退出..."
+				echo_date "======================================================="
+				clean 1
+			elif [ "${JFFS_FREE}" -lt "2048" ];then
+				echo_date "======================================================="
+				echo_date "当前jffs分区剩余：${JFFS_AVAIL}KB, 插件安装大致需要${MODULE_NEEDED}KB"
+				echo_date "JFFS分区剩余可用空间不足！，软件中心将不会安装此插件！！！"
+				echo_date "删除相关文件并退出..."
+				echo_date "======================================================="
+				clean 1
+			fi
+		elif [ "${MODULE_UPGRADE}" == "1" ];then
+			if [ "${JFFS_AVAIL}" -lt "2048" ];then
+				echo_date "======================================================="
+				echo_date "当前jffs分区剩余：${JFFS_AVAIL}KB，剩余可用空间已经小于2MB！"
+				echo_date "JFFS分区可用空间过低，软件中心将不会安装此插件！！！"
+				echo_date "删除相关文件并退出..."
+				echo_date "======================================================="
+				clean 1
+			fi
 		fi
-	elif [ "${MODULE_UPGRADE}" == "1" ];then
-		if [ "${JFFS_AVAIL}" -lt "2048" ];then
-			echo_date "======================================================="
-			echo_date "当前jffs分区剩余：${JFFS_AVAIL}KB，剩余可用空间已经小于2MB！"
-			echo_date "JFFS分区可用空间过低，软件中心将不会安装此插件！！！"
-			echo_date "删除相关文件并退出..."
-			echo_date "======================================================="
-			clean 1
-		fi
+		echo_date "当前jffs分区剩余：${JFFS_AVAIL}KB, 空间满足，继续安装！"
+	else
+		echo_date "U盘已挂载，继续安装！"
 	fi
-	echo_date "当前jffs分区剩余：${JFFS_AVAIL}KB, 空间满足，继续安装！"
 }
 
 install_tar(){
