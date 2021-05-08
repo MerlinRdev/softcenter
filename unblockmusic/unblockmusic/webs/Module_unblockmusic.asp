@@ -76,7 +76,7 @@ function check_status(){
 		success: function (response) {
 			//console.log(response)
 			E("unblockmusic_status").innerHTML = response;
-			setTimeout("check_status();", 10000);
+			setTimeout("check_status();", 5000);
 		},
 		error: function(){
 			setTimeout("check_status();", 5000);
