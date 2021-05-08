@@ -24,7 +24,7 @@ add_rule()
 	echo_date 加载nat规则...
 	echo_date Load nat rules...
 	ipset -! -N music hash:ip
-	wget -q -t 99 -T 10 "https://httpdns.n.netease.com/httpdns/v2/d?session_id=1609320571828_26796&domain=clientlog.music.163.com,interface.music.163.com,interface3.music.163.com,apm.music.163.com,apm3.music.163.com,clientlog3.music.163.com,music.163.com" | grep -Eo '[0-9]+?\.[0-9]+?\.[0-9]+?\.[0-9]+?' | sort | uniq | awk '{print "ipset -! add music "$1}' | sh
+	wget -q -t 99 -T 10 http://httpdns.n.netease.com/httpdns/v2/d?domain=music.163.com,interface.music.163.com,interface3.music.163.com,apm.music.163.com,apm3.music.163.com,clientlog.music.163.com,clientlog3.music.163.com -O- | grep -Eo '[0-9]+?\.[0-9]+?\.[0-9]+?\.[0-9]+?' | sort | uniq | awk '{print "ipset -! add music "$1}' | sh
 	rm -rf /tmp/163.txt
 	$ipt_n -N cloud_music
 	$ipt_n -A cloud_music -d 0.0.0.0/8 -j RETURN
