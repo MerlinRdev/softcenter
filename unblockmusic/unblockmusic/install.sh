@@ -34,9 +34,8 @@ fi
 chmod +x /jffs/softcenter/scripts/*
 chmod +x /jffs/softcenter/bin/*
 
-
-
-cp -rf /jffs/softcenter/scripts/unblockmusic_config.sh /jffs/softcenter/init.d/S99unblockmusic.sh
+ln -sf /jffs/softcenter/scripts/unblockmusic_config.sh /jffs/softcenter/init.d/S99unblockmusic.sh
+ln -sf /jffs/softcenter/scripts/unblockmusic_config.sh /jffs/softcenter/init.d/M99unblockmusic.sh
 
 dbus set unblockmusic_version="$(cat $DIR/version)"
 dbus set softcenter_module_unblockmusic_version="$(cat $DIR/version)"
