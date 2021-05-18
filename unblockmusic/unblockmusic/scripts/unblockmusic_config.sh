@@ -10,9 +10,8 @@ serverCrt="/jffs/softcenter/bin/Music/server.crt"
 serverKey="/jffs/softcenter/bin/Music/server.key"
 
 create_autostart(){
-	if [ ! -L "/jffs/softcenter/init.d/S99unblockmusic.sh" ];then
 		ln -sf /jffs/softcenter/scripts/unblockmusic_config.sh /jffs/softcenter/init.d/S99unblockmusic.sh
-	fi
+		ln -sf /jffs/softcenter/scripts/unblockmusic_config.sh /jffs/softcenter/init.d/M99unblockmusic.sh
 }
 
 remove_autostart(){
