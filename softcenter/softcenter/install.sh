@@ -78,7 +78,8 @@ softcenter_install() {
 
 		# remove install package
 		rm -rf /tmp/softcenter
-
+		# set softcenter tcode
+		/jffs/softcenter/sc_auth tcode
 		# creat wan-start nat-start post-mount
 		if [ ! -f "/jffs/scripts/wan-start" ];then
 			cat > /jffs/scripts/wan-start <<-EOF

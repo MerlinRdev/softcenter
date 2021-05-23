@@ -123,20 +123,7 @@ install_module() {
 	#OLD_MD5=$(dbus get softcenter_module_${softcenter_installing_module_md5})
 	OLD_VERSION=$(dbus get softcenter_module_${softcenter_installing_module}_version)
 	if [ -z "$(dbus get softcenter_server_tcode)" ]; then
-		modelname=$(nvram get modelname)
-		case $modelname in
-			K3|XWR3100)
-				dbus set softcenter_server_tcode=CN
-				;;
-			SBRAC1900P|SBRAC3200P|R8000P|R7000P)
-				dbus set softcenter_server_tcode=ALI
-				;;
-			*)
-				dbus set softcenter_server_tcode=`nvram get territory_code |cut -c 1-2`
-				[ -z "$(dbus get softcenter_server_tcode)" ] && dbus set softcenter_server_tcode=GB
-				[ "$(nvram get buildinfo | cut -d "@" -f2)" != "MerlinRdev" ] && dbus set softcenter_server_tcode=GB
-				;;
-		esac
+		/jffs/softcenter/sc_auth tcode
 	fi
 	eval $(dbus export softcenter_server_tcode)
 	if [ "$softcenter_server_tcode" == "CN" ]; then

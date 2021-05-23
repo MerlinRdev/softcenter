@@ -151,7 +151,7 @@ if [[ "${serverchan_info_temp}" == "1" ]]; then
 		interface_52_temperature=`thermaltool -i wifi2 -get |grep temperature | awk '{print $3}'`
 		router_cpu_temperature=0
 		;;
-	RT-AX89X)
+	RT-AX89*)
 		interface_2_temperature=`thermaltool -i wifi0 -get |grep temperature | awk '{print $3}'`
 		interface_5_temperature=`thermaltool -i wifi1 -get |grep temperature | awk '{print $3}'`
 		router_cpu_temperature=`cat /sys/class/thermal/thermal_zone0/temp`
