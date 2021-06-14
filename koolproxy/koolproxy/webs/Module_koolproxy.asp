@@ -1295,7 +1295,7 @@ function openkpHint(itemNum) {
 														koolproxy.txt
 													</td>
 													<td>
-														https://www.houzi-blog.top/koolproxy.txt
+														https://cdn.jsdelivr.net/gh/ihuaer/koolproxy@master/koolproxy.txt
 													</td>
 													<td style="text-align:center;">
 														静态规则
@@ -1316,7 +1316,7 @@ function openkpHint(itemNum) {
 														daily.txt
 													</td>
 													<td>
-														https://www.houzi-blog.top/daily.txt
+														https://cdn.jsdelivr.net/gh/ihuaer/koolproxy@master/daily.txt
 													</td>
 													<td style="text-align:center;">
 														每日规则
@@ -1337,7 +1337,7 @@ function openkpHint(itemNum) {
 														kp.dat
 													</td>
 													<td>
-														https://www.houzi-blog.top/kp.dat
+														https://cdn.jsdelivr.net/gh/ihuaer/koolproxy@master/kp.dat
 													</td>
 													<td style="text-align:center;">
 														视频规则
