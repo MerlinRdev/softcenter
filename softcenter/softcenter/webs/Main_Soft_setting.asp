@@ -197,7 +197,7 @@ function checkCmdRet(){
 										</div>
 										<div class="SCBottom">
 											<br/>论坛技术支持： <a href="https://www.right.com.cn" target="_blank"> <i><u>www.right.com.cn</u></i> </a> <br/>
-											Copyright：  <a href="https://github.com/MerlinRdev" target="_blank"><i>MerlinRdev</i></a>
+											Copyright：  <a href="https://github.com/SWRT-dev" target="_blank"><i>SWRTdev</i></a>
 										</div>
 									</td>
 								</tr>
