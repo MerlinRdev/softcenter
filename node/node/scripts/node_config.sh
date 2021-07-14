@@ -2,6 +2,7 @@
 
 source /jffs/softcenter/scripts/base.sh
 eval `dbus export node_`
+mkdir -p /tmp/upload
 
 create_init(){
 	if [ ! -L "/jffs/softcenter/init.d/S99node.sh" ];then

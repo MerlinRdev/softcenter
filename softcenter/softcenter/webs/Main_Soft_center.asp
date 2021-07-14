@@ -541,7 +541,7 @@ function init(cb) {
 $(function() {
 	//梅林要求用这个函数来显示左测菜单
 	show_menu(menu_hook);
-	sc_load_lang("sc1");
+	sc_load_lang("sc");
 	$.ajax({
 		type: "GET",
 		url: "/dbconf?p=softcenter",
