@@ -29,7 +29,7 @@
 <script>
 function init(menu_hook) {
 	show_menu();
-	sc_load_lang("sc");
+	sc_load_lang("sc1");
 }
 function onSubmitCtrl(o, s) {
 	document.form.action_mode.value = s;
